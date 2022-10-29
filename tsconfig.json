@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "sourceMap": true,
+  "noImplicitAny": true,
+  "exclude": ["node_modules", "build"],
+  "include": ["./src", "webpack.config.ts", "server.js", "types"],
+  "compilerOptions": {
+    "typeRoots" : ["node_modules/@types", "src/types"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "allowJs": true,
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "paths": {
+      "*": ["src/*"],
+      "@api/*" : ["api/*"],
+      "@assets/*" : ["assets/*"],
+      "@pages/*" : ["components/pages/*"],
+      "@constants/*" : ["constants/*"],
+      "@components/*" : ["components/*"],
+      "@shared/*" : ["shared/*"],
+      "@store/*" : ["store/*"],
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+  },
+}
