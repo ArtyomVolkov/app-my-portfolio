@@ -7,6 +7,9 @@ import Avatar from '@mui/material/Avatar';
 import TerminalIcon from '@mui/icons-material/Terminal';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import BuildIcon from '@mui/icons-material/Build';
+import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
+import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
+import ContactMailRoundedIcon from '@mui/icons-material/ContactMailRounded';
 
 import { LANGUAGES, TECHNOLOGIES, TOOLS } from '@pages/profile/data';
 
@@ -54,7 +57,7 @@ const Summary = () => {
           }
         </div>
       </Card>
-      <section className="tools-technologies">
+      <section className="cell-2">
         <Card className="card">
           <p className="title">
             <LibraryBooksIcon className="icon" />
@@ -90,6 +93,34 @@ const Summary = () => {
               ))
             }
           </div>
+        </Card>
+      </section>
+      <section className="cell-3">
+        <Card className="card">
+          <p className="title">
+            <SchoolRoundedIcon className="icon" />
+            <label>Education</label>
+          </p>
+          <p>M.Sc. in Mechanical Engineering</p>
+          <p>Donetsk National Technical University</p>
+          <p>Graduated in 2011</p>
+        </Card>
+        <Card className="card">
+          <p className="title">
+            <LanguageRoundedIcon className="icon" />
+            <label>Languages</label>
+          </p>
+          <p>English: Intermediate+ (B1-B2)</p>
+          <p>Ukrainian: Native</p>
+        </Card>
+        <Card className="card">
+          <p className="title">
+            <ContactMailRoundedIcon className="icon" />
+            <label>Contacts</label>
+          </p>
+          <p>skype: <b className="link">artyom_volkov_</b></p>
+          <p>telegram: <b className="link">@artem_volkov1989</b></p>
+          <p>email: <b className="link">artyom.volkow@gmail.com</b></p>
         </Card>
       </section>
     </div>
