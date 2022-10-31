@@ -15,8 +15,8 @@ const TABS:Array<TabItem> = [
     component: SummaryTab,
   },
   {
-    key: 'experience',
-    label: 'Experience',
+    key: 'projects',
+    label: 'Projects',
     component: ExperienceTab,
     icon: <AppRegistrationIcon />,
   }
