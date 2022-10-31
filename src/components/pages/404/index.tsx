@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Main from '@components/app-entry/main';
+import Main from '@components/main';
 
 const Page404 = () => (
   <Main>

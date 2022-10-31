@@ -1,0 +1,27 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+
+  img {
+    width: inherit;
+    height: inherit;
+  }
+
+  .info {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 21px;
+    }
+
+    .sub-title {
+      color: grey;
+      font-size: 12px;
+    }
+  }
+}

@@ -2,6 +2,6 @@ import React from 'react';
 
 import { createRoot } from 'react-dom/client';
 
-import App from '@components/app-entry';
+import App from '@components/app';
 
 createRoot(document.getElementById('my-portfolio-app')).render(<App />);

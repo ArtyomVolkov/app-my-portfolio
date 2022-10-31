@@ -1,0 +1,15 @@
+nav {
+  margin-top: 20px;
+
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 10px;
+
+    .nav-item {
+      border: 1px solid #dcdcdc;
+      border-radius: 10px;
+      margin: 0 10px;
+    }
+  }
+}

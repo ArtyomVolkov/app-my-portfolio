@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 
 import './style.scss';
 
-const Main = ({ children }) => (
-  <Box component="main" className="page-content">
+const Main = ({ children, className = null }) => (
+  <Box component="main" className={className}>
     { children }
   </Box>
 );

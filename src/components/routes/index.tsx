@@ -2,9 +2,10 @@ import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 const Page404 = lazy(() => import('@pages/404'));
-const Dashboard = lazy(() => import('@pages/dashboard'));
-const Account = lazy(() => import('@pages/account'));
-const Analytics = lazy(() => import('@pages/analytics'));
+const Profile = lazy(() => import('@pages/profile'));
+const Components = lazy(() => import('@pages/components'));
+const Widgets = lazy(() => import('@pages/widgets'));
+const Games = lazy(() => import('@pages/games'));
 
 const AppRoutes = () => (
   <Routes>
@@ -12,31 +13,39 @@ const AppRoutes = () => (
       path="/"
       element={(
         <Suspense fallback="loading...">
-          <Dashboard />
+          <Profile />
         </Suspense>
       )}
     />
     <Route
-      path="/dashboard"
+      path="/profile"
       element={(
         <Suspense fallback="loading...">
-          <Dashboard />
+          <Profile />
         </Suspense>
       )}
     />
     <Route
-      path="/account"
+      path="/components"
       element={(
         <Suspense fallback="loading...">
-          <Account />
+          <Components />
         </Suspense>
       )}
     />
     <Route
-      path="/analytics"
+      path="/widgets"
       element={(
         <Suspense fallback="loading...">
-          <Analytics />
+          <Widgets />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/games"
+      element={(
+        <Suspense fallback="loading...">
+          <Games />
         </Suspense>
       )}
     />
