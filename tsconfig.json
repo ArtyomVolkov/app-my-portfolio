@@ -26,6 +26,7 @@
       "@components/*" : ["components/*"],
       "@shared/*" : ["shared/*"],
       "@store/*" : ["store/*"],
+      "@utils/*" : ["utils/*"],
     },
     "lib": [
       "esnext",

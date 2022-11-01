@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Card from '@mui/material/Card';
-import Chip from '@mui/material/Chip';
-import Avatar from '@mui/material/Avatar';
+import TechnologyPill from '@shared/components/pills/technology';
 
 import TerminalIcon from '@mui/icons-material/Terminal';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
@@ -20,7 +18,7 @@ import './style.scss';
 const Summary = () => {
   return (
     <div className="summary-tab">
-      <Card className="card profile"  variant="outlined">
+      <div className="card profile">
         <img src={UserImage} alt="user-img" className="profile-image" />
         <section className="profile-info">
           <p className="profile-title">Artem Volkov</p>
@@ -37,8 +35,8 @@ const Summary = () => {
             and work planning.
           </label>
         </section>
-      </Card>
-      <Card className="card">
+      </div>
+      <div className="card">
         <p className="title">
           <TerminalIcon className="icon" />
           <label>Programming Languages</label>
@@ -46,19 +44,17 @@ const Summary = () => {
         <div className="list">
           {
             LANGUAGES.map((item) => (
-              <Chip
-                key={item.key}
-                color={item.color}
-                avatar={<Avatar>{item.prefix}</Avatar>}
-                label={item.label}
-                variant="outlined"
+              <TechnologyPill
+                type={item.type}
+                name={item.key}
+                {...item}
               />
             ))
           }
         </div>
-      </Card>
+      </div>
       <section className="cell-2">
-        <Card className="card">
+        <div className="card">
           <p className="title">
             <LibraryBooksIcon className="icon" />
             <label>Technologies</label>
@@ -66,18 +62,16 @@ const Summary = () => {
           <div className="list">
             {
               TECHNOLOGIES.map((item) => (
-                <Chip
-                  key={item.key}
-                  label={item.label}
-                  size="small"
-                  variant="filled"
-                  color="info"
+                <TechnologyPill
+                  type={item.type}
+                  name={item.key}
+                  {...item}
                 />
               ))
             }
           </div>
-        </Card>
-        <Card className="card">
+        </div>
+        <div className="card">
           <p className="title">
             <BuildIcon className="icon" />
             <label>Tools</label>
@@ -85,20 +79,18 @@ const Summary = () => {
           <div className="list">
             {
               TOOLS.map((item) => (
-                <Chip
-                  key={item.key}
-                  label={item.label}
-                  size="small"
-                  variant="filled"
-                  color="secondary"
+                <TechnologyPill
+                  type={item.type}
+                  name={item.key}
+                  {...item}
                 />
               ))
             }
           </div>
-        </Card>
+        </div>
       </section>
       <section className="cell-3">
-        <Card className="card">
+        <div className="card">
           <p className="title">
             <SchoolRoundedIcon className="icon" />
             <label>Education</label>
@@ -106,16 +98,16 @@ const Summary = () => {
           <p>M.Sc. in Mechanical Engineering</p>
           <p>Donetsk National Technical University</p>
           <p>Graduated in 2011</p>
-        </Card>
-        <Card className="card">
+        </div>
+        <div className="card">
           <p className="title">
             <LanguageRoundedIcon className="icon" />
             <label>Languages</label>
           </p>
           <p>English: Intermediate+ (B1-B2)</p>
           <p>Ukrainian: Native</p>
-        </Card>
-        <Card className="card">
+        </div>
+        <div className="card">
           <p className="title">
             <ContactMailRoundedIcon className="icon" />
             <label>Contacts</label>
@@ -123,7 +115,7 @@ const Summary = () => {
           <p>skype: <b className="link">artyom_volkov_</b></p>
           <p>telegram: <b className="link">@artem_volkov1989</b></p>
           <p>email: <b className="link">artyom.volkow@gmail.com</b></p>
-        </Card>
+        </div>
       </section>
     </div>
   );

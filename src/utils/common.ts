@@ -1,0 +1,1 @@
+export const mergeClassNames = (classNames = []) => classNames.filter((item) => item).join(' ');

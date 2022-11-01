@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { PROJECTS } from '@pages/profile/data';
-
-import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
+import TechnologyPill from '@shared/components/pills/technology';
+
+import { PROJECTS } from '@pages/profile/data';
 
 import './style.scss'
 
@@ -26,13 +25,11 @@ const Experience = () => (
           </div>
           <div className="technologies">
             {
-              item.technologies.map((item: any) => (
-                <Chip
-                  key={item.key}
-                  color={item.color}
-                  avatar={item.prefix ? <Avatar>{item.prefix}</Avatar> : null}
-                  label={item.label}
-                  variant="outlined"
+              item.technologies.map((item) => (
+                <TechnologyPill
+                  type={item.type}
+                  name={item.key}
+                  {...item}
                 />
               ))
             }
