@@ -70,7 +70,8 @@ const Summary = () => {
                   key={item.key}
                   label={item.label}
                   size="small"
-                  variant="outlined"
+                  variant="filled"
+                  color="info"
                 />
               ))
             }
@@ -88,7 +89,8 @@ const Summary = () => {
                   key={item.key}
                   label={item.label}
                   size="small"
-                  variant="outlined"
+                  variant="filled"
+                  color="secondary"
                 />
               ))
             }
