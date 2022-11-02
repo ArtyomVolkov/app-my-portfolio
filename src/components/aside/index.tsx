@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Avatar from '@shared/components/avatar';
+import Avatar from '@components/aside/avatar';
 import Navigation from '@components/aside/navigation';
 
 import Image from '@assets/images/a.volkov.png';

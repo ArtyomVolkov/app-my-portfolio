@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface appState {
+export interface App {
   version: string,
   loading: boolean,
+  fullWidth: boolean,
 }
 
-export const initialState: appState = {
+export const initialState: App = {
   version: '0.0.1',
   loading: false,
+  fullWidth: false,
 };
 
 const app = createSlice({
@@ -17,11 +19,11 @@ const app = createSlice({
     setLoading: (state, data) => {
       return { ...state, loading: data.payload };
     },
+    toggleFullWidth: (state) => {
+      return { ...state, fullWidth: !state.fullWidth };
+    },
     resetData: () => {
-      return {
-        version: '0.0.1',
-        loading: false,
-      }
+      return {...initialState };
     },
   }
 });

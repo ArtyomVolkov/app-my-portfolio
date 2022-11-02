@@ -3,9 +3,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
 
-import AppRoutes from '@components/routes';
-import AppHeader from '@components/header';
-import SideBar from '@components/aside';
+import AppContent from '@components/app/app-content';
 
 import STORE from '@store/index';
 import THEME from '@assets/theme/main';
@@ -17,11 +15,7 @@ const App = () => {
     <BrowserRouter>
       <Provider store={STORE}>
         <ThemeProvider theme={THEME}>
-          <SideBar />
-          <div className="content">
-            <AppHeader />
-            <AppRoutes />
-          </div>
+          <AppContent />
         </ThemeProvider>
       </Provider>
     </BrowserRouter>

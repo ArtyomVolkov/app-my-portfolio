@@ -13,6 +13,10 @@ export const setLoading = (data) => {
   }
 };
 
+const toggleFullWidth = () => {
+  store.dispatch(actions.toggleFullWidth());
+};
+
 const resetData = () => {
   store.dispatch(actions.resetData());
 }
@@ -21,4 +25,5 @@ export default {
   getState,
   resetData,
   setLoading,
+  toggleFullWidth,
 };

@@ -2,7 +2,23 @@
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
 
-  .content {
-    margin-left: 256px;
+  .app-entry {
+    &.full-width {
+      aside {
+        width: 80px;
+      }
+      .main-content {
+        margin-left: 80px;
+      }
+    }
+
+    aside {
+      transition: width 0.5s;
+    }
+
+    .main-content {
+      margin-left: 256px;
+      transition: margin-left 0.5s;
+    }
   }
 }
