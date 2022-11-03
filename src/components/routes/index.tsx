@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 const Page404 = lazy(() => import('@pages/404'));
 const Profile = lazy(() => import('@pages/profile'));
 const Components = lazy(() => import('@pages/components'));
+const Shapes = lazy(() => import('@pages/components/shapes'));
 const Widgets = lazy(() => import('@pages/widgets'));
 const Games = lazy(() => import('@pages/games'));
 
@@ -30,6 +31,14 @@ const AppRoutes = () => (
       element={(
         <Suspense fallback="loading...">
           <Components />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/components/shapes"
+      element={(
+        <Suspense fallback="loading...">
+          <Shapes />
         </Suspense>
       )}
     />

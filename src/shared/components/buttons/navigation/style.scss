@@ -1,0 +1,27 @@
+.nav-button {
+  padding: 10px;
+
+  .avatar {
+    padding: 0;
+    background: white;
+    border: 1px solid #aeaeae;
+    color: #2f74c0;
+
+    svg {
+      font-size: 26px;
+    }
+  }
+
+  .headline {
+    font-size: 20px;
+    margin: 0;
+    padding: 0 12px;
+    text-transform: capitalize;
+    color: #636463;
+  }
+
+  .arrow-icon {
+    color: #646464;
+    font-size: 30px;
+  }
+}

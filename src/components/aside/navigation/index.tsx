@@ -7,40 +7,47 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItemButton';
 
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
+import HomeIcon from '@mui/icons-material/Home';
+import AccountIcon from '@mui/icons-material/AccountBox';
+import ComponentsIcon from '@mui/icons-material/DashboardCustomize';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import GameIcon from '@mui/icons-material/SportsEsports';
+import CategoryIcon from '@mui/icons-material/Category';
 
 import './style.scss';
 
-interface NavOption {
-  path: string,
-  label: string,
-  icon: React.ReactElement,
-}
-
-export const NAV_OPTIONS: Array<NavOption> = [
-  {
-    path: '/profile',
+export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement }} = {
+  home: {
+    label: 'Home',
+    icon: <HomeIcon />,
+  },
+  profile: {
     label: 'My Profile',
-    icon: <AccountBoxIcon />
+    icon: <AccountIcon />,
   },
-  {
-    path: '/components',
+  components: {
     label: 'Components',
-    icon: <DashboardCustomizeIcon />
+    icon: <ComponentsIcon />,
   },
-  {
-    path: '/widgets',
+  shapes: {
+    label: 'Shapes',
+    icon: <CategoryIcon />,
+  },
+  widgets: {
     label: 'Widgets',
-    icon: <WidgetsIcon />
+    icon: <WidgetsIcon />,
   },
-  {
-    path: '/games',
+  games: {
     label: 'Games',
-    icon: <GameIcon />
-  },
+    icon: <GameIcon />,
+  }
+};
+
+export const NAV_OPTIONS: Array<string> = [
+  'profile',
+  'components',
+  'widgets',
+  'games',
 ];
 
 const Navigation = () => {
@@ -51,18 +58,18 @@ const Navigation = () => {
     navigate(path);
   };
 
-  const renderNavItem = ({ path, label, icon }) => {
+  const renderNavItem = (item) => {
     return (
       <ListItem
-        key={path}
+        key={item}
         className="nav-item"
-        onClick={() => navigateTo(path)}
-        selected={location.pathname.includes(path)}
+        onClick={() => navigateTo(item)}
+        selected={location.pathname.includes(item)}
       >
         <ListItemIcon>
-          { icon }
+          { PATH_MAP[item]?.icon }
         </ListItemIcon>
-        <ListItemText primary={label} />
+        <ListItemText primary={PATH_MAP[item]?.label} />
       </ListItem>
     );
   }

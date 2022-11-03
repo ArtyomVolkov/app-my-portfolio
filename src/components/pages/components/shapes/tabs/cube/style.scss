@@ -1,0 +1,78 @@
+.cube-widget {
+  padding: 20px;
+  border: 1px solid #dcdcdc;
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.rotating {
+    cursor: grabbing;
+
+    .scene .cube .plane {
+      cursor: grabbing;
+      pointer-events: none;
+    }
+  }
+
+  .scene {
+    width: 200px;
+    height: 200px;
+    perspective: 500px;
+  }
+
+  .cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    //transform: translateZ(-100px);
+
+    .plane {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      border: 2px solid black;
+      box-sizing: border-box;
+      border-radius: 1px;
+
+      &:hover {
+        cursor: grab;
+      }
+    }
+
+    .top {
+      background: #1565C091;
+      transform: rotateX(90deg) translateZ(100px);
+    }
+
+    .front {
+      background: rgba(255, 0, 0, 0.55);
+      transform: rotateX(0deg) translateZ(100px);
+    }
+
+    .back {
+      background: #E86F0081;
+      transform: rotateX(180deg) translateZ(100px);
+    }
+
+    .bottom {
+      background: #EFD81E87;
+      transform: rotateX(-90deg) translateZ(100px);
+    }
+
+    .right {
+      background: #00f800ad;
+      transform: rotateY(90deg) translateZ(100px);
+    }
+
+    .left {
+      background: purple;
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+  }
+}

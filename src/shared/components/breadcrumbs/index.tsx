@@ -3,9 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import Link from '@mui/material/Link';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
-import HomeIcon from '@mui/icons-material/Home';
 
-import { NAV_OPTIONS } from '@components/aside/navigation';
+import { PATH_MAP } from '@components/aside/navigation';
 
 import './style.scss';
 
@@ -19,38 +18,44 @@ const Breadcrumbs = () => {
   };
 
   const renderItems = () => {
-    const item = NAV_OPTIONS.find((item) => item.path.includes(location.pathname));
+    const paths = location.pathname.length === 1 ? [''] : location.pathname.split('/');
 
-    if (!item) {
-      return null;
-    }
+    return paths.map((item, index) => {
+      if (!item) {
+        return (
+          <label key={index} onClick={(e) => navigateTo(e, '/')}>
+            <Link underline="hover" color="inherit" href="/" className="link">
+              { PATH_MAP.home.icon }
+              { PATH_MAP.home.label }
+            </Link>
+          </label>
+        );
+      }
 
-    return (
-      <label onClick={(e) => navigateTo(e, item.path)}>
-        <Link
-          underline="hover"
-          color="inherit"
-          href={item.path}
-          className="link"
-        >
-          { item.icon }
-          { item.label }
-        </Link>
-      </label>
-    );
+      if (!PATH_MAP[item]) {
+        return null;
+      }
+      const path = paths.slice(0, (index+1)).join('/');
+
+      return (
+        <label key={item} onClick={(e) => navigateTo(e, path)}>
+          <Link
+            underline="hover"
+            color="inherit"
+            href={path}
+            className="link"
+          >
+            { PATH_MAP[item].icon }
+            { PATH_MAP[item].label }
+          </Link>
+        </label>
+      )
+    })
   };
 
   return (
     <MuiBreadcrumbs className="mui-breadcrumbs">
-      <label onClick={(e) => navigateTo(e, '/')}>
-        <Link underline="hover" color="inherit" href="/" className="link">
-          <HomeIcon />
-          Home
-        </Link>
-      </label>
-      {
-        renderItems()
-      }
+      { renderItems() }
     </MuiBreadcrumbs>
   );
 }
