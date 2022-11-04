@@ -19,7 +19,6 @@
   .scene {
     width: 200px;
     height: 200px;
-    perspective: 500px;
   }
 
   .cube {
@@ -27,7 +26,6 @@
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    //transform: translateZ(-100px);
 
     .plane {
       width: 200px;
@@ -46,27 +44,28 @@
     }
 
     .top {
-      background: #1565C091;
+      background: #1565c0;
       transform: rotateX(90deg) translateZ(100px);
     }
 
     .front {
-      background: rgba(255, 0, 0, 0.55);
+      background: #ff0000;
       transform: rotateX(0deg) translateZ(100px);
     }
 
     .back {
-      background: #E86F0081;
-      transform: rotateX(180deg) translateZ(100px);
+      background: #e86f00;
+      opacity: 1;
+      transform: rotateY(180deg) translateZ(100px);
     }
 
     .bottom {
-      background: #EFD81E87;
+      background: #efd81e;
       transform: rotateX(-90deg) translateZ(100px);
     }
 
     .right {
-      background: #00f800ad;
+      background: #00f800;
       transform: rotateY(90deg) translateZ(100px);
     }
 

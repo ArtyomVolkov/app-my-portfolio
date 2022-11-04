@@ -5,39 +5,41 @@ import './style.scss';
 const CubeWidget = () => {
   const cubeRef = useRef(null);
   const widgetRef = useRef(null);
-  const movement = useRef({
+  const rotate = useRef({
+    active: false,
     startX: 0,
     startY: 0,
-    active: false,
-    x: 0,
-    y: 0,
+    x: -45,
+    y: -45,
   });
 
   const mouseMove = (e) => {
-    if (!movement.current.active) {
+    if (!rotate.current.active) {
       return;
     }
-    const x = e.clientX - movement.current.startX ;
-    const y = movement.current.startY - e.clientY;
+    const x = e.clientX - rotate.current.startX + rotate.current.x;
+    const y = rotate.current.startY - e.clientY + rotate.current.y;
 
-    cubeRef.current.childNodes[0].style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+    cubeRef.current.childNodes[0].style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
   };
 
   const mouseDown = (e) => {
-    movement.current.active = true;
-    movement.current.startX = e.clientX;
-    movement.current.startY = e.clientY;
+    rotate.current.active = true;
+    rotate.current.startX = e.clientX;
+    rotate.current.startY = e.clientY;
     widgetRef.current.classList.add('rotating');
   };
 
-  const mouseUp = () => {
+  const mouseUp = (e) => {
+    rotate.current.active = false;
+    rotate.current.x = e.clientX - rotate.current.startX + rotate.current.x;
+    rotate.current.y = rotate.current.startY - e.clientY + rotate.current.y;
     widgetRef.current.classList.remove('rotating');
-    movement.current.active = false;
   };
 
   const mouseLeave = () => {
     widgetRef.current.classList.remove('rotating');
-    movement.current.active = false;
+    rotate.current.active = false;
   };
 
   return (
@@ -46,14 +48,17 @@ const CubeWidget = () => {
       ref={widgetRef}
       onMouseMove={mouseMove}
       onMouseLeave={mouseLeave}
+      onMouseUp={mouseUp}
     >
       <div
         ref={cubeRef}
         className="scene"
         onMouseDown={mouseDown}
-        onMouseUp={mouseUp}
       >
-        <div className="cube">
+        <div
+          className="cube"
+          style={{ transform: `rotateX(${rotate.current.x}deg) rotateY(${rotate.current.y}deg)` }}
+        >
           <div className="plane top">TOP</div>
           <div className="plane bottom">BOTTOM</div>
           <div className="plane right">RIGHT</div>
