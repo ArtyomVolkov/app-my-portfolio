@@ -6,6 +6,7 @@ import TonalityRoundedIcon from '@mui/icons-material/TonalityRounded';
 
 import InlineTabs, { TabItem } from '@shared/components/tabs';
 import CubeWidget from '@pages/components/shapes/tabs/cube';
+import Sphere from '@pages/components/shapes/tabs/sphere';
 
 const TABS:Array<TabItem> = [
   {
@@ -24,14 +25,14 @@ const TABS:Array<TabItem> = [
     key: 'sphere',
     label: 'Sphere',
     icon: <TonalityRoundedIcon />,
-    component: () => (<h1>Sphere</h1>),
+    component: Sphere,
   },
 ];
 
 const ShapeTabs = () => (
   <InlineTabs
     tabs={TABS}
-    defaultActive={TABS[0].key}
+    defaultActive={TABS[2].key}
   />
 );
 
