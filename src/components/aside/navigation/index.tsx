@@ -30,7 +30,7 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
     icon: <ComponentsIcon />,
   },
   shapes: {
-    label: 'Shapes',
+    label: '3D Shapes',
     icon: <CategoryIcon />,
   },
   widgets: {

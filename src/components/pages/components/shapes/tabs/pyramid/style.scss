@@ -1,0 +1,49 @@
+.pyramid-widget {
+  .pyramid {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+
+    .plane {
+      width: 0;
+      height: 0;
+      position: absolute;
+      border: 100px solid transparent;
+      border-bottom: 200px solid;
+      border-top: 0;
+    }
+
+    .front {
+      border-bottom-color: red;
+      transform-origin: 0 0;
+      transform: rotateX(30deg);
+    }
+
+    .back {
+      transform-origin: 0 0;
+      transform: rotateX(-30deg);
+      border-bottom-color: #efd81e;
+    }
+
+    .left {
+      transform-origin: 100px 0;
+      transform: rotateY(90deg) rotateX(-30deg);
+      border-bottom-color: purple;
+    }
+
+    .right {
+      transform-origin: 100px 0;
+      transform: rotateY(-90deg) rotateX(-30deg);
+      border-bottom-color: green;
+    }
+
+    .bottom {
+      border: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #1565c0;
+      transform: rotateX(90deg) translateZ(-73px);
+    }
+  }
+}

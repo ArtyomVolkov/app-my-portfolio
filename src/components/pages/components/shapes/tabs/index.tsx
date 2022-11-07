@@ -6,6 +6,7 @@ import TonalityRoundedIcon from '@mui/icons-material/TonalityRounded';
 
 import InlineTabs, { TabItem } from '@shared/components/tabs';
 import CubeWidget from '@pages/components/shapes/tabs/cube';
+import Pyramid from '@pages/components/shapes/tabs/pyramid';
 import Sphere from '@pages/components/shapes/tabs/sphere';
 
 const TABS:Array<TabItem> = [
@@ -16,10 +17,10 @@ const TABS:Array<TabItem> = [
     component: CubeWidget,
   },
   {
-    key: 'triangle',
-    label: 'Triangle',
+    key: 'pyramid',
+    label: 'Pyramid',
     icon: <ChangeHistoryRoundedIcon />,
-    component: () => (<h1>Triangle</h1>),
+    component: Pyramid,
   },
   {
     key: 'sphere',
@@ -32,7 +33,7 @@ const TABS:Array<TabItem> = [
 const ShapeTabs = () => (
   <InlineTabs
     tabs={TABS}
-    defaultActive={TABS[2].key}
+    defaultActive={TABS[0].key}
   />
 );
 

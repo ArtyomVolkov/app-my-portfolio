@@ -12,7 +12,7 @@ const ComponentsPage = () => {
     <Main className="components-page">
       <NavButton
         path="/components/shapes"
-        title="Shapes"
+        title="3D Shapes"
         icon={<CategoryIcon className="icon"/>}
       />
     </Main>
