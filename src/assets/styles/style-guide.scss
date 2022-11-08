@@ -1,0 +1,52 @@
+// colors
+$indigo: #233862;
+$deepChestnut: #B74B42;
+// commons
+$label: #282828;
+$link: #2196F3;
+// animations
+@keyframes pulsar {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+@keyframes grid-loading {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #f4f4f496;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+// mixins
+@mixin card-shadow {
+  box-shadow: 0 3px 6px 2px #dadada;
+  border-radius: 4px;
+}
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@mixin pulsar-animation() {
+  animation: pulsar 1.5s ease-in-out 0.5s infinite;
+}
+@mixin reset {
+  p, ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    margin: 0;
+    list-style: none;
+  }
+}

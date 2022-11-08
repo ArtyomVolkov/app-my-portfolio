@@ -1,17 +1,17 @@
 .shapes-page {
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
+  padding-top: 12px;
 
   .tabs-header {
     border-bottom: 1px solid #dcdcdc;
   }
 
+  .tab-item {
+    min-height: 60px;
+  }
+
   .tab-item-content {
     margin-top: 20px;
-
-    .tab-item {
-      min-height: 60px;
-    }
   }
 }
