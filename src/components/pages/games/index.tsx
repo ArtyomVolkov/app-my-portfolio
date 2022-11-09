@@ -1,11 +1,12 @@
 import React from 'react';
 
 import Main from '@components/main';
+import Puzzle from '@pages/games/puzzle';
 
 const GamesPage = () => {
   return (
     <Main>
-      <h1>Games</h1>
+      <Puzzle defaultSize={5} cellSize={40} />
     </Main>
   );
 }
