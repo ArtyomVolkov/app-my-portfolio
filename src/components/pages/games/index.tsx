@@ -6,7 +6,10 @@ import Puzzle from '@pages/games/puzzle';
 const GamesPage = () => {
   return (
     <Main>
-      <Puzzle defaultSize={5} cellSize={40} />
+      <Puzzle
+        defaultLevel={3}
+        cellSize={40}
+      />
     </Main>
   );
 }
