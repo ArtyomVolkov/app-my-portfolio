@@ -38,8 +38,8 @@ interface PuzzleTags {
 const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize = 40 }) => {
   const [isOver, setIsOver] = useState(false);
   const [level, setActive] = useState(defaultLevel);
-  const [items, setItems] = useState(generateItems(defaultLevel));
-  const [zeroIndex, setZeroIndex] = useState(Math.pow(defaultLevel, 2)-1);
+  const [items, setItems] = useState(() => generateItems(defaultLevel));
+  const [zeroIndex, setZeroIndex] = useState(() => Math.pow(defaultLevel, 2)-1);
 
   useEffect(() => {
     window.addEventListener('keydown', onKeyDown);
@@ -47,7 +47,7 @@ const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize 
     return () => {
       window.removeEventListener('keydown', onKeyDown);
     }
-  }, [zeroIndex]);
+  }, [zeroIndex, items]);
 
   const onChangeItemsCount = (value) => {
     setActive(value);
