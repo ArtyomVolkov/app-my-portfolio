@@ -1,9 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 
 import './style.scss';
 
@@ -22,13 +20,12 @@ const NavButton: React.FC<NavButton> = ({ path, title, icon }) => {
 
   return (
     <Button className="nav-button" onClick={navigateTo}>
-      <Avatar className="avatar">
+      <div className="icon-box">
         { icon }
-      </Avatar>
+      </div>
       <p className="headline">
         { title }
       </p>
-      <KeyboardArrowRightRoundedIcon className="arrow-icon"/>
     </Button>
   );
 }

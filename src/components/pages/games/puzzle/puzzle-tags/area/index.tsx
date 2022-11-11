@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mergeClassNames } from '@utils/common';
 
-import { Level } from '@pages/games/puzzle';
+import { Level } from '@pages/games/puzzle/puzzle-tags';
 
 interface PuzzleArea {
   size: number,

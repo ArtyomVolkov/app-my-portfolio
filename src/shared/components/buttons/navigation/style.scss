@@ -1,11 +1,16 @@
 .nav-button {
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 3px 6px 2px #dadada;
+  border-radius: 4px;
 
-  .avatar {
-    padding: 0;
-    background: white;
-    border: 1px solid #aeaeae;
-    color: #2f74c0;
+  .icon-box {
+    margin-top: 4px;
+    padding: 15px;
+    border-radius: 4px;
+    background: #343434;
+    color: white;
 
     svg {
       font-size: 26px;
@@ -13,15 +18,11 @@
   }
 
   .headline {
-    font-size: 20px;
-    margin: 0;
+    font-size: 16px;
+    margin: 6px 0;
     padding: 0 12px;
     text-transform: capitalize;
-    color: #636463;
-  }
-
-  .arrow-icon {
-    color: #646464;
-    font-size: 30px;
+    color: #252525;
+    min-width: 80px;
   }
 }

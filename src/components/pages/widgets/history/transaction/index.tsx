@@ -5,19 +5,19 @@ import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 import './style.scss';
 
-interface HistoryData {
+interface TransactionData {
   title: string,
   date: string,
   color?: string,
   icon?: OverridableComponent<SvgIconTypeMap>
 }
 
-interface History {
+interface Transaction {
   title: string,
-  data: Array<HistoryData>
+  data: Array<TransactionData>
 }
 
-const History: React.FC<History> = ({ title, data }) => {
+const Transaction: React.FC<Transaction> = ({ title, data }) => {
   return (
     <div className="history-widget">
       <div className="headline">
@@ -43,4 +43,4 @@ const History: React.FC<History> = ({ title, data }) => {
   );
 }
 
-export default History;
+export default Transaction;

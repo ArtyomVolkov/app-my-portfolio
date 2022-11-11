@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TechnologyPill from '@shared/components/pills/technology';
+import TechnologyList from '@shared/components/lists/technologies';
 
 import TerminalIcon from '@mui/icons-material/Terminal';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
@@ -42,15 +42,7 @@ const Summary = () => {
           <label>Programming Languages</label>
         </p>
         <div className="list">
-          {
-            LANGUAGES.map((item) => (
-              <TechnologyPill
-                type={item.type}
-                name={item.key}
-                {...item}
-              />
-            ))
-          }
+          <TechnologyList data={LANGUAGES} />
         </div>
       </div>
       <section className="cell-2">
@@ -59,34 +51,14 @@ const Summary = () => {
             <LibraryBooksIcon className="icon" />
             <label>Technologies</label>
           </p>
-          <div className="list">
-            {
-              TECHNOLOGIES.map((item) => (
-                <TechnologyPill
-                  type={item.type}
-                  name={item.key}
-                  {...item}
-                />
-              ))
-            }
-          </div>
+          <TechnologyList data={TECHNOLOGIES} />
         </div>
         <div className="card">
           <p className="title">
             <BuildIcon className="icon" />
             <label>Tools</label>
           </p>
-          <div className="list">
-            {
-              TOOLS.map((item) => (
-                <TechnologyPill
-                  type={item.type}
-                  name={item.key}
-                  {...item}
-                />
-              ))
-            }
-          </div>
+          <TechnologyList data={TOOLS} />
         </div>
       </section>
       <section className="cell-3">

@@ -21,17 +21,6 @@
       }
     }
 
-    .list {
-      display: flex;
-      grid-column-gap: 10px;
-      grid-row-gap: 10px;
-      flex-wrap: wrap;
-
-      &.vertical {
-        flex-direction: column;
-      }
-    }
-
     .link {
       color: #1565c0;
     }

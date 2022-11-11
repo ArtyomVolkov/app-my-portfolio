@@ -1,14 +1,17 @@
 import React from 'react';
 
 import Main from '@components/main';
-import Puzzle from '@pages/games/puzzle';
+import NavButton from '@shared/components/buttons/navigation';
+
+import ExtensionRoundedIcon from '@mui/icons-material/ExtensionRounded';
 
 const GamesPage = () => {
   return (
     <Main>
-      <Puzzle
-        defaultLevel={3}
-        cellSize={40}
+      <NavButton
+        path="/games/puzzle"
+        title="Puzzle"
+        icon={<ExtensionRoundedIcon className="icon"/>}
       />
     </Main>
   );

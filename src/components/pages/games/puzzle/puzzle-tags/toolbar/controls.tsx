@@ -6,7 +6,7 @@ import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftR
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 
-import { Level } from '@pages/games/puzzle';
+import { Level } from '@pages/games/puzzle/puzzle-tags';
 
 interface Controls {
   items: any,

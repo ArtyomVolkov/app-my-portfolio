@@ -1,16 +1,17 @@
 import React from 'react';
 
 import Main from '@components/main';
-import History from '@shared/components/history';
+import NavButton from '@shared/components/buttons/navigation';
 
-import { TRANSACTION_HISTORY } from '@shared/mock-data/widgets';
+import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 
 const WidgetsPage = () => {
   return (
     <Main>
-      <History
-        title={TRANSACTION_HISTORY.title}
-        data={TRANSACTION_HISTORY.data}
+      <NavButton
+        path="/widgets/history"
+        title="History"
+        icon={<HistoryRoundedIcon className="icon"/>}
       />
     </Main>
   );

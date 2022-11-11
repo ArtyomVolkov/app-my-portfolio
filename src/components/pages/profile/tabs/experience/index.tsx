@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Divider from '@mui/material/Divider';
-import TechnologyPill from '@shared/components/pills/technology';
+import TechnologyList from '@shared/components/lists/technologies';
 
 import { PROJECTS } from '@pages/profile/data';
 
@@ -23,17 +23,7 @@ const Experience = () => (
             />
             <label>{item.period}</label>
           </div>
-          <div className="technologies">
-            {
-              item.technologies.map((item) => (
-                <TechnologyPill
-                  type={item.type}
-                  name={item.key}
-                  {...item}
-                />
-              ))
-            }
-          </div>
+          <TechnologyList data={item.technologies} />
           <Divider />
           <ul className="responsibilities">
             {

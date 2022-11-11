@@ -13,6 +13,8 @@ import ComponentsIcon from '@mui/icons-material/DashboardCustomize';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import GameIcon from '@mui/icons-material/SportsEsports';
 import CategoryIcon from '@mui/icons-material/Category';
+import ExtensionRoundedIcon from '@mui/icons-material/ExtensionRounded';
+import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 
 import './style.scss';
 
@@ -40,6 +42,14 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   games: {
     label: 'Games',
     icon: <GameIcon />,
+  },
+  puzzle: {
+    label: 'Puzzle',
+    icon: <ExtensionRoundedIcon />
+  },
+  history: {
+    label: 'History',
+    icon: <HistoryRoundedIcon />
   }
 };
 

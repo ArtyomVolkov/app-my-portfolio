@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Divider from '@mui/material/Divider';
 
-import { Level } from '@pages/games/puzzle';
+import { Level } from '@pages/games/puzzle/puzzle-tags';
 
 interface Index {
   level: Level,
