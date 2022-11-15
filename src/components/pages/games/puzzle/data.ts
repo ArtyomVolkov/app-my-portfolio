@@ -7,3 +7,11 @@ export const PUZZLE_TAGS = {
     Technologies.css,
   ]
 };
+
+export const SUDOKU = {
+  technologies: [
+    Languages.typescript,
+    Technologies.materialUI,
+    Technologies.css,
+  ]
+};

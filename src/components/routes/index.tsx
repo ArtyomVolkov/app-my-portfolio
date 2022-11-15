@@ -9,6 +9,7 @@ const Widgets = lazy(() => import('@pages/widgets'));
 const History = lazy(() => import('@pages/widgets/history'));
 const Games = lazy(() => import('@pages/games'));
 const Puzzle = lazy(() => import('@pages/games/puzzle'));
+const Sudoku = lazy(() => import('@pages/games/sudoku'));
 
 const AppRoutes = () => (
   <Routes>
@@ -73,6 +74,14 @@ const AppRoutes = () => (
       element={(
         <Suspense fallback="loading...">
           <Puzzle />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/games/sudoku"
+      element={(
+        <Suspense fallback="loading...">
+          <Sudoku />
         </Suspense>
       )}
     />

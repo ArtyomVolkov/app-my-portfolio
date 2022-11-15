@@ -1,0 +1,50 @@
+@import "../../../../../assets/styles/style-guide";
+
+section.sudoku {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  @include card-shadow;
+
+  .panel {
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    border-right: 1px solid #dcdcdc;
+    flex-direction: column;
+    grid-row-gap: 10px;
+
+    button {
+      min-width: 65px;
+
+      svg {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .area {
+    margin: 24px auto;
+    display: grid;
+    width: fit-content;
+    background: black;
+    grid-template-columns: 90px 90px 90px;
+    grid-template-rows: 90px 90px 90px;
+    grid-gap: 2px;
+    border: 2px solid;
+
+    .box-area {
+      background: #bebebe;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-gap: 1px;
+
+      .box-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+      }
+    }
+  }
+}

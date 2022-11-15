@@ -15,6 +15,7 @@ import GameIcon from '@mui/icons-material/SportsEsports';
 import CategoryIcon from '@mui/icons-material/Category';
 import ExtensionRoundedIcon from '@mui/icons-material/ExtensionRounded';
 import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 import './style.scss';
 
@@ -46,6 +47,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   puzzle: {
     label: 'Puzzle',
     icon: <ExtensionRoundedIcon />
+  },
+  sudoku: {
+    label: 'Sudoku',
+    icon: <AppRegistrationIcon />
   },
   history: {
     label: 'History',
