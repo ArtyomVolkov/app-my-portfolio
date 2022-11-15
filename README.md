@@ -1,6 +1,6 @@
-# React App
+# My Portfolio
 
-### React application for quick start
+### My Portfolio application on react with TypeScript
 
 ## Technologies:
 * [Typescript](https://www.typescriptlang.org/)
