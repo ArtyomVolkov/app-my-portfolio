@@ -16,11 +16,11 @@ const GamePanel = () => {
       </Button>
       <Button variant="outlined">
         <ReplayIcon fontSize="small" />
-        Erase
+        Undo
       </Button>
       <Button variant="outlined">
         <BackspaceOutlinedIcon fontSize="small" />
-        Undo
+        Erase
       </Button>
       <Button variant="outlined">
         <TipsAndUpdatesOutlinedIcon />

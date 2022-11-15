@@ -44,6 +44,21 @@ section.sudoku {
         align-items: center;
         justify-content: center;
         background: white;
+        cursor: default;
+
+        &.filled {
+          color: #1565c0;
+          font-weight: 500;
+        }
+
+        &.active {
+          background: #e0e0e0;
+          cursor: pointer;
+        }
+
+        &.incorrect {
+          background: #ff0000;
+        }
       }
     }
   }
