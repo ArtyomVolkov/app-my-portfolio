@@ -4,19 +4,22 @@ import { mergeClassNames } from '@utils/common';
 
 interface BoxItem {
   active: boolean,
+  filled: number,
+  origin: number
   value: number,
   onPress: (data) => void,
 }
 
-const BoxItem: React.FC<BoxItem> = ({ active, value, onPress }) => {
+const BoxItem: React.FC<BoxItem> = ({ active, filled, value, origin, onPress }) => {
   return (
     <div
       className={mergeClassNames([
         'box-item',
+        (value > 0 && value !== filled) && 'incorrect',
+        !origin && 'filled',
         active && 'active',
-        !value && 'filled'
       ])}
-      onClick={onPress}
+      onClick={!origin ? onPress : null}
     >
       {value > 0 ? value : ''}
     </div>

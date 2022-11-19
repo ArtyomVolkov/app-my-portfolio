@@ -52,12 +52,12 @@ section.sudoku {
         }
 
         &.active {
-          background: #e0e0e0;
+          background: #ececec;
           cursor: pointer;
         }
 
         &.incorrect {
-          background: #ff0000;
+          color: #ff0000;
         }
       }
     }

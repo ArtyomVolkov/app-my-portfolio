@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import GameArea from '@pages/games/sudoku/game/area';
-import GamePanel from '@pages/games/sudoku/game/panel';
+import GamePanel, { ActionType } from '@pages/games/sudoku/game/panel';
 
 import { GAME_DATA } from '@pages/games/sudoku/game/data';
 
@@ -15,13 +15,30 @@ export enum Level {
 
 const SudokuGameWidget = () => {
   const [level] = useState<Level>(Level.Easy);
+  const gameAreaRef = useRef(null);
+
+  const onAction = (action) => {
+    switch (action) {
+      case ActionType.ERASE: {
+        gameAreaRef.current.fillItem(0);
+        break;
+      }
+      case ActionType.HINT: {
+        gameAreaRef.current.hintItem();
+        break;
+      }
+      default:
+        break;
+    }
+  };
 
   return (
     <section className="sudoku">
-      <GamePanel />
+      <GamePanel onAction={onAction} />
       <GameArea
+        componentRef={gameAreaRef}
         blank={GAME_DATA[level].blank}
-        data={GAME_DATA[level].filled}
+        filled={GAME_DATA[level].filled}
       />
     </section>
   );
