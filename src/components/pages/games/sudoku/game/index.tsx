@@ -27,6 +27,10 @@ const SudokuGameWidget = () => {
         gameAreaRef.current.hintItem();
         break;
       }
+      case ActionType.UNDO: {
+        gameAreaRef.current.undoAction();
+        break;
+      }
       default:
         break;
     }

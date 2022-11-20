@@ -18,6 +18,11 @@ interface GameArea {
 }
 
 const GameArea: React.FC<GameArea> = ({ blank, filled, componentRef }) => {
+  const [hints, setHints] = useState(5);
+  const [active, setActive] = useState([-1, -1]);
+  const [blankData, setBlankData] = useState(() => cloneDeep(blank));
+  const [history, setHistory] = useState<Array<{ block: number, cell: number, value: number }>>([]);
+
   useEffect(() => {
     window.addEventListener('keydown', onKeyDown);
 
@@ -29,11 +34,8 @@ const GameArea: React.FC<GameArea> = ({ blank, filled, componentRef }) => {
   useImperativeHandle(componentRef, () => ({
     fillItem,
     hintItem,
+    undoAction,
   }));
-
-  const [hints, setHints] = useState(5);
-  const [active, setActive] = useState([-1, -1]);
-  const [blankData, setBlankData] = useState(() => cloneDeep(blank));
 
   const onSetActive = ([row, cell]) => {
     if (active[0] === row && active[1] === cell) {
@@ -52,12 +54,34 @@ const GameArea: React.FC<GameArea> = ({ blank, filled, componentRef }) => {
     fillItem(e.keyCode === KeyCodes.Erase ? 0 : Number(e.key));
   };
 
+  const undoAction = () => {
+    if (!history.length) {
+      return;
+    }
+
+    const newHistory = [...history];
+    const newData = [...blankData];
+    const lastItem = newHistory[newHistory.length-1];
+    const previousItem = newHistory[newHistory.length-2];
+
+    newData[lastItem.block][lastItem.cell] = 0;
+
+    if (newHistory.length > 1) {
+      newData[previousItem.block][previousItem.cell] = previousItem.value;
+    }
+
+    newHistory.pop();
+    setBlankData(newData);
+    setHistory(newHistory);
+  };
+
   const fillItem = (value) => {
-    const [row, cell] = active;
+    const [block, cell] = active;
     const newData = [...blankData];
 
-    newData[row][cell] = value;
+    newData[block][cell] = value;
     setBlankData(newData);
+    setHistory([...history, { block, cell, value }]);
     checkIsFinish(newData);
   };
 
@@ -107,28 +131,26 @@ const GameArea: React.FC<GameArea> = ({ blank, filled, componentRef }) => {
     }
   };
 
-  const renderBoxItem = (item, rowIndex, cellIndex) => {
-    const [row, cell] = active;
-
-    return (
-      <BoxItem
-        key={rowIndex+cellIndex}
-        value={item}
-        origin={blank[rowIndex][cellIndex]}
-        filled={filled[rowIndex][cellIndex]}
-        active={row === rowIndex && cell === cellIndex}
-        onPress={() => onSetActive([rowIndex, cellIndex])}
-      />
-    );
-  };
-
   return (
     <div className="area">
       {
         blankData.map((item, rowIndex) => (
           <div className="box-area" key={rowIndex}>
             {
-              item.map((item, cellIndex) => renderBoxItem(item, rowIndex, cellIndex))
+              item.map((item, cellIndex) => {
+                const [row, cell] = active;
+
+                return (
+                  <BoxItem
+                    key={rowIndex+cellIndex}
+                    value={item}
+                    origin={blank[rowIndex][cellIndex]}
+                    filled={filled[rowIndex][cellIndex]}
+                    active={row === rowIndex && cell === cellIndex}
+                    onPress={() => onSetActive([rowIndex, cellIndex])}
+                  />
+                )
+              })
             }
           </div>
         ))
