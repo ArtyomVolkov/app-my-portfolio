@@ -5,9 +5,11 @@ import BoxItem from './box-item';
 
 enum KeyCodes {
   Erase = 8,
-  One = 49,
-  Nine = 57,
 }
+
+const AvailableCodes = [
+  8,49,50,51,52,53,54,55,56,57,97,98,99,100,101,102,103,104,105,
+];
 
 interface GameArea {
   blank: Array<Array<number>>,
@@ -43,18 +45,11 @@ const GameArea: React.FC<GameArea> = ({ blank, filled, componentRef }) => {
   const onKeyDown = (e) => {
     const [row, cell] = active;
 
-    if (row < 0 || cell < 0) {
+    if (row < 0 || cell < 0 || !AvailableCodes.includes(e.keyCode)) {
       return;
     }
 
-    if (e.keyCode === KeyCodes.Erase) {
-      fillItem(0);
-      return;
-    }
-
-    if (e.keyCode >= KeyCodes.One && e.keyCode <= KeyCodes.Nine) {
-      fillItem(Number(e.key));
-    }
+    fillItem(e.keyCode === KeyCodes.Erase ? 0 : Number(e.key));
   };
 
   const fillItem = (value) => {
