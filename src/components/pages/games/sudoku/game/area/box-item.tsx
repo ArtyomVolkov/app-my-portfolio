@@ -15,8 +15,8 @@ const BoxItem: React.FC<BoxItem> = ({ active, filled, value, origin, onPress }) 
     <div
       className={mergeClassNames([
         'box-item',
-        (value > 0 && value !== filled) && 'incorrect',
         !origin && 'filled',
+        (value > 0 && value !== filled) && 'incorrect',
         active && 'active',
       ])}
       onClick={!origin ? onPress : null}

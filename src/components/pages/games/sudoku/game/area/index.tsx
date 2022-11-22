@@ -1,7 +1,8 @@
-import React, { useEffect, useImperativeHandle, useState } from 'react';
-import cloneDeep from 'lodash/cloneDeep';
+import React, { useEffect } from 'react';
 
 import BoxItem from './box-item';
+
+import { Action } from '@pages/games/sudoku/game';
 
 enum KeyCodes {
   Erase = 8,
@@ -13,16 +14,13 @@ const AvailableCodes = [
 
 interface GameArea {
   blank: Array<Array<number>>,
+  origin: Array<Array<number>>,
   filled: Array<Array<number>>,
-  componentRef: React.Ref<any>,
+  active: [block: number, cell: number],
+  onAction: (action, data?) => void
 }
 
-const GameArea: React.FC<GameArea> = ({ blank, filled, componentRef }) => {
-  const [hints, setHints] = useState(5);
-  const [active, setActive] = useState([-1, -1]);
-  const [blankData, setBlankData] = useState(() => cloneDeep(blank));
-  const [history, setHistory] = useState<Array<{ block: number, cell: number, value: number }>>([]);
-
+const GameArea: React.FC<GameArea> = ({ active, blank, origin, filled, onAction }) => {
   useEffect(() => {
     window.addEventListener('keydown', onKeyDown);
 
@@ -31,17 +29,11 @@ const GameArea: React.FC<GameArea> = ({ blank, filled, componentRef }) => {
     }
   });
 
-  useImperativeHandle(componentRef, () => ({
-    fillItem,
-    hintItem,
-    undoAction,
-  }));
-
-  const onSetActive = ([row, cell]) => {
-    if (active[0] === row && active[1] === cell) {
+  const onSetActive = ([block, cell]) => {
+    if (active[0] === block && active[1] === cell) {
       return;
     }
-    setActive([row, cell]);
+    onAction(Action.SET_ACTIVE, [block, cell]);
   };
 
   const onKeyDown = (e) => {
@@ -54,100 +46,27 @@ const GameArea: React.FC<GameArea> = ({ blank, filled, componentRef }) => {
     fillItem(e.keyCode === KeyCodes.Erase ? 0 : Number(e.key));
   };
 
-  const undoAction = () => {
-    if (!history.length) {
-      return;
-    }
-
-    const newHistory = [...history];
-    const newData = [...blankData];
-    const lastItem = newHistory[newHistory.length-1];
-    const previousItem = newHistory[newHistory.length-2];
-
-    newData[lastItem.block][lastItem.cell] = 0;
-
-    if (newHistory.length > 1) {
-      newData[previousItem.block][previousItem.cell] = previousItem.value;
-    }
-
-    newHistory.pop();
-    setBlankData(newData);
-    setHistory(newHistory);
-  };
-
   const fillItem = (value) => {
-    const [block, cell] = active;
-    const newData = [...blankData];
-
-    newData[block][cell] = value;
-    setBlankData(newData);
-    setHistory([...history, { block, cell, value }]);
-    checkIsFinish(newData);
-  };
-
-  const hintItem = () => {
-    if (hints <= 0) {
-      return;
-    }
-
-    const blocks = [];
-    const emptyBlocs = [];
-    const newData = [...blankData];
-
-    blankData.forEach((row, index) => {
-      const hasEmpty = row.some((item) => !item);
-
-      if (!hasEmpty) {
-        blocks[index] = null;
-        return;
-      }
-      emptyBlocs.push(index);
-      blocks[index] = row.reduce((prev, item, index) => {
-        if (!item) {
-          prev.push(index);
-        }
-        return prev;
-      }, []);
-    });
-
-    if (!emptyBlocs.length) {
-      return;
-    }
-
-    const blockIndex = emptyBlocs[Math.round(Math.random() * (emptyBlocs.length-1))];
-    const cellIndex = blocks[blockIndex][Math.round(Math.random() * (blocks[blockIndex].length-1))];
-
-    newData[blockIndex][cellIndex] = filled[blockIndex][cellIndex];
-    setHints(hints-1);
-    setBlankData(newData);
-    checkIsFinish(newData);
-  };
-
-  const checkIsFinish = (data) => {
-    const isFinish = !data.some((itemRow, row) => itemRow.some((item, cell) => filled[row][cell] !== item));
-
-    if (isFinish) {
-      alert('You WIN');
-    }
+    onAction(Action.FILL, value);
   };
 
   return (
     <div className="area">
       {
-        blankData.map((item, rowIndex) => (
-          <div className="box-area" key={rowIndex}>
+        blank.map((item, blockIndex) => (
+          <div className="box-area" key={blockIndex}>
             {
               item.map((item, cellIndex) => {
-                const [row, cell] = active;
+                const [block, cell] = active;
 
                 return (
                   <BoxItem
-                    key={rowIndex+cellIndex}
+                    key={blockIndex+cellIndex}
                     value={item}
-                    origin={blank[rowIndex][cellIndex]}
-                    filled={filled[rowIndex][cellIndex]}
-                    active={row === rowIndex && cell === cellIndex}
-                    onPress={() => onSetActive([rowIndex, cellIndex])}
+                    origin={origin[blockIndex][cellIndex]}
+                    filled={filled[blockIndex][cellIndex]}
+                    active={block === blockIndex && cell === cellIndex}
+                    onPress={() => onSetActive([blockIndex, cellIndex])}
                   />
                 )
               })
