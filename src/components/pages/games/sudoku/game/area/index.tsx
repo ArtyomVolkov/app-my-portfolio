@@ -4,6 +4,8 @@ import BoxItem from './box-item';
 
 import { Action } from '@pages/games/sudoku/game';
 
+import './style.scss';
+
 enum KeyCodes {
   Erase = 8,
 }

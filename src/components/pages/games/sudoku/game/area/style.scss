@@ -1,0 +1,39 @@
+.sudoku-widget .area {
+  margin: 24px;
+  display: grid;
+  width: fit-content;
+  background: black;
+  grid-template-columns: 90px 90px 90px;
+  grid-template-rows: 90px 90px 90px;
+  grid-gap: 2px;
+  border: 2px solid;
+
+  .box-area {
+    background: #bebebe;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 1px;
+
+    .box-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      cursor: default;
+
+      &.filled {
+        color: #1565c0;
+        font-weight: 550;
+      }
+
+      &.active {
+        background: #ececec;
+      }
+
+      &.incorrect {
+        color: #ff0000;
+      }
+    }
+  }
+}

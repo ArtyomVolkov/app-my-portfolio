@@ -1,24 +1,29 @@
 import React from 'react';
 
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Close from '@mui/icons-material/Close';
 
 import { Action } from '@pages/games/sudoku/game';
-import Button from '@mui/material/Button';
+
+import './style.scss';
 
 export enum ModalType {
   CONFIRM,
   FINISH,
 }
 
-interface ModalWrap {
-  open: boolean,
-  type: ModalType,
+interface Modal {
+  data: {
+    open: boolean,
+    type: ModalType,
+    onConfirm?: () => void,
+  }
   onAction: (type: Action) => void,
 }
 
-const ModalWrap: React.FC<ModalWrap> = ({ open, type, onAction }) => {
-  if (!open) {
+const Modal: React.FC<Modal> = ({ data, onAction }) => {
+  if (!data.open) {
     return null;
   }
 
@@ -26,15 +31,25 @@ const ModalWrap: React.FC<ModalWrap> = ({ open, type, onAction }) => {
     onAction(Action.CLOSE_MODAL);
   };
 
+  const onConfirm = () => {
+    if (data.onConfirm) {
+      onAction(Action.CLOSE_MODAL);
+      data.onConfirm();
+    }
+  };
+
   const renderContent = () => {
-    switch (type) {
+    switch (data.type) {
       case ModalType.CONFIRM: {
         return (
-          <div className="confirm-type">
+          <div className="modal-content">
             <p className="title">New Game?</p>
             <p className="description">Current game hasn't finished yet.</p>
             <div className="actions">
-              <Button variant="contained" size="small">
+              <Button variant="outlined" size="small" onClick={() => onAction(Action.CLOSE_MODAL)}>
+                Cancel
+              </Button>
+              <Button variant="contained" size="small" onClick={onConfirm}>
                 Confirm
               </Button>
             </div>
@@ -43,8 +58,17 @@ const ModalWrap: React.FC<ModalWrap> = ({ open, type, onAction }) => {
       }
       case ModalType.FINISH: {
         return (
-          <div>
-            <h1>You Win!</h1>
+          <div className="modal-content">
+            <p className="title">You win!</p>
+            <p className="description">Congratulations you solved this puzzle.</p>
+            <div className="actions">
+              <Button variant="outlined" size="small" onClick={() => onAction(Action.CLOSE_MODAL)}>
+                Cancel
+              </Button>
+              <Button variant="contained" size="small">
+                New Game
+              </Button>
+            </div>
           </div>
         );
       }
@@ -53,8 +77,8 @@ const ModalWrap: React.FC<ModalWrap> = ({ open, type, onAction }) => {
   };
 
   return (
-    <div className="modal-wrap">
-      <div className="content">
+    <div className="modal">
+      <div className="content-box">
         <IconButton onClick={onClose} className="close-button">
           <Close />
         </IconButton>
@@ -66,4 +90,4 @@ const ModalWrap: React.FC<ModalWrap> = ({ open, type, onAction }) => {
   );
 }
 
-export default ModalWrap;
+export default Modal;
