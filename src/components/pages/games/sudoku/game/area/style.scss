@@ -7,6 +7,9 @@
   grid-template-rows: 90px 90px 90px;
   grid-gap: 2px;
   border: 2px solid;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   .box-area {
     background: #bebebe;
