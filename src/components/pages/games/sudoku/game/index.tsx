@@ -32,7 +32,7 @@ const SudokuGameWidget = () => {
   const [filled, setFilled] = useState([]);
   const [blankData, setBlankData] = useState([]);
   const [active, setActive] = useState<[block: number, cell: number]>([-1, -1]);
-  const [hints, setHints] = useState<number>(5);
+  const [hints, setHints] = useState<number>(0);
   const [history, setHistory] = useState<Array<{ block: number, cell: number, value: number }>>([]);
   const [modal, setModal] = useState<{ open: boolean, type: ModalType, onConfirm?: () => void}>({
     open: false, type: null
