@@ -103,6 +103,7 @@ const SudokuGameWidget = () => {
     setFilled(sudoku.filled);
     setHistory([]);
     setHints(5);
+    setActive([-1, -1]);
   };
 
   const closeModal = () => {
