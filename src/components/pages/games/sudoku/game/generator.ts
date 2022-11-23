@@ -1,4 +1,12 @@
+export enum Level {
+  Easy = 62,
+  Medium = 53,
+  Hard = 44
+}
+
 class SudokuGenerator {
+  private static size: number = 9;
+
   private matrix: Array<Array<number>> = [
     [7,6,1, 9,8,5, 2,3,4],
     [9,3,2 ,4,7,6, 8,5,1],
@@ -13,19 +21,21 @@ class SudokuGenerator {
     [4,2,5, 7,6,9, 3,1,8]
   ];
 
-  constructor() {
-  }
-
-  generate = (level) => {
+  generate = (level: Level) => {
     this.shuffle();
-    console.log(this.matrix);
+    const blocks = this.transform();
+
+    return {
+      filled: blocks,
+      blank: []
+    };
   }
 
   private shuffle = () => {
-    const list = Array(9).fill(1).map((item, index) => index+1);
     const crypt = {};
+    const list = Array(SudokuGenerator.size).fill(1).map((item, index) => index+1);
 
-    Array(9).fill(1).forEach((item, index) => {
+    Array(SudokuGenerator.size).fill(1).forEach((item, index) => {
       const randomIndex = Math.round(Math.random()*(list.length-1));
 
       crypt[index+1] = list[randomIndex];
@@ -33,6 +43,27 @@ class SudokuGenerator {
     });
 
     this.matrix = this.matrix.map((block) => block.map((item) => crypt[item]));
+  }
+
+  private transform = (): Array<Array<number>> => {
+    const blocks = [];
+    const size = Math.sqrt(SudokuGenerator.size);
+    const row = Array(size).fill(1).map((item, index) => index*size);
+
+    row.forEach((a) => {
+      row.forEach((b) => {
+        const block = [];
+
+        row.forEach((item, i) => {
+          row.forEach((item, j) => {
+            block.push(this.matrix[a+i][b+j]);
+          });
+        });
+        blocks.push(block);
+      });
+    });
+
+    return blocks;
   }
 }
 

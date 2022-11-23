@@ -43,7 +43,7 @@ const SudokuGameWidget = () => {
     open: false, type: null
   });
 
-  generator.generate(level);
+  console.log(generator.generate(level));
 
   const onAction = (action, data = null) => {
     switch (action) {
