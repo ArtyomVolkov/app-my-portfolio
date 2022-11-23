@@ -5,6 +5,8 @@ import GameArea from '@pages/games/sudoku/game/area';
 import GamePanel from '@pages/games/sudoku/game/panel';
 import Modal, { ModalType } from '@pages/games/sudoku/game/modal';
 
+import SudokuGenerator from '@pages/games/sudoku/game/generator';
+
 import { GAME_DATA } from '@pages/games/sudoku/game/data';
 
 import './style.scss';
@@ -26,6 +28,8 @@ export enum Action {
   CLOSE_MODAL
 }
 
+const generator = new SudokuGenerator();
+
 const SudokuGameWidget = () => {
   const [level, setLevel] = useState<Level>(Level.Easy);
   const [hasChange, setHasChange] = useState<boolean>(false);
@@ -38,6 +42,8 @@ const SudokuGameWidget = () => {
   const [modal, setModal] = useState<{ open: boolean, type: ModalType, onConfirm?: () => void}>({
     open: false, type: null
   });
+
+  generator.generate(level);
 
   const onAction = (action, data = null) => {
     switch (action) {
