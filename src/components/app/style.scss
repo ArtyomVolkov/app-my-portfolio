@@ -3,6 +3,8 @@
   min-height: 100vh;
 
   .app-entry {
+    min-height: inherit;
+
     &.full-width {
       aside {
         width: 80px;

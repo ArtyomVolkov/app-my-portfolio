@@ -1,6 +1,5 @@
 aside {
   border-right: 1px solid #dcdcdc;
-  overflow: auto;
   position: fixed;
   left: 0;
   top: 0;
@@ -8,4 +7,16 @@ aside {
   z-index: 100;
   width: 256px;
   background-color: #fbfbfb;
+
+  .screen-resize {
+    position: absolute;
+    top: 60px;
+    right: -20px;
+    background: #fbfbfb;
+    border: 1px solid #dcdcdc;
+
+    &:hover {
+      background: white;
+    }
+  }
 }
