@@ -37,3 +37,16 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .sudoku-widget .area {
+    margin: 12px auto;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .sudoku-widget .area {
+    grid-template-columns: 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px;
+  }
+}

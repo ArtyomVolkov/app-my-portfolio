@@ -39,30 +39,32 @@ const GamePanel: React.FC<GamePanel> = ({ level, hints, history, activeValue, on
         </Select>
       </FormControl>
       <br />
-      <Button variant="outlined" onClick={() => onAction(Action.NEW_GAME)}>
-        <AppsOutlinedIcon fontSize="small" />
-        New Game
-      </Button>
-      <Button
-        variant="outlined"
-        disabled={!history.length}
-        onClick={() => onAction(Action.UNDO)}
-      >
-        <ReplayIcon fontSize="small" />
-        Undo
-      </Button>
-      <Button variant="outlined" onClick={() => onAction(Action.ERASE)} disabled={!activeValue}>
-        <BackspaceOutlinedIcon fontSize="small" />
-        Erase
-      </Button>
-      <Button
-        variant="outlined"
-        onClick={() => onAction(Action.HINT)}
-        disabled={!hints}
-      >
-        <TipsAndUpdatesOutlinedIcon />
-        {`Hint (${hints})`}
-      </Button>
+      <div className="main-actions">
+        <Button variant="outlined" onClick={() => onAction(Action.NEW_GAME)}>
+          <AppsOutlinedIcon fontSize="small" />
+          New Game
+        </Button>
+        <Button
+          variant="outlined"
+          disabled={!history.length}
+          onClick={() => onAction(Action.UNDO)}
+        >
+          <ReplayIcon fontSize="small" />
+          Undo
+        </Button>
+        <Button variant="outlined" onClick={() => onAction(Action.ERASE)} disabled={!activeValue}>
+          <BackspaceOutlinedIcon fontSize="small" />
+          Erase
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={() => onAction(Action.HINT)}
+          disabled={!hints}
+        >
+          <TipsAndUpdatesOutlinedIcon />
+          {`Hint (${hints})`}
+        </Button>
+      </div>
     </div>
   );
 }
