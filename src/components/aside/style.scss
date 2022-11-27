@@ -20,3 +20,28 @@ aside {
     }
   }
 }
+
+@media screen and (max-width: 1023px) {
+  aside {
+    .avatar {
+      padding: 8px 12px;
+    }
+    .screen-resize {
+      padding: 6px;
+      top: 47px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  aside {
+    .avatar {
+      padding: 0;
+    }
+    .screen-resize {
+      padding: 2px;
+      top: 33px;
+      right: -15px ;
+    }
+  }
+}

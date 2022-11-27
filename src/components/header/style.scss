@@ -10,3 +10,16 @@ header {
   background: #fbfbfb;
   z-index: 90;
 }
+
+@media screen and (max-width: 1023px) {
+  header {
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  header {
+    height: 40px;
+    padding: 4px 8px;
+  }
+}

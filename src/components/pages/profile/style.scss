@@ -13,15 +13,16 @@
 @media screen and (max-width: 767px) {
   .profile-page {
     padding: 12px;
-  }
-}
 
-@media screen and (max-width: 475px) {
-  .profile-page {
     .tabs-header {
       .tab-item {
+        min-height: 45px;
         padding: 8px;
         font-size: 14px;
+
+        svg {
+          font-size: 18px;
+        }
       }
     }
   }

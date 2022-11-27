@@ -9,3 +9,18 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .mui-breadcrumbs {
+
+    .link {
+      .page-label {
+        display: none;
+      }
+
+      svg {
+        margin: 0;
+      }
+    }
+  }
+}

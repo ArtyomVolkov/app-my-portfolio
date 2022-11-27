@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 #my-portfolio-app {
   font-family: 'Roboto', sans-serif;
   min-height: 100vh;
@@ -21,6 +25,19 @@
     .main-content {
       margin-left: 256px;
       transition: margin-left 0.5s;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #my-portfolio-app {
+    .app-entry.full-width {
+      .main-content {
+        margin-left: 60px;
+      }
+      aside {
+        width: 60px;
+      }
     }
   }
 }
