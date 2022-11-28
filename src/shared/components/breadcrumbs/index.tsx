@@ -46,7 +46,7 @@ const Breadcrumbs = () => {
             className="link"
           >
             { PATH_MAP[item].icon }
-            <span className="page-label">{ PATH_MAP.home.label }</span>
+            <span className="page-label">{ PATH_MAP[item]?.label }</span>
           </Link>
         </label>
       )
