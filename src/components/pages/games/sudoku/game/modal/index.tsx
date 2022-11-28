@@ -65,7 +65,7 @@ const Modal: React.FC<Modal> = ({ data, onAction }) => {
               <Button variant="outlined" size="small" onClick={() => onAction(Action.CLOSE_MODAL)}>
                 Cancel
               </Button>
-              <Button variant="contained" size="small">
+              <Button variant="contained" size="small" onClick={onConfirm}>
                 New Game
               </Button>
             </div>
