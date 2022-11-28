@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import PuzzleArea from '@pages/games/puzzle/puzzle-tags/area';
-import Toolbar from '@pages/games/puzzle/puzzle-tags/toolbar';
-import Controls from '@pages/games/puzzle/puzzle-tags/toolbar/controls';
+import PuzzleArea from './area';
+import Toolbar from './toolbar';
+import Controls from './toolbar/controls';
 
 import './style.scss';
 

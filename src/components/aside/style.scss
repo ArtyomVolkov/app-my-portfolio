@@ -1,6 +1,5 @@
 aside {
   border-right: 1px solid #dcdcdc;
-  overflow: auto;
   position: fixed;
   left: 0;
   top: 0;
@@ -8,4 +7,41 @@ aside {
   z-index: 100;
   width: 256px;
   background-color: #fbfbfb;
+
+  .screen-resize {
+    position: absolute;
+    top: 60px;
+    right: -20px;
+    background: #fbfbfb;
+    border: 1px solid #dcdcdc;
+
+    &:hover {
+      background: white;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  aside {
+    .avatar {
+      padding: 8px 12px;
+    }
+    .screen-resize {
+      padding: 6px;
+      top: 47px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  aside {
+    .avatar {
+      padding: 0;
+    }
+    .screen-resize {
+      padding: 2px;
+      top: 33px;
+      right: -15px ;
+    }
+  }
 }

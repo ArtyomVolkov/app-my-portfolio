@@ -6,3 +6,12 @@ section.sudoku-widget {
   width: fit-content;
   @include card-shadow;
 }
+
+@media screen and (max-width: 835px) {
+  section.sudoku-widget {
+    display: grid;
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    width: 100%;
+  }
+}

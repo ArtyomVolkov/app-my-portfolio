@@ -4,13 +4,42 @@
   justify-content: center;
   border-right: 1px solid #dcdcdc;
   flex-direction: column;
-  grid-row-gap: 10px;
 
-  button {
-    min-width: 65px;
+  .main-actions {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 10px;
 
-    svg {
-      margin-right: 10px;
+    button {
+      min-width: 65px;
+
+      svg {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 835px) {
+  .sudoku-widget .panel {
+    padding: 12px;
+    border-right: 0;
+    border-bottom: 1px solid #dcdcdc;
+
+    .main-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+
+      button {
+        font-size: 0.8em;
+        padding: 4px;
+
+        svg {
+          font-size: 16px;
+        }
+      }
     }
   }
 }

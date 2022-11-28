@@ -167,7 +167,7 @@ export const PROJECTS: Array<Project> = [
     period: '11 months',
   },
   {
-    name: 'Think Research Corporation',
+    name: 'Think Research',
     description: 'Healthcare Software Company developing knowledge-based tools that empower clinicians to deliver the best evidence-based care to patients, driving better patient outcomes.',
     technologies: [
       Languages.javascript,

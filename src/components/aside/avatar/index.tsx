@@ -3,8 +3,6 @@ import React from 'react';
 import MuiAvatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 
-import appActions from '@store/actions/app';
-
 import './style.scss';
 
 interface IAvatar {
@@ -18,7 +16,7 @@ const Avatar: React.FC<IAvatar> = ({ title, subtitle, image }) => {
 
   return (
     <div className="avatar">
-      <IconButton onClick={appActions.toggleFullWidth}>
+      <IconButton>
         <MuiAvatar>
           {
             !image ? `${firstName[0]}${lastName[0]}` : <img src={image} alt="avatar" />

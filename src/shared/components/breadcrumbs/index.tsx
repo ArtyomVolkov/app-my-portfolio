@@ -26,7 +26,7 @@ const Breadcrumbs = () => {
           <label key={index} onClick={(e) => navigateTo(e, '/')}>
             <Link underline="hover" color="inherit" href="/" className="link">
               { PATH_MAP.home.icon }
-              { PATH_MAP.home.label }
+              <span className="page-label">{ PATH_MAP.home.label }</span>
             </Link>
           </label>
         );
@@ -46,7 +46,7 @@ const Breadcrumbs = () => {
             className="link"
           >
             { PATH_MAP[item].icon }
-            { PATH_MAP[item].label }
+            <span className="page-label">{ PATH_MAP.home.label }</span>
           </Link>
         </label>
       )

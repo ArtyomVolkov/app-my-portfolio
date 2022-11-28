@@ -58,3 +58,35 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .projects-tab {
+    grid-row-gap: 10px;
+
+    .project-card {
+      padding: 20px;
+
+      .responsibilities {
+        margin: 0 10px;
+        padding: 10px 0 0;
+
+        li {
+          padding: 4px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 474px) {
+  .projects-tab {
+    .project-card {
+      .name {
+        font-size: 16px;
+      }
+      .pill-widget {
+        padding: 6px;
+      }
+    }
+  }
+}
