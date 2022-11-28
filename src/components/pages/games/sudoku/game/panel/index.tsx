@@ -11,7 +11,8 @@ import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 
-import { Action, Level } from '@pages/games/sudoku/game';
+import { Action } from '@pages/games/sudoku/game';
+import { Level } from '@pages/games/sudoku/game/generator';
 
 import './style.scss';
 
