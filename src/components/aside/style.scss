@@ -10,13 +10,22 @@ aside {
 
   .screen-resize {
     position: absolute;
-    top: 60px;
-    right: -20px;
+    top: 65px;
+    right: -15px;
+    padding: 2px;
     background: #fbfbfb;
     border: 1px solid #dcdcdc;
 
     &:hover {
       background: white;
+    }
+
+    .icon {
+      transition: transform 0.5s;
+
+      &.left {
+        transform: rotateZ(180deg);
+      }
     }
   }
 }
@@ -27,8 +36,7 @@ aside {
       padding: 8px 12px;
     }
     .screen-resize {
-      padding: 6px;
-      top: 47px;
+      top: 50px;
     }
   }
 }
@@ -39,8 +47,8 @@ aside {
       padding: 0;
     }
     .screen-resize {
-      padding: 2px;
-      top: 33px;
+      padding: 0;
+      top: 35px;
       right: -15px ;
     }
   }

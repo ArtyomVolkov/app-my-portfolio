@@ -1,26 +1,27 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { observer } from 'mobx-react';
 
 import Header from '@components/header';
 import SideBar from '@components/aside';
 import AppRoutes from '@components/routes';
 
 import { mergeClassNames } from '@utils/common';
+import { IAppStore } from '@store/app';
 
-import { ReduxStore } from '@shared/interfaces/redux-store';
+interface IAppContent {
+  store: IAppStore
+}
 
-const AppContent = () => {
-  const fullWidth = useSelector(({ app }: ReduxStore) => app.fullWidth);
-
+const AppContent = observer<React.FC<IAppContent>>(({ store }) => {
   return (
-    <div className={mergeClassNames(['app-entry', fullWidth && 'full-width'])}>
-      <SideBar />
+    <div className={mergeClassNames(['app-entry', store.layout.fullWidth && 'full-width'])}>
+      <SideBar fullWidth={store.layout.fullWidth} />
       <div className="main-content">
         <Header />
         <AppRoutes />
       </div>
     </div>
   );
-}
+});
 
 export default AppContent;
