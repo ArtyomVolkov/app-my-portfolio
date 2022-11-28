@@ -1,0 +1,8 @@
+@import "../../../../../assets/styles/style-guide";
+
+section.sudoku-widget {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  @include card-shadow;
+}
