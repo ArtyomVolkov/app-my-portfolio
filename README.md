@@ -6,7 +6,7 @@
 * [Typescript](https://www.typescriptlang.org/)
 * [Webpack](https://webpack.js.org/)
 * [React](https://en.reactjs.org/)
-* [Redux](https://redux-toolkit.js.org/)
+* [MobX](https://mobx.js.org/)
 * [MaterialUI](https://mui.com/)
 * [Sass](https://sass-lang.com/)
 

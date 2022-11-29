@@ -5,6 +5,7 @@ export interface IAppStore {
     fullWidth: boolean,
   },
   toggleFullWidth: () => void,
+  setFullWidth: (value: boolean) => void,
 }
 
 class AppStore implements IAppStore {
@@ -18,6 +19,10 @@ class AppStore implements IAppStore {
 
   public toggleFullWidth = () => {
     this.layout.fullWidth = !this.layout.fullWidth;
+  }
+
+  public setFullWidth = (value: boolean) => {
+    this.layout.fullWidth = value;
   }
 }
 

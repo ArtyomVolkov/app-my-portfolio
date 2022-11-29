@@ -1,12 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback } from 'react';
+import debounce from 'lodash/debounce';
 
-export const useResizeChange = () => {
-  const [small] = useState(false);
+import { DEBOUNCE_DELAY } from '@shared/constants/commons';
+
+export const useResizeChange = (callback) => {
+  const onChangeResizeDebounce = useCallback(debounce((e) => {
+    callback(e.target.innerWidth);
+  }, DEBOUNCE_DELAY), []);
 
   useEffect(() => {
-    console.log('change width');
+    window.addEventListener('resize', onChangeResizeDebounce);
 
-  }, [window.innerWidth]);
-
-  return small;
+    return () => {
+      window.removeEventListener('resize', onChangeResizeDebounce);
+    }
+  }, []);
 };
