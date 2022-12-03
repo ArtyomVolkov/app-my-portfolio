@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { action, makeAutoObservable, observable } from 'mobx';
 import cloneDeep from 'lodash/cloneDeep';
 
 import SudokuGenerator, { Level } from '@pages/games/sudoku/game/generator';
@@ -39,7 +39,24 @@ class SudokuStore implements ISudoku {
   modal: { open: boolean; type: ModalType; onConfirm?: () => void };
 
   constructor(level: Level) {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      level: observable,
+      hints: observable,
+      matrix: observable,
+      active: observable,
+      hasChange: observable,
+      modal: observable,
+      history: observable,
+      setNewGame: action,
+      setActive: action,
+      setModal: action,
+      fill: action,
+      hint: action,
+      undo: action,
+      onChangeLevel: action,
+      onStartNewGame: action,
+      onCloseModal: action,
+    });
 
     this.level = level;
     this.resetData();
@@ -81,6 +98,26 @@ class SudokuStore implements ISudoku {
       open: true,
       type: ModalType.CONFIRM,
       onConfirm: () => this.setNewGame(level),
+    });
+  }
+
+  onStartNewGame = () => {
+    if (!this.hasChange) {
+      this.setNewGame(this.level);
+      return;
+    }
+    this.setModal({
+      open: true,
+      type: ModalType.CONFIRM,
+      onConfirm: () => this.setNewGame(this.level),
+    });
+  }
+
+  onCloseModal = () => {
+    this.setModal({
+      open: false,
+      type: null,
+      onConfirm: null,
     });
   }
 
@@ -137,26 +174,6 @@ class SudokuStore implements ISudoku {
       blank: cloneDeep(sudoku.blank),
       data: sudoku.blank
     }
-  }
-
-  onStartNewGame = () => {
-    if (!this.hasChange) {
-      this.setNewGame(this.level);
-      return;
-    }
-    this.setModal({
-      open: true,
-      type: ModalType.CONFIRM,
-      onConfirm: () => this.setNewGame(this.level),
-    });
-  }
-
-  onCloseModal = () => {
-    this.setModal({
-      open: false,
-      type: null,
-      onConfirm: null,
-    });
   }
 
   undo(): void {
