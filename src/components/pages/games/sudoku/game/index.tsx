@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 
 import GameArea from '@pages/games/sudoku/game/area';
@@ -83,6 +83,10 @@ const SudokuGameWidget = observer(({ store }) => {
   );
 });
 
-export default () => (
-  <SudokuGameWidget store={new SudokuStore(Level.Easy)} />
-);
+export default () => {
+  const [store] = useState(() => new SudokuStore(Level.Easy));
+
+  return (
+    <SudokuGameWidget store={store} />
+  );
+}

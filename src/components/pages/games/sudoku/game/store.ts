@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import cloneDeep from 'lodash/cloneDeep';
 
 import SudokuGenerator, { Level } from '@pages/games/sudoku/game/generator';
