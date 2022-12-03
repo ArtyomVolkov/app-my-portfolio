@@ -1,5 +1,4 @@
 import React from 'react';
-import { observer } from 'mobx-react';
 
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
@@ -71,4 +70,4 @@ const GamePanel: React.FC<GamePanel> = ({ level, hints, history, activeValue, on
   );
 }
 
-export default observer(GamePanel);
+export default GamePanel;
