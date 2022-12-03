@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react';
 
 import GameArea from '@pages/games/sudoku/game/area';
@@ -21,12 +21,12 @@ export enum Action {
   CLOSE_MODAL
 }
 
-const SudokuGameWidget = observer(({ store }) => {
+const SudokuGameWidget = () => {
+  const store = useRef(new SudokuStore(Level.Easy)).current;
+
   useEffect(() => {
     store.setNewGame(Level.Easy);
   }, []);
-
-  console.log(store);
 
   const onAction = (action, data = null) => {
     switch (action) {
@@ -81,12 +81,6 @@ const SudokuGameWidget = observer(({ store }) => {
       />
     </section>
   );
-});
-
-export default () => {
-  const [store] = useState(() => new SudokuStore(Level.Easy));
-
-  return (
-    <SudokuGameWidget store={store} />
-  );
 }
+
+export default observer(SudokuGameWidget);

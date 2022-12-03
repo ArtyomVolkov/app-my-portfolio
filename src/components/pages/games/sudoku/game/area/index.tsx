@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { observer } from 'mobx-react';
 
 import BoxItem from './box-item';
 
@@ -80,4 +81,4 @@ const GameArea: React.FC<GameArea> = ({ active, blank, origin, filled, onAction 
   );
 }
 
-export default GameArea;
+export default observer(GameArea);

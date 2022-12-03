@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -23,6 +24,7 @@ interface Modal {
 }
 
 const Modal: React.FC<Modal> = ({ data, onAction }) => {
+  console.log('render modal');
   if (!data.open) {
     return null;
   }
@@ -90,4 +92,4 @@ const Modal: React.FC<Modal> = ({ data, onAction }) => {
   );
 }
 
-export default Modal;
+export default observer(Modal);

@@ -104,7 +104,7 @@ class SudokuStore implements ISudoku {
     if (this.hints <= 0) {
       return;
     }
-    const data = SudokuGenerator.setHint(this.matrix.blank, this.matrix.filled);
+    const data = SudokuGenerator.setHint(this.matrix.data, this.matrix.filled);
 
     if (!data) {
       return;

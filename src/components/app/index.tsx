@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import AppContent from '@components/app/app-content';
 
 import THEME from '@assets/theme/main';
-import STORE from '@store/app';
 
 import './style.scss';
 
@@ -14,7 +13,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={THEME}>
-        <AppContent store={STORE} />
+        <AppContent />
       </ThemeProvider>
     </BrowserRouter>
   );
