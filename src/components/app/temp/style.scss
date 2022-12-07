@@ -29,6 +29,16 @@
         width: 0;
         transform: translateX(-230px);
       }
+      .main .main-content {
+        .headline {
+          button {
+            left: 0;
+          }
+          input {
+            margin-left: 100px;
+          }
+        }
+      }
     }
 
     .sidebar {
@@ -53,8 +63,21 @@
         overflow: auto;
 
         .headline {
+          display: inline-flex;
+          align-items: baseline;
           background: red;
           height: 120px;
+
+          button {
+            position: absolute;
+            left: 120px;
+            transition: left 0.5s;
+          }
+
+          input {
+            flex: 1;
+            transition:  margin-left 0.5s;
+          }
         }
 
         .templates {

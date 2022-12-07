@@ -24,6 +24,7 @@ const TempPage = () => {
           <div className="main-content">
             <div className="headline">
               <button onClick={() => setFullwidth(!fullwidth)}>fullwidth</button>
+              <input />
             </div>
             <div className="templates">
               <div className="template-content">
