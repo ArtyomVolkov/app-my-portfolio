@@ -1,0 +1,71 @@
+.gallery-app {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 65px 50px 1fr;
+
+  .header {
+    display: block;
+    position: relative;
+    height: 65px;
+    padding: 0;
+    border: 0;
+    background: #1565c0;
+  }
+
+  .tabs {
+    height: 50px;
+    background: #00b822;
+  }
+
+  .tab-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background: wheat;
+    overflow: auto;
+
+    &.fullwidth {
+      .sidebar {
+        width: 0;
+        transform: translateX(-230px);
+      }
+    }
+
+    .sidebar {
+      width: 230px;
+      background: #B74B42;
+      overflow: auto;
+      transition: width 0.5s, transform 0.5s;
+
+      .sidebar-content {
+        min-height: 1200px;
+      }
+    }
+
+    .main {
+      flex: 1;
+      overflow: auto;
+
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: auto;
+
+        .headline {
+          background: red;
+          height: 120px;
+        }
+
+        .templates {
+          flex: 1;
+          overflow: auto;
+
+          .template-content {
+            min-height: 1200px;
+          }
+        }
+      }
+    }
+  }
+}

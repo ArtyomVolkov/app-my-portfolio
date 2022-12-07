@@ -7,9 +7,15 @@ import AppContent from '@components/app/app-content';
 
 import THEME from '@assets/theme/main';
 
+import TempPage from '@components/app/temp';
+
 import './style.scss';
 
 const App = () => {
+  return  (
+    <TempPage />
+  );
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={THEME}>
