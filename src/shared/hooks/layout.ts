@@ -9,6 +9,8 @@ export const useResizeChange = (callback) => {
   }, DEBOUNCE_DELAY), []);
 
   useEffect(() => {
+    callback(window.innerWidth);
+
     window.addEventListener('resize', onChangeResizeDebounce);
 
     return () => {
