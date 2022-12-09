@@ -5,17 +5,19 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { mergeClassNames } from '@utils/common';
 
 interface ICellBox {
-  index: number,
+  row: number,
+  cell: number,
   size: number,
-  onPress: (index) => void,
-  filled?: boolean,
-  empty?: boolean,
+  onPress: (row, cell) => void,
+  onEnter: (row, cell) => void,
+  filled: boolean,
+  incorrect: boolean,
 }
 
-const CellBox: React.FC<ICellBox> = ({ index, size, filled, empty, onPress }) => {
+const CellBox: React.FC<ICellBox> = ({ row, cell, size, filled, incorrect, onPress, onEnter }) => {
   const renderItem = () => {
-    if (empty) {
-      return <CloseRoundedIcon />
+    if (incorrect) {
+      return <CloseRoundedIcon className="wrong" />
     }
     if (filled) {
       return <div className="filled" />;
@@ -23,12 +25,24 @@ const CellBox: React.FC<ICellBox> = ({ index, size, filled, empty, onPress }) =>
     return null;
   };
 
+  const onClick = () => {
+    onPress(row, cell);
+  };
+
+  const onMouseEnter = () => {
+    onEnter(row, cell);
+  }
+
   return (
     <div
-      onClick={onPress}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      data-row={row}
+      data-cell={cell}
       className={mergeClassNames([
         'cell',
-        (index !== size) && !((index+1)%5) && 'divider'
+        (cell !== size) && !((cell+1)%5) && 'divider',
+        incorrect && 'disabled'
       ])}
     >
       { renderItem() }

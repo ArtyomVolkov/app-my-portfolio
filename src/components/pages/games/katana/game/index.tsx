@@ -28,7 +28,10 @@ const GameWidget = () => {
           size={crossword.area.cells[1]}
           variant="horizontal"
         />
-        <Area size={crossword.size} />
+        <Area
+          size={crossword.size}
+          matrix={crossword.filled}
+        />
       </div>
     </section>
   );

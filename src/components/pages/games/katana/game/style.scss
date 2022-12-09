@@ -46,6 +46,7 @@ $cell-size: 21px;
 
   .panel {
     display: grid;
+    user-select: none;
 
     &.horizontal {
       grid-row-gap: 1px;
@@ -108,6 +109,10 @@ $cell-size: 21px;
         border-width: calc($border-width - 1px);
       }
 
+      &.disabled {
+        pointer-events: none;
+      }
+
       .filled {
         background: #101010;
         width: 100%;
@@ -115,6 +120,11 @@ $cell-size: 21px;
         border: 1px solid white;
         border-radius: 4px;
         box-sizing: border-box;
+        pointer-events: none;
+      }
+
+      .wrong {
+        color: red;
       }
     }
 
