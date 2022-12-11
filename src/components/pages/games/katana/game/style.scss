@@ -95,6 +95,28 @@ $cell-size: 21px;
     display: grid;
     grid-row-gap: 1px;
     background: #5e5d54;
+    position: relative;
+
+    .tooltip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      background-color: #ffffffdb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border: 1px solid #b3b3b3;
+      font-weight: 600;
+
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
 
     .cell {
       @include cell(white);

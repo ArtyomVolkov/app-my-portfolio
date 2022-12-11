@@ -8,13 +8,12 @@ interface ICellBox {
   row: number,
   cell: number,
   size: number,
-  onPress: (row, cell) => void,
   onEnter: (row, cell) => void,
   filled: boolean,
   incorrect: boolean,
 }
 
-const CellBox: React.FC<ICellBox> = ({ row, cell, size, filled, incorrect, onPress, onEnter }) => {
+const CellBox: React.FC<ICellBox> = ({ row, cell, size, filled, incorrect, onEnter }) => {
   const renderItem = () => {
     if (incorrect) {
       return <CloseRoundedIcon className="wrong" />
@@ -25,18 +24,18 @@ const CellBox: React.FC<ICellBox> = ({ row, cell, size, filled, incorrect, onPre
     return null;
   };
 
-  const onClick = () => {
-    onPress(row, cell);
-  };
-
   const onMouseEnter = () => {
     onEnter(row, cell);
   }
 
+  const onDragEnter = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <div
-      onClick={onClick}
       onMouseEnter={onMouseEnter}
+      onDragStart={onDragEnter}
       data-row={row}
       data-cell={cell}
       className={mergeClassNames([
