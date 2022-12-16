@@ -28,14 +28,14 @@ const CellBox: React.FC<ICellBox> = ({ row, cell, size, filled, incorrect, onEnt
     onEnter(row, cell);
   }
 
-  const onDragEnter = (e) => {
+  const onDragStart = (e) => {
     e.preventDefault();
   }
 
   return (
     <div
       onMouseEnter={onMouseEnter}
-      onDragStart={onDragEnter}
+      onDragStart={onDragStart}
       data-row={row}
       data-cell={cell}
       className={mergeClassNames([
