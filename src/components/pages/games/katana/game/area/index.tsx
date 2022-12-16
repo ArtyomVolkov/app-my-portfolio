@@ -4,11 +4,6 @@ import CellBox from '@pages/games/katana/game/area/box';
 
 import { mergeClassNames } from '@utils/common';
 
-interface IArea {
-  size: [v: number, h: number],
-  matrix: Array<Array<number>>,
-}
-
 enum FLOW {
   HORIZONTAL,
   VERTICAL
@@ -18,7 +13,13 @@ enum MouseButton {
   LEFT,
 }
 
-const Area: React.FC<IArea> = ({ size, matrix }) => {
+interface IArea {
+  size: [v: number, h: number],
+  matrix: Array<Array<number>>,
+  onBoxHover: (row, cell) => void,
+}
+
+const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
   const tooltipRef = useRef(null);
   const [filled, setFilled] = useState(Array(size[0]).fill(Array(size[1]).fill(null)));
   const data = useMemo(() => Array(size[0]).fill(Array(size[1]).fill(1)), [size]);
@@ -57,6 +58,7 @@ const Area: React.FC<IArea> = ({ size, matrix }) => {
   };
 
   const onMouseLeave = () => {
+    onBoxHover(-1, -1);
     stopDrawMode();
   };
 
@@ -71,6 +73,8 @@ const Area: React.FC<IArea> = ({ size, matrix }) => {
   }
 
   const onBoxEnter = (row, cell) => {
+    onBoxHover(row, cell);
+
     if (!drawMode.current.active) {
       return false;
     }

@@ -59,6 +59,10 @@ $cell-size: 21px;
         grid-column-gap: 1px;
         justify-content: end;
 
+        &.hover {
+          opacity: 0.8;
+        }
+
         &.divider {
           border-bottom: $border;
           border-width: calc($border-width - 1px);
@@ -82,6 +86,10 @@ $cell-size: 21px;
         &.divider {
           border-right: $border;
           border-width: calc($border-width - 1px);
+        }
+
+        &.hover {
+          opacity: 0.8;
         }
       }
     }
