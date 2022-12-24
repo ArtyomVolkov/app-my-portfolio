@@ -113,15 +113,19 @@ const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
 
   const drawByVertical = (row, cell, value) => {
     if (!value) {
+      if (!drawMode.current.filled) {
+        return;
+      }
       fillItemBox(drawMode.current.vertical[0], cell, !drawMode.current.filled);
       drawMode.current.vertical.pop();
       return;
     }
 
     if (drawMode.current.vertical.includes(row)) {
-      const index = drawMode.current.vertical.pop();
-
-      fillItemBox(index, cell, !drawMode.current.filled);
+      if (!drawMode.current.filled) {
+        return;
+      }
+      fillItemBox(drawMode.current.vertical.pop(), cell, !drawMode.current.filled);
       return;
     }
 
@@ -131,15 +135,19 @@ const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
 
   const drawByHorizontal = (row, cell, value) => {
     if (!value) {
+      if (!drawMode.current.filled) {
+        return;
+      }
       fillItemBox(row, drawMode.current.horizontal[0], !drawMode.current.filled);
       drawMode.current.horizontal.pop();
       return;
     }
 
     if (drawMode.current.horizontal.includes(cell)) {
-      const index = drawMode.current.horizontal.pop();
-
-      fillItemBox(row, index, !drawMode.current.filled);
+      if (!drawMode.current.filled) {
+        return;
+      }
+      fillItemBox(row, drawMode.current.horizontal.pop(), !drawMode.current.filled);
       return;
     }
 
@@ -174,7 +182,7 @@ const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
       onMouseDown={onMouseDown}
       onMouseLeave={onMouseLeave}
     >
-      <div className="tooltip hidden" ref={tooltipRef}></div>
+      <div className="tooltip hidden" ref={tooltipRef} />
       {
         data.map((item, row, list) => (
           <div
