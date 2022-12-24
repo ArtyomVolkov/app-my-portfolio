@@ -42,6 +42,11 @@ $cell-size: 21px;
     justify-content: center;
     background: white;
     font-weight: 600;
+    border: 3px solid white;
+
+    canvas {
+      position: absolute;
+    }
   }
 
   .panel {
