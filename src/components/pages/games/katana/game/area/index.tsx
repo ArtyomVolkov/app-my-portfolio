@@ -1,8 +1,15 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useContext, useMemo, useRef } from 'react';
 
 import CellBox from '@pages/games/katana/game/area/box';
 
 import { mergeClassNames } from '@utils/common';
+
+import { GameContext, Action } from '@pages/games/katana/game/context';
+
+const TooltipAxisOffset = {
+  x: 50,
+  y: 40,
+};
 
 enum FLOW {
   HORIZONTAL,
@@ -15,14 +22,16 @@ enum MouseButton {
 
 interface IArea {
   size: [v: number, h: number],
-  matrix: Array<Array<number>>,
+  filled: Array<Array<number>>,
+  blank: Array<Array<number>>,
   onBoxHover: (row, cell) => void,
 }
 
-const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
+const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
   const tooltipRef = useRef(null);
-  const [filled, setFilled] = useState(Array(size[0]).fill(Array(size[1]).fill(null)));
-  const data = useMemo(() => Array(size[0]).fill(Array(size[1]).fill(1)), [size]);
+  const [,dispatch] = useContext(GameContext);
+  const matrix = useMemo(() => Array(size[0]).fill(Array(size[1]).fill(1)), [size]);
+
   const drawMode = useRef({
     active: false,
     startBox: [],
@@ -42,7 +51,7 @@ const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
     if (!row || !cell) {
       return;
     }
-    const value = !filled[+row][+cell] ? 1 : null;
+    const value = !blank[+row][+cell] ? 1 : null;
 
     if (!drawMode.current.active) {
       fillItemBox(row, cell, value);
@@ -68,8 +77,8 @@ const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
     }
     drawMode.current.position[FLOW.HORIZONTAL] = e.clientX;
     drawMode.current.position[FLOW.VERTICAL] = e.clientY;
-    tooltipRef.current.style.left = e.clientX - 50 + 'px';
-    tooltipRef.current.style.top = e.clientY - 40 + 'px';
+    tooltipRef.current.style.left = e.clientX - TooltipAxisOffset.x + 'px';
+    tooltipRef.current.style.top = e.clientY - TooltipAxisOffset.y + 'px';
   }
 
   const onBoxEnter = (row, cell) => {
@@ -159,10 +168,10 @@ const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
     if (isNaN(row) || isNaN(cell)) {
       return;
     }
-    const data = filled.map((item) => item.slice());
+    const data = blank.map((item) => item.slice());
 
     data[row][cell] = value;
-    setFilled(data);
+    dispatch({ type: Action.UPDATE_BLANK, payload: data });
   };
 
   const stopDrawMode = () => {
@@ -184,7 +193,7 @@ const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
     >
       <div className="tooltip hidden" ref={tooltipRef} />
       {
-        data.map((item, row, list) => (
+        matrix.map((item, row, list) => (
           <div
             key={row}
             className={mergeClassNames([
@@ -198,8 +207,8 @@ const Area: React.FC<IArea> = ({ size, matrix, onBoxHover }) => {
                   key={cell}
                   row={row}
                   cell={cell}
-                  filled={filled[row][cell]}
-                  incorrect={filled[row][cell] && !matrix[row].includes(cell)}
+                  filled={!!blank[row][cell]}
+                  incorrect={blank[row][cell] && !filled[row].includes(cell)}
                   onEnter={onBoxEnter}
                   size={list.length - 1}
                 />
