@@ -4,19 +4,19 @@ import CellBox from '@pages/games/katana/game/area/box';
 
 import { mergeClassNames } from '@utils/common';
 
-import { GameContext, Action } from '@pages/games/katana/game/context';
+import { Action, GameContext, IState, EBoxState, TDispatch } from '@pages/games/katana/game/context';
 
 const TooltipAxisOffset = {
   x: 50,
   y: 40,
 };
 
-enum FLOW {
+enum EFlow {
   HORIZONTAL,
   VERTICAL
 }
 
-enum MouseButton {
+enum EMouseButton {
   LEFT,
 }
 
@@ -29,7 +29,7 @@ interface IArea {
 
 const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
   const tooltipRef = useRef(null);
-  const [,dispatch] = useContext(GameContext);
+  const [,dispatch] = useContext<[IState, TDispatch]>(GameContext);
   const matrix = useMemo(() => Array(size[0]).fill(Array(size[1]).fill(1)), [size]);
 
   const drawMode = useRef({
@@ -43,7 +43,7 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
   });
 
   const onMouseDown = (e) => {
-    if (e.button !== MouseButton.LEFT) {
+    if (e.button !== EMouseButton.LEFT) {
       return false;
     }
     const { row, cell } = e.target.dataset;
@@ -51,7 +51,7 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
     if (!row || !cell) {
       return;
     }
-    const value = !blank[+row][+cell] ? 1 : null;
+    const value = !blank[+row][+cell] ? EBoxState.Filled : EBoxState.Empty;
 
     if (!drawMode.current.active) {
       fillItemBox(row, cell, value);
@@ -75,8 +75,8 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
     if (!drawMode.current.active) {
       return;
     }
-    drawMode.current.position[FLOW.HORIZONTAL] = e.clientX;
-    drawMode.current.position[FLOW.VERTICAL] = e.clientY;
+    drawMode.current.position[EFlow.HORIZONTAL] = e.clientX;
+    drawMode.current.position[EFlow.VERTICAL] = e.clientY;
     tooltipRef.current.style.left = e.clientX - TooltipAxisOffset.x + 'px';
     tooltipRef.current.style.top = e.clientY - TooltipAxisOffset.y + 'px';
   }
@@ -98,10 +98,10 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
 
   const setDrawData = (row, cell) => {
     if (drawMode.current.flow < 0) {
-      drawMode.current.flow = drawMode.current.startBox[0] === row ? FLOW.HORIZONTAL : FLOW.VERTICAL;
+      drawMode.current.flow = drawMode.current.startBox[0] === row ? EFlow.HORIZONTAL : EFlow.VERTICAL;
     }
 
-    const value = drawMode.current.flow === FLOW.HORIZONTAL
+    const value = drawMode.current.flow === EFlow.HORIZONTAL
       ? drawMode.current.startBox[1] - cell
       : drawMode.current.startBox[0] - row;
 
@@ -115,7 +115,7 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
   };
 
   const drawByAxis = (row, cell, value) => {
-    drawMode.current.flow === FLOW.HORIZONTAL
+    drawMode.current.flow === EFlow.HORIZONTAL
       ? drawByHorizontal(row, cell, value)
       : drawByVertical(row, cell, value)
   };
@@ -168,10 +168,12 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
     if (isNaN(row) || isNaN(cell)) {
       return;
     }
-    const data = blank.map((item) => item.slice());
-
-    data[row][cell] = value;
-    dispatch({ type: Action.UPDATE_BLANK, payload: data });
+    dispatch({
+      type: Action.FILL_BOX,
+      payload: {
+        row, cell, value
+      }
+    });
   };
 
   const stopDrawMode = () => {

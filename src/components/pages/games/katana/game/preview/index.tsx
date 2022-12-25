@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useRef } from 'react';
 
-import { GameContext } from '@pages/games/katana/game/context';
+import { GameContext, IState, TDispatch } from '@pages/games/katana/game/context';
 
 const Preview = () => {
-  const [data] = useContext(GameContext);
+  const [data] = useContext<[IState, TDispatch]>(GameContext);
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const Preview = () => {
 
   useEffect(() => {
     draw();
-  }, [data.blank]);
+  }, [data.lastActive]);
 
   const setInitialScale = () => {
     if (!canvasRef.current) {
@@ -23,21 +23,22 @@ const Preview = () => {
   };
 
   const draw = () => {
+    if (!data.lastActive) {
+      return;
+    }
+    const { row, cell, value } = data.lastActive;
     const context = canvasRef.current.getContext('2d');
     const boxSize = 5;
 
-    // TODO: need to optimize draw render!
-    data.blank.forEach((row, i) => {
-      row.forEach((cell, j) => {
-        // ignore draw incorrect box
-        if (data.filled[i].indexOf(j) < 0) {
-          return;
-        }
-        const [x, y] = [j*boxSize, i*boxSize];
+    // ignore draw incorrect box
+    if (data.filled[row].indexOf(cell) < 0) {
+      return;
+    }
+    const [x, y] = [cell*boxSize, row*boxSize];
 
-        cell ? context.fillRect(x, y,  boxSize, boxSize) : context.clearRect(x, y, boxSize, boxSize);
-      });
-    });
+    value ?
+      context.fillRect(x, y,  boxSize, boxSize)
+      : context.clearRect(x, y, boxSize, boxSize);
   };
 
   return (
