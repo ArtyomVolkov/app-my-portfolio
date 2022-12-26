@@ -4,7 +4,7 @@ import CellBox from '@pages/games/katana/game/area/box';
 
 import { mergeClassNames } from '@utils/common';
 
-import { Action, GameContext, IState, EBoxState, TDispatch } from '@pages/games/katana/game/context';
+import { Action, EBoxState, GameContext, IState, TDispatch } from '@pages/games/katana/game/context';
 
 const TooltipAxisOffset = {
   x: 50,
@@ -17,6 +17,7 @@ enum EFlow {
 }
 
 enum EMouseButton {
+  LEFT,
   MIDDLE = 1,
   RIGHT = 2
 }
@@ -55,11 +56,17 @@ const Area: React.FC<IArea> = ({ size, blank, onBoxHover }) => {
     if (!row || !cell) {
       return;
     }
+    let value;
 
-    const value = e.button === EMouseButton.RIGHT
-      ? EBoxState.Cross : !blank[+row][+cell]
-        ? EBoxState.Filled : EBoxState.Empty;
-
+    switch (e.button) {
+      case EMouseButton.RIGHT: {
+        value = blank[+row][+cell] === EBoxState.Cross ? EBoxState.Empty : EBoxState.Cross;
+        break;
+      }
+      case EMouseButton.LEFT: {
+        value = blank[+row][+cell] === EBoxState.Filled ? EBoxState.Empty : EBoxState.Filled;
+      }
+    }
     if (!drawMode.current.active) {
       fillItemBox(row, cell, value);
     }
