@@ -1,27 +1,30 @@
-import React  from 'react';
+import React from 'react';
 
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 import { mergeClassNames } from '@utils/common';
+import { EBoxState } from '@pages/games/katana/game/context';
 
 interface ICellBox {
   row: number,
   cell: number,
   size: number,
+  state: EBoxState,
   onEnter: (row, cell) => void,
-  filled: boolean,
-  incorrect: boolean,
 }
 
-const CellBox: React.FC<ICellBox> = ({ row, cell, size, filled, incorrect, onEnter }) => {
+const CellBox: React.FC<ICellBox> = ({ row, cell, size, state, onEnter }) => {
   const renderItem = () => {
-    if (incorrect) {
-      return <CloseRoundedIcon className="wrong" />
+    switch (state) {
+      case EBoxState.Cross: {
+        return <CloseRoundedIcon className="cross" />
+      }
+      case EBoxState.Filled: {
+        return <div className="filled" />;
+      }
+      default:
+        return null;
     }
-    if (filled) {
-      return <div className="filled" />;
-    }
-    return null;
   };
 
   const onMouseEnter = () => {
@@ -41,7 +44,6 @@ const CellBox: React.FC<ICellBox> = ({ row, cell, size, filled, incorrect, onEnt
       className={mergeClassNames([
         'cell',
         (cell !== size) && !((cell+1)%5) && 'divider',
-        incorrect && 'disabled'
       ])}
     >
       { renderItem() }

@@ -8,6 +8,7 @@ export enum Action {
 }
 
 export enum EBoxState {
+  Cross = -1,
   Empty,
   Filled,
 }

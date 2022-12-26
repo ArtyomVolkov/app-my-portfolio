@@ -1,4 +1,4 @@
-@import "@assets/styles/style-guide";
+@import "../../../../../assets/styles/style-guide";
 
 $border-width: 2px;
 $border: $border-width solid black;
@@ -144,10 +144,6 @@ $cell-size: 21px;
         border-width: calc($border-width - 1px);
       }
 
-      &.disabled {
-        pointer-events: none;
-      }
-
       .filled {
         background: #101010;
         width: 100%;
@@ -158,8 +154,9 @@ $cell-size: 21px;
         pointer-events: none;
       }
 
-      .wrong {
-        color: red;
+      .cross {
+        color: #a4a4a4;
+        pointer-events: none;
       }
     }
 

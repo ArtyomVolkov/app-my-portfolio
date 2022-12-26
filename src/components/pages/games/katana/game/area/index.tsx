@@ -17,17 +17,17 @@ enum EFlow {
 }
 
 enum EMouseButton {
-  LEFT,
+  MIDDLE = 1,
+  RIGHT = 2
 }
 
 interface IArea {
   size: [v: number, h: number],
-  filled: Array<Array<number>>,
   blank: Array<Array<number>>,
   onBoxHover: (row, cell) => void,
 }
 
-const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
+const Area: React.FC<IArea> = ({ size, blank, onBoxHover }) => {
   const tooltipRef = useRef(null);
   const [,dispatch] = useContext<[IState, TDispatch]>(GameContext);
   const matrix = useMemo(() => Array(size[0]).fill(Array(size[1]).fill(1)), [size]);
@@ -42,8 +42,12 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
     vertical: [],
   });
 
+  const onContextMenu = (e) => {
+    e.preventDefault();
+  };
+
   const onMouseDown = (e) => {
-    if (e.button !== EMouseButton.LEFT) {
+    if (e.button === EMouseButton.MIDDLE) {
       return false;
     }
     const { row, cell } = e.target.dataset;
@@ -51,7 +55,10 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
     if (!row || !cell) {
       return;
     }
-    const value = !blank[+row][+cell] ? EBoxState.Filled : EBoxState.Empty;
+
+    const value = e.button === EMouseButton.RIGHT
+      ? EBoxState.Cross : !blank[+row][+cell]
+        ? EBoxState.Filled : EBoxState.Empty;
 
     if (!drawMode.current.active) {
       fillItemBox(row, cell, value);
@@ -192,6 +199,7 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
       onMouseMove={onMouseMove}
       onMouseDown={onMouseDown}
       onMouseLeave={onMouseLeave}
+      onContextMenu={onContextMenu}
     >
       <div className="tooltip hidden" ref={tooltipRef} />
       {
@@ -209,8 +217,7 @@ const Area: React.FC<IArea> = ({ size, filled, blank, onBoxHover }) => {
                   key={cell}
                   row={row}
                   cell={cell}
-                  filled={!!blank[row][cell]}
-                  incorrect={blank[row][cell] && !filled[row].includes(cell)}
+                  state={blank[row][cell]}
                   onEnter={onBoxEnter}
                   size={list.length - 1}
                 />

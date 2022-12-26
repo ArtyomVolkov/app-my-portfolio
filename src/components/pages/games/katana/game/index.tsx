@@ -31,7 +31,6 @@ const GameWidget = () => {
   if (!crossword.size) {
     return null;
   }
-  // console.log(crossword.blank);
 
   return (
     <section className="katana-game-widget">
@@ -53,7 +52,6 @@ const GameWidget = () => {
         />
         <Area
           size={crossword.size}
-          filled={crossword.filled}
           blank={crossword.blank}
           onBoxHover={onBoxHover}
         />
