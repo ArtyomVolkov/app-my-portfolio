@@ -134,12 +134,26 @@ const Area: React.FC<IArea> = ({ size, blank, onBoxHover }) => {
       : drawByVertical(row, cell, value)
   };
 
+  const invertValue = (value: EBoxState) => {
+    switch (value) {
+      case EBoxState.Cross:
+      case EBoxState.Filled: {
+        return EBoxState.Empty
+      }
+      case EBoxState.Empty: {
+        return EBoxState.Filled;
+      }
+      default:
+        return EBoxState.Empty;
+    }
+  }
+
   const drawByVertical = (row, cell, value) => {
     if (!value) {
       if (!drawMode.current.filled) {
         return;
       }
-      fillItemBox(drawMode.current.vertical[0], cell, !drawMode.current.filled);
+      fillItemBox(drawMode.current.vertical[0], cell, invertValue(drawMode.current.filled));
       drawMode.current.vertical.pop();
       return;
     }
@@ -148,7 +162,7 @@ const Area: React.FC<IArea> = ({ size, blank, onBoxHover }) => {
       if (!drawMode.current.filled) {
         return;
       }
-      fillItemBox(drawMode.current.vertical.pop(), cell, !drawMode.current.filled);
+      fillItemBox(drawMode.current.vertical.pop(), cell, invertValue(drawMode.current.filled));
       return;
     }
 
@@ -161,7 +175,7 @@ const Area: React.FC<IArea> = ({ size, blank, onBoxHover }) => {
       if (!drawMode.current.filled) {
         return;
       }
-      fillItemBox(row, drawMode.current.horizontal[0], !drawMode.current.filled);
+      fillItemBox(row, drawMode.current.horizontal[0], invertValue(drawMode.current.filled));
       drawMode.current.horizontal.pop();
       return;
     }
@@ -170,7 +184,7 @@ const Area: React.FC<IArea> = ({ size, blank, onBoxHover }) => {
       if (!drawMode.current.filled) {
         return;
       }
-      fillItemBox(row, drawMode.current.horizontal.pop(), !drawMode.current.filled);
+      fillItemBox(row, drawMode.current.horizontal.pop(), invertValue(drawMode.current.filled));
       return;
     }
 

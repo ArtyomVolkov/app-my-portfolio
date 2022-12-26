@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 
-import { GameContext, IState, TDispatch } from '@pages/games/katana/game/context';
+import { EBoxState, GameContext, IState, TDispatch } from '@pages/games/katana/game/context';
 
 const Preview = () => {
   const [data] = useContext<[IState, TDispatch]>(GameContext);
@@ -30,15 +30,21 @@ const Preview = () => {
     const context = canvasRef.current.getContext('2d');
     const boxSize = 5;
 
-    // ignore draw incorrect box
-    if (data.filled[row].indexOf(cell) < 0) {
-      return;
-    }
     const [x, y] = [cell*boxSize, row*boxSize];
 
-    value ?
-      context.fillRect(x, y,  boxSize, boxSize)
-      : context.clearRect(x, y, boxSize, boxSize);
+    switch (value) {
+      case EBoxState.Cross:
+      case EBoxState.Empty: {
+        context.clearRect(x, y, boxSize, boxSize);
+        break;
+      }
+      case EBoxState.Filled: {
+        context.fillRect(x, y,  boxSize, boxSize);
+        break
+      }
+      default:
+        break;
+    }
   };
 
   return (
