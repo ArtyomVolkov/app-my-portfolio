@@ -1,8 +1,8 @@
-import React, { useContext, useMemo, useRef } from 'react';
+import React from 'react';
+import debounce from 'lodash/debounce';
 
-import CellBox from '@pages/games/katana/game/area/box';
-
-import { mergeClassNames } from '@utils/common';
+import Matrix from '@pages/games/katana/game/area/matrix';
+import Tooltip from '@pages/games/katana/game/area/tooltip';
 
 import { Action, EBoxState, GameContext, IState, TDispatch } from '@pages/games/katana/game/context';
 
@@ -28,113 +28,13 @@ interface IArea {
   onBoxHover: (row, cell) => void,
 }
 
-const Area: React.FC<IArea> = ({ size, blank, onBoxHover }) => {
-  const tooltipRef = useRef(null);
-  const [,dispatch] = useContext<[IState, TDispatch]>(GameContext);
-  const matrix = useMemo(() => Array(size[0]).fill(Array(size[1]).fill(1)), [size]);
+class Area extends React.Component<IArea, null> {
+  private readonly tooltipRef: React.RefObject<any>;
+  private readonly onCheckIncorrectDebounce: any;
+  private drawMode: { horizontal: any[]; startBox: any[]; active: boolean; filled: null; vertical: any[]; position: any[]; flow: number };
+  declare public context: [IState, TDispatch];
 
-  const drawMode = useRef({
-    active: false,
-    startBox: [],
-    position: [],
-    filled: null,
-    flow: -1,
-    horizontal: [],
-    vertical: [],
-  });
-
-  const onContextMenu = (e) => {
-    e.preventDefault();
-  };
-
-  const onMouseDown = (e) => {
-    if (e.button === EMouseButton.MIDDLE) {
-      return false;
-    }
-    const { row, cell } = e.target.dataset;
-
-    if (!row || !cell) {
-      return;
-    }
-    let value;
-
-    switch (e.button) {
-      case EMouseButton.RIGHT: {
-        value = blank[+row][+cell] === EBoxState.Cross ? EBoxState.Empty : EBoxState.Cross;
-        break;
-      }
-      case EMouseButton.LEFT: {
-        value = blank[+row][+cell] === EBoxState.Filled ? EBoxState.Empty : EBoxState.Filled;
-      }
-    }
-    if (!drawMode.current.active) {
-      fillItemBox(row, cell, value);
-    }
-
-    drawMode.current.active = true;
-    drawMode.current.filled = value;
-    drawMode.current.startBox = [+row, +cell];
-  };
-
-  const onMouseUp = () => {
-    stopDrawMode();
-  };
-
-  const onMouseLeave = () => {
-    onBoxHover(-1, -1);
-    stopDrawMode();
-  };
-
-  const onMouseMove = (e) => {
-    if (!drawMode.current.active) {
-      return;
-    }
-    drawMode.current.position[EFlow.HORIZONTAL] = e.clientX;
-    drawMode.current.position[EFlow.VERTICAL] = e.clientY;
-    tooltipRef.current.style.left = e.clientX - TooltipAxisOffset.x + 'px';
-    tooltipRef.current.style.top = e.clientY - TooltipAxisOffset.y + 'px';
-  }
-
-  const onBoxEnter = (row, cell) => {
-    onBoxHover(row, cell);
-
-    if (!drawMode.current.active) {
-      return false;
-    }
-    tooltipRef.current.classList.remove('hidden');
-
-    if (drawMode.current.startBox[0] === row || drawMode.current.startBox[1] === cell) {
-      setDrawData(row, cell);
-      return;
-    }
-    stopDrawMode();
-  };
-
-  const setDrawData = (row, cell) => {
-    if (drawMode.current.flow < 0) {
-      drawMode.current.flow = drawMode.current.startBox[0] === row ? EFlow.HORIZONTAL : EFlow.VERTICAL;
-    }
-
-    const value = drawMode.current.flow === EFlow.HORIZONTAL
-      ? drawMode.current.startBox[1] - cell
-      : drawMode.current.startBox[0] - row;
-
-    if (!value) {
-      drawByAxis(row, cell, value);
-      tooltipRef.current.classList.add('hidden');
-      return;
-    }
-    tooltipRef.current.innerHTML = Math.abs(value)+1;
-    drawByAxis(row, cell, value);
-  };
-
-  const drawByAxis = (row, cell, value) => {
-    drawMode.current.flow === EFlow.HORIZONTAL
-      ? drawByHorizontal(row, cell, value)
-      : drawByVertical(row, cell, value)
-  };
-
-  const invertValue = (value: EBoxState) => {
+  private static invertValue = (value: EBoxState) => {
     switch (value) {
       case EBoxState.Cross:
       case EBoxState.Filled: {
@@ -148,54 +48,118 @@ const Area: React.FC<IArea> = ({ size, blank, onBoxHover }) => {
     }
   }
 
-  const drawByVertical = (row, cell, value) => {
-    if (!value) {
-      if (!drawMode.current.filled) {
-        return;
-      }
-      fillItemBox(drawMode.current.vertical[0], cell, invertValue(drawMode.current.filled));
-      drawMode.current.vertical.pop();
-      return;
-    }
+  constructor(props) {
+    super(props);
 
-    if (drawMode.current.vertical.includes(row)) {
-      if (!drawMode.current.filled) {
-        return;
-      }
-      fillItemBox(drawMode.current.vertical.pop(), cell, invertValue(drawMode.current.filled));
-      return;
-    }
+    this.tooltipRef = React.createRef();
+    this.drawMode = {
+      active: false,
+      startBox: [],
+      position: [],
+      filled: null,
+      flow: -1,
+      horizontal: [],
+      vertical: [],
+    };
+    this.onCheckIncorrectDebounce = debounce(this.onCheckIncorrect, 1000, { leading: false, trailing: true });
+  }
 
-    drawMode.current.vertical.push(row);
-    fillItemBox(row, cell, drawMode.current.filled);
+  componentDidUpdate(prevProps: Readonly<IArea>, prevState: Readonly<null>) {
+    this.onCheckIncorrectDebounce();
   };
 
-  const drawByHorizontal = (row, cell, value) => {
-    if (!value) {
-      if (!drawMode.current.filled) {
-        return;
-      }
-      fillItemBox(row, drawMode.current.horizontal[0], invertValue(drawMode.current.filled));
-      drawMode.current.horizontal.pop();
-      return;
-    }
-
-    if (drawMode.current.horizontal.includes(cell)) {
-      if (!drawMode.current.filled) {
-        return;
-      }
-      fillItemBox(row, drawMode.current.horizontal.pop(), invertValue(drawMode.current.filled));
-      return;
-    }
-
-    drawMode.current.horizontal.push(cell);
-    fillItemBox(row, cell, drawMode.current.filled);
+  private stopDrawMode = () => {
+    this.drawMode.active = false;
+    this.drawMode.startBox = [];
+    this.drawMode.horizontal = [];
+    this.drawMode.vertical = [];
+    this.drawMode.flow = -1;
+    this.tooltipRef.current.classList.add('hidden');
   };
 
-  const fillItemBox = (row, cell, value) => {
+  private onBoxEnter = (row, cell) => {
+    this.props.onBoxHover(row, cell);
+
+    if (!this.drawMode.active) {
+      return false;
+    }
+    this.tooltipRef.current.classList.remove('hidden');
+
+    if (this.drawMode.startBox[0] === row || this.drawMode.startBox[1] === cell) {
+      this.setDrawData(row, cell);
+      return;
+    }
+    this.stopDrawMode();
+  };
+
+  private setDrawData = (row, cell) => {
+    if (this.drawMode.flow < 0) {
+      this.drawMode.flow = this.drawMode.startBox[0] === row ? EFlow.HORIZONTAL : EFlow.VERTICAL;
+    }
+
+    const value = this.drawMode.flow === EFlow.HORIZONTAL
+      ? this.drawMode.startBox[1] - cell
+      : this.drawMode.startBox[0] - row;
+
+    if (!value) {
+      this.drawByAxis(row, cell, value);
+      this.tooltipRef.current.classList.add('hidden');
+      return;
+    }
+    this.tooltipRef.current.innerHTML = Math.abs(value)+1;
+    this.drawByAxis(row, cell, value);
+  };
+
+  private drawByVertical = (row, cell, value) => {
+    if (!value) {
+      if (!this.drawMode.filled) {
+        return;
+      }
+      this.fillItemBox(this.drawMode.vertical[0], cell, Area.invertValue(this.drawMode.filled));
+      this.drawMode.vertical.pop();
+      return;
+    }
+
+    if (this.drawMode.vertical.includes(row)) {
+      if (!this.drawMode.filled) {
+        return;
+      }
+      this.fillItemBox(this.drawMode.vertical.pop(), cell, Area.invertValue(this.drawMode.filled));
+      return;
+    }
+
+    this.drawMode.vertical.push(row);
+    this.fillItemBox(row, cell, this.drawMode.filled);
+  };
+
+  private drawByHorizontal = (row, cell, value) => {
+    if (!value) {
+      if (!this.drawMode.filled) {
+        return;
+      }
+      this.fillItemBox(row, this.drawMode.horizontal[0], Area.invertValue(this.drawMode.filled));
+      this.drawMode.horizontal.pop();
+      return;
+    }
+
+    if (this.drawMode.horizontal.includes(cell)) {
+      if (!this.drawMode.filled) {
+        return;
+      }
+      this.fillItemBox(row, this.drawMode.horizontal.pop(), Area.invertValue(this.drawMode.filled));
+      return;
+    }
+
+    this.drawMode.horizontal.push(cell);
+    this.fillItemBox(row, cell, this.drawMode.filled);
+  };
+
+  private fillItemBox = (row, cell, value) => {
     if (isNaN(row) || isNaN(cell)) {
       return;
     }
+    const [, dispatch] = this.context;
+
     dispatch({
       type: Action.FILL_BOX,
       payload: {
@@ -204,51 +168,94 @@ const Area: React.FC<IArea> = ({ size, blank, onBoxHover }) => {
     });
   };
 
-  const stopDrawMode = () => {
-    drawMode.current.active = false;
-    drawMode.current.startBox = [];
-    drawMode.current.horizontal = [];
-    drawMode.current.vertical = [];
-    drawMode.current.flow = -1;
-    tooltipRef.current.classList.add('hidden');
+  private drawByAxis = (row, cell, value) => {
+    this.drawMode.flow === EFlow.HORIZONTAL
+      ? this.drawByHorizontal(row, cell, value)
+      : this.drawByVertical(row, cell, value)
   };
 
-  return (
-    <div
-      className="area"
-      onMouseUp={onMouseUp}
-      onMouseMove={onMouseMove}
-      onMouseDown={onMouseDown}
-      onMouseLeave={onMouseLeave}
-      onContextMenu={onContextMenu}
-    >
-      <div className="tooltip hidden" ref={tooltipRef} />
-      {
-        matrix.map((item, row, list) => (
-          <div
-            key={row}
-            className={mergeClassNames([
-              'row',
-              (row !== list.length-1) && !((row+1)%5) && 'divider'
-            ])}
-          >
-            {
-              item.map((item, cell, list) => (
-                <CellBox
-                  key={cell}
-                  row={row}
-                  cell={cell}
-                  state={blank[row][cell]}
-                  onEnter={onBoxEnter}
-                  size={list.length - 1}
-                />
-              ))
-            }
-          </div>
-        ))
+
+  private onCheckIncorrect = () => {
+    console.log('check incorrect', this.props.blank);
+  }
+
+  public onContextMenu = (e) => {
+    e.preventDefault();
+  };
+
+  public onMouseDown = (e) => {
+    if (e.button === EMouseButton.MIDDLE) {
+      return false;
+    }
+    const { row, cell } = e.target.dataset;
+
+    if (!row || !cell) {
+      return;
+    }
+    const { blank } = this.props;
+    let value;
+
+    switch (e.button) {
+      case EMouseButton.RIGHT: {
+        value = blank[+row][+cell] === EBoxState.Cross ? EBoxState.Empty : EBoxState.Cross;
+        break;
       }
-    </div>
-  );
+      case EMouseButton.LEFT: {
+        value = blank[+row][+cell] === EBoxState.Filled ? EBoxState.Empty : EBoxState.Filled;
+      }
+    }
+    if (!this.drawMode.active) {
+     this.fillItemBox(row, cell, value);
+    }
+
+    this.drawMode.active = true;
+    this.drawMode.filled = value;
+    this.drawMode.startBox = [+row, +cell];
+  };
+
+  public onMouseUp = () => {
+    this.stopDrawMode();
+  };
+
+  public onMouseLeave = () => {
+    this.props.onBoxHover(-1, -1);
+    this.stopDrawMode();
+  };
+
+  public onMouseMove = (e) => {
+    if (!this.drawMode.active) {
+      return;
+    }
+    this.drawMode.position[EFlow.HORIZONTAL] = e.clientX;
+    this.drawMode.position[EFlow.VERTICAL] = e.clientY;
+
+    this.tooltipRef.current.style.left = e.clientX - TooltipAxisOffset.x + 'px';
+    this.tooltipRef.current.style.top = e.clientY - TooltipAxisOffset.y + 'px';
+  }
+
+  render() {
+    const { size, blank } = this.props;
+
+    return (
+      <div
+        className="area"
+        onMouseUp={this.onMouseUp}
+        onMouseMove={this.onMouseMove}
+        onMouseDown={this.onMouseDown}
+        onMouseLeave={this.onMouseLeave}
+        onContextMenu={this.onContextMenu}
+      >
+        <Tooltip tooltipRef={this.tooltipRef} />
+        <Matrix
+          size={size}
+          blank={blank}
+          onBoxEnter={this.onBoxEnter}
+        />
+      </div>
+    )
+  }
 }
+
+Area.contextType = GameContext;
 
 export default Area;
