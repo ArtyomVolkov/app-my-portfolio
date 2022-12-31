@@ -30,7 +30,7 @@ interface IArea {
 
 class Area extends React.Component<IArea, null> {
   private readonly tooltipRef: React.RefObject<any>;
-  private readonly onCheckIncorrectDebounce: any;
+  private readonly onCheckIsDoneDebounce: () => void;
   private drawMode: { horizontal: any[]; startBox: any[]; active: boolean; filled: null; vertical: any[]; position: any[]; flow: number };
   declare public context: [IState, TDispatch];
 
@@ -61,12 +61,32 @@ class Area extends React.Component<IArea, null> {
       horizontal: [],
       vertical: [],
     };
-    this.onCheckIncorrectDebounce = debounce(this.onCheckIncorrect, 1000, { leading: false, trailing: true });
+    this.onCheckIsDoneDebounce = debounce(this.onCheckIsDone, 1000, { leading: false, trailing: true });
   }
 
   componentDidUpdate(prevProps: Readonly<IArea>, prevState: Readonly<null>) {
-    this.onCheckIncorrectDebounce();
+    this.onCheckIsDoneDebounce();
   };
+
+  componentDidMount() {
+    // TODO: for future test
+    //this.fillAllBox();
+  }
+
+  private fillAllBox = () => {
+    const [state, dispatch] = this.context;
+    const row = Array(state.filled.length).fill(0);
+
+    const filledBlank = state.filled.reduce((prev: any, item, index) => {
+      prev[index] = row.map((cell, index) => item.includes(index) ? 1 : 0)
+      return prev;
+    }, []);
+
+    dispatch({
+      type: Action.UPDATE_BLANK,
+      payload: filledBlank
+    });
+  }
 
   private stopDrawMode = () => {
     this.drawMode.active = false;
@@ -175,9 +195,21 @@ class Area extends React.Component<IArea, null> {
   };
 
 
-  private onCheckIncorrect = () => {
-    console.log('check incorrect', this.props.blank);
-  }
+  private onCheckIsDone = () => {
+    const [state, ] = this.context;
+    const matrix = this.props.blank.reduce((prev: any, item, index) => {
+      prev[index] = item.map((i, j) => i > 0 ? j : -1).filter((f) => f >= 0);
+      return prev;
+    }, []);
+
+    const isDone = !state.filled.some((row, index) => {
+      if (!matrix[index] || row.length !== matrix[index].length) {
+        return true;
+      }
+      return row.some((cell) => !matrix[index].includes(cell));
+    });
+    console.log('is done', isDone);
+  };
 
   public onContextMenu = (e) => {
     e.preventDefault();
