@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import CellBox from '@pages/games/katana/game/area/box';
+import CellBox from '@pages/games/nonogram/game/area/box';
 
 import { mergeClassNames } from '@utils/common';
 

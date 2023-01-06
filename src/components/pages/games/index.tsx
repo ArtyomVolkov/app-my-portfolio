@@ -23,8 +23,8 @@ const GamesPage = () => {
         icon={<AppRegistrationIcon className="icon"/>}
       />
       <NavButton
-        path="/games/katana"
-        title="Katana"
+        path="/games/nonogram"
+        title="Nonogram"
         icon={<GridOnRoundedIcon className="icon"/>}
       />
     </Main>

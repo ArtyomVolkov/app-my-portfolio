@@ -3,7 +3,7 @@ import React from 'react';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 import { mergeClassNames } from '@utils/common';
-import { EBoxState } from '@pages/games/katana/game/context';
+import { EBoxState } from '@pages/games/nonogram/game/context';
 
 interface ICellBox {
   row: number,

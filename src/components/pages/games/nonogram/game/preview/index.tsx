@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 
-import { EBoxState, GameContext, IState, TDispatch } from '@pages/games/katana/game/context';
+import { EBoxState, GameContext, IState, TDispatch } from '@pages/games/nonogram/game/context';
 
 const Preview = () => {
   const [data] = useContext<[IState, TDispatch]>(GameContext);

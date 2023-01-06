@@ -57,8 +57,8 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
     label: 'History',
     icon: <HistoryRoundedIcon />
   },
-  katana: {
-    label: 'Katana',
+  nonogram: {
+    label: 'Nonogram',
     icon: <GridOnRoundedIcon />,
   }
 };

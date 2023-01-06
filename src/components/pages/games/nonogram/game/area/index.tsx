@@ -1,10 +1,10 @@
 import React from 'react';
 import debounce from 'lodash/debounce';
 
-import Matrix from '@pages/games/katana/game/area/matrix';
-import Tooltip from '@pages/games/katana/game/area/tooltip';
+import Matrix from '@pages/games/nonogram/game/area/matrix';
+import Tooltip from '@pages/games/nonogram/game/area/tooltip';
 
-import { Action, EBoxState, GameContext, IState, TDispatch } from '@pages/games/katana/game/context';
+import { Action, EBoxState, GameContext, IState, TDispatch } from '@pages/games/nonogram/game/context';
 
 const TooltipAxisOffset = {
   x: 50,

@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useRef } from 'react';
 
 import ContextProvider, { GameContext, Action } from './context';
 
-import Panel from '@pages/games/katana/game/panel';
-import Area from '@pages/games/katana/game/area';
-import Preview from '@pages/games/katana/game/preview';
+import Panel from '@pages/games/nonogram/game/panel';
+import Area from '@pages/games/nonogram/game/area';
+import Preview from '@pages/games/nonogram/game/preview';
 
 import { CROSSWORDS } from './data';
 
