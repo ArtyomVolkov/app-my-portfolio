@@ -100,7 +100,14 @@ $cell-size: 21px;
     }
 
     .cell {
+      position: relative;
       @include cell(wheat);
+
+      .cross-icon {
+        position: absolute;
+        color: #e8e8e8;
+        background: #26262659;
+      }
     }
   }
 

@@ -1,11 +1,18 @@
 import React, { useMemo, useImperativeHandle, useRef, useState } from 'react';
 
+import CellBox from '@pages/games/katana/game/panel/cell';
+
 import { mergeClassNames } from '@utils/common';
 
+export enum EVariant {
+  Vertical = 'vertical',
+  Horizontal = 'horizontal'
+}
+
 interface IPanel {
-  data: Array<Array<number>>,
   size: number,
-  variant: 'vertical'|'horizontal',
+  variant: EVariant,
+  data: Array<Array<number>>,
   refItem: React.Ref<{setHoverLine: (row, cell) => void }>,
 }
 
@@ -16,7 +23,7 @@ const Panel: React.FC<IPanel> = ({ data, variant, size, refItem }) => {
   const containerRef = useRef<any>(null);
   const items = useMemo(() => Array(size).fill(1), [size]);
 
-  const setHoverLine = (row, cell) => setHoverIndex(variant === 'vertical' ? cell : row);
+  const setHoverLine = (row, cell) => setHoverIndex(variant === EVariant.Vertical ? cell : row);
 
   return (
     <div className={mergeClassNames(['panel', variant])} ref={containerRef}>
@@ -32,12 +39,10 @@ const Panel: React.FC<IPanel> = ({ data, variant, size, refItem }) => {
           >
             {
               items.map((cell, i) => (
-                <div
+                <CellBox
                   key={i}
-                  className="cell"
-                >
-                  {item[item.length-1-i]}
-                </div>
+                  value={item[item.length-1-i]}
+                />
               ))
             }
           </div>

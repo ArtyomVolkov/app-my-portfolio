@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef } from 'react';
 
-import ContextProvider, { GameContext, Action } from './context';
+import ContextProvider, { Action, GameContext } from './context';
 
-import Panel from '@pages/games/katana/game/panel';
+import Panel, { EVariant } from '@pages/games/katana/game/panel';
 import Area from '@pages/games/katana/game/area';
 import Preview from '@pages/games/katana/game/preview';
 
@@ -37,7 +37,7 @@ const GameWidget = () => {
       <div className="header">
         <Preview />
         <Panel
-          variant="vertical"
+          variant={EVariant.Vertical}
           data={crossword.area.vertical}
           size={crossword.area.cells[0]}
           refItem={verticalPanelRef}
@@ -45,7 +45,7 @@ const GameWidget = () => {
       </div>
       <div className="body">
         <Panel
-          variant="horizontal"
+          variant={EVariant.Horizontal}
           data={crossword.area.horizontal}
           size={crossword.area.cells[1]}
           refItem={horizontalPanelRef}
