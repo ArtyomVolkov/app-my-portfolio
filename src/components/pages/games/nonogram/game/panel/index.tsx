@@ -1,6 +1,6 @@
 import React, { useMemo, useImperativeHandle, useRef, useState } from 'react';
 
-import CellBox from '@pages/games/katana/game/panel/cell';
+import CellBox from '@pages/games/nonogram/game/panel/cell';
 
 import { mergeClassNames } from '@utils/common';
 
