@@ -4,7 +4,9 @@ export enum Action {
   SET_DATA,
   CLEAR_DATA,
   FILL_BOX,
-  UPDATE_BLANK
+  UPDATE_BLANK,
+  SET_FINISH,
+  SET_MODAL
 }
 
 export enum EBoxState {
@@ -27,7 +29,11 @@ export interface IState {
     row: number,
     cell: number,
     value: EBoxState,
-  }
+  },
+  modal: {
+    open: boolean,
+  },
+  isFinish: boolean,
 }
 
 const State: IState = {
@@ -38,9 +44,13 @@ const State: IState = {
     horizontal: [],
     vertical: [],
   },
+  modal: {
+    open: false,
+  },
   filled: [],
   blank: [],
-  lastActive: null
+  lastActive: null,
+  isFinish: false,
 };
 
 const reducer = (state, action) => {
@@ -72,6 +82,20 @@ const reducer = (state, action) => {
         ...state,
         blank: action.payload,
       };
+    }
+    case Action.SET_FINISH: {
+      return {
+        ...state,
+        isFinish: action.payload,
+      };
+    }
+    case Action.SET_MODAL: {
+      return {
+        ...state,
+        modal: {
+          open: action.payload,
+        }
+      }
     }
     case Action.CLEAR_DATA: {
       return State;
