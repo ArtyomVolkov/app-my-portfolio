@@ -70,7 +70,7 @@ class Area extends React.Component<IArea, null> {
 
   componentDidMount() {
     // TODO: for future test
-    //this.fillAllBox();
+    this.fillAllBox();
   }
 
   private fillAllBox = () => {
@@ -196,7 +196,7 @@ class Area extends React.Component<IArea, null> {
 
 
   private onCheckIsDone = () => {
-    const [state, ] = this.context;
+    const [state, dispatch] = this.context;
     const matrix = this.props.blank.reduce((prev: any, item, index) => {
       prev[index] = item.map((i, j) => i > 0 ? j : -1).filter((f) => f >= 0);
       return prev;
@@ -208,7 +208,9 @@ class Area extends React.Component<IArea, null> {
       }
       return row.some((cell) => !matrix[index].includes(cell));
     });
-    console.log('is done', isDone);
+    if (!state.isFinish && isDone) {
+      dispatch({ type: Action.SET_FINISH, payload: isDone });
+    }
   };
 
   public onContextMenu = (e) => {

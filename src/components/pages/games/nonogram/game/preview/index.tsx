@@ -2,12 +2,21 @@ import React, { useContext, useEffect, useRef } from 'react';
 
 import { EBoxState, GameContext, IState, TDispatch } from '@pages/games/nonogram/game/context';
 
-const Preview = () => {
+interface IPreview {
+  initialDraw?: boolean,
+  drawBoxSize?: number,
+}
+
+const Preview: React.FC<IPreview> = ({ initialDraw = false, drawBoxSize = 5 }) => {
   const [data] = useContext<[IState, TDispatch]>(GameContext);
   const canvasRef = useRef(null);
 
   useEffect(() => {
     setInitialScale();
+
+    if (initialDraw) {
+      drawByModel();
+    }
   }, []);
 
   useEffect(() => {
@@ -22,24 +31,37 @@ const Preview = () => {
     canvasRef.current.style.transform = `scale(${size/100})`;
   };
 
+  const drawByModel = () => {
+    const context = canvasRef.current.getContext('2d');
+
+    data.blank.forEach((row, ri) => {
+      row.forEach((cell, ci) => {
+        if (cell > 0) {
+          const [x, y] = [ci*drawBoxSize, ri*drawBoxSize];
+
+          context.fillRect(x, y, drawBoxSize, drawBoxSize);
+        }
+      });
+    });
+  };
+
   const draw = () => {
     if (!data.lastActive) {
       return;
     }
     const { row, cell, value } = data.lastActive;
     const context = canvasRef.current.getContext('2d');
-    const boxSize = 5;
 
-    const [x, y] = [cell*boxSize, row*boxSize];
+    const [x, y] = [cell*drawBoxSize, row*drawBoxSize];
 
     switch (value) {
       case EBoxState.Cross:
       case EBoxState.Empty: {
-        context.clearRect(x, y, boxSize, boxSize);
+        context.clearRect(x, y, drawBoxSize, drawBoxSize);
         break;
       }
       case EBoxState.Filled: {
-        context.fillRect(x, y,  boxSize, boxSize);
+        context.fillRect(x, y,  drawBoxSize, drawBoxSize);
         break
       }
       default:

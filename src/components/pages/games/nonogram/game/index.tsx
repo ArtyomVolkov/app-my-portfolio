@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useRef } from 'react';
 
 import ContextProvider, { GameContext, Action } from './context';
 
-import Panel from '@pages/games/nonogram/game/panel';
 import Area from '@pages/games/nonogram/game/area';
+import Panel from '@pages/games/nonogram/game/panel';
+import Modal from '@pages/games/nonogram/game/modal';
 import Preview from '@pages/games/nonogram/game/preview';
 
 import { CROSSWORDS } from './data';
@@ -33,7 +34,8 @@ const GameWidget = () => {
   }
 
   return (
-    <section className="katana-game-widget">
+    <section className="nonogram-game-widget">
+      <Modal />
       <div className="header">
         <Preview />
         <Panel
@@ -56,6 +58,9 @@ const GameWidget = () => {
           onBoxHover={onBoxHover}
         />
       </div>
+      {
+        crossword.isFinish && <div className="finish-view-wrap" />
+      }
     </section>
   );
 }

@@ -16,14 +16,57 @@ $cell-size: 21px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-.katana-game-widget {
+.nonogram-game-widget {
   @include card-shadow;
   display: flex;
   width: min-content;
   flex-direction: column;
   padding: 10px;
+  position: relative;
+
+  .game-modal {
+    border-radius: inherit;
+
+    .content-box {
+      width: 350px;
+    }
+
+    .crossword-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .title {
+        font-size: 18px;
+      }
+
+      .preview-wrap {
+        width: 200px;
+        height: 200px;
+        margin-top: 15px;
+
+        .preview {
+          position: relative;
+          height: inherit;
+          border: 0;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  .finish-view-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #bcbcbc4a;
+  }
 
   .header, .body {
     @include border;
