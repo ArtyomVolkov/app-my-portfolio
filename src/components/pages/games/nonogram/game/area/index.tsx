@@ -5,6 +5,7 @@ import Matrix from '@pages/games/nonogram/game/area/matrix';
 import Tooltip from '@pages/games/nonogram/game/area/tooltip';
 
 import { Action, EBoxState, GameContext, IState, TDispatch } from '@pages/games/nonogram/game/context';
+import { EMouseButton } from '@shared/enums/web-ui';
 
 const TooltipAxisOffset = {
   x: 50,
@@ -14,12 +15,6 @@ const TooltipAxisOffset = {
 enum EFlow {
   HORIZONTAL,
   VERTICAL
-}
-
-enum EMouseButton {
-  LEFT,
-  MIDDLE = 1,
-  RIGHT = 2
 }
 
 interface IArea {
@@ -61,7 +56,7 @@ class Area extends React.Component<IArea, null> {
       horizontal: [],
       vertical: [],
     };
-    this.onCheckIsDoneDebounce = debounce(this.onCheckIsDone, 1000, { leading: false, trailing: true });
+    this.onCheckIsDoneDebounce = debounce(this.onCheckIsDone, 1000, { leading: true, trailing: true });
   }
 
   componentDidUpdate(prevProps: Readonly<IArea>, prevState: Readonly<null>) {
@@ -70,23 +65,23 @@ class Area extends React.Component<IArea, null> {
 
   componentDidMount() {
     // TODO: for future test
-    this.fillAllBox();
+    // this.fillAllBox();
   }
 
-  private fillAllBox = () => {
-    const [state, dispatch] = this.context;
-    const row = Array(state.filled.length).fill(0);
-
-    const filledBlank = state.filled.reduce((prev: any, item, index) => {
-      prev[index] = row.map((cell, index) => item.includes(index) ? 1 : 0)
-      return prev;
-    }, []);
-
-    dispatch({
-      type: Action.UPDATE_BLANK,
-      payload: filledBlank
-    });
-  }
+  // private fillAllBox = () => {
+  //   const [state, dispatch] = this.context;
+  //   const row = Array(state.filled.length).fill(0);
+  //
+  //   const filledBlank = state.filled.reduce((prev: any, item, index) => {
+  //     prev[index] = row.map((cell, index) => item.includes(index) ? 1 : 0)
+  //     return prev;
+  //   }, []);
+  //
+  //   dispatch({
+  //     type: Action.UPDATE_BLANK,
+  //     payload: filledBlank
+  //   });
+  // }
 
   private stopDrawMode = () => {
     this.drawMode.active = false;

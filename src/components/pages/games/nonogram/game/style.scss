@@ -32,6 +32,10 @@ $cell-size: 21px;
 
     .content-box {
       width: 350px;
+
+      .title {
+        text-align: center;
+      }
     }
 
     .crossword-preview {
@@ -41,7 +45,9 @@ $cell-size: 21px;
       margin-bottom: 20px;
 
       .title {
-        font-size: 18px;
+        font-size: 16px;
+        color: #161616;
+        font-weight: 500;
       }
 
       .preview-wrap {
@@ -108,12 +114,12 @@ $cell-size: 21px;
         justify-content: end;
 
         &.hover {
-          opacity: 0.8;
+          filter: brightness(0.7);
         }
 
         &.divider {
           border-bottom: $border;
-          border-width: calc($border-width - 1px);
+          border-width: calc(#{$border-width} - 1px);
         }
       }
     }
@@ -133,11 +139,11 @@ $cell-size: 21px;
 
         &.divider {
           border-right: $border;
-          border-width: calc($border-width - 1px);
+          border-width: calc(#{$border-width} - 1px);
         }
 
         &.hover {
-          opacity: 0.8;
+          filter: brightness(0.7);
         }
       }
     }
@@ -191,7 +197,7 @@ $cell-size: 21px;
 
       &.divider {
         border-right: $border;
-        border-width: calc($border-width - 1px);
+        border-width: calc(#{$border-width} - 1px);
       }
 
       .filled {
@@ -217,7 +223,7 @@ $cell-size: 21px;
 
       &.divider {
         border-bottom: $border;
-        border-width: calc($border-width - 1px);
+        border-width: calc(#{$border-width} - 1px);
       }
     }
   }

@@ -17,7 +17,11 @@ const CellBox: React.FC<ICellBox> = ({ value }) => {
   };
 
   return (
-    <div className="cell" onClick={onToggleFilled}>
+    <div
+      className="cell"
+      onClick={onToggleFilled}
+      onContextMenu={(e) => e.preventDefault()}
+    >
       {
         filled && <CloseRoundedIcon className="cross-icon" />
       }
