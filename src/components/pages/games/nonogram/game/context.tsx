@@ -4,9 +4,11 @@ export enum Action {
   SET_DATA,
   CLEAR_DATA,
   FILL_BOX,
+  FILL_BOX_PANEL,
   UPDATE_BLANK,
   SET_FINISH,
-  SET_MODAL
+  SET_MODAL,
+  SET_NEW_GAME
 }
 
 export enum EBoxState {
@@ -17,13 +19,19 @@ export enum EBoxState {
 
 export interface IState {
   name: string,
+  loading: boolean,
   size: [rows: number, cells: number],
-  area: {
-    cells: [vertical: number, horizontal: number],
-    horizontal: Array<Array<number>>,
-    vertical: Array<Array<number>>,
+  panel: {
+    horizontal: {
+      filled: Array<Array<number>>,
+      blank: Array<Array<number>>
+    },
+    vertical: {
+      filled: Array<Array<number>>,
+      blank: Array<Array<number>>
+    }
   },
-  filled: Array<Array<number>>,
+  matrix: Array<Array<number>>,
   blank: Array<Array<number>>,
   lastActive?: {
     row: number,
@@ -38,19 +46,77 @@ export interface IState {
 
 const State: IState = {
   name: '',
+  loading: true,
   size: null,
-  area: {
-    cells: [0, 0],
-    horizontal: [],
-    vertical: [],
+  panel: {
+    horizontal: {
+      filled: [],
+      blank: []
+    },
+    vertical: {
+      filled: [],
+      blank: []
+    }
   },
   modal: {
     open: false,
   },
-  filled: [],
+  matrix: [],
   blank: [],
   lastActive: null,
   isFinish: false,
+};
+
+const getPanelAreaCells = (list) => {
+  const data = [];
+  let count = 0;
+
+  list.forEach((cell, j, list) => {
+    if (cell > 0) {
+      count++;
+    }
+    if ((!cell && count > 0) || (j === list.length - 1 && count > 0)) {
+      data.push(count);
+      count = 0;
+    }
+  });
+
+  return data;
+};
+
+const getGameData = (data) => {
+  const gameData = {
+    name: data.name,
+    matrix: data.matrix.slice(),
+    blank: null,
+    size: [data.matrix.length, Math.max(...data.matrix.map((item) => item.length))],
+    panel: {
+      horizontal: {
+        blank: [],
+        filled: [],
+      },
+      vertical: {
+        blank: [],
+        filled: [],
+      }
+    }
+  };
+
+  data.matrix.forEach((row, i) => {
+    const horizontal = getPanelAreaCells(row);
+    const vertical = getPanelAreaCells(row.map((cell, j) => data.matrix[j][i]));
+
+    if (horizontal.length) {
+      gameData.panel.horizontal.blank.push(horizontal);
+      gameData.panel.horizontal.filled.push(horizontal.map(() => null));
+    }
+    if (vertical.length) {
+      gameData.panel.vertical.blank.push(vertical);
+      gameData.panel.vertical.filled.push(horizontal.map(() => null));
+    }
+  });
+  gameData.blank = Array(gameData.size[0]).fill(Array(gameData.size[1]).fill(null));
+  return gameData;
 };
 
 const reducer = (state, action) => {
@@ -59,7 +125,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         ...action.payload,
-        blank: Array(action.payload.size[0]).fill(Array(action.payload.size[1]).fill(null)),
+        ...getGameData(action.payload),
+        loading: false,
       };
     }
     case Action.FILL_BOX: {
@@ -75,6 +142,17 @@ const reducer = (state, action) => {
           cell: Number(cell),
           value,
         },
+      }
+    }
+    case Action.FILL_BOX_PANEL: {
+      const { variant, panel } = action.payload;
+
+      return {
+        ...state,
+        panel: {
+          ...state.panel,
+          [variant]: panel,
+        }
       }
     }
     case Action.UPDATE_BLANK: {
@@ -97,6 +175,17 @@ const reducer = (state, action) => {
         }
       }
     }
+    case Action.SET_NEW_GAME: {
+      return {
+        ...state,
+        ...getGameData(action.payload),
+        isFinish: false,
+        lastActive: null,
+        modal: {
+          open: false,
+        },
+      }
+    }
     case Action.CLEAR_DATA: {
       return State;
     }
@@ -105,7 +194,7 @@ const reducer = (state, action) => {
   }
 }
 
-export type TDispatch  = (data: { type: Action, payload: any }) => void;
+export type TDispatch  = (data: { type: Action, payload?: any }) => void;
 
 export const GameContext = createContext(null);
 

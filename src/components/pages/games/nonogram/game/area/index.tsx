@@ -56,7 +56,7 @@ class Area extends React.Component<IArea, null> {
       horizontal: [],
       vertical: [],
     };
-    this.onCheckIsDoneDebounce = debounce(this.onCheckIsDone, 1000, { leading: true, trailing: true });
+    this.onCheckIsDoneDebounce = debounce(this.onCheckIsDone, 200, { leading: false, trailing: true });
   }
 
   componentDidUpdate(prevProps: Readonly<IArea>, prevState: Readonly<null>) {
@@ -65,23 +65,20 @@ class Area extends React.Component<IArea, null> {
 
   componentDidMount() {
     // TODO: for future test
-    // this.fillAllBox();
+    //this.fillAllBox();
   }
 
   // private fillAllBox = () => {
   //   const [state, dispatch] = this.context;
-  //   const row = Array(state.filled.length).fill(0);
+  //   const blank = state.matrix.map((item) => item.slice());
   //
-  //   const filledBlank = state.filled.reduce((prev: any, item, index) => {
-  //     prev[index] = row.map((cell, index) => item.includes(index) ? 1 : 0)
-  //     return prev;
-  //   }, []);
-  //
+  //   // set wrong item-box
+  //   blank[0][4] = 0;
   //   dispatch({
   //     type: Action.UPDATE_BLANK,
-  //     payload: filledBlank
+  //     payload: blank
   //   });
-  // }
+  // };
 
   private stopDrawMode = () => {
     this.drawMode.active = false;
@@ -192,17 +189,15 @@ class Area extends React.Component<IArea, null> {
 
   private onCheckIsDone = () => {
     const [state, dispatch] = this.context;
-    const matrix = this.props.blank.reduce((prev: any, item, index) => {
-      prev[index] = item.map((i, j) => i > 0 ? j : -1).filter((f) => f >= 0);
-      return prev;
-    }, []);
+    const isDone = !state.matrix.some((row, i) =>
+      row.some((cell, j) => {
+        if (state.blank[i][j] === 1 && !cell) {
+          return true;
+        }
+        return (cell === 1 && state.blank[i][j] !== cell);
+      })
+    );
 
-    const isDone = !state.filled.some((row, index) => {
-      if (!matrix[index] || row.length !== matrix[index].length) {
-        return true;
-      }
-      return row.some((cell) => !matrix[index].includes(cell));
-    });
     if (!state.isFinish && isDone) {
       dispatch({ type: Action.SET_FINISH, payload: isDone });
     }

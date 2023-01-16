@@ -20,6 +20,10 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false, drawBoxSize = 5 }) =
   }, []);
 
   useEffect(() => {
+    if (!data.lastActive) {
+      clearHolst();
+      return;
+    }
     draw();
   }, [data.lastActive]);
 
@@ -67,6 +71,12 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false, drawBoxSize = 5 }) =
       default:
         break;
     }
+  };
+
+  const clearHolst = () => {
+    const context = canvasRef.current.getContext('2d');
+
+    context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
   };
 
   return (

@@ -5,10 +5,11 @@ import Button from '@mui/material/Button';
 import Modal from '@shared/components/modals/basic';
 import Preview from '@pages/games/nonogram/game/preview';
 
-import { GameContext, Action } from '@pages/games/nonogram/game/context';
+import { GameContext, Action, IState, TDispatch } from '@pages/games/nonogram/game/context';
+import { NONOGRAMS } from '@pages/games/nonogram/game/data';
 
 const GameModal = () => {
-  const [crossword, dispatch] = useContext(GameContext);
+  const [crossword, dispatch] = useContext<[IState, TDispatch]>(GameContext);
 
   useEffect(() => {
     onCheckOpenModal()
@@ -25,7 +26,7 @@ const GameModal = () => {
   };
 
   const onSetNewGame = () => {
-
+    dispatch({ type: Action.SET_NEW_GAME, payload: NONOGRAMS.guitar });
   };
 
   const renderContent = () => {
@@ -55,8 +56,8 @@ const GameModal = () => {
 
   return (
     <Modal
-      open={crossword.modal.open}
       className="game-modal"
+      open={crossword.modal.open}
       onClose={onCloseModal}
       renderContent={renderContent}
     />

@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 interface ICellBox {
   value: number,
+  filled: boolean,
+  onPress: (value) => void,
 }
 
-const CellBox: React.FC<ICellBox> = ({ value }) => {
-  const [filled, setFilled] = useState(false);
-
+const CellBox: React.FC<ICellBox> = ({ value, filled, onPress }) => {
   const onToggleFilled = () => {
     if (!value) {
       return;
     }
-    setFilled(!filled);
+    onPress(!filled ? 1: 0);
   };
 
   return (
@@ -23,7 +23,7 @@ const CellBox: React.FC<ICellBox> = ({ value }) => {
       onContextMenu={(e) => e.preventDefault()}
     >
       {
-        filled && <CloseRoundedIcon className="cross-icon" />
+        Boolean(filled) && <CloseRoundedIcon className="cross-icon" />
       }
       { value }
     </div>

@@ -1,8 +1,9 @@
-import React, { useMemo, useImperativeHandle, useRef, useState } from 'react';
+import React, { useMemo, useImperativeHandle, useRef, useState, useContext } from 'react';
 
 import CellBox from '@pages/games/nonogram/game/panel/cell';
 
 import { mergeClassNames } from '@utils/common';
+import { GameContext, Action } from '@pages/games/nonogram/game/context';
 
 export enum EVariant {
   Vertical = 'vertical',
@@ -10,25 +11,43 @@ export enum EVariant {
 }
 
 interface IPanel {
-  size: number,
   variant: EVariant,
-  data: Array<Array<number>>,
+  data: {
+    blank: Array<Array<number>>,
+    filled: Array<Array<number>>,
+  },
   refItem: React.Ref<{setHoverLine: (row, cell) => void }>,
 }
 
-const Panel: React.FC<IPanel> = ({ data, variant, size, refItem }) => {
+const Panel: React.FC<IPanel> = ({ data, variant, refItem }) => {
+  const [crossword, dispatch] = useContext(GameContext);
   useImperativeHandle(refItem, () => ({ setHoverLine }));
 
   const [hoverIndex, setHoverIndex] = useState(-1);
   const containerRef = useRef<any>(null);
+  const size = useMemo(() => Math.max(...data.blank.map((item) => item.length)), [data]);
   const items = useMemo(() => Array(size).fill(1), [size]);
 
   const setHoverLine = (row, cell) => setHoverIndex(variant === EVariant.Vertical ? cell : row);
 
+  const onFillBox = (row, cell, value) => {
+    const panel = crossword.panel[variant];
+
+    data.filled[row][cell] = value;
+
+    dispatch({
+      type: Action.FILL_BOX_PANEL,
+      payload: {
+        variant,
+        panel,
+      }
+    });
+  };
+
   return (
     <div className={mergeClassNames(['panel', variant])} ref={containerRef}>
       {
-        data.map((item, index, list) => (
+        data.blank.map((item, index, list) => (
           <div
             key={index}
             className={mergeClassNames([
@@ -41,6 +60,8 @@ const Panel: React.FC<IPanel> = ({ data, variant, size, refItem }) => {
               items.map((cell, i) => (
                 <CellBox
                   key={i}
+                  filled={crossword.panel[variant].filled[index][i]}
+                  onPress={(value) => onFillBox(index, i, value)}
                   value={item[item.length-1-i]}
                 />
               ))
