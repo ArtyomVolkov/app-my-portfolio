@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
 import { EBoxState, GameContext, IState, TDispatch } from '@pages/games/nonogram/game/context';
 
@@ -7,13 +7,16 @@ interface IPreview {
   drawBoxSize?: number,
 }
 
-const Preview: React.FC<IPreview> = ({ initialDraw = false, drawBoxSize = 5 }) => {
-  const [data] = useContext<[IState, TDispatch]>(GameContext);
+const Preview: React.FC<IPreview> = ({ initialDraw = false }) => {
   const canvasRef = useRef(null);
+  const [data] = useContext<[IState, TDispatch]>(GameContext);
+  const drawBox = useMemo(() => 1000 / Math.min(...data.size), [data.size]);
 
   useEffect(() => {
     setInitialScale();
+  }, [data.size]);
 
+  useEffect(() => {
     if (initialDraw) {
       drawByModel();
     }
@@ -31,8 +34,11 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false, drawBoxSize = 5 }) =
     if (!canvasRef.current) {
       return;
     }
-    const size = canvasRef.current.parentElement.clientWidth || 100;
-    canvasRef.current.style.transform = `scale(${size/100})`;
+    const sx = (canvasRef.current.parentElement.clientWidth || 100) / 1000;
+    const sy = (canvasRef.current.parentElement.clientHeight || 100) / 1000;
+    const size = Math.min(sx, sy);
+
+    canvasRef.current.style.transform = `scale(${size})`;
   };
 
   const drawByModel = () => {
@@ -41,9 +47,9 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false, drawBoxSize = 5 }) =
     data.blank.forEach((row, ri) => {
       row.forEach((cell, ci) => {
         if (cell > 0) {
-          const [x, y] = [ci*drawBoxSize, ri*drawBoxSize];
+          const [x, y] = [ci*drawBox, ri*drawBox];
 
-          context.fillRect(x, y, drawBoxSize, drawBoxSize);
+          context.fillRect(x, y, drawBox, drawBox);
         }
       });
     });
@@ -56,16 +62,16 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false, drawBoxSize = 5 }) =
     const { row, cell, value } = data.lastActive;
     const context = canvasRef.current.getContext('2d');
 
-    const [x, y] = [cell*drawBoxSize, row*drawBoxSize];
+    const [x, y] = [cell*drawBox, row*drawBox];
 
     switch (value) {
       case EBoxState.Cross:
       case EBoxState.Empty: {
-        context.clearRect(x, y, drawBoxSize, drawBoxSize);
+        context.clearRect(x, y, drawBox, drawBox);
         break;
       }
       case EBoxState.Filled: {
-        context.fillRect(x, y,  drawBoxSize, drawBoxSize);
+        context.fillRect(x, y,  drawBox, drawBox);
         break
       }
       default:
@@ -83,8 +89,8 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false, drawBoxSize = 5 }) =
     <div className="preview">
       <canvas
         ref={canvasRef}
-        width={100}
-        height={100}
+        width={1000}
+        height={1000}
       />
     </div>
   );

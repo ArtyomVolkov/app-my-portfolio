@@ -25,7 +25,14 @@ const Panel: React.FC<IPanel> = ({ data, variant, refItem }) => {
 
   const [hoverIndex, setHoverIndex] = useState(-1);
   const containerRef = useRef<any>(null);
-  const size = useMemo(() => Math.max(...data.blank.map((item) => item.length)), [data]);
+  const size = useMemo(() => {
+    if (!data.blank.length) {
+      return 0;
+    }
+    return Math.max(
+      ...data.blank.map((item) => item ? item.length : 0)
+    )
+  }, [data]);
   const items = useMemo(() => Array(size).fill(1), [size]);
 
   const setHoverLine = (row, cell) => setHoverIndex(variant === EVariant.Vertical ? cell : row);
