@@ -10,7 +10,8 @@ interface IPreview {
 const Preview: React.FC<IPreview> = ({ initialDraw = false }) => {
   const canvasRef = useRef(null);
   const [data] = useContext<[IState, TDispatch]>(GameContext);
-  const drawBox = useMemo(() => 1000 / Math.min(...data.size), [data.size]);
+  const resize = useMemo(() => ({ width: data.size[1] * 50, height: data.size[0] * 50}), [data.size]);
+  const drawBox = useMemo(() => Math.min(resize.width, resize.height) / Math.min(...data.size), [data.size]);
 
   useEffect(() => {
     setInitialScale();
@@ -34,8 +35,9 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false }) => {
     if (!canvasRef.current) {
       return;
     }
-    const sx = (canvasRef.current.parentElement.clientWidth || 100) / 1000;
-    const sy = (canvasRef.current.parentElement.clientHeight || 100) / 1000;
+    const scale = Math.max(resize.width, resize.height);
+    const sx = (canvasRef.current.parentElement.clientWidth || 100) / scale;
+    const sy = (canvasRef.current.parentElement.clientHeight || 100) / scale;
     const size = Math.min(sx, sy);
 
     canvasRef.current.style.transform = `scale(${size})`;
@@ -89,8 +91,8 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false }) => {
     <div className="preview">
       <canvas
         ref={canvasRef}
-        width={1000}
-        height={1000}
+        width={resize.width}
+        height={resize.height}
       />
     </div>
   );

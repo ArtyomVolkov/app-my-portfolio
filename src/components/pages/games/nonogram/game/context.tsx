@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 
 const DEFAULT = {
-  size: [15, 15],
+  size: [20, 15],
   panel: [5, 5],
 }
 
@@ -107,19 +107,26 @@ const getGameData = (data) => {
     }
   };
 
-  data?.matrix.forEach((row, i) => {
-    const horizontal = getPanelAreaCells(row);
-    const vertical = getPanelAreaCells(row.map((cell, j) => data.matrix[j][i]));
+  data?.matrix.forEach((row) => {
+    const cells = getPanelAreaCells(row);
 
-    if (horizontal.length) {
-      gameData.panel.horizontal.blank.push(horizontal);
-      gameData.panel.horizontal.filled.push(horizontal.map(() => null));
-    }
-    if (vertical.length) {
-      gameData.panel.vertical.blank.push(vertical);
-      gameData.panel.vertical.filled.push(horizontal.map(() => null));
+    if (cells.length) {
+      gameData.panel.horizontal.blank.push(cells);
+      gameData.panel.horizontal.filled.push(cells.map(() => null));
     }
   });
+  // for vertical cells (rotate matrix)
+  const vertical = data?.matrix?.length || 0;
+  const row = Array(vertical).fill(0);
+
+  Array(vertical).fill(0).forEach((item, i) => {
+    const cells = getPanelAreaCells(row.map((cell, j) => data.matrix[j][i]));
+
+    if (cells.length) {
+      gameData.panel.vertical.blank.push(cells);
+      gameData.panel.vertical.filled.push(cells.map(() => null));
+    }
+  })
 
   if (data?.matrix?.length > 0) {
     gameData.size = [data.matrix.length, Math.max(...data.matrix.map((item) => item.length))];
