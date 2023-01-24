@@ -67,7 +67,7 @@ const Panel: React.FC<IPanel> = ({ data, variant, refItem }) => {
               items.map((cell, i) => (
                 <CellBox
                   key={i}
-                  filled={crossword.panel[variant].filled[index][i]}
+                  filled={crossword.panel[variant].filled?.[index]?.[i]}
                   onPress={(value) => onFillBox(index, i, value)}
                   value={item[item.length-1-i]}
                 />

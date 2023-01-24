@@ -13,7 +13,7 @@ import './style.scss';
 
 const GameWidget = () => {
   useEffect(() => {
-    dispatch({ type: Action.SET_DATA, payload: NONOGRAMS.guitar });
+    dispatch({ type: Action.SET_DATA, payload: NONOGRAMS.duck });
 
     return () => {
       dispatch({ type: Action.CLEAR_DATA });

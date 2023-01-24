@@ -189,7 +189,7 @@ class Area extends React.Component<IArea, null> {
 
   private onCheckIsDone = () => {
     const [state, dispatch] = this.context;
-    const isDone = !state.matrix.some((row, i) =>
+    const isDone = state.matrix.length > 0 && !state.matrix.some((row, i) =>
       row.some((cell, j) => {
         if (state.blank[i][j] === 1 && !cell) {
           return true;

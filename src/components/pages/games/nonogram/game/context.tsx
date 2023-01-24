@@ -1,5 +1,10 @@
 import React, { createContext, useReducer } from 'react';
 
+const DEFAULT = {
+  size: [15, 15],
+  panel: [5, 5],
+}
+
 export enum Action {
   SET_DATA,
   CLEAR_DATA,
@@ -86,10 +91,10 @@ const getPanelAreaCells = (list) => {
 
 const getGameData = (data) => {
   const gameData = {
-    name: data.name,
-    matrix: data.matrix.slice(),
+    name: data.name || 'unknown',
+    matrix: data?.matrix?.slice(),
     blank: null,
-    size: [data.matrix.length, Math.max(...data.matrix.map((item) => item.length))],
+    size: [],
     panel: {
       horizontal: {
         blank: [],
@@ -102,7 +107,7 @@ const getGameData = (data) => {
     }
   };
 
-  data.matrix.forEach((row, i) => {
+  data?.matrix.forEach((row, i) => {
     const horizontal = getPanelAreaCells(row);
     const vertical = getPanelAreaCells(row.map((cell, j) => data.matrix[j][i]));
 
@@ -115,6 +120,17 @@ const getGameData = (data) => {
       gameData.panel.vertical.filled.push(horizontal.map(() => null));
     }
   });
+
+  if (data?.matrix?.length > 0) {
+    gameData.size = [data.matrix.length, Math.max(...data.matrix.map((item) => item.length))];
+  }
+
+  if (!data?.matrix.length) {
+    gameData.size = DEFAULT.size;
+    gameData.panel.horizontal.blank = Array(DEFAULT.size[0]).fill(Array(DEFAULT.panel[0]).fill(null));
+    gameData.panel.vertical.blank = Array(DEFAULT.size[1]).fill(Array(DEFAULT.panel[1]).fill(null));
+  }
+
   gameData.blank = Array(gameData.size[0]).fill(Array(gameData.size[1]).fill(null));
   return gameData;
 };
