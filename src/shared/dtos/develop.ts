@@ -363,5 +363,10 @@ export const Technologies: {[key in ETechnology]: ITechnology } = {
     key: ETechnology.EXP,
     label: 'Extreme Programming',
     type: Development.TECHNOLOGY
+  },
+  pexels: {
+    key: ETechnology.PEXELS,
+    label: 'Pexels (api)',
+    type: Development.TECHNOLOGY
   }
 }
