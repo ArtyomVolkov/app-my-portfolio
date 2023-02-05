@@ -7,13 +7,11 @@ import Panel, { EVariant } from '@pages/games/nonogram/game/panel';
 import Modal from '@pages/games/nonogram/game/modal';
 import Preview from '@pages/games/nonogram/game/preview';
 
-import { NONOGRAMS } from './data';
-
 import './style.scss';
 
 const GameWidget = () => {
   useEffect(() => {
-    dispatch({ type: Action.SET_DATA, payload: NONOGRAMS.guitar });
+    dispatch({ type: Action.SET_NEW_GAME });
 
     return () => {
       dispatch({ type: Action.CLEAR_DATA });

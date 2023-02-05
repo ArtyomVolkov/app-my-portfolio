@@ -1,12 +1,13 @@
 import React, { createContext, useReducer } from 'react';
 
+import { NONOGRAMS } from './data';
+
 const DEFAULT = {
-  size: [20, 15],
+  size: [20, 20],
   panel: [5, 5],
 }
 
 export enum Action {
-  SET_DATA,
   CLEAR_DATA,
   FILL_BOX,
   FILL_BOX_PANEL,
@@ -89,7 +90,11 @@ const getPanelAreaCells = (list) => {
   return data;
 };
 
-const getGameData = (data) => {
+const getGameData = () => {
+  const games = Object.keys(NONOGRAMS);
+  const name = Object.keys(NONOGRAMS)[Math.round(Math.random() * (games.length - 1))];
+  const data = NONOGRAMS[name];
+
   const gameData = {
     name: data.name || 'unknown',
     matrix: data?.matrix?.slice(),
@@ -144,14 +149,6 @@ const getGameData = (data) => {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case Action.SET_DATA: {
-      return {
-        ...state,
-        ...action.payload,
-        ...getGameData(action.payload),
-        loading: false,
-      };
-    }
     case Action.FILL_BOX: {
       const { row, cell, value } = action.payload;
       const blankData = state.blank.map((item) => item.slice());
@@ -201,8 +198,9 @@ const reducer = (state, action) => {
     case Action.SET_NEW_GAME: {
       return {
         ...state,
-        ...getGameData(action.payload),
+        ...getGameData(),
         isFinish: false,
+        loading: false,
         lastActive: null,
         modal: {
           open: false,
