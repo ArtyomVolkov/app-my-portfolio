@@ -16,6 +16,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import ExtensionRoundedIcon from '@mui/icons-material/ExtensionRounded';
 import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import GridOnRoundedIcon from '@mui/icons-material/GridOnRounded';
 
 import './style.scss';
 
@@ -55,6 +56,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   history: {
     label: 'History',
     icon: <HistoryRoundedIcon />
+  },
+  nonogram: {
+    label: 'Nonogram',
+    icon: <GridOnRoundedIcon />,
   }
 };
 

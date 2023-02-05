@@ -189,6 +189,11 @@ export const Technologies: {[key in ETechnology]: ITechnology } = {
     label: 'React',
     type: Development.TECHNOLOGY
   },
+  reactContext: {
+    key: ETechnology.REACT_CONTEXT,
+    label: 'React Context',
+    type: Development.TECHNOLOGY
+  },
   reactNative: {
     key: ETechnology.REACT_NATIVE,
     label: 'React Native',

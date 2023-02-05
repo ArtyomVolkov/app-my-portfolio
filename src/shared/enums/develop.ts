@@ -40,6 +40,7 @@ export enum Technology {
   HTML = 'html',
   CSS = 'css',
   REACT = 'react',
+  REACT_CONTEXT = 'reactContext',
   REACT_NATIVE = 'reactNative',
   FLUTTER = 'flutter',
   ANGULAR = 'angular',

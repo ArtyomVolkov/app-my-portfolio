@@ -5,6 +5,7 @@ import NavButton from '@shared/components/buttons/navigation';
 
 import ExtensionRoundedIcon from '@mui/icons-material/ExtensionRounded';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import GridOnRoundedIcon from '@mui/icons-material/GridOnRounded';
 
 import './style.scss';
 
@@ -20,6 +21,11 @@ const GamesPage = () => {
         path="/games/sudoku"
         title="Sudoku"
         icon={<AppRegistrationIcon className="icon"/>}
+      />
+      <NavButton
+        path="/games/nonogram"
+        title="Nonogram"
+        icon={<GridOnRoundedIcon className="icon"/>}
       />
     </Main>
   );

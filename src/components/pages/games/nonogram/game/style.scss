@@ -1,0 +1,230 @@
+@import "../../../../../assets/styles/style-guide";
+
+$border-width: 2px;
+$border: $border-width solid black;
+$cell-size: 21px;
+
+@mixin border() {
+  border: $border;
+}
+
+@mixin cell($background) {
+  width: $cell-size;
+  height: $cell-size;
+  color: black;
+  background: $background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.nonogram-game-widget {
+  @include card-shadow;
+  display: flex;
+  width: min-content;
+  flex-direction: column;
+  padding: 10px;
+  position: relative;
+
+  .game-modal {
+    border-radius: inherit;
+
+    .content-box {
+      width: 350px;
+
+      .title {
+        text-align: center;
+      }
+    }
+
+    .crossword-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .title {
+        font-size: 16px;
+        color: #161616;
+        font-weight: 500;
+      }
+
+      .preview-wrap {
+        width: 200px;
+        height: 200px;
+        margin-top: 15px;
+
+        .preview {
+          position: relative;
+          height: inherit;
+          border: 0;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  .finish-view-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #bcbcbc4a;
+  }
+
+  .header, .body {
+    @include border;
+    display: flex;
+    grid-template-columns: auto 1fr;
+  }
+
+  .body {
+    border-top-width: 0;
+  }
+
+  .preview {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    font-weight: 600;
+    border: 3px solid white;
+
+    canvas {
+      position: absolute;
+    }
+  }
+
+  .panel {
+    display: grid;
+    user-select: none;
+
+    &.horizontal {
+      grid-row-gap: 1px;
+      background: #5e5d54;
+      border-right: $border;
+
+      .row {
+        display: flex;
+        flex-direction: row-reverse;
+        grid-column-gap: 1px;
+        justify-content: end;
+
+        &.hover {
+          filter: brightness(0.7);
+        }
+
+        &.divider {
+          border-bottom: $border;
+          border-width: calc(#{$border-width} - 1px);
+        }
+      }
+    }
+
+    &.vertical {
+      display: flex;
+      grid-column-gap: 1px;
+      background: #5e5d54;
+      flex-direction: row;
+      border-left: $border;
+
+      .row {
+        display: flex;
+        flex-direction: column-reverse;
+        grid-row-gap: 1px;
+        justify-content: end;
+
+        &.divider {
+          border-right: $border;
+          border-width: calc(#{$border-width} - 1px);
+        }
+
+        &.hover {
+          filter: brightness(0.7);
+        }
+      }
+    }
+
+    .cell {
+      position: relative;
+      @include cell(wheat);
+
+      .cross-icon {
+        position: absolute;
+        color: #e8e8e8;
+        background: #26262659;
+      }
+    }
+  }
+
+  .area {
+    display: grid;
+    grid-row-gap: 1px;
+    background: #5e5d54;
+    position: relative;
+
+    .tooltip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      background-color: #ffffffdb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border: 1px solid #b3b3b3;
+      font-weight: 600;
+
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    .cell {
+      @include cell(white);
+      overflow: hidden;
+
+      &:hover {
+        background: #e7e7e7;
+      }
+
+      &.divider {
+        border-right: $border;
+        border-width: calc(#{$border-width} - 1px);
+      }
+
+      .filled {
+        background: #101010;
+        width: 100%;
+        height: 100%;
+        border: 1px solid white;
+        border-radius: 4px;
+        box-sizing: border-box;
+        pointer-events: none;
+      }
+
+      .cross {
+        color: #a4a4a4;
+        pointer-events: none;
+      }
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      grid-column-gap: 1px;
+
+      &.divider {
+        border-bottom: $border;
+        border-width: calc(#{$border-width} - 1px);
+      }
+    }
+  }
+}
