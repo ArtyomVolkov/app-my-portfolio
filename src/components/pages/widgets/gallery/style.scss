@@ -21,12 +21,23 @@
       flex: 1;
       min-width: 270px;
       min-height: 200px;
-      border: 1px solid #e5e5e5;
+      // border: 1px solid #e5e5e5;
       border-radius: 4px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: box-shadow 0.3s, opacity 0.6s;
+      box-shadow: 3px 4px 6px 2px #b9b9b9;
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 5px 7px 10px 4px #4c4c4c;
+      }
+
+      &:active {
+        opacity: 0.5;
+      }
 
       &.loading {
         img {
@@ -49,7 +60,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 12px;
+      padding: 25px 0 0;
 
       .loader {
         margin-right: 10px;
