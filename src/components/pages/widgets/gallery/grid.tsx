@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import GridItem from '@pages/widgets/gallery/grid-item';
+import LoadMore from '@pages/widgets/gallery/load-more';
+
 import { getImages } from '@api/pexels';
 
 const GalleryGrid = () => {
@@ -29,13 +32,17 @@ const GalleryGrid = () => {
 
   return (
     <div className="gallery-grid">
-      {
-        photos.map((item) => (
-          <section key={item.id} className="card">
-            <img alt={item.alt} src={item.src.large} />
-          </section>
-        ))
-      }
+      <div className="grid">
+        {
+          photos.map((item) => (
+            <GridItem
+              key={item.id}
+              data={item}
+            />
+          ))
+        }
+      </div>
+      <LoadMore hasMore={true} />
     </div>
   )
 };
