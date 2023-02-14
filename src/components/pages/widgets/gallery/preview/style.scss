@@ -1,0 +1,22 @@
+.gallery-image-preview {
+  display: flex;
+  min-height: 400px;
+
+
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.galleryImageModalRoot {
+  .MuiBackdrop-root {
+    background: #000000e8;
+  }
+  .galleryImageMuiPaper {
+    max-width: calc(100vw - 5%);
+    max-height: calc(100vh - 10%);
+    width: max-content;
+    height: max-content;
+  }
+}

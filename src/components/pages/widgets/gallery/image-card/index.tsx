@@ -3,7 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { mergeClassNames } from '@utils/common';
 
-const GridItem = ({ data }) => {
+const ImageCard = ({ data, onPreview }) => {
   const [loading, setLoading] = useState(true);
 
   const onLoadImage = () => {
@@ -15,7 +15,10 @@ const GridItem = ({ data }) => {
   };
 
   return (
-    <section className={mergeClassNames(['card', loading && 'loading'])}>
+    <section
+      className={mergeClassNames(['card', loading && 'loading'])}
+      onClick={() => onPreview(data)}
+    >
       {
         loading && (
           <div className="loading-wrap">
@@ -33,4 +36,4 @@ const GridItem = ({ data }) => {
   );
 }
 
-export default GridItem;
+export default ImageCard;
