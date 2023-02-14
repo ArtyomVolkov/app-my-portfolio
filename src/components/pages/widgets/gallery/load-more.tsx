@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import debounce from 'lodash/debounce';
+import React, { useState } from 'react';
 
+import Button from '@mui/material/Button';
+import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 import CircularProgress from '@mui/material/CircularProgress';
 
 interface ILoadMore {
@@ -9,57 +10,34 @@ interface ILoadMore {
   onRequestLoad: () => void,
 }
 
-const LoadMore: React.FC<ILoadMore> = ({ hasMore, loading, onRequestLoad }) => {
-  const elementRef = useRef(null);
+const LoadMore: React.FC<ILoadMore> = ({ hasMore, onRequestLoad }) => {
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    window.addEventListener('scroll', onScrollDebounce, { passive: true });
+  const onLoadMore = async () => {
+    setLoading(true);
 
-    return () => {
-      window.removeEventListener('scroll', onScrollDebounce);
-    }
-  }, []);
-
-  useEffect(() => {
-    scrollTopOffset();
-  }, [loading]);
-
-  const scrollTopOffset = () => {
-    if (loading || !elementRef.current) {
-      return;
-    }
-    window.scrollTo({
-      top: window.scrollY - elementRef.current.clientHeight,
-      behavior: 'smooth'
-    });
+    setTimeout(async () => {
+      await onRequestLoad();
+      setLoading(false);
+    }, 1000);
   }
-
-  const onCheckIsVisibleView = () => {
-    if (!elementRef.current) {
-      return;
-    }
-    const rect = elementRef.current.getBoundingClientRect();
-    const visible = rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
-
-    if (visible && !loading) {
-      onRequestLoad()
-    }
-  };
-
-  const onScroll = () => {
-    onCheckIsVisibleView();
-  };
-
-  const onScrollDebounce = debounce(onScroll, 200, { leading: false, trailing: true });
 
   if (!hasMore) {
     return null;
   }
 
   return (
-    <div className="load-more" ref={elementRef}>
-      <CircularProgress size={21} className="loader" />
-      <span>Load more...</span>
+    <div className="load-more">
+      <Button
+        variant="outlined"
+        disabled={loading}
+        onClick={onLoadMore}
+        startIcon={loading ? <CircularProgress size={16} className="loader" /> : <DownloadRoundedIcon />}
+      >
+        {
+          loading ? 'Loading...' : 'Load more'
+        }
+      </Button>
     </div>
   );
 }

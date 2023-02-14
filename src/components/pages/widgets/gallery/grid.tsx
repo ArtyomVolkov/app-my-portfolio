@@ -31,15 +31,11 @@ const GalleryGrid = () => {
   const onLoadMore = async () => {
     const { page, perPage } = pagination.current;
 
-    setLoading(true);
-
     const data = await getImages(page+1, perPage);
     const newData = [...photos].concat(data.photos);
 
     pagination.current.page = page+1;
     pagination.current.hasMore = data.total_results > newData.length;
-
-    setLoading(false);
     setPhotos(newData);
   };
 
@@ -64,8 +60,8 @@ const GalleryGrid = () => {
         }
       </div>
       <LoadMore
-        hasMore={true}
         loading={loading}
+        hasMore={pagination.current.hasMore}
         onRequestLoad={onLoadMore}
       />
     </div>
