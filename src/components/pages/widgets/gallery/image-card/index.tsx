@@ -18,6 +18,7 @@ const ImageCard = ({ data, onPreview }) => {
     <section
       className={mergeClassNames(['card', loading && 'loading'])}
       onClick={() => onPreview(data)}
+      title={data.alt}
     >
       {
         loading && (

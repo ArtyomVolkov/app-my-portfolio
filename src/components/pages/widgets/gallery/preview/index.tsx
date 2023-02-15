@@ -2,10 +2,12 @@ import React from 'react';
 
 import Dialog from '@mui/material/Dialog';
 
+import IconButton from '@mui/material/IconButton';
+import Close from '@mui/icons-material/Close';
+
 import './style.scss';
 
 const PreviewModal = ({ open, data, onClose }) => {
-  console.log(data);
   return (
     <Dialog
       open={open}
@@ -24,6 +26,9 @@ const PreviewModal = ({ open, data, onClose }) => {
             />
           )
         }
+        <IconButton onClick={onClose} className="close-button">
+          <Close />
+        </IconButton>
       </div>
     </Dialog>
   );
