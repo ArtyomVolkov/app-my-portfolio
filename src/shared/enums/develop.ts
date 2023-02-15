@@ -71,7 +71,8 @@ export enum Technology {
   SCRUM = 'scrum',
   KANBAN = 'kanban',
   LEAN = 'lean',
-  EXP = 'exp'
+  EXP = 'exp',
+  PEXELS = 'pexels'
 }
 
 export enum Development {
