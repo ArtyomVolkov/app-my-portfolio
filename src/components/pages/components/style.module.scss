@@ -1,6 +1,7 @@
-.components-page {
+.componentsPage {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
 }

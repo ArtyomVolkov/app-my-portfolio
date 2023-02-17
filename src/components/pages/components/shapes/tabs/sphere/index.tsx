@@ -2,23 +2,25 @@ import React from 'react';
 
 import Rotation from '@shared/components/rotation';
 
-import './style.scss';
+import { mergeClassNames } from '@utils/common';
+
+import styles from './style.module.scss';
 
 const Sphere = () => {
   return (
     <Rotation
-      className="sphere-widget"
+      className={styles.sphereWidget}
       position={{ x: 45, y: 65 }}
     >
-      <div className="sphere">
-        <div className="plane north-x" />
-        <div className="plane north-east-x" />
-        <div className="plane east-x" />
-        <div className="plane south-east-x" />
-        <div className="plane north-y" />
-        <div className="plane north-east-y" />
-        <div className="plane east-y" />
-        <div className="plane south-east-y" />
+      <div className={styles.sphere}>
+        <div className={mergeClassNames([styles.plane, styles.northX])} />
+        <div className={mergeClassNames([styles.plane, styles.northEastX])} />
+        <div className={mergeClassNames([styles.plane, styles.eastX])} />
+        <div className={mergeClassNames([styles.plane, styles.southEastX])} />
+        <div className={mergeClassNames([styles.plane, styles.northY])} />
+        <div className={mergeClassNames([styles.plane, styles.northEastY])} />
+        <div className={mergeClassNames([styles.plane, styles.eastY])} />
+        <div className={mergeClassNames([styles.plane, styles.southEastY])} />
       </div>
     </Rotation>
   );

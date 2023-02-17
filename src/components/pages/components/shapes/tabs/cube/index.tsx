@@ -2,21 +2,23 @@ import React from 'react';
 
 import Rotation from '@shared/components/rotation';
 
-import './style.scss';
+import { mergeClassNames } from '@utils/common';
+
+import styles from './style.module.scss';
 
 const CubeWidget = () => {
   return (
     <Rotation
-      className="cube-widget"
+      className={styles.cubeWidget}
       position={{ x: -45, y: -45 }}
     >
-      <div className="cube">
-        <div className="plane top">TOP</div>
-        <div className="plane bottom">BOTTOM</div>
-        <div className="plane right">RIGHT</div>
-        <div className="plane left">LEFT</div>
-        <div className="plane front">FRONT</div>
-        <div className="plane back">BACK</div>
+      <div className={styles.cube}>
+        <div className={mergeClassNames([styles.plane, styles.top])}>TOP</div>
+        <div className={mergeClassNames([styles.plane, styles.bottom])}>BOTTOM</div>
+        <div className={mergeClassNames([styles.plane, styles.right])}>RIGHT</div>
+        <div className={mergeClassNames([styles.plane, styles.left])}>LEFT</div>
+        <div className={mergeClassNames([styles.plane, styles.front])}>FRONT</div>
+        <div className={mergeClassNames([styles.plane, styles.back])}>BACK</div>
       </div>
     </Rotation>
   );

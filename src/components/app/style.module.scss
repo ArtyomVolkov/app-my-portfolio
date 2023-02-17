@@ -1,3 +1,9 @@
+@import "../../assets/styles/style-guide";
+
+:global(html) {
+  @include scroll-style;
+}
+
 .appEntry {
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
@@ -16,6 +22,9 @@
   }
 
   .mainContent {
+    display: grid;
+    grid-template-rows: 82px 1fr;
+    height: 100vh;
     margin-left: 256px;
     transition: margin-left 0.5s;
   }

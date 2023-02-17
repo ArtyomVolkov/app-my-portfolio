@@ -1,4 +1,4 @@
-.sphere-widget {
+.sphereWidget {
   .sphere {
     width: 100%;
     height: 100%;
@@ -13,42 +13,42 @@
       box-sizing: border-box;
       position: absolute;
 
-      &.north-x {
+      &.northX {
         border-color: #ff0000;
         background: rgba(248, 0, 0, 0.5);
         transform: rotateX(0deg);
       }
-      &.north-east-x {
+      &.northEastX {
         border-color: #e86f00;
         background: rgba(232, 111, 0, 0.5);
         transform: rotateX(45deg);
       }
-      &.east-x {
+      &.eastX {
         transform: rotateX(90deg);
         border-color: #efd81e;
         background: rgba(239, 216, 30, 0.5);
       }
-      &.south-east-x {
+      &.southEastX {
         transform: rotateX(135deg);
         border-color: #00f800;
         background: rgba(0, 248, 0, 0.5);
       }
 
-      &.north-y {
+      &.northY {
         border-color: #007dff;
         transform: rotateY(0deg);
       }
-      &.north-east-y {
+      &.northEastY {
         border-color: #003072;
         background: rgba(0, 48, 114, 0.5);
         transform: rotateY(45deg);
       }
-      &.east-y {
+      &.eastY {
         transform: rotateY(90deg);
         border-color: #be01bb;
         background: rgba(190, 1, 187, 0.5);
       }
-      &.south-east-y {
+      &.southEastY {
         transform: rotateY(135deg);
         border-color: #090808;
         background: rgba(9, 8, 8, 0.5);

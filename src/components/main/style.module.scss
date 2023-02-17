@@ -1,19 +1,17 @@
-.mainContent {
+.main {
   position: relative;
-  top: 82px;
   padding: 24px;
+  overflow: auto;
 }
 
 @media screen and (max-width: 1023px) {
-  .mainContent {
-    top: 72px;
+  .main {
     padding: 18px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .mainContent {
-    top: 49px;
+  .main {
     padding: 12px;
   }
 }
