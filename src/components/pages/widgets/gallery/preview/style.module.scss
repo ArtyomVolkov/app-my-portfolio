@@ -1,4 +1,4 @@
-.gallery-image-preview {
+.galleryImagePreview {
   display: flex;
   min-height: 320px;
   flex-direction: row;
@@ -7,12 +7,12 @@
   background: black;
 
 
-  img {
+  .image {
     width: 100%;
     object-fit: contain;
   }
 
-  .close-button {
+  .closeButton {
     position: absolute;
     top: 10px;
     background: #dadada;
