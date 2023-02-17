@@ -22,7 +22,7 @@ const SideBar = ({ fullWidth }) => {
         subtitle="SR. FrontEnd engineer"
         image={Image}
       />
-      <IconButton className={styles.screenResize} onClick={STORE.toggleFullWidth}>
+      <IconButton className={styles.screenResize} onClick={STORE.toggleFullWidth} aria-label="arrow-button">
         <ArrowRight className={mergeClassNames([styles.icon, !fullWidth && styles.left])} />
       </IconButton>
       <Navigation />

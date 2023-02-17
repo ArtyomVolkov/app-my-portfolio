@@ -7,7 +7,7 @@ import { Development } from '@shared/enums/develop';
 
 import { mergeClassNames } from '@utils/common';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 interface TechnologyPill {
   name: string,
@@ -21,7 +21,7 @@ const TechnologyPill: React.FC<TechnologyPill> = ({ name, prefix, label, type })
     case Development.PL: {
       return (
         <Chip
-          className={mergeClassNames(['technology-pill', name])}
+          className={mergeClassNames([styles.technologyPill, name])}
           avatar={<Avatar className="icon">{prefix}</Avatar>}
           label={label}
           variant="filled"
@@ -33,7 +33,7 @@ const TechnologyPill: React.FC<TechnologyPill> = ({ name, prefix, label, type })
     case Development.TECHNOLOGY: {
       return (
         <Chip
-          className="technology-pill"
+          className={styles.technologyPill}
           label={label}
           size="small"
           color={type === Development.TECHNOLOGY ? 'primary' : 'secondary'}

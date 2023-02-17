@@ -1,4 +1,4 @@
-.summary-tab {
+.summaryTab {
   display: flex;
   flex-direction: column;
   grid-row-gap: 20px;
@@ -32,42 +32,42 @@
     max-height: 250px;
     padding: 0;
 
-    .profile-image {
+    .profileImage {
       max-width: 250px;
       border-radius: 4px 0 0 4px;
     }
 
-    .profile-info {
+    .profileInfo {
       display: flex;
       flex-direction: column;
       padding: 20px;
       overflow: auto;
 
-      .profile-title {
+      .title {
         font-size: 28px;
         margin: 0 0 10px;
       }
 
-      .profile-subtitle {
+      .subtitle {
         font-size: 18px;
         margin: 0;
-        color: grey;
+        color: #737373;
       }
 
-      .profile-description {
+      .description {
         font-size: 16px;
         margin-top: 15px;
       }
     }
   }
 
-  .cell-2 {
+  .cell2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
   }
 
-  .cell-3 {
+  .cell3 {
     display: flex;
     flex-wrap: wrap;
     grid-column-gap: 20px;
@@ -81,8 +81,8 @@
 }
 
 @media screen and (min-width: 1240px) {
-  .summary-tab {
-    .cell-3 {
+  .summaryTab {
+    .cell3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
     }
@@ -90,8 +90,8 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .summary-tab {
-    .cell-2 {
+  .summaryTab {
+    .cell2 {
       grid-template-columns: 1fr;
       grid-row-gap: 20px;
     }
@@ -99,7 +99,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .summary-tab {
+  .summaryTab {
     grid-column-gap: 10px;
     grid-row-gap: 10px;
 
@@ -107,24 +107,24 @@
       flex-direction: column;
       max-height: unset;
 
-      .profile-image {
+      .profileImage {
         width: 100px;
         height: 100px;
         border-radius: 50%;
         margin: 15px auto 0;
       }
 
-      .profile-title, .profile-subtitle {
+      .title, .subtitle {
         text-align: center;
       }
     }
 
-    .cell-2, .cell-3 {
+    .cell2, .cell3 {
       grid-column-gap: 10px;
       grid-row-gap: 10px;
     }
 
-    .cell-3 {
+    .cell3 {
       display: flex;
       flex-wrap: wrap;
 
@@ -137,13 +137,13 @@
 }
 
 @media screen and (max-width: 475px) {
-  .summary-tab {
+  .summaryTab {
     .card {
       min-width: 250px;
       font-size: 0.9em;
       padding: 10px;
 
-      .profile-info {
+      .profileInfo {
         padding: 0;
       }
 

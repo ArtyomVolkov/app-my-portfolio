@@ -1,40 +1,38 @@
-.technology-pill {
-  color: black;
-
-  &.javascript {
+.technologyPill {
+  &:global(.javascript) {
     background: #efd81e;
 
-    .icon {
+    :global(.icon) {
       background: black;
       color: white;
     }
   }
 
-  &.typescript {
+  &:global(.typescript) {
     background: #2f74c0;
     color: white;
 
-    .icon {
+    :global(.icon) {
       background: black;
       color: white;
     }
   }
 
-  &.dart {
+  &:global(.dart) {
     background: #2bb1ef;
-    color: white;
+    color: black;
 
-    .icon {
+    :global(.icon) {
       background: black;
       color: white;
     }
   }
 
-  &.java {
+  &:global(.java) {
     background: #e86f00;
-    color: white;
+    color: black;
 
-    .icon {
+    :global(.icon) {
       background: black;
       color: white;
     }

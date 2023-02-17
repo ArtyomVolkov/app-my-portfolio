@@ -1,21 +1,21 @@
-.profile-page {
+.profilePage {
   padding-top: 12px;
 
-  .tabs-header {
+  :global(.tabs-header) {
     border-bottom: 1px solid #dcdcdc;
   }
 
-  .tab-item {
+  :global(.tab-item) {
     min-height: 60px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .profile-page {
+  .profilePage {
     padding: 12px;
 
-    .tabs-header {
-      .tab-item {
+    :global(.tabs-header) {
+      :global(.tab-item) {
         min-height: 45px;
         padding: 8px;
         font-size: 14px;

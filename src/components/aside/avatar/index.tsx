@@ -19,7 +19,7 @@ const Avatar: React.FC<IAvatar> = ({ title, subtitle, image }) => {
       <IconButton>
         <MuiAvatar>
           {
-            !image ? `${firstName[0]}${lastName[0]}` : <img src={image} alt="avatar" />
+            !image ? `${firstName[0]}${lastName[0]}` : <img src={image} alt="avatar" width={40} height={40} />
           }
         </MuiAvatar>
       </IconButton>

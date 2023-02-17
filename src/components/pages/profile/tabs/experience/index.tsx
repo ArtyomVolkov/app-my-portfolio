@@ -5,16 +5,16 @@ import TechnologyList from '@shared/components/lists/technologies';
 
 import { PROJECTS } from '@pages/profile/data';
 
-import './style.scss'
+import styles from './style.module.scss';
 
 const Experience = () => (
-  <div className="projects-tab">
+  <div className={styles.projectsTab}>
     {
       PROJECTS.map((item, index) => (
-        <section className="project-card" key={index}>
-          <p className="name">{ item.name }</p>
-          <label className="description">{item.description}</label>
-          <div className="pill-widget">
+        <section className={styles.projectCard} key={index}>
+          <p className={styles.name}>{ item.name }</p>
+          <label className={styles.description}>{item.description}</label>
+          <div className={styles.pillWidget}>
             <img
               src={`https://flagcdn.com/w40/${item.countryCode}.png`}
               loading="lazy"
@@ -23,9 +23,9 @@ const Experience = () => (
             />
             <label>{item.period}</label>
           </div>
-          <TechnologyList data={item.technologies} />
+          <TechnologyList data={item.technologies} className={styles.technologyList} />
           <Divider />
-          <ul className="responsibilities">
+          <ul className={styles.responsibilities}>
             {
               item.responsibilities.map((item, index) => (
                 <li key={index}>{item}</li>

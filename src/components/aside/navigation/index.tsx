@@ -87,6 +87,7 @@ const Navigation = () => {
     return (
       <ListItem
         key={item}
+        component="li"
         className={styles.navItem}
         onClick={() => navigateTo(item)}
         selected={location.pathname.includes(item)}
