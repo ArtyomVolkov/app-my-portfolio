@@ -2,10 +2,10 @@ import React from 'react';
 
 import Breadcrumbs from '@shared/components/breadcrumbs';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 const Header = () => (
-  <header>
+  <header className={styles.appHeader}>
     <Breadcrumbs />
   </header>
 );

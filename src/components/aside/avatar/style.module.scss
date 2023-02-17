@@ -23,9 +23,21 @@
       line-height: 21px;
     }
 
-    .sub-title {
+    .subTitle {
       color: grey;
       font-size: 12px;
     }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .avatar {
+    padding: 8px 12px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .avatar {
+    padding: 0;
   }
 }

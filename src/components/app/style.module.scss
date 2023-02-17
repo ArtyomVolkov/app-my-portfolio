@@ -1,0 +1,33 @@
+.appEntry {
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+
+  &.fullWidth {
+    aside {
+      width: 80px;
+    }
+    .mainContent {
+      margin-left: 80px;
+    }
+  }
+
+  aside {
+    transition: width 0.5s;
+  }
+
+  .mainContent {
+    margin-left: 256px;
+    transition: margin-left 0.5s;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .appEntry.fullWidth {
+    .mainContent {
+      margin-left: 60px;
+    }
+    aside {
+      width: 60px;
+    }
+  }
+}

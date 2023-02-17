@@ -1,0 +1,29 @@
+nav {
+  margin-top: 20px;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 10px;
+  white-space: nowrap;
+
+  .navItem {
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    margin: 0 10px;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navList .navItem {
+    margin: 0 8px;
+    padding: 0;
+
+    svg {
+      margin-left: 10px;
+      font-size: 21px;
+    }
+  }
+}

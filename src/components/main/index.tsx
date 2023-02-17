@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Box from '@mui/material/Box';
+import { mergeClassNames } from '@utils/common';
 
-import './style.scss';
+import styles from  './style.module.scss';
 
 const Main = ({ children, className = null }) => (
-  <Box component="main" className={className}>
+  <main className={mergeClassNames([styles.mainContent, className])}>
     { children }
-  </Box>
+  </main>
 );
 
 export default Main;

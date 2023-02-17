@@ -10,18 +10,20 @@ import Image from '@assets/images/a.volkov.png';
 
 import STORE from '@store/app';
 
-import './style.scss';
+import { mergeClassNames } from '@utils/common';
+
+import styles from './style.module.scss';
 
 const SideBar = ({ fullWidth }) => {
   return (
-    <aside>
+    <aside className={styles.sideBar}>
       <Avatar
         title="Artem Volkov"
         subtitle="SR. FrontEnd engineer"
         image={Image}
       />
-      <IconButton className="screen-resize" onClick={STORE.toggleFullWidth}>
-        <ArrowRight className={!fullWidth ? 'icon left' : 'icon'} />
+      <IconButton className={styles.screenResize} onClick={STORE.toggleFullWidth}>
+        <ArrowRight className={mergeClassNames([styles.icon, !fullWidth && styles.left])} />
       </IconButton>
       <Navigation />
     </aside>

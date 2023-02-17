@@ -7,8 +7,6 @@ import AppContent from '@components/app/app-content';
 
 import THEME from '@assets/theme/main';
 
-import './style.scss';
-
 const App = () => {
   return (
     <BrowserRouter>

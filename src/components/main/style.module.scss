@@ -1,18 +1,18 @@
-main {
+.mainContent {
   position: relative;
   top: 82px;
   padding: 24px;
 }
 
 @media screen and (max-width: 1023px) {
-  main {
+  .mainContent {
     top: 72px;
     padding: 18px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  main {
+  .mainContent {
     top: 49px;
     padding: 12px;
   }

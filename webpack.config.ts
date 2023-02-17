@@ -1,7 +1,7 @@
 import path from 'path';
 import env from 'dotenv';
 
-import webpack from 'webpack';
+import webpack, { Configuration as WebpackConfig } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import InterpolateHtmlPlugin from 'interpolate-html-plugin';
 import { Configuration as WebpackDevServer } from 'webpack-dev-server';
@@ -49,12 +49,40 @@ const MODULE = {
       },
     },
     {
-      test: /\.(s[ac]ss|css)$/i,
+      test: /\.module\.(s[ac]ss|css)$/,
       exclude: /node_modules/,
-      use: [{
-        loader: MiniCssExtractPlugin.loader,
-        options: {},
-      }, 'css-loader', 'sass-loader'],
+      use: [
+        isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              localIdentName: '[local]__[hash:base64:5]',
+            },
+            sourceMap: !isProd,
+          },
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: !isProd,
+          },
+        },
+      ],
+    },
+    {
+      test: /\.(s[ac]ss|css)$/,
+      exclude: /\.module.(s[ac]ss|css)$/,
+      use: [
+        isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+        'css-loader',
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: !isProd,
+          },
+        },
+      ],
     },
     {
       test: /\.(jpe?g|png|gif|svg)$/i,
@@ -95,7 +123,8 @@ const PLUGINS = [
   new ForkTsCheckerWebpackPlugin(),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
-    filename: `${filename('css')}`,
+    filename: !isProd ? '[name].css' : '[name].css',
+    chunkFilename: !isProd ? '[id].css' : '[id].css'
   }),
   // new BundleAnalyzer(),
 ];
@@ -129,7 +158,7 @@ const OPTIMIZATION = {
     : [],
 };
 
-interface Configuration extends webpack.Configuration {
+interface Configuration extends WebpackConfig {
   devServer?: WebpackDevServer;
 }
 
@@ -138,7 +167,7 @@ const config: Configuration = {
   devtool: isProd ? false : 'inline-source-map',
   resolve: {
     alias: ALIAS,
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.scss'],
     plugins: [new TsconfigPathsPlugin({configFile: './tsconfig.json'})],
   },
   output: {
