@@ -14,7 +14,7 @@ import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { Action } from '@pages/games/sudoku/game';
 import { Level } from '@pages/games/sudoku/game/generator';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 interface GamePanel {
   level: Level,
@@ -30,7 +30,7 @@ const GamePanel: React.FC<GamePanel> = ({ level, hints, history, activeValue, on
   };
 
   return (
-    <div className="panel">
+    <div className={styles.panel}>
       <FormControl size="small">
         <InputLabel>Level</InputLabel>
         <Select value={level} label="level" onChange={onChangeLevel}>
@@ -40,7 +40,7 @@ const GamePanel: React.FC<GamePanel> = ({ level, hints, history, activeValue, on
         </Select>
       </FormControl>
       <br />
-      <div className="main-actions">
+      <div className={styles.mainActions}>
         <Button variant="outlined" onClick={() => onAction(Action.NEW_GAME)}>
           <AppsOutlinedIcon fontSize="small" />
           New Game

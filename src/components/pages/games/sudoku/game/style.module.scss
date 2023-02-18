@@ -1,0 +1,18 @@
+@import "../../../../../assets/styles/style-guide";
+
+.sudokuWidget {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  overflow: hidden;
+  @include card-shadow;
+}
+
+@media screen and (max-width: 835px) {
+  .sudokuWidget {
+    display: grid;
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    width: 100%;
+  }
+}

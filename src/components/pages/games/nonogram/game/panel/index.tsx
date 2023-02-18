@@ -5,6 +5,8 @@ import CellBox from '@pages/games/nonogram/game/panel/cell';
 import { mergeClassNames } from '@utils/common';
 import { GameContext, Action } from '@pages/games/nonogram/game/context';
 
+import styles from './style.module.scss';
+
 export enum EVariant {
   Vertical = 'vertical',
   Horizontal = 'horizontal'
@@ -52,15 +54,15 @@ const Panel: React.FC<IPanel> = ({ data, variant, refItem }) => {
   };
 
   return (
-    <div className={mergeClassNames(['panel', variant])} ref={containerRef}>
+    <div className={mergeClassNames([styles.panel, variant])} ref={containerRef}>
       {
         data.blank.map((item, index, list) => (
           <div
             key={index}
             className={mergeClassNames([
-              'row',
-              index === hoverIndex && 'hover',
-              (index !== list.length-1) && !((index+1)%5) && 'divider'
+              styles.row,
+              index === hoverIndex && styles.hover,
+              (index !== list.length-1) && !((index+1)%5) && styles.divider
             ])}
           >
             {

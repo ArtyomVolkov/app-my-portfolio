@@ -1,0 +1,43 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  position: relative;
+
+  img {
+    width: inherit;
+    height: inherit;
+  }
+
+  .info {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 21px;
+    }
+
+    .subTitle {
+      color: #696969;
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .avatar {
+    padding: 8px 12px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .avatar {
+    padding: 0;
+  }
+}

@@ -1,0 +1,25 @@
+.breadcrumbs {
+  .link {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 10px;
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .breadcrumbs {
+    .link {
+      .pageLabel {
+        display: none;
+      }
+
+      svg {
+        margin: 0;
+      }
+    }
+  }
+}

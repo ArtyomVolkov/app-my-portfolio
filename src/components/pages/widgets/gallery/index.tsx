@@ -6,13 +6,13 @@ import GalleryGrid from '@pages/widgets/gallery/grid';
 
 import { TECHNOLOGIES } from '@pages/widgets/gallery/data';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 const Gallery = () => {
   return (
-    <Main className="nature-gallery">
+    <Main className={styles.natureGallery}>
       <h3>Gallery</h3>
-      <TechnologyList data={TECHNOLOGIES} />
+      <TechnologyList data={TECHNOLOGIES} className={styles.technologyList} />
       <GalleryGrid />
     </Main>
   );

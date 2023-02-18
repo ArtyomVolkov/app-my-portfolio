@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { mergeClassNames } from '@utils/common';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 interface Rotation {
   className: string,
@@ -36,6 +36,7 @@ const Rotation: React.FC<Rotation> = ({position = {x: 0, y: 0}, children, classN
     if (!rotate.current.active) {
       return;
     }
+    console.log('mouse move')
     const x = e.clientX - rotate.current.startX + rotate.current.x;
     const y = rotate.current.startY - e.clientY + rotate.current.y;
 
@@ -66,7 +67,7 @@ const Rotation: React.FC<Rotation> = ({position = {x: 0, y: 0}, children, classN
 
   return (
     <div
-      className={mergeClassNames(['rotation-section', className])}
+      className={mergeClassNames([styles.rotationSection, className])}
       ref={widgetRef}
       onMouseMove={mouseMove}
       onMouseLeave={mouseLeave}

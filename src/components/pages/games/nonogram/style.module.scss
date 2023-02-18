@@ -1,0 +1,11 @@
+.nonogram {
+  .technologyList {
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .nonogram {
+    padding: 12px;
+  }
+}

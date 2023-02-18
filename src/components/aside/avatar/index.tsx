@@ -3,7 +3,7 @@ import React from 'react';
 import MuiAvatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 interface IAvatar {
   title: string,
@@ -15,17 +15,17 @@ const Avatar: React.FC<IAvatar> = ({ title, subtitle, image }) => {
   const [firstName, lastName] = title.split(' ');
 
   return (
-    <div className="avatar">
+    <div className={styles.avatar}>
       <IconButton>
         <MuiAvatar>
           {
-            !image ? `${firstName[0]}${lastName[0]}` : <img src={image} alt="avatar" />
+            !image ? `${firstName[0]}${lastName[0]}` : <img src={image} alt="avatar" width={40} height={40} />
           }
         </MuiAvatar>
       </IconButton>
-      <div className="info">
-        <label className="title">{title}</label>
-        <label className="sub-title">{subtitle}</label>
+      <div className={styles.info}>
+        <label className={styles.title}>{title}</label>
+        <label className={styles.subTitle}>{subtitle}</label>
       </div>
     </div>
   );

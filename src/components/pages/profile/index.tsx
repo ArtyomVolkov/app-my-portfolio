@@ -3,11 +3,11 @@ import React from 'react';
 import Main from '@components/main';
 import ProfileTabs from '@pages/profile/tabs';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 const ProfilePage = () => {
   return (
-    <Main className="profile-page">
+    <Main className={styles.profilePage}>
       <ProfileTabs />
     </Main>
   );

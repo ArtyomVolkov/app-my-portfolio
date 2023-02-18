@@ -1,0 +1,49 @@
+.sideBar {
+  border-right: 1px solid #dcdcdc;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
+  width: 256px;
+  background-color: #fbfbfb;
+
+  .screenResize {
+    position: absolute;
+    top: 65px;
+    right: -15px;
+    padding: 2px;
+    background: #fbfbfb;
+    border: 1px solid #dcdcdc;
+
+    &:hover {
+      background: white;
+    }
+
+    .icon {
+      transition: transform 0.5s;
+
+      &.left {
+        transform: rotateZ(180deg);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .sideBar {
+    .screenResize {
+      top: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .sideBar {
+    .screenResize {
+      padding: 0;
+      top: 35px;
+      right: -15px ;
+    }
+  }
+}

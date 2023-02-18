@@ -7,6 +7,8 @@ import PreviewModal from '@pages/widgets/gallery/preview';
 
 import { getImages } from '@api/pexels';
 
+import styles from '../style.module.scss';
+
 const GalleryGrid = () => {
   const [loading, setLoading] = useState(true);
   const [photos, setPhotos] = useState([]);
@@ -61,8 +63,8 @@ const GalleryGrid = () => {
   }
 
   return (
-    <div className="gallery-grid">
-      <div className="grid">
+    <div className={styles.galleryGrid}>
+      <div className={styles.grid}>
         {
           photos.map((item) => (
             <ImageCard

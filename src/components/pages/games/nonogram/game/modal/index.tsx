@@ -8,6 +8,8 @@ import Preview from '@pages/games/nonogram/game/preview';
 import { GameContext, Action, IState, TDispatch } from '@pages/games/nonogram/game/context';
 import { NONOGRAMS } from '@pages/games/nonogram/game/data';
 
+import styles from './style.module.scss';
+
 const GameModal = () => {
   const [crossword, dispatch] = useContext<[IState, TDispatch]>(GameContext);
 
@@ -36,10 +38,10 @@ const GameModal = () => {
         <p className="description">
           Congratulations, you decrypted that crossword.
         </p>
-        <div className="crossword-preview">
-          <p className="title">{ crossword.name }</p>
-          <div className="preview-wrap">
-            <Preview initialDraw />
+        <div className={styles.crosswordPreview}>
+          <p className={styles.title}>{ crossword.name }</p>
+          <div className={styles.previewWrap}>
+            <Preview initialDraw className={styles.preview} />
           </div>
         </div>
         <div className="actions">
@@ -56,7 +58,7 @@ const GameModal = () => {
 
   return (
     <Modal
-      className="game-modal"
+      className={styles.modal}
       open={crossword.modal.open}
       onClose={onCloseModal}
       renderContent={renderContent}

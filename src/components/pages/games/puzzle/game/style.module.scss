@@ -1,0 +1,14 @@
+@import "../../../../../assets/styles/style-guide";
+
+.puzzleGameWidget {
+  @include card-shadow;
+  display: flex;
+  max-width: fit-content;
+}
+
+@media screen and (max-width: 875px) {
+  .puzzleGameWidget {
+    flex-direction: column;
+    max-width: 100%;
+  }
+}

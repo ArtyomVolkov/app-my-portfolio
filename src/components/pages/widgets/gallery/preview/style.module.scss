@@ -1,0 +1,39 @@
+.galleryImagePreview {
+  display: flex;
+  min-height: 320px;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+
+  .image {
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    background: #dadada;
+    right: 10px;
+
+    &:hover {
+      background: #787878;
+    }
+  }
+}
+
+.galleryImageModalRoot {
+  .MuiBackdrop-root {
+    background: rgba(0, 0, 0, 0.75);
+  }
+  .galleryImageMuiPaper {
+    max-height: 100vh;
+    background: transparent;
+    box-shadow: none;
+    min-width: 100vw;
+    width: fit-content;
+    height: 100%;
+    display: grid;
+    margin: 0;
+  }
+}

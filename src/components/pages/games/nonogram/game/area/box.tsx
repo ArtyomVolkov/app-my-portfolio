@@ -5,6 +5,8 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { mergeClassNames } from '@utils/common';
 import { EBoxState } from '@pages/games/nonogram/game/context';
 
+import styles from './style.module.scss';
+
 interface ICellBox {
   row: number,
   cell: number,
@@ -17,10 +19,10 @@ const CellBox: React.FC<ICellBox> = ({ row, cell, size, state, onEnter }) => {
   const renderItem = () => {
     switch (state) {
       case EBoxState.Cross: {
-        return <CloseRoundedIcon className="cross" />
+        return <CloseRoundedIcon className={styles.cross} />
       }
       case EBoxState.Filled: {
-        return <div className="filled" />;
+        return <div className={styles.filled} />;
       }
       default:
         return null;
@@ -42,8 +44,8 @@ const CellBox: React.FC<ICellBox> = ({ row, cell, size, state, onEnter }) => {
       data-row={row}
       data-cell={cell}
       className={mergeClassNames([
-        'cell',
-        (cell !== size) && !((cell+1)%5) && 'divider',
+        styles.cell,
+        (cell !== size) && !((cell+1)%5) && styles.divider,
       ])}
     >
       { renderItem() }

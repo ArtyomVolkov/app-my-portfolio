@@ -3,6 +3,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { mergeClassNames } from '@utils/common';
 
+import styles from '../style.module.scss';
+
 const ImageCard = ({ data, onPreview }) => {
   const [loading, setLoading] = useState(true);
 
@@ -16,13 +18,13 @@ const ImageCard = ({ data, onPreview }) => {
 
   return (
     <section
-      className={mergeClassNames(['card', loading && 'loading'])}
+      className={mergeClassNames([styles.card, loading && styles.loading])}
       onClick={() => onPreview(data)}
       title={data.alt}
     >
       {
         loading && (
-          <div className="loading-wrap">
+          <div className={styles.loadingWrap}>
             <CircularProgress />
           </div>
         )

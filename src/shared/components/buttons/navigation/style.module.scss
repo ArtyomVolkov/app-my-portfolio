@@ -1,0 +1,52 @@
+.navButton {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 12px;
+  box-shadow: 0 3px 6px 2px #dadada;
+  border-radius: 4px;
+
+  .iconBox {
+    margin-top: 4px;
+    padding: 15px;
+    border-radius: 4px;
+    background: #343434;
+    color: white;
+
+    svg {
+      font-size: 26px;
+    }
+  }
+
+  .headline {
+    font-size: 16px;
+    margin: 6px 0;
+    padding: 0 12px;
+    text-transform: capitalize;
+    color: #252525;
+    min-width: 80px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navButton {
+    .iconBox {
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        font-size: 18px;
+      }
+    }
+
+    .headline {
+      font-size: 14px;
+      padding: 0 8px;
+      min-width: fit-content;
+      margin: 6px 0 0;
+    }
+  }
+}

@@ -13,17 +13,19 @@ import { LANGUAGES, TECHNOLOGIES, TOOLS } from '@pages/profile/data';
 
 import UserImage from '@assets/images/a.volkov.png';
 
-import './style.scss';
+import { mergeClassNames } from '@utils/common';
+
+import styles from './style.module.scss';
 
 const Summary = () => {
   return (
-    <div className="summary-tab">
-      <div className="card profile">
-        <img src={UserImage} alt="user-img" className="profile-image" />
-        <section className="profile-info">
-          <p className="profile-title">Artem Volkov</p>
-          <p className="profile-subtitle">FrontEnd Software Engineer</p>
-          <label className="profile-description">
+    <div className={styles.summaryTab}>
+      <div className={mergeClassNames([styles.card, styles.profile])}>
+        <img src={UserImage} alt="user-img" className={styles.profileImage} width={250} height={250} />
+        <section className={styles.profileInfo}>
+          <p className={styles.title}>Artem Volkov</p>
+          <p className={styles.subtitle}>FrontEnd Software Engineer</p>
+          <label className={styles.description}>
             Software Engineer (7+ years) with vast development experience of web-applications using libs/frameworks
             such as: Backbone, Angular, Angular 2+, React, React-Native, Flutter.
             <br/>
@@ -36,57 +38,55 @@ const Summary = () => {
           </label>
         </section>
       </div>
-      <div className="card">
-        <p className="title">
-          <TerminalIcon className="icon" />
+      <div className={styles.card}>
+        <p className={styles.title}>
+          <TerminalIcon className={styles.icon} />
           <label>Programming Languages</label>
         </p>
-        <div className="list">
-          <TechnologyList data={LANGUAGES} />
-        </div>
+        <TechnologyList data={LANGUAGES} />
       </div>
-      <section className="cell-2">
-        <div className="card">
-          <p className="title">
-            <LibraryBooksIcon className="icon" />
+      <section className={styles.cell2}>
+        <div className={styles.card}>
+          <p className={styles.title}>
+            <LibraryBooksIcon className={styles.icon} />
             <label>Technologies</label>
           </p>
           <TechnologyList data={TECHNOLOGIES} />
         </div>
-        <div className="card">
-          <p className="title">
-            <BuildIcon className="icon" />
+        <div className={styles.card}>
+          <p className={styles.title}>
+            <BuildIcon className={styles.icon} />
             <label>Tools</label>
           </p>
           <TechnologyList data={TOOLS} />
         </div>
       </section>
-      <section className="cell-3">
-        <div className="card">
-          <p className="title">
-            <SchoolRoundedIcon className="icon" />
+      <section className={styles.cell3}>
+        <div className={styles.card}>
+          <p className={styles.title}>
+            <SchoolRoundedIcon className={styles.icon} />
             <label>Education</label>
           </p>
           <p>M.Sc. in Mechanical Engineering</p>
           <p>Donetsk National Technical University</p>
           <p>Graduated in 2011</p>
         </div>
-        <div className="card">
-          <p className="title">
-            <LanguageRoundedIcon className="icon" />
+        <div className={styles.card}>
+          <p className={styles.title}>
+            <LanguageRoundedIcon className={styles.icon} />
             <label>Languages</label>
           </p>
           <p>English: Intermediate+ (B1-B2)</p>
           <p>Ukrainian: Native</p>
         </div>
-        <div className="card">
-          <p className="title">
-            <ContactMailRoundedIcon className="icon" />
+        <div className={styles.card}>
+          <p className={styles.title}>
+            <ContactMailRoundedIcon className={styles.icon} />
             <label>Contacts</label>
           </p>
-          <p>skype: <b className="link">artyom_volkov_</b></p>
-          <p>telegram: <b className="link">@artem_volkov1989</b></p>
-          <p>email: <b className="link">artyom.volkow@gmail.com</b></p>
+          <p>skype: <b className={styles.link}>artyom_volkov_</b></p>
+          <p>telegram: <b className={styles.link}>@artem_volkov1989</b></p>
+          <p>email: <b className={styles.link}>artyom.volkow@gmail.com</b></p>
         </div>
       </section>
     </div>

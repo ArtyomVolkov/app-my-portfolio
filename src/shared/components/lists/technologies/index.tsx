@@ -5,16 +5,17 @@ import TechnologyPill from '@shared/components/pills/technology';
 import { mergeClassNames } from '@utils/common';
 import { Technology, Language, Tool } from '@shared/interfaces/develop';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 interface TechnologyList<T> {
-  vertical?: boolean,
   data: T[],
+  vertical?: boolean,
+  className?: string
 }
 
-const TechnologyList: React.FC<TechnologyList<Technology|Language|Tool>> = ({ data, vertical }) => {
+const TechnologyList: React.FC<TechnologyList<Technology|Language|Tool>> = ({ data, vertical, className }) => {
   return (
-    <div className={mergeClassNames(['technology-list', vertical && 'vertical'])}>
+    <div className={mergeClassNames([styles.technologyList, vertical && styles.vertical, className])}>
       {
         data.map((item) => (
           <TechnologyPill name={item.key} {...item} />

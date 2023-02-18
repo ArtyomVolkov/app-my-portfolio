@@ -1,0 +1,14 @@
+.rotationSection {
+  padding: 20px;
+  border: 1px solid #dcdcdc;
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :global(.scene) {
+    width: 200px;
+    height: 200px;
+  }
+}

@@ -2,6 +2,8 @@ import React from 'react';
 
 import { mergeClassNames } from '@utils/common';
 
+import styles from './style.module.scss';
+
 interface BoxItem {
   active: boolean,
   filled: number,
@@ -14,10 +16,10 @@ const BoxItem: React.FC<BoxItem> = ({ active, filled, value, origin, onPress }) 
   return (
     <div
       className={mergeClassNames([
-        'box-item',
-        !origin && 'filled',
-        (value > 0 && value !== filled) && 'incorrect',
-        active && 'active',
+        styles.boxItem,
+        !origin && styles.filled,
+        (value > 0 && value !== filled) && styles.incorrect,
+        active && styles.active,
       ])}
       onClick={!origin ? onPress : null}
     >

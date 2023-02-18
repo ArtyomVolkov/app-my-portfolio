@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import styles from '../style.module.scss';
+
 interface ILoadMore {
   hasMore: boolean,
   loading?: boolean,
@@ -27,12 +29,12 @@ const LoadMore: React.FC<ILoadMore> = ({ hasMore, onRequestLoad }) => {
   }
 
   return (
-    <div className="load-more">
+    <div className={styles.loadMore}>
       <Button
         variant="outlined"
         disabled={loading}
         onClick={onLoadMore}
-        startIcon={loading ? <CircularProgress size={16} className="loader" /> : <DownloadRoundedIcon />}
+        startIcon={loading ? <CircularProgress size={16} /> : <DownloadRoundedIcon />}
       >
         {
           loading ? 'Loading...' : 'Load more'

@@ -1,0 +1,23 @@
+.appHeader {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-bottom: 1px solid #dcdcdc;
+  height: 65px;
+  width: calc(100% - 32px);
+  background: #fbfbfb;
+  z-index: 90;
+}
+
+@media screen and (max-width: 1023px) {
+  .appHeader {
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .appHeader {
+    height: 40px;
+    padding: 4px 8px;
+  }
+}

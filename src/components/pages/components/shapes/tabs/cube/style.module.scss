@@ -1,0 +1,62 @@
+.cubeWidget {
+  &:global(.rotating) {
+    background: #e4e4e4;
+    cursor: grabbing;
+
+    .cube .plane {
+      cursor: grabbing;
+    }
+  }
+
+  .cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+
+    .plane {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      border: 2px solid black;
+      box-sizing: border-box;
+      border-radius: 1px;
+      user-select: none;
+      cursor: grab;
+    }
+
+    .top {
+      background: #1565c0;
+      transform: rotateX(90deg) translateZ(100px);
+    }
+
+    .front {
+      background: #ff0000;
+      transform: rotateX(0deg) translateZ(100px);
+    }
+
+    .back {
+      background: #e86f00;
+      opacity: 1;
+      transform: rotateY(180deg) translateZ(100px);
+    }
+
+    .bottom {
+      background: #efd81e;
+      transform: rotateX(-90deg) translateZ(100px);
+    }
+
+    .right {
+      background: #00f800;
+      transform: rotateY(90deg) translateZ(100px);
+    }
+
+    .left {
+      background: purple;
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+  }
+}

@@ -6,7 +6,7 @@ import Close from '@mui/icons-material/Close';
 
 import { Action } from '@pages/games/sudoku/game';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 export enum ModalType {
   CONFIRM,
@@ -42,10 +42,10 @@ const Modal: React.FC<Modal> = ({ data, onAction }) => {
     switch (data.type) {
       case ModalType.CONFIRM: {
         return (
-          <div className="modal-content">
-            <p className="title">New Game?</p>
-            <p className="description">Current game hasn't finished yet.</p>
-            <div className="actions">
+          <div className={styles.modalContent}>
+            <p className={styles.title}>New Game?</p>
+            <p className={styles.description}>Current game hasn't finished yet.</p>
+            <div className={styles.actions}>
               <Button variant="outlined" size="small" onClick={() => onAction(Action.CLOSE_MODAL)}>
                 Cancel
               </Button>
@@ -58,10 +58,10 @@ const Modal: React.FC<Modal> = ({ data, onAction }) => {
       }
       case ModalType.FINISH: {
         return (
-          <div className="modal-content">
-            <p className="title">You win!</p>
-            <p className="description">Congratulations you solved this puzzle.</p>
-            <div className="actions">
+          <div className={styles.modalContent}>
+            <p className={styles.title}>You win!</p>
+            <p className={styles.description}>Congratulations you solved this puzzle.</p>
+            <div className={styles.actions}>
               <Button variant="outlined" size="small" onClick={() => onAction(Action.CLOSE_MODAL)}>
                 Cancel
               </Button>
@@ -77,9 +77,9 @@ const Modal: React.FC<Modal> = ({ data, onAction }) => {
   };
 
   return (
-    <div className="modal">
-      <div className="content-box">
-        <IconButton onClick={onClose} className="close-button">
+    <div className={styles.modal}>
+      <div className={styles.contentBox}>
+        <IconButton onClick={onClose} className={styles.closeButton}>
           <Close />
         </IconButton>
         {

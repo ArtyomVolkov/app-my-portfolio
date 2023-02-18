@@ -1,0 +1,17 @@
+.main {
+  position: relative;
+  padding: 24px;
+  overflow: auto;
+}
+
+@media screen and (max-width: 1023px) {
+  .main {
+    padding: 18px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main {
+    padding: 12px;
+  }
+}

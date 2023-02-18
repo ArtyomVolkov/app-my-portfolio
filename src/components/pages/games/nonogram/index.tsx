@@ -6,12 +6,12 @@ import GameWidget from '@pages/games/nonogram/game';
 
 import { TECHNOLOGIES } from '@pages/games/nonogram/game/data';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 const JapaneseCrosswordsPage = () => (
-  <Main className="katana-page">
+  <Main className={styles.nonogram}>
     <h3>Nonogram</h3>
-    <TechnologyList data={TECHNOLOGIES} />
+    <TechnologyList data={TECHNOLOGIES} className={styles.technologyList} />
     <GameWidget />
   </Main>
 );

@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 
 import { Level } from '@pages/games/puzzle/game';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 interface Index {
   level: Level,
@@ -16,8 +16,8 @@ interface Index {
 }
 
 const Toolbar: React.FC<Index> = ({ onRefresh, level, onChangeItemsCount, controls }) => (
-  <div className="toolbar">
-    <div className="actions">
+  <div className={styles.toolbar}>
+    <div className={styles.actions}>
       <Button
         size="medium"
         title="Refresh"

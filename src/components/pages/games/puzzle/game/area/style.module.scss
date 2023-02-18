@@ -1,0 +1,48 @@
+.area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  min-width: 300px;
+
+  .holst {
+    border: 1px dashed #dcdcdc;
+    box-sizing: content-box;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .gameOver {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #00b822;
+      border-radius: 2px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .item {
+      background: #1565c0;
+      border: 1px solid black;
+      box-sizing: border-box;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+
+      &.empty {
+        background: white;
+        border: 0;
+      }
+
+      &.done {
+        background: #00b822;
+      }
+    }
+  }
+}

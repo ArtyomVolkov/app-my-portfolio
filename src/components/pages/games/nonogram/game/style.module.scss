@@ -1,0 +1,62 @@
+@import "../../../../../assets/styles/style-guide";
+
+$border-width: 2px;
+$border: $border-width solid black;
+$cell-size: 21px;
+
+@mixin border() {
+  border: $border;
+}
+
+@mixin cell($background) {
+  width: $cell-size;
+  height: $cell-size;
+  color: black;
+  background: $background;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gameWidget {
+  @include card-shadow;
+  display: flex;
+  width: min-content;
+  flex-direction: column;
+  padding: 10px;
+  position: relative;
+
+  .finishViewWrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #bcbcbc4a;
+  }
+
+  .header, .body {
+    @include border;
+    display: flex;
+    grid-template-columns: auto 1fr;
+  }
+
+  .body {
+    border-top-width: 0;
+  }
+
+  .preview {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    font-weight: 600;
+    border: 3px solid white;
+
+    canvas {
+      position: absolute;
+    }
+  }
+}

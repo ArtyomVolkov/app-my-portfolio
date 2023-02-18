@@ -19,7 +19,7 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import GridOnRoundedIcon from '@mui/icons-material/GridOnRounded';
 import CollectionsIcon from '@mui/icons-material/Collections';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement }} = {
   home: {
@@ -87,7 +87,8 @@ const Navigation = () => {
     return (
       <ListItem
         key={item}
-        className="nav-item"
+        component="li"
+        className={styles.navItem}
         onClick={() => navigateTo(item)}
         selected={location.pathname.includes(item)}
       >
@@ -101,7 +102,7 @@ const Navigation = () => {
 
   return (
     <nav>
-      <List className="nav-list">
+      <List className={styles.navList}>
         {
           NAV_OPTIONS.map(renderNavItem)
         }

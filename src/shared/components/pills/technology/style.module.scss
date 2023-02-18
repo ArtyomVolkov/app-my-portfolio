@@ -1,0 +1,40 @@
+.technologyPill {
+  &:global(.javascript) {
+    background: #efd81e;
+
+    :global(.icon) {
+      background: black;
+      color: white;
+    }
+  }
+
+  &:global(.typescript) {
+    background: #2f74c0;
+    color: white;
+
+    :global(.icon) {
+      background: black;
+      color: white;
+    }
+  }
+
+  &:global(.dart) {
+    background: #2bb1ef;
+    color: black;
+
+    :global(.icon) {
+      background: black;
+      color: white;
+    }
+  }
+
+  &:global(.java) {
+    background: #e86f00;
+    color: black;
+
+    :global(.icon) {
+      background: black;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@import "../../assets/styles/style-guide";
+
+:global(html) {
+  @include scroll-style;
+}
+:global(#my-portfolio-app) {
+  font-family: 'Roboto', sans-serif;
+  transition: filter 0.25s;
+
+  &[aria-hidden="true"] {
+    filter: blur(5px);
+  }
+}
+
+.appEntry {
+  min-height: 100vh;
+
+  &.fullWidth {
+    aside {
+      width: 80px;
+    }
+    .mainContent {
+      margin-left: 80px;
+    }
+  }
+
+  aside {
+    transition: width 0.5s;
+  }
+
+  .mainContent {
+    display: grid;
+    grid-template-rows: 82px 1fr;
+    height: 100vh;
+    margin-left: 256px;
+    transition: margin-left 0.5s;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .appEntry.fullWidth {
+    .mainContent {
+      margin-left: 60px;
+    }
+    aside {
+      width: 60px;
+    }
+  }
+}

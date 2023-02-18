@@ -8,6 +8,8 @@ import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownR
 
 import { Level } from '@pages/games/puzzle/game';
 
+import styles from './style.module.scss';
+
 interface Controls {
   items: any,
   zeroIndex: number,
@@ -27,13 +29,13 @@ const Controls: React.FC<Controls> = ({
   onMoveRight,
   onMoveDown
 }) => (
-  <div className="controls">
-    <div className="vertical">
+  <div className={styles.controls}>
+    <div className={styles.vertical}>
       <Button size="small" variant="outlined" onClick={onMoveUp} disabled={!items[zeroIndex+level]}>
         <KeyboardArrowUpRoundedIcon />
       </Button>
     </div>
-    <div className="horizontal">
+    <div className={styles.horizontal}>
       <Button size="small" variant="outlined" onClick={onMoveLeft} disabled={(zeroIndex % level) >= level-1}>
         <KeyboardArrowLeftRoundedIcon />
       </Button>
@@ -41,7 +43,7 @@ const Controls: React.FC<Controls> = ({
         <KeyboardArrowRightRoundedIcon />
       </Button>
     </div>
-    <div className="vertical">
+    <div className={styles.vertical}>
       <Button
         size="small"
         variant="outlined"
