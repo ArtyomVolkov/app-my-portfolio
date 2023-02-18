@@ -1,0 +1,63 @@
+@import "../style.module";
+
+.panel {
+  display: grid;
+  user-select: none;
+
+  &:global(.horizontal) {
+    grid-row-gap: 1px;
+    background: #5e5d54;
+    border-right: $border;
+
+    .row {
+      display: flex;
+      flex-direction: row-reverse;
+      grid-column-gap: 1px;
+      justify-content: end;
+
+      &.hover {
+        filter: brightness(0.7);
+      }
+
+      &.divider {
+        border-bottom: $border;
+        border-width: calc(#{$border-width} - 1px);
+      }
+    }
+  }
+
+  &:global(.vertical) {
+    display: flex;
+    grid-column-gap: 1px;
+    background: #5e5d54;
+    flex-direction: row;
+    border-left: $border;
+
+    .row {
+      display: flex;
+      flex-direction: column-reverse;
+      grid-row-gap: 1px;
+      justify-content: end;
+
+      &.divider {
+        border-right: $border;
+        border-width: calc(#{$border-width} - 1px);
+      }
+
+      &.hover {
+        filter: brightness(0.7);
+      }
+    }
+  }
+
+  .cell {
+    position: relative;
+    @include cell(wheat);
+
+    .crossIcon {
+      position: absolute;
+      color: #e8e8e8;
+      background: #26262659;
+    }
+  }
+}

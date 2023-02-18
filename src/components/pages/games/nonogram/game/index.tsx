@@ -7,7 +7,7 @@ import Panel, { EVariant } from '@pages/games/nonogram/game/panel';
 import Modal from '@pages/games/nonogram/game/modal';
 import Preview from '@pages/games/nonogram/game/preview';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 const GameWidget = () => {
   useEffect(() => {
@@ -39,7 +39,7 @@ const GameWidget = () => {
     return (
       <>
         <Modal />
-        <div className="header">
+        <div className={styles.header}>
           <Preview />
           <Panel
             variant={EVariant.Vertical}
@@ -47,7 +47,7 @@ const GameWidget = () => {
             refItem={verticalPanelRef}
           />
         </div>
-        <div className="body">
+        <div className={styles.body}>
           <Panel
             variant={EVariant.Horizontal}
             data={crossword.panel.horizontal}
@@ -60,14 +60,14 @@ const GameWidget = () => {
           />
         </div>
         {
-          crossword.isFinish && <div className="finish-view-wrap" />
+          crossword.isFinish && <div className={styles.finishViewWrap} />
         }
       </>
     )
   }
 
   return (
-    <section className="nonogram-game-widget">
+    <section className={styles.gameWidget}>
       { renderContent() }
     </section>
   );

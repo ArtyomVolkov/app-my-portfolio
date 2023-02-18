@@ -7,6 +7,8 @@ import Tooltip from '@pages/games/nonogram/game/area/tooltip';
 import { Action, EBoxState, GameContext, IState, TDispatch } from '@pages/games/nonogram/game/context';
 import { EMouseButton } from '@shared/enums/web-ui';
 
+import styles from './style.module.scss';
+
 const TooltipAxisOffset = {
   x: 50,
   y: 40,
@@ -86,7 +88,7 @@ class Area extends React.Component<IArea, null> {
     this.drawMode.horizontal = [];
     this.drawMode.vertical = [];
     this.drawMode.flow = -1;
-    this.tooltipRef.current.classList.add('hidden');
+    this.tooltipRef.current.classList.add(styles.hidden);
   };
 
   private onBoxEnter = (row, cell) => {
@@ -95,7 +97,7 @@ class Area extends React.Component<IArea, null> {
     if (!this.drawMode.active) {
       return false;
     }
-    this.tooltipRef.current.classList.remove('hidden');
+    this.tooltipRef.current.classList.remove(styles.hidden);
 
     if (this.drawMode.startBox[0] === row || this.drawMode.startBox[1] === cell) {
       this.setDrawData(row, cell);
@@ -115,7 +117,7 @@ class Area extends React.Component<IArea, null> {
 
     if (!value) {
       this.drawByAxis(row, cell, value);
-      this.tooltipRef.current.classList.add('hidden');
+      this.tooltipRef.current.classList.add(styles.hidden);
       return;
     }
     this.tooltipRef.current.innerHTML = Math.abs(value)+1;
@@ -262,7 +264,7 @@ class Area extends React.Component<IArea, null> {
 
     return (
       <div
-        className="area"
+        className={styles.area}
         onMouseUp={this.onMouseUp}
         onMouseMove={this.onMouseMove}
         onMouseDown={this.onMouseDown}

@@ -5,7 +5,7 @@ import Close from '@mui/icons-material/Close';
 
 import { mergeClassNames } from '@utils/common';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 interface IModal {
   open: boolean,
@@ -20,7 +20,7 @@ const Modal: React.FC<IModal> = ({ open, onClose, className, renderContent }) =>
   }
 
   return (
-    <div className={mergeClassNames(['basic-modal', className])}>
+    <div className={mergeClassNames([styles.basicModal, className])}>
       <div className="content-box">
         <IconButton onClick={onClose} className="close-button">
           <Close />

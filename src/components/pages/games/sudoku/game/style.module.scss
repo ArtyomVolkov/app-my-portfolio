@@ -1,6 +1,6 @@
 @import "../../../../../assets/styles/style-guide";
 
-section.sudoku-widget {
+.sudokuWidget {
   position: relative;
   display: flex;
   width: fit-content;
@@ -9,7 +9,7 @@ section.sudoku-widget {
 }
 
 @media screen and (max-width: 835px) {
-  section.sudoku-widget {
+  .sudokuWidget {
     display: grid;
     grid-template-columns: 1fr;
     flex-direction: column;

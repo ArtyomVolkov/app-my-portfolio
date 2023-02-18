@@ -8,7 +8,7 @@ import Modal from '@pages/games/sudoku/game/modal';
 import SudokuStore from '@pages/games/sudoku/game/store';
 import { Level } from '@pages/games/sudoku/game/generator';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 export enum Action {
   FILL,
@@ -60,7 +60,7 @@ const SudokuGameWidget = () => {
   };
 
   return (
-    <section className="sudoku-widget">
+    <section className={styles.sudokuWidget}>
       <Modal
         data={store.modal}
         onAction={onAction}

@@ -4,7 +4,7 @@ import BoxItem from './box-item';
 
 import { Action } from '@pages/games/sudoku/game';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 enum KeyCodes {
   Erase = 8,
@@ -53,10 +53,10 @@ const GameArea: React.FC<GameArea> = ({ active, blank, origin, filled, onAction 
   };
 
   return (
-    <div className="area">
+    <div className={styles.area}>
       {
         blank.map((item, blockIndex) => (
-          <div className="box-area" key={blockIndex}>
+          <div className={styles.boxArea} key={blockIndex}>
             {
               item.map((item, cellIndex) => {
                 const [block, cell] = active;

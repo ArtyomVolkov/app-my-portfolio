@@ -1,11 +1,11 @@
-.sudoku-widget .panel {
+.panel {
   padding: 24px;
   display: flex;
   justify-content: center;
   border-right: 1px solid #dcdcdc;
   flex-direction: column;
 
-  .main-actions {
+  .mainActions {
     display: flex;
     flex-direction: column;
     grid-row-gap: 10px;
@@ -21,12 +21,12 @@
 }
 
 @media screen and (max-width: 835px) {
-  .sudoku-widget .panel {
+  .panel {
     padding: 12px;
     border-right: 0;
     border-bottom: 1px solid #dcdcdc;
 
-    .main-actions {
+    .mainActions {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-column-gap: 10px;

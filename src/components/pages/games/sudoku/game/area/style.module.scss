@@ -1,4 +1,4 @@
-.sudoku-widget .area {
+.area {
   margin: 24px;
   display: grid;
   width: fit-content;
@@ -11,14 +11,14 @@
   -ms-user-select: none;
   user-select: none;
 
-  .box-area {
+  .boxArea {
     background: #bebebe;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 1px;
 
-    .box-item {
+    .boxItem {
       display: flex;
       align-items: center;
       justify-content: center;

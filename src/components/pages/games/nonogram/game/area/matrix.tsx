@@ -4,6 +4,8 @@ import CellBox from '@pages/games/nonogram/game/area/box';
 
 import { mergeClassNames } from '@utils/common';
 
+import styles from './style.module.scss';
+
 interface IMatrix {
   size: [v: number, h: number],
   blank: Array<Array<number>>,
@@ -20,8 +22,8 @@ const Matrix: React.FC<IMatrix> = ({ size, blank, onBoxEnter }) => {
           <div
             key={row}
             className={mergeClassNames([
-              'row',
-              (row !== list.length-1) && !((row+1)%5) && 'divider'
+              styles.row,
+              (row !== list.length-1) && !((row+1)%5) && styles.divider
             ])}
           >
             {

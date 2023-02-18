@@ -4,7 +4,7 @@ import { mergeClassNames } from '@utils/common';
 
 import { Level } from '@pages/games/puzzle/game';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 interface PuzzleArea {
   size: number,
@@ -15,10 +15,10 @@ interface PuzzleArea {
 }
 
 const PuzzleArea: React.FC<PuzzleArea> = ({ size, level, isOver, items, zeroIndex }) => (
-  <div className="area">
-    <div className="holst" style={{ width: size * level }}>
+  <div className={styles.area}>
+    <div className={styles.holst} style={{ width: size * level }}>
       {
-        isOver && <div className="game-over">Game Over!</div>
+        isOver && <div className={styles.gameOver}>Game Over!</div>
       }
       {
         items.map((item, index) => (
@@ -26,9 +26,9 @@ const PuzzleArea: React.FC<PuzzleArea> = ({ size, level, isOver, items, zeroInde
             key={index}
             style={{ width: size, height: size }}
             className={mergeClassNames([
-              'item',
-              (item - 1) === index && 'done',
-              zeroIndex === index && 'empty'
+              styles.item,
+              (item - 1) === index && styles.done,
+              zeroIndex === index && styles.empty
             ])}
           >
             {item}

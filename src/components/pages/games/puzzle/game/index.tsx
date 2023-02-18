@@ -4,7 +4,7 @@ import PuzzleArea from './area';
 import Toolbar from './toolbar';
 import Controls from './toolbar/controls';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 const generateItems = (size) => {
   const list = Array(Math.pow(size, 2)-1)
@@ -147,7 +147,7 @@ const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize 
   };
 
   return (
-    <section className="puzzle-game-widget">
+    <section className={styles.puzzleGameWidget}>
       <Toolbar
         level={level}
         onRefresh={onRefresh}

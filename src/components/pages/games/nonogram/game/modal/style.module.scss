@@ -1,0 +1,38 @@
+.modal {
+  border-radius: inherit;
+
+  .contentBox {
+    width: 350px;
+
+    .title {
+      text-align: center;
+    }
+  }
+
+  .crosswordPreview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .title {
+      font-size: 16px;
+      color: #161616;
+      margin: 5px 0 0;
+      font-weight: 500;
+    }
+
+    .previewWrap {
+      width: 200px;
+      height: 200px;
+      margin-top: 15px;
+
+      .preview {
+        position: relative;
+        height: inherit;
+        border: 0;
+        border-radius: 4px;
+      }
+    }
+  }
+}

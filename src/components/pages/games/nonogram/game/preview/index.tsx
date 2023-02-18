@@ -2,12 +2,17 @@ import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
 import { EBoxState, GameContext, IState, TDispatch } from '@pages/games/nonogram/game/context';
 
+import { mergeClassNames } from '@utils/common';
+
+import styles from '../style.module.scss';
+
 interface IPreview {
   initialDraw?: boolean,
   drawBoxSize?: number,
+  className?: string,
 }
 
-const Preview: React.FC<IPreview> = ({ initialDraw = false }) => {
+const Preview: React.FC<IPreview> = ({ initialDraw = false, className }) => {
   const canvasRef = useRef(null);
   const [data] = useContext<[IState, TDispatch]>(GameContext);
   const resize = useMemo(() => ({ width: data.size[1] * 50, height: data.size[0] * 50}), [data.size]);
@@ -21,7 +26,7 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false }) => {
     if (initialDraw) {
       drawByModel();
     }
-  }, []);
+  }, [data.blank]);
 
   useEffect(() => {
     if (!data.lastActive) {
@@ -88,7 +93,7 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false }) => {
   };
 
   return (
-    <div className="preview">
+    <div className={mergeClassNames([styles.preview, className])}>
       <canvas
         ref={canvasRef}
         width={resize.width}

@@ -6,12 +6,12 @@ import TechnologyList from '@shared/components/lists/technologies';
 
 import { PUZZLE_TAGS } from '@pages/games/puzzle/game/data';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 const PuzzlePage = () => (
-  <Main className="puzzle-tags">
+  <Main className={styles.puzzleTags}>
     <h3>Puzzle tags</h3>
-    <TechnologyList data={PUZZLE_TAGS.technologies} />
+    <TechnologyList data={PUZZLE_TAGS.technologies} className={styles.technologyList} />
     <GameWidget />
   </Main>
 );

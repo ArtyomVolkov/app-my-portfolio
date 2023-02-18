@@ -1,4 +1,4 @@
-.puzzle-game-widget .toolbar {
+.toolbar {
   padding: 24px;
   min-width: 160px;
   border-right: 1px solid #dcdcdc;
@@ -42,4 +42,27 @@
       }
     }
   }
+}
+
+@media screen and (max-width: 875px) {
+  .toolbar {
+      flex-direction: row;
+      flex-wrap: wrap;
+      grid-column-gap: 10px;
+      justify-content: flex-start;
+      align-items: center;
+      border-right: 0;
+      border-bottom: 1px solid #dcdcdc;
+
+      .controls {
+        width: 160px;
+        margin: 0 auto;
+      }
+
+      .actions {
+        hr {
+          display: none;
+        }
+      }
+    }
 }

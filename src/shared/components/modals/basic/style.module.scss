@@ -1,5 +1,7 @@
-.sudoku-widget .modal {
+.basicModal {
   position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,8 +11,8 @@
   z-index: 10;
   animation: fadeIn 0.25s linear;
 
-  .content-box {
-    width: 235px;
+  :global(.content-box) {
+    min-width: 235px;
     display: flex;
     flex-direction: column;
     background: white;
@@ -18,30 +20,30 @@
     position: relative;
     padding: 10px;
 
-    .close-button {
+    :global(.close-button) {
       position: absolute;
       right: 10px;
       top: 10px;
     }
 
-    .modal-content {
+    :global(.modal-content) {
       display: flex;
       flex: 1;
       flex-direction: column;
 
-      .title {
+      :global(.title) {
         font-size: 18px;
         font-weight: 600;
         margin: 10px 0;
       }
 
-      .description {
-        color: #888888;
+      :global(.description) {
+        color: #747474;
         flex: 1;
         margin: 10px 0;
       }
 
-      .actions {
+      :global(.actions) {
         margin-top: 10px;
         display: flex;
         grid-column-gap: 10px;

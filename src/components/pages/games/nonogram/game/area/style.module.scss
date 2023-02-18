@@ -1,0 +1,69 @@
+@import "../style.module";
+
+.area {
+  display: grid;
+  grid-row-gap: 1px;
+  background: #5e5d54;
+  position: relative;
+
+  .tooltip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background-color: #ffffffdb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 1px solid #b3b3b3;
+    font-weight: 600;
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  .cell {
+    @include cell(white);
+    overflow: hidden;
+
+    &:hover {
+      background: #e7e7e7;
+    }
+
+    &.divider {
+      border-right: $border;
+      border-width: calc(#{$border-width} - 1px);
+    }
+
+    .filled {
+      background: #101010;
+      width: 100%;
+      height: 100%;
+      border: 1px solid white;
+      border-radius: 4px;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    .cross {
+      color: #a4a4a4;
+      pointer-events: none;
+    }
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    grid-column-gap: 1px;
+
+    &.divider {
+      border-bottom: $border;
+      border-width: calc(#{$border-width} - 1px);
+    }
+  }
+}

@@ -1,7 +1,5 @@
-.basic-modal {
+.modal {
   position: absolute;
-  top: 0;
-  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,8 +9,8 @@
   z-index: 10;
   animation: fadeIn 0.25s linear;
 
-  .content-box {
-    min-width: 235px;
+  .contentBox {
+    width: 235px;
     display: flex;
     flex-direction: column;
     background: white;
@@ -20,13 +18,13 @@
     position: relative;
     padding: 10px;
 
-    .close-button {
+    .closeButton {
       position: absolute;
       right: 10px;
       top: 10px;
     }
 
-    .modal-content {
+    .modalContent {
       display: flex;
       flex: 1;
       flex-direction: column;
