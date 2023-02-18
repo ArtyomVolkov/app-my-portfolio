@@ -18,6 +18,7 @@ import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import GridOnRoundedIcon from '@mui/icons-material/GridOnRounded';
 import CollectionsIcon from '@mui/icons-material/Collections';
+import PlayIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
 
 import styles from './style.module.scss';
 
@@ -61,6 +62,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   gallery: {
     label: 'Gallery',
     icon: <CollectionsIcon />
+  },
+  'media-player' : {
+    label: 'Media Player',
+    icon: <PlayIcon />
   },
   nonogram: {
     label: 'Nonogram',

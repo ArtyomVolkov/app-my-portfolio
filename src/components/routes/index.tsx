@@ -8,6 +8,7 @@ const Shapes = lazy(() => import('@pages/components/shapes'));
 const Widgets = lazy(() => import('@pages/widgets'));
 const History = lazy(() => import('@pages/widgets/history'));
 const Gallery = lazy(() => import('@pages/widgets/gallery'));
+const MediaPlayer = lazy(() => import('@pages/widgets/media-player'));
 const Games = lazy(() => import('@pages/games'));
 const Puzzle = lazy(() => import('@pages/games/puzzle'));
 const Sudoku = lazy(() => import('@pages/games/sudoku'));
@@ -68,6 +69,14 @@ const AppRoutes = () => (
       element={(
         <Suspense fallback="loading...">
           <Gallery />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/widgets/media-player"
+      element={(
+        <Suspense fallback="loading...">
+          <MediaPlayer />
         </Suspense>
       )}
     />
