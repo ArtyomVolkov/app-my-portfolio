@@ -26,7 +26,7 @@ const Preview: React.FC<IPreview> = ({ initialDraw = false, className }) => {
     if (initialDraw) {
       drawByModel();
     }
-  }, [data.blank]);
+  }, []);
 
   useEffect(() => {
     if (!data.lastActive) {

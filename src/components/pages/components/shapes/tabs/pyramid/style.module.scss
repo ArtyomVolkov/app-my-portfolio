@@ -1,4 +1,13 @@
 .pyramidWidget {
+  &:global(.rotating) {
+    background: #e4e4e4;
+    cursor: grabbing;
+
+    .pyramid .plane {
+      cursor: grabbing;
+    }
+  }
+
   .pyramid {
     width: 100%;
     height: 100%;
@@ -12,6 +21,8 @@
       border: 100px solid transparent;
       border-bottom: 200px solid;
       border-top: 0;
+      cursor: grab;
+      user-select: none;
     }
 
     .front {

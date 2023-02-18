@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 interface NavButton {
   path: string,
@@ -19,11 +19,11 @@ const NavButton: React.FC<NavButton> = ({ path, title, icon }) => {
   };
 
   return (
-    <Button className="nav-button" onClick={navigateTo}>
-      <div className="icon-box">
+    <Button className={styles.navButton} onClick={navigateTo}>
+      <div className={styles.iconBox}>
         { icon }
       </div>
-      <p className="headline">
+      <p className={styles.headline}>
         { title }
       </p>
     </Button>

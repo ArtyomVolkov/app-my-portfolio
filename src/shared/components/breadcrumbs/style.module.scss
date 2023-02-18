@@ -1,4 +1,4 @@
-.mui-breadcrumbs {
+.breadcrumbs {
   .link {
     display: flex;
     align-items: center;
@@ -11,10 +11,9 @@
 }
 
 @media screen and (max-width: 767px) {
-  .mui-breadcrumbs {
-
+  .breadcrumbs {
     .link {
-      .page-label {
+      .pageLabel {
         display: none;
       }
 

@@ -3,10 +3,17 @@
 :global(html) {
   @include scroll-style;
 }
+:global(#my-portfolio-app) {
+  font-family: 'Roboto', sans-serif;
+  transition: filter 0.25s;
+
+  &[aria-hidden="true"] {
+    filter: blur(5px);
+  }
+}
 
 .appEntry {
   min-height: 100vh;
-  font-family: 'Roboto', sans-serif;
 
   &.fullWidth {
     aside {

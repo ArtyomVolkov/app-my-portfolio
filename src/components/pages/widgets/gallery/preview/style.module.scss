@@ -4,8 +4,6 @@
   flex-direction: row;
   align-items: stretch;
   justify-content: stretch;
-  background: black;
-
 
   .image {
     width: 100%;
@@ -26,14 +24,16 @@
 
 .galleryImageModalRoot {
   .MuiBackdrop-root {
-    background: #000000e8;
+    background: rgba(0, 0, 0, 0.75);
   }
   .galleryImageMuiPaper {
-    max-width: calc(100vw - 5%);
-    max-height: calc(100vh - 10%);
+    max-height: 100vh;
     background: transparent;
     box-shadow: none;
+    min-width: 100vw;
     width: fit-content;
-    height: fit-content;
+    height: 100%;
+    display: grid;
+    margin: 0;
   }
 }

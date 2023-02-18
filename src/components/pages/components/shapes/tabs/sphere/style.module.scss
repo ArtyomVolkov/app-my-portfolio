@@ -1,4 +1,13 @@
 .sphereWidget {
+  &:global(.rotating) {
+    background: #e4e4e4;
+    cursor: grabbing;
+
+    .sphere .plane {
+      cursor: grabbing;
+    }
+  }
+
   .sphere {
     width: 100%;
     height: 100%;
@@ -12,6 +21,8 @@
       border-radius: 50%;
       box-sizing: border-box;
       position: absolute;
+      cursor: grab;
+      user-select: none;
 
       &.northX {
         border-color: #ff0000;

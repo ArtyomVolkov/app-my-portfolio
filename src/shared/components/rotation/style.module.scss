@@ -1,4 +1,4 @@
-.rotation-section {
+.rotationSection {
   padding: 20px;
   border: 1px solid #dcdcdc;
   position: relative;
@@ -7,21 +7,8 @@
   align-items: center;
   justify-content: center;
 
-  &.rotating {
-    cursor: grabbing;
-
-    .scene .plane {
-      cursor: grabbing;
-      pointer-events: none;
-    }
-  }
-
-  .scene {
+  :global(.scene) {
     width: 200px;
     height: 200px;
-  }
-
-  .plane {
-    cursor: grab;
   }
 }

@@ -1,4 +1,13 @@
 .cubeWidget {
+  &:global(.rotating) {
+    background: #e4e4e4;
+    cursor: grabbing;
+
+    .cube .plane {
+      cursor: grabbing;
+    }
+  }
+
   .cube {
     width: 100%;
     height: 100%;
@@ -16,10 +25,7 @@
       box-sizing: border-box;
       border-radius: 1px;
       user-select: none;
-
-      &:hover {
-        cursor: grab;
-      }
+      cursor: grab;
     }
 
     .top {

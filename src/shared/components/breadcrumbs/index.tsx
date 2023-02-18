@@ -6,7 +6,7 @@ import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 
 import { PATH_MAP } from '@components/aside/navigation';
 
-import './style.scss';
+import styles from './style.module.scss';
 
 const Breadcrumbs = () => {
   const navigation = useNavigate();
@@ -24,9 +24,9 @@ const Breadcrumbs = () => {
       if (!item) {
         return (
           <label key={index} onClick={(e) => navigateTo(e, '/')}>
-            <Link underline="hover" color="inherit" href="/" className="link">
+            <Link underline="hover" color="inherit" href="/" className={styles.link}>
               { PATH_MAP.home.icon }
-              <span className="page-label">{ PATH_MAP.home.label }</span>
+              <span className={styles.pageLabel}>{ PATH_MAP.home.label }</span>
             </Link>
           </label>
         );
@@ -43,10 +43,10 @@ const Breadcrumbs = () => {
             underline="hover"
             color="inherit"
             href={path}
-            className="link"
+            className={styles.link}
           >
             { PATH_MAP[item].icon }
-            <span className="page-label">{ PATH_MAP[item]?.label }</span>
+            <span className={styles.pageLabel}>{ PATH_MAP[item]?.label }</span>
           </Link>
         </label>
       )
@@ -54,7 +54,7 @@ const Breadcrumbs = () => {
   };
 
   return (
-    <MuiBreadcrumbs className="mui-breadcrumbs">
+    <MuiBreadcrumbs className={styles.breadcrumbs}>
       { renderItems() }
     </MuiBreadcrumbs>
   );
