@@ -1,0 +1,60 @@
+.trackOptions {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .options {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .volume {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    grid-column-gap: 10px;
+
+    .value {
+      min-width: 26px;
+      font-size: 16px;
+      color: #656565;
+    }
+
+    .icon {
+      color: #202020;
+    }
+
+    .muiRoot {
+      color: #606060;
+    }
+
+    .muiTrack {
+      background: black;
+      border-color: black;
+    }
+
+    .muiTrackRail {
+      height: 4px;
+    }
+
+    .muiThumb {
+      background: white;
+      width: 16px;
+      height: 16px;
+
+      &:hover, &.muiThumbFocus {
+        box-shadow: 0 0 0 4px #cfcfcf29;
+      }
+
+      &:active {
+        width: 16px;
+        height: 16px;
+      }
+
+      &:before {
+        box-shadow: 0 2px 8px 0 #cfcfcf29;
+      }
+    }
+  }
+}

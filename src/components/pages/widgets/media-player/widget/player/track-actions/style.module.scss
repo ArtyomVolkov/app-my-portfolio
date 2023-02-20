@@ -1,0 +1,15 @@
+.trackActions {
+  text-align: center;
+  min-height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .activeRepeat {
+    color: #1e57ef;
+
+    svg {
+      // font-size: 22px;
+    }
+  }
+}

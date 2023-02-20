@@ -1,0 +1,49 @@
+.trackBar {
+  display: flex;
+  align-items: center;
+  width: auto;
+  flex-direction: row;
+  grid-column-gap: 20px;
+
+  .timeValue {
+    min-width: 50px;
+    text-align: end;
+    color: #656565;
+
+    &.odd {
+      text-align: start;
+    }
+  }
+
+  .muiRoot {
+    color: #606060;
+  }
+
+  .muiTrack {
+    background: black;
+    border-color: black;
+  }
+
+  .muiTrackRail {
+    height: 5px;
+  }
+
+  .muiThumb {
+    background: #0f0f0f;
+    width: 10px;
+    height: 10px;
+
+    &:hover, &.muiThumbFocus {
+      box-shadow: 0 0 0 8px rgb(0 0 0 / 16%);
+    }
+
+    &:active {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:before {
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.4);
+    }
+  }
+}
