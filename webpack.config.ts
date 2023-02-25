@@ -100,6 +100,7 @@ const MODULE = {
 const PLUGINS = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    'process.env.SPOTIFY_AUTH': JSON.stringify(process.env.SPOTIFY_AUTH),
   }),
   new InterpolateHtmlPlugin({
     PUBLIC_URL: '',

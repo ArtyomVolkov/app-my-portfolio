@@ -9,6 +9,7 @@ const Widgets = lazy(() => import('@pages/widgets'));
 const History = lazy(() => import('@pages/widgets/history'));
 const Gallery = lazy(() => import('@pages/widgets/gallery'));
 const MediaPlayer = lazy(() => import('@pages/widgets/media-player'));
+const MediaPlayerAuth = lazy(() => import('@pages/widgets/media-player/auth-callback'));
 const Games = lazy(() => import('@pages/games'));
 const Puzzle = lazy(() => import('@pages/games/puzzle'));
 const Sudoku = lazy(() => import('@pages/games/sudoku'));
@@ -77,6 +78,14 @@ const AppRoutes = () => (
       element={(
         <Suspense fallback="loading...">
           <MediaPlayer />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/widgets/media-player/auth-callback"
+      element={(
+        <Suspense fallback="loading...">
+          <MediaPlayerAuth />
         </Suspense>
       )}
     />
