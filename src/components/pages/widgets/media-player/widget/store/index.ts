@@ -33,6 +33,21 @@ export const useAuthData = create<IPlayerAuthData>((set) => ({
     set((state) => ({
       ...state,
       token
+    }));
+  }
+}));
+
+interface IUser {
+  user: any,
+  setUserData: (data) => void,
+}
+
+export const useUserData = create<IUser>((set) => ({
+  user: null,
+  setUserData: (data) => {
+    set((state) => ({
+      ...state,
+      user: data,
     }))
   }
 }));

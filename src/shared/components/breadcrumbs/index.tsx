@@ -19,8 +19,15 @@ const Breadcrumbs = () => {
 
   const renderItems = () => {
     const paths = location.pathname.length === 1 ? [''] : location.pathname.split('/');
+    const excludePaths = ['media-player'];
+    let excludeIndex = -1;
 
-    return paths.map((item, index) => {
+    return paths.filter((item, index) => {
+      if (excludePaths.includes(item)) {
+        excludeIndex = index+1;
+      }
+      return !(excludeIndex > 0 && index >= excludeIndex);
+    }).map((item, index) => {
       if (!item) {
         return (
           <label key={index} onClick={(e) => navigateTo(e, '/')}>

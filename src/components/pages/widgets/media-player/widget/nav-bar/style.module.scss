@@ -1,0 +1,64 @@
+.navBar {
+  width: 175px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #e9e9e9;
+  padding: 12px;
+  transition: width 0.35s;
+
+  &.small {
+    width: 44px;
+  }
+
+  .layoutIcon {
+    svg {
+      color: #2f2f2f;
+      font-size: 32px;
+    }
+  }
+
+  .navItems, .settings {
+    width: 100%;
+
+    button {
+      min-width: 45px;
+      width: 100%;
+      justify-content: flex-start;
+      color: #2f2f2f;
+      overflow: hidden;
+      white-space: nowrap;
+
+      .muiStartIcon {
+        margin-right: 12px;
+      }
+
+      svg {
+        font-size: 30px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .navItems {
+    flex: 1;
+    margin: 30px 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    button {
+      width: 100%;
+      justify-content: flex-start;
+      color: #2f2f2f;
+    }
+  }
+
+  .navItem {
+    display: flex;
+
+    &.active {
+      background: #bcbcbc;
+    }
+  }
+}

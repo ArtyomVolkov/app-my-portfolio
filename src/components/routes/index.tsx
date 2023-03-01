@@ -74,7 +74,7 @@ const AppRoutes = () => (
       )}
     />
     <Route
-      path="/widgets/media-player"
+      path="/widgets/media-player/*"
       element={(
         <Suspense fallback="loading...">
           <MediaPlayer />
