@@ -9,7 +9,7 @@ import VolumeOffRoundedIcon from '@mui/icons-material/VolumeOffRounded';
 import styles from './style.module.scss';
 
 const TrackOptions = () => {
-  const [volume, setVolume] = useState(5);
+  const [volume, setVolume] = useState(70);
 
   const onChangeVolume = (e, value) => {
     setVolume(value);

@@ -1,0 +1,41 @@
+.loginPage {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  overflow: auto;
+
+
+  .loginBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    border-radius: 4px;
+    padding: 10px;
+    margin: auto 0;
+
+    .subtitle {
+      color: #3f3f3f;
+      font-weight: 500;
+      text-align: center;
+      max-width: 281px;
+    }
+
+    .musicIcon {
+      font-size: 60px;
+      margin: 8px 0;
+    }
+
+    .loginButton {
+      color: black;
+
+      .muiLoginIcon {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.spotifyIcon {
+  width: 85px;
+}

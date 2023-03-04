@@ -1,57 +1,68 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import Player from '@pages/widgets/media-player/widget/player';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import Player from './player';
+import NavBar from './nav-bar';
 import PlayerRoutes from './routes';
-import NavBar from '@pages/widgets/media-player/widget/nav-bar';
 
-import { useAuthData, useUserData } from './store';
-
-import { getUserInfo } from './api/user';
+import { useAuthData } from './store';
+import { useAuthActions } from './store/actions/auth';
+import { mergeClassNames } from '@utils/common';
 
 import styles from './style.module.scss';
 
 const PlayerWidget = () => {
+  const [loading, setLoading] = useState(true);
+  const { onFetchUser } = useAuthActions();
   const { token, setToken } = useAuthData();
-  const { setUserData } = useUserData();
 
   useEffect(() => {
-    window.addEventListener('message', onMessageReceive, false);
+    onFetchData();
+    window.addEventListener('message', onMessageReceive);
 
     return () => {
-      window.removeEventListener('message', onMessageReceive)
+      window.removeEventListener('message', onMessageReceive);
     }
   }, []);
-
-  useEffect(() => {
-    fetchUserData().finally();
-  }, [token]);
 
   const onMessageReceive = (evt) => {
     if (evt.data && evt.data.authType === 'spotify-auth') {
       setToken(evt.data.access_token);
+      onFetchUser(evt.data.access_token).then();
     }
   };
 
-  const fetchUserData = async () => {
-    if (!token) {
-      return;
-    }
-    const data = await getUserInfo(token);
-
-    if (data) {
-      setUserData(data);
-    }
+  const onFetchData = () => {
+    onFetchUser(token).finally(() => {
+      setLoading(false);
+    });
   };
+
+  const renderAppContent = () => {
+    if (loading) {
+      return (
+        <div className={styles.loaderWrap}>
+          <CircularProgress />
+        </div>
+      )
+    }
+    return (
+      <>
+        <NavBar />
+        <div className={styles.mainContent}>
+          <PlayerRoutes />
+          <div className={styles.footer}>
+            <Player />
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
-    <div className={styles.playerWidget}>
-      <NavBar />
-      <div className={styles.mainContent}>
-        <PlayerRoutes />
-        <div className={styles.footer}>
-          <Player />
-        </div>
-      </div>
+    <div className={mergeClassNames([styles.playerWidget, loading && styles.loading])}>
+      { renderAppContent() }
     </div>
   );
 }

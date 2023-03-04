@@ -14,5 +14,9 @@ export const getAccessToken = () => {
 }
 
 export const saveAccessToken = (token) => {
-  document.cookie = `_MPT=${AES.encrypt(token, process.env.SPOTIFY_AUTH).toString()}`;
+  const date = Date.now();
+  const range = 1000*60*60*24*7; // 7 days
+  const expires = new Date(date + range).toUTCString();
+
+  document.cookie = `_MPT=${AES.encrypt(token, process.env.SPOTIFY_AUTH).toString()};expires=${expires};path=/;Secure`;
 }
