@@ -12,7 +12,13 @@ export const useAuthActions = () => {
     const clientId = '48b22f435e084cebb6a38e338310dcaf';
     const spotifyAuth = 'https://accounts.spotify.com/authorize';
     const redirectURI = 'http://localhost:3000/widgets/media-player/auth-callback';
-    const scopes = ['user-read-private', 'user-read-email'].join(' ');
+    const scopes = [
+      'user-read-private',
+      'user-read-email',
+      'user-library-read',
+      'user-top-read',
+      'user-read-recently-played',
+    ].join(' ');
     const modal = { width: 650, height: 800 };
     const modalPosition = {
       top: (screen.height / 2) - (modal.height / 2),

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import CircularProgress from '@mui/material/CircularProgress';
 
-import Player from './player';
-import NavBar from './nav-bar';
 import PlayerRoutes from './routes';
+import Player from './components/player';
+import NavBar from './components/nav-bar';
 
 import { useAuthData } from './store';
 import { useAuthActions } from './store/actions/auth';
@@ -45,7 +45,7 @@ const PlayerWidget = () => {
         <div className={styles.loaderWrap}>
           <CircularProgress />
         </div>
-      )
+      );
     }
     return (
       <>

@@ -16,7 +16,7 @@ import AlbumIcon from '@mui/icons-material/Album';
 
 import { mergeClassNames } from '@utils/common';
 
-import { useLayoutData, useUserData } from '../store';
+import { useLayoutData, useUserData } from '../../store';
 
 import styles from './style.module.scss';
 

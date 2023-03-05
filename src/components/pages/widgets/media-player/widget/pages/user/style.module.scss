@@ -1,0 +1,96 @@
+.userPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .userHeadline {
+    display: flex;
+
+    .userImage {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  .userCaption {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 20px;
+
+    .country {
+      display: flex;
+      margin-bottom: 5px;
+
+      img {
+        height: 22px;
+      }
+    }
+
+    .fullName {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 500;
+    }
+
+    .email {
+      color: #0065d7;
+      line-height: 24px;
+    }
+  }
+
+  .socialPanel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 15px 0;
+    gap: 20px;
+    color: #4d4d4d;
+
+    .followers {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .total {
+        font-weight: 600;
+      }
+    }
+
+    .product {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .subscription {
+        font-weight: 600;
+      }
+    }
+
+    .spotifyLink {
+      display: flex;
+      align-items: center;
+      text-decoration: unset;
+      color: inherit;
+
+      svg {
+        margin-right: 5px;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .topTracks {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .title {
+      font-weight: 500;
+    }
+
+    .trackList {
+      display: flex;
+    }
+  }
+}

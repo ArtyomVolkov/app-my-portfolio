@@ -1,18 +1,68 @@
-import React, { useEffect } from 'react';
-import { useUserData } from '@pages/widgets/media-player/widget/store';
+import React, { useEffect, useState } from 'react';
+
+import Link from '@mui/material/Link';
+import Avatar from '@mui/material/Avatar';
+import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
+import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
+import NoteRoundedIcon from '@mui/icons-material/NoteRounded';
+
+import { useUserData } from '../../store';
+import { useUserActions } from '../../store/actions/user';
+
+import styles from './style.module.scss';
+import TrackList from '@pages/widgets/media-player/widget/components/track-list';
 
 const UserPage = () => {
+  const [tracks, setTracks] = useState([]);
   const { user } = useUserData();
+  const { onFetchTopItems } = useUserActions();
 
   useEffect(() => {
-
+    onFetchTopItems().then((data) => {
+      setTracks(data.items);
+    });
   }, []);
-  console.log(user);
 
   return (
-    <p>
-      User page
-    </p>
+    <div className={styles.userPage}>
+      <section className={styles.userHeadline}>
+        <Avatar alt="User" src={user.images[0]?.url} className={styles.userImage} />
+        <div className={styles.userCaption}>
+          <label className={styles.country}>
+            <img src={`https://flagcdn.com/w40/${user.country.toLowerCase()}.png`} alt="country" />
+          </label>
+          <label className={styles.fullName}>{ user.display_name }</label>
+          <label className={styles.email}>{ user.email }</label>
+        </div>
+      </section>
+      <section className={styles.socialPanel}>
+        <label className={styles.followers}>
+          <PeopleAltRoundedIcon />
+          <span>followers:</span>
+          <span className={styles.total}>{ user.followers.total }</span>
+        </label>
+        <label className={styles.product}>
+          <NoteRoundedIcon />
+          <span>subscription:</span>
+          <span className={styles.subscription}>{ user.product }</span>
+        </label>
+        <label>
+          <Link
+            href={user.external_urls.spotify}
+            className={styles.spotifyLink}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <LaunchRoundedIcon />
+            <span>spotify</span>
+          </Link>
+        </label>
+      </section>
+      <section className={styles.topTracks}>
+        <p className={styles.title}>My Top tracks</p>
+        <TrackList data={tracks} />
+      </section>
+    </div>
   );
 }
 

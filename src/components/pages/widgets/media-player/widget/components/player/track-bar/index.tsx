@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Slider from '@mui/material/Slider';
 
 import { mergeClassNames } from '@utils/common';
+import { formatDuration } from '../../../utils/common';
 
 import styles from './style.module.scss';
 
@@ -12,13 +13,6 @@ const TrackBar = ({ duration = 200 }) => {
   const onChange = (e, value) => {
     setValue(value);
   };
-
-  const formatDuration = (value: number) => {
-    const minute = Math.floor(value / 60);
-    const secondLeft = value - minute * 60;
-
-    return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
-  }
 
   return (
     <div className={styles.trackBar}>
