@@ -2,19 +2,24 @@ import React, { useEffect, useState } from 'react';
 
 import Link from '@mui/material/Link';
 import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import NoteRoundedIcon from '@mui/icons-material/NoteRounded';
+
+import TrackList from '@pages/widgets/media-player/widget/components/track-list';
 
 import { useUserData } from '../../store';
 import { useUserActions } from '../../store/actions/user';
+import { useAuthActions } from '../../store/actions/auth';
 
 import styles from './style.module.scss';
-import TrackList from '@pages/widgets/media-player/widget/components/track-list';
 
 const UserPage = () => {
-  const [tracks, setTracks] = useState([]);
   const { user } = useUserData();
+  const { onLogout } = useAuthActions();
+  const [tracks, setTracks] = useState([]);
   const { onFetchTopItems } = useUserActions();
 
   useEffect(() => {
@@ -33,6 +38,16 @@ const UserPage = () => {
           </label>
           <label className={styles.fullName}>{ user.display_name }</label>
           <label className={styles.email}>{ user.email }</label>
+        </div>
+        <div className={styles.logout}>
+          <Button
+            color="inherit"
+            variant="outlined"
+            startIcon={<LogoutRoundedIcon />}
+            onClick={onLogout}
+          >
+            Logout
+          </Button>
         </div>
       </section>
       <section className={styles.socialPanel}>

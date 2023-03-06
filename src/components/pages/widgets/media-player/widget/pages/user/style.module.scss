@@ -13,6 +13,7 @@
   }
 
   .userCaption {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -37,6 +38,10 @@
       color: #0065d7;
       line-height: 24px;
     }
+  }
+
+  .logout {
+    color: #4d4d4d;
   }
 
   .socialPanel {

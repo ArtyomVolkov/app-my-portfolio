@@ -46,6 +46,14 @@ export const useAuthActions = () => {
     openSocialAuthModal();
   };
 
+  const onLogout = () => {
+    const expires = new Date().toUTCString();
+
+    setUserData(null);
+    document.cookie = `_MPT='';expires=${expires};path=/;Secure`;
+    navigate(location.pathname.replace('login', ''), { replace: true });
+  };
+
   const onFetchUser = async (token) => {
     if (!token) {
       return;
@@ -71,6 +79,7 @@ export const useAuthActions = () => {
 
   return {
     onLogin,
+    onLogout,
     onFetchUser,
     onCheckRedirect
   }
