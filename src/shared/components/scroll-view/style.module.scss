@@ -1,0 +1,30 @@
+@mixin gradient() {
+  pointer-events: none;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+  opacity: 0;
+}
+
+.scrollView {
+  position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background: inherit;
+
+  .children {
+    overflow: auto;
+    background: inherit;
+  }
+
+  .header {
+    top: 0;
+    @include gradient();
+  }
+
+  .footer {
+    bottom: 0;
+    @include gradient();
+  }
+}
