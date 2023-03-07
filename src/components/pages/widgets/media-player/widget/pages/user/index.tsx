@@ -8,6 +8,7 @@ import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import NoteRoundedIcon from '@mui/icons-material/NoteRounded';
 
+import ScrollViewGradient from '@shared/components/scroll-view';
 import TrackList from '@pages/widgets/media-player/widget/components/track-list';
 
 import { useUserData } from '../../store';
@@ -75,7 +76,9 @@ const UserPage = () => {
       </section>
       <section className={styles.topTracks}>
         <p className={styles.title}>My Top tracks</p>
-        <TrackList data={tracks} />
+        <ScrollViewGradient gateHeight={50}>
+          <TrackList data={tracks} />
+        </ScrollViewGradient>
       </section>
     </div>
   );

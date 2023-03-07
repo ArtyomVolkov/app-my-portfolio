@@ -1,0 +1,105 @@
+.playList {
+  display: flex;
+  flex-direction: column;
+  background: inherit;
+  height: 100%;
+
+  .headline {
+    display: flex;
+    align-items: center;
+
+    .backButton {
+      margin-right: 5px;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  .header {
+    height: 120px;
+    background: #f3f3f3;
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+
+    .image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .captions {
+      flex: 1;
+      gap: 14px;
+      margin-left: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+
+      .owner {
+        font-size: 16px;
+        color: #0849e9;
+        font-weight: 500;
+      }
+
+      .name {
+        display: grid;
+
+        span {
+          font-size: 28px;
+          font-weight: 500;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
+          display: inline-block;
+        }
+      }
+
+      .details {
+        display: flex;
+        gap: 20px;
+
+        .availability, .tracksCount, .followers {
+          font-size: 16px;
+          font-weight: 500;
+          color: #6a6969;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          svg {
+            color: #111111;
+          }
+        }
+
+        .tracksCount {
+          svg {
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  .body {
+    flex: 1;
+    display: grid;
+    position: relative;
+    overflow: auto;
+    background: inherit;
+  }
+
+  .tracks {
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}

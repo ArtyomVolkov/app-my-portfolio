@@ -1,3 +1,5 @@
+@import "../../../../../assets/styles/style-guide";
+
 .playerWidget {
   position: relative;
   display: flex;
@@ -32,6 +34,7 @@
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     position: relative;
+    @include scroll-style(16px, #8a8a8a, #fcfcfc);
   }
 
   .footer {

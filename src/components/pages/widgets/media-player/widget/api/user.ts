@@ -18,4 +18,26 @@ export const getTopItems = async (token, type = 'artists') => {
   });
 
   return resp.json();
-}
+};
+
+export const getPlaylists = async (token) => {
+  const resp = await fetch(`https://api.spotify.com/v1/me/playlists?limit=20`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return resp.json();
+};
+
+export const getPlaylist = async (token, playListId) => {
+  const resp = await fetch(`https://api.spotify.com/v1/playlists/${playListId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return resp.json();
+};

@@ -7,6 +7,7 @@ import Albums from '../pages/albums';
 import Artists from '../pages/artists';
 import Tracks from '../pages/tracks';
 import PlayLists from '../pages/play-lists';
+import PlayList from '../pages/play-lists/play-list';
 import Login from '../pages/login';
 
 import { useUserData } from '@pages/widgets/media-player/widget/store';
@@ -36,6 +37,7 @@ const PlayerRoutes = () => {
       <Route path="/artists" element={<AuthRequire><Artists /></AuthRequire>} />
       <Route path="/albums" element={<AuthRequire><Albums /></AuthRequire>} />
       <Route path="/play-lists" element={<AuthRequire><PlayLists /></AuthRequire>} />
+      <Route path="/play-lists/:id" element={<AuthRequire><PlayList /></AuthRequire>} />
       <Route path="/tracks" element={<AuthRequire><Tracks /></AuthRequire>} />
       <Route path="/login" element={<Login />} />
       <Route path="/*" element={<h1>404</h1>} />

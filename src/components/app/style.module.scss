@@ -1,7 +1,7 @@
 @import "../../assets/styles/style-guide";
 
 :global(html) {
-  @include scroll-style;
+  @include scroll-style(16px, #8a8a8a, #fff);
 }
 :global(#my-portfolio-app) {
   font-family: 'Roboto', sans-serif;
