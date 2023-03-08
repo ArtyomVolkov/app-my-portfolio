@@ -25,6 +25,7 @@
     padding: 10px;
     display: flex;
     flex-direction: row;
+    border: 1px solid #dcdcdc;
 
     .image {
       width: 120px;
@@ -76,6 +77,18 @@
 
           svg {
             color: #111111;
+          }
+        }
+
+        .availability {
+          .public {
+            color: #0b0b0b;
+            background-color: #1ed760;
+          }
+
+          .private {
+            color: white;
+            background-color: #eb0014;
           }
         }
 
