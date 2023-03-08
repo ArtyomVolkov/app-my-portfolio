@@ -13,17 +13,6 @@ const ScrollViewGradient: React.FC<IScrollView> = ({ children, gateHeight = 40, 
   const headerRef = useRef(null);
   const footerRef = useRef(null);
 
-  const parentColor = useMemo(() => {
-    if (gradientColor) {
-      return gradientColor;
-    }
-    if (!childrenRef.current) {
-      return 'rgba(255, 255, 255, 0)';
-    }
-    // inherit background color from parent view
-    return window.getComputedStyle(childrenRef.current)?.backgroundColor;
-  }, [childrenRef.current]);
-
   const scrollBarWidth = useMemo(() => {
     if (!childrenRef.current) {
       return 0;
@@ -35,7 +24,7 @@ const ScrollViewGradient: React.FC<IScrollView> = ({ children, gateHeight = 40, 
     const observer = new ResizeObserver(onResizeChange);
 
     observer.observe(childrenRef.current);
-
+    setBackground();
     return () => observer.disconnect();
   }, []);
 
@@ -59,6 +48,20 @@ const ScrollViewGradient: React.FC<IScrollView> = ({ children, gateHeight = 40, 
     footerRef.current.style.opacity = bottomOpacity;
   };
 
+  const setBackground = () => {
+    if (!headerRef.current || !footerRef.current) {
+      return;
+    }
+    if (gradientColor) {
+      headerRef.current.style.background = `linear-gradient(${gradientColor}, rgba(255, 255, 255, 0))`;
+      footerRef.current.style.background = `linear-gradient(rgba(255, 255, 255, 0), ${gradientColor})`;
+      return;
+    }
+    const color = window.getComputedStyle(childrenRef.current)?.backgroundColor || 'rgba(255, 255, 255, 0)';
+    headerRef.current.style.background = `linear-gradient(${color}, rgba(255, 255, 255, 0))`;
+    footerRef.current.style.background = `linear-gradient(rgba(255, 255, 255, 0), ${color})`;
+  }
+
   const onScroll = (e) => {
     setOpacity(e.currentTarget);
   };
@@ -71,7 +74,6 @@ const ScrollViewGradient: React.FC<IScrollView> = ({ children, gateHeight = 40, 
         style={{
           height: gateHeight,
           width: `calc(100% - ${scrollBarWidth}px)`,
-          background: `linear-gradient(${parentColor}, rgba(255, 255, 255, 0))`
         }}
       />
       <div
@@ -87,7 +89,6 @@ const ScrollViewGradient: React.FC<IScrollView> = ({ children, gateHeight = 40, 
         style={{
           height: gateHeight,
           width: `calc(100% - ${scrollBarWidth}px)`,
-          background: `linear-gradient(rgba(255, 255, 255, 0), ${parentColor})`
         }}
       />
     </div>
