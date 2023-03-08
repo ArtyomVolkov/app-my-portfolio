@@ -18,6 +18,11 @@ export const useAuthActions = () => {
       'user-library-read',
       'user-top-read',
       'user-read-recently-played',
+      'user-follow-modify',
+      'user-follow-read',
+      'user-read-playback-position',
+      'user-top-read',
+      'user-read-recently-played'
     ].join(' ');
     const modal = { width: 650, height: 800 };
     const modalPosition = {

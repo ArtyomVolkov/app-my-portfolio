@@ -1,0 +1,87 @@
+.artists {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: inherit;
+
+  .header {
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  .body {
+    flex: 1;
+    display: grid;
+    position: relative;
+    overflow: auto;
+    background: inherit;
+  }
+
+  .artistsCards {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .artistCard {
+      flex: 1;
+      border-radius: 4px;
+      padding: 10px;
+      background: #f4f4f4;
+      border: 1px solid #dcdcdc;
+      min-width: 150px;
+      max-width: 270px;
+      min-height: 150px;
+      overflow: hidden;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: box-shadow 0.4s, opacity 0.3s;
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: inset 0 0 4px 1px #999999;
+
+        .tracksCount {
+          opacity: 1;
+        }
+      }
+
+      &:active {
+        opacity: 0.5;
+      }
+
+      .image {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 4px;
+        }
+      }
+
+      .captions {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+
+        .name {
+          font-size: 16px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-bottom: 5px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
