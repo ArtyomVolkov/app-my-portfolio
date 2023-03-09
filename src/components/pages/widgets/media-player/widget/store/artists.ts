@@ -1,16 +1,15 @@
 import { create } from 'zustand';
 
-interface IArtis {
+import { ILoading } from '../store';
+
+interface IArtist {
   id: string,
   name: string,
-  images: Array<{ url: string }>
-
+  image: string
 }
 
-interface IArtists {
-  loading: boolean,
-  artists: Array<IArtis>,
-  setLoading: (loading: boolean) => void,
+interface IArtists extends ILoading {
+  artists: Array<IArtist>,
   setArtists: (data) => void,
 }
 

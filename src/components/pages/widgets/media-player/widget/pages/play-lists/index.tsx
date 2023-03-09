@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
+import MediaCard from '../../components/cards/media';
 import Loader from '../../components/loader';
 
 import { usePlayListsActions } from '../../store/actions/playlists';
@@ -31,25 +32,14 @@ const PlayListsPage = () => {
       <section className={styles.playListCards}>
         {
           playlists.map((item) => (
-            <div
+            <MediaCard
               key={item.id}
+              image={item.images[0]?.url}
+              title={item.name}
+              subtitle={`${item.tracks.total} Tracks`}
               className={styles.playList}
-              onClick={() => onOpenPlayList(item.id)}
-            >
-              <div className={styles.tracksCount}>
-                { `${item.tracks.total} tracks` }
-              </div>
-              <div className={styles.image}>
-                <img
-                  alt="playlist"
-                  src={item.images[0]?.url}
-                />
-              </div>
-              <div className={styles.captions}>
-                <label className={styles.name}>{ item.name }</label>
-                <label className={styles.owner}>{ item.owner.display_name }</label>
-              </div>
-            </div>
+              onPress={() => onOpenPlayList(item.id)}
+            />
           ))
         }
       </section>

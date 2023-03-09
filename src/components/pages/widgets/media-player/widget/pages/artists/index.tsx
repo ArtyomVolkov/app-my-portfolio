@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
+import MediaCard from '../../components/cards/media';
 import Loader from '../../components/loader';
 
 import { useArtistsActions } from '../../store/actions/artists';
@@ -9,12 +11,17 @@ import { useArtistsData } from '../../store/artists';
 import styles from './style.module.scss';
 
 const ArtistsPage = () => {
+  const navigation = useNavigate();
   const { loading, artists } = useArtistsData();
   const { onFetchArtists } = useArtistsActions();
 
   useEffect(() => {
     onFetchArtists().then();
   }, []);
+
+  const onOpenArtistPage = (artistId) => {
+    navigation(artistId);
+  };
 
   const renderArtists = () => {
     if (loading) {
@@ -27,17 +34,12 @@ const ArtistsPage = () => {
       <section className={styles.artistsCards}>
         {
           artists.map((item) => (
-            <div key={item.id} className={styles.artistCard}>
-              <div className={styles.image}>
-                <img
-                  alt="Artist"
-                  src={item.images[0]?.url}
-                />
-              </div>
-              <div className={styles.captions}>
-                <label className={styles.name}>{ item.name }</label>
-              </div>
-            </div>
+            <MediaCard
+              key={item.id}
+              image={item.image}
+              title={item.name}
+              onPress={() => onOpenArtistPage(item.id)}
+            />
           ))
         }
       </section>

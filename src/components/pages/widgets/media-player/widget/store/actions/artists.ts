@@ -1,4 +1,5 @@
 import { getArtists } from '../../api/artists';
+import { getImageSrc } from '../../utils/common';
 
 import { useAuthData } from '../../store';
 import { useArtistsData } from '../../store/artists';
@@ -18,7 +19,7 @@ export const useArtistsActions = () => {
       const artists = data.artists.items.map((item) => ({
         id: item.id,
         name: item.name,
-        images: item.images
+        image: getImageSrc(item.images)
       }));
 
       setLoading(false);

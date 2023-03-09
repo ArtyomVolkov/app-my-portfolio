@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { ILoading } from '../store';
+
 export interface IPlaylistData {
   id: string,
   public: boolean,
@@ -24,12 +26,10 @@ export interface ITrack {
   duration_ms: number
 }
 
-interface IPlaylist<PL> {
-  loading: boolean,
+interface IPlaylist<PL> extends ILoading {
   playlist: PL,
   tracks: Array<ITrack>,
   pagination: {},
-  setLoading: (loading: boolean) => void,
   setPlaylist: (data: PL) => void,
   setPlaylistTracks: (data) => void,
 }

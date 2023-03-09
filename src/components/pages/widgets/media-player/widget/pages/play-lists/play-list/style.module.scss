@@ -19,83 +19,43 @@
   }
 
   .header {
-    height: 120px;
-    background: #f3f3f3;
-    border-radius: 4px;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    border: 1px solid #dcdcdc;
-
-    .image {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 4px;
+    .owner {
+      font-size: 16px;
+      color: #0849e9;
+      font-weight: 500;
     }
-
-    .captions {
-      flex: 1;
-      gap: 14px;
-      margin-left: 15px;
+    .details {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-end;
+      gap: 20px;
 
-      .owner {
+      .availability, .tracksCount, .followers {
         font-size: 16px;
-        color: #0849e9;
         font-weight: 500;
-      }
-
-      .name {
-        display: grid;
-
-        span {
-          font-size: 28px;
-          font-weight: 500;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          max-width: 100%;
-          display: inline-block;
-        }
-      }
-
-      .details {
+        color: #6a6969;
         display: flex;
-        gap: 20px;
+        align-items: center;
+        gap: 10px;
 
-        .availability, .tracksCount, .followers {
-          font-size: 16px;
-          font-weight: 500;
-          color: #6a6969;
-          display: flex;
-          align-items: center;
-          gap: 10px;
+        svg {
+          color: #111111;
+        }
+      }
 
-          svg {
-            color: #111111;
-          }
+      .availability {
+        .public {
+          color: #0b0b0b;
+          background-color: #1ed760;
         }
 
-        .availability {
-          .public {
-            color: #0b0b0b;
-            background-color: #1ed760;
-          }
-
-          .private {
-            color: white;
-            background-color: #eb0014;
-          }
+        .private {
+          color: white;
+          background-color: #eb0014;
         }
+      }
 
-        .tracksCount {
-          svg {
-            font-size: 30px;
-          }
+      .tracksCount {
+        svg {
+          font-size: 30px;
         }
       }
     }

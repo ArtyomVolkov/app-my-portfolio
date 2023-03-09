@@ -1,0 +1,97 @@
+.artist {
+  display: flex;
+  flex-direction: column;
+  background: inherit;
+  height: 100%;
+
+  .headline {
+    display: flex;
+    align-items: center;
+
+    .backButton {
+      margin-right: 5px;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  .header {
+    .genres {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 10px;
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        background-color: #f3f3f3;
+        width: 10px;
+        height: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: #f3f3f3;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #8a8a8a;
+        border-radius: 6px;
+        border: 3px solid #f3f3f3;
+      }
+
+      .genre {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 15px;
+        color: black;
+        background: #b0b0b0bf;
+      }
+    }
+
+    .details {
+      display: flex;
+      gap: 20px;
+
+      .albumsCount, .followers {
+        font-size: 16px;
+        font-weight: 500;
+        color: #6a6969;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        svg {
+          color: #111111;
+        }
+      }
+
+      .albumsCount {
+        svg {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  .body {
+    flex: 1;
+    display: grid;
+    position: relative;
+    overflow: auto;
+    background: inherit;
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .albums {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+  }
+}

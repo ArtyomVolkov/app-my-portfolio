@@ -5,3 +5,7 @@ export const formatDuration = (value: number, multiplicity: number = 1) => {
 
   return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
 };
+
+export const getImageSrc = (data: Array<{ url: string, width: number, height: number }>, maxSize = 300) => {
+  return data.find((item) => (item.width <= maxSize || item.height <= maxSize))?.url;
+};

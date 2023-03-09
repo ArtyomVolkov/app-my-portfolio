@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 
-interface IPlaylists {
-  loading: boolean,
+import { ILoading } from '../store';
+
+interface IPlaylists extends ILoading {
   playlists: Array<any>,
   pagination: {},
   setPlaylists: (data) => void,
-  setLoading: (loading: boolean) => void,
 }
 
 export const usePlaylistsData = create<IPlaylists>((set) => ({

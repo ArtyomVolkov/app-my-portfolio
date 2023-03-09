@@ -11,6 +11,7 @@ import PlaylistPlayRoundedIcon from '@mui/icons-material/PlaylistPlayRounded';
 import ScrollViewGradient from '@shared/components/scroll-view';
 import Loader from '../../../components/loader';
 import TrackList from '../../../components/track-list';
+import MediaBanner from '../../../components/cards/media-banner';
 
 import { mergeClassNames } from '@utils/common';
 import { usePlayListActions } from '../../../store/actions/playlist';
@@ -41,37 +42,33 @@ const PlayList = () => {
     }
     return (
       <>
-        <div className={styles.header}>
-          <img src={playlist.images[0].url} className={styles.image} alt="Playlist" />
-          <div className={styles.captions}>
-            <div className={styles.name}>
-              <span>
-                 { playlist.name }
-              </span>
+        <MediaBanner
+          className={styles.header}
+          title={playlist.name}
+          image={playlist.images[0].url}
+        >
+          <div className={styles.owner}>
+            { playlist.owner.display_name }
+          </div>
+          <div className={styles.details}>
+            <div className={styles.tracksCount}>
+              <PlaylistPlayRoundedIcon />
+              <label>{ `${playlist.tracks.total} Tracks` }</label>
             </div>
-            <div className={styles.owner}>
-              { playlist.owner.display_name }
+            <div className={styles.followers}>
+              <PeopleAltRoundedIcon />
+              <span>{ `${playlist.followers.total} Followers` }</span>
             </div>
-            <div className={styles.details}>
-              <div className={styles.tracksCount}>
-                <PlaylistPlayRoundedIcon />
-                <label>{ `${playlist.tracks.total} Tracks` }</label>
-              </div>
-              <div className={styles.followers}>
-                <PeopleAltRoundedIcon />
-                <span>{ `${playlist.followers.total} Followers` }</span>
-              </div>
-              <div className={styles.availability}>
-                <PublicRoundedIcon />
-                <Chip
-                  className={mergeClassNames([playlist.public ? styles.public : styles.private ])}
-                  label={playlist.public ? 'Public' : 'Private'}
-                  size="small"
-                />
-              </div>
+            <div className={styles.availability}>
+              <PublicRoundedIcon />
+              <Chip
+                className={mergeClassNames([playlist.public ? styles.public : styles.private ])}
+                label={playlist.public ? 'Public' : 'Private'}
+                size="small"
+              />
             </div>
           </div>
-        </div>
+        </MediaBanner>
         <div className={styles.tracks}>
           <p className={styles.title}>Tracks</p>
           <TrackList data={tracks} />

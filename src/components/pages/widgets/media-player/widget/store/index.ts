@@ -2,6 +2,11 @@ import { create } from 'zustand';
 
 import { getAccessToken, saveAccessToken } from '../services/auth-token';
 
+export interface ILoading {
+  loading: boolean,
+  setLoading: (loading: boolean) => void,
+}
+
 interface IPlayerLayout {
   fullWidth: boolean,
   toggleWidth: () => void,

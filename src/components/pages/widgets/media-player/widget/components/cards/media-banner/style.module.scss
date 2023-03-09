@@ -1,0 +1,36 @@
+.mediaBanner {
+  min-height: 120px;
+  background: #f3f3f3;
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #dcdcdc;
+
+  .image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .captions {
+    display: grid;
+    gap: 8px;
+    margin-left: 15px;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    .title {
+      display: grid;
+
+      span {
+        font-size: 28px;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
