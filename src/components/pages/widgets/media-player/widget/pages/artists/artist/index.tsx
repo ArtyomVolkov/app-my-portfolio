@@ -17,7 +17,6 @@ import { useArtistData } from '../../../store/artist';
 
 import styles from './style.module.scss';
 
-
 const Artist = () => {
   const params = useParams();
   const navigation = useNavigate();
@@ -30,6 +29,10 @@ const Artist = () => {
 
   const backToArtists = () => {
     navigation(-1);
+  };
+
+  const onOpenArtistAlbumPage = (album) => {
+    navigation(album.id);
   };
 
   const renderContent = () => {
@@ -75,6 +78,7 @@ const Artist = () => {
                   image={item.image}
                   title={item.name}
                   subtitle={`${item.totalTracks} Tracks`}
+                  onPress={() => onOpenArtistAlbumPage(item)}
                 />
               ))
             }

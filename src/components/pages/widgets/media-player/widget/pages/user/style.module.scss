@@ -16,18 +16,8 @@
   .userCaption {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    margin-left: 20px;
-
-    .country {
-      display: flex;
-      margin-bottom: 5px;
-
-      img {
-        height: 22px;
-      }
-    }
+    flex-direction: row;
+    gap: 10px;
 
     .fullName {
       font-size: 20px;
@@ -37,21 +27,41 @@
 
     .email {
       color: #0065d7;
-      line-height: 24px;
+      font-size: 18px;
     }
   }
 
   .logout {
+    position: absolute;
+    right: 0;
+    top: 0;
     color: #4d4d4d;
+
+    button {
+      padding: 0 8px;
+      text-transform: none;
+    }
   }
 
   .socialPanel {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 15px 0;
-    gap: 20px;
+    gap: 15px;
     color: #4d4d4d;
+
+    svg {
+      color: black;
+    }
+
+    .country {
+      display: flex;
+      align-items: center;
+
+      img {
+        height: 18px;
+      }
+    }
 
     .followers {
       display: flex;
@@ -59,7 +69,7 @@
       gap: 5px;
 
       .total {
-        font-weight: 600;
+        font-weight: 500;
       }
     }
 
@@ -69,7 +79,7 @@
       gap: 5px;
 
       .subscription {
-        font-weight: 600;
+        font-weight: 500;
       }
     }
 
@@ -78,6 +88,7 @@
       align-items: center;
       text-decoration: unset;
       color: inherit;
+      font-weight: 500;
 
       svg {
         margin-right: 5px;
@@ -87,6 +98,7 @@
   }
 
   .topTracks {
+    flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;

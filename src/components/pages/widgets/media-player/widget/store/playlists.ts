@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { ILoading } from '../store';
+import { ILoading } from '../shared/interfaces/music-store';
 
 interface IPlaylists extends ILoading {
   playlists: Array<any>,

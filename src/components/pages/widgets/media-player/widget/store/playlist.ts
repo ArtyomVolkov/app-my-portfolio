@@ -1,37 +1,23 @@
 import { create } from 'zustand';
 
-import { ILoading } from '../store';
+import { ITrack, ILoading } from '../shared/interfaces/music-store';
 
 export interface IPlaylistData {
   id: string,
   public: boolean,
   name: string,
-  images: Array<{ url: string }>,
-  followers: {
-    total: number,
-  }
-  owner: {
-    display_name: string,
-  },
-  tracks: {
-    total: number,
-  }
-}
-
-export interface ITrack {
-  id: string,
-  name: string,
-  album: any,
-  artists: any,
-  duration_ms: number
+  image: string,
+  followers: number,
+  owner: string,
+  totalTracks: number
 }
 
 interface IPlaylist<PL> extends ILoading {
   playlist: PL,
   tracks: Array<ITrack>,
   pagination: {},
-  setPlaylist: (data: PL) => void,
-  setPlaylistTracks: (data) => void,
+  setPlaylist: (data: IPlaylistData) => void,
+  setPlaylistTracks: (data: Array<ITrack>) => void,
 }
 
 export const usePlaylistData = create<IPlaylist<IPlaylistData>>((set) => ({

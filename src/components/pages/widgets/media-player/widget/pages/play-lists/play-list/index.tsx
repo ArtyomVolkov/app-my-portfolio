@@ -45,19 +45,19 @@ const PlayList = () => {
         <MediaBanner
           className={styles.header}
           title={playlist.name}
-          image={playlist.images[0].url}
+          image={playlist.image}
         >
           <div className={styles.owner}>
-            { playlist.owner.display_name }
+            { playlist.owner }
           </div>
           <div className={styles.details}>
             <div className={styles.tracksCount}>
               <PlaylistPlayRoundedIcon />
-              <label>{ `${playlist.tracks.total} Tracks` }</label>
+              <label>{ `${playlist.totalTracks} Tracks` }</label>
             </div>
             <div className={styles.followers}>
               <PeopleAltRoundedIcon />
-              <span>{ `${playlist.followers.total} Followers` }</span>
+              <span>{ `${playlist.followers} Followers` }</span>
             </div>
             <div className={styles.availability}>
               <PublicRoundedIcon />

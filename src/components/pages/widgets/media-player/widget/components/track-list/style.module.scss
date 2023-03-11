@@ -35,6 +35,25 @@
     flex-direction: column;
     white-space: nowrap;
     overflow: hidden;
+    gap: 4px;
+
+    &:global(.track) {
+      flex-direction: column-reverse;
+
+      .artist {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+        color: #606060;
+      }
+
+      .name {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        color: #0b0b0b;
+      }
+    }
 
     .artist {
       font-size: 16px;

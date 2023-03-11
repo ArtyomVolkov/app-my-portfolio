@@ -1,7 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getUserInfo } from '../../api/user';
-import { useUserData } from '../../store';
+import { useUserData } from '../../store/user';
+
+import { getImageSrc } from '../../utils/common';
 
 export const useAuthActions = () => {
   const location = useLocation();
@@ -63,13 +65,25 @@ export const useAuthActions = () => {
     if (!token) {
       return;
     }
-    const data = await getUserInfo(token);
 
-    if (!data.error) {
-      setUserData(data);
-      return;
-    }
-    if (data.error.status === 401) {
+    try {
+      const data = await getUserInfo(token);
+
+      if (data?.error?.status === 401) {
+        navigate('/widgets/media-player/login', { replace: true });
+        return;
+      }
+
+      setUserData({
+        name: data.display_name,
+        image: getImageSrc(data.images, 400),
+        followers: data.followers.total,
+        email: data.email,
+        product: data.product,
+        country: data.country?.toLowerCase() || 'en',
+        spotifyURL: data.external_urls.spotify
+      });
+    } catch (e) {
       navigate('/widgets/media-player/login', { replace: true });
     }
   };

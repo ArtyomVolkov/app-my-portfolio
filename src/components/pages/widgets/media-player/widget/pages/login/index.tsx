@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import MusicOffRoundedIcon from '@mui/icons-material/MusicOffRounded';
 
-import { useUserData } from '../../store';
+import { useUserData } from '../../store/user';
 import { useAuthActions } from '../../store/actions/auth';
 
 import styles from './style.module.scss';

@@ -6,12 +6,13 @@ import User from '../pages/user';
 import Albums from '../pages/albums';
 import Artists from '../pages/artists';
 import Artist from '../pages/artists/artist';
+import ArtistAlbum from '../pages/artists/artist/album';
 import Tracks from '../pages/tracks';
 import PlayLists from '../pages/play-lists';
 import PlayList from '../pages/play-lists/play-list';
 import Login from '../pages/login';
 
-import { useUserData } from '@pages/widgets/media-player/widget/store';
+import { useUserData } from '../store/user';
 
 const AuthRequire = ({ children }) => {
   const location = useLocation();
@@ -37,6 +38,7 @@ const PlayerRoutes = () => {
       <Route path="/user" element={<AuthRequire><User /></AuthRequire>} />
       <Route path="/artists" element={<AuthRequire><Artists /></AuthRequire>} />
       <Route path="/artists/:id" element={<AuthRequire><Artist /></AuthRequire>} />
+      <Route path="/artists/:artistId/:albumId" element={<AuthRequire><ArtistAlbum /></AuthRequire>} />
       <Route path="/albums" element={<AuthRequire><Albums /></AuthRequire>} />
       <Route path="/play-lists" element={<AuthRequire><PlayLists /></AuthRequire>} />
       <Route path="/play-lists/:id" element={<AuthRequire><PlayList /></AuthRequire>} />

@@ -1,12 +1,6 @@
 import { create } from 'zustand';
 
-import { ILoading } from '../store';
-
-interface IArtist {
-  id: string,
-  name: string,
-  image: string
-}
+import { ILoading, IArtist } from '../shared/interfaces/music-store';
 
 interface IArtists extends ILoading {
   artists: Array<IArtist>,

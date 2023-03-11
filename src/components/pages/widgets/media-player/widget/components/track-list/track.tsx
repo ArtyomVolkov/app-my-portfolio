@@ -1,30 +1,32 @@
-import React, { useMemo } from 'react';
-import { formatDuration } from '../../utils/common';
+import React from 'react';
 
 import IconButton from '@mui/material/IconButton';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 
+import { ITrack as TrackData } from '../../shared/interfaces/music-store';
+
+import { mergeClassNames } from '@utils/common';
+import { formatDuration } from '../../utils/common';
+
 import styles from './style.module.scss';
 
-export const Track = ({ track, index }) => {
-  const artists = useMemo(() => {
-    return track.artists.map((item) => item.name).join(', ');
-  }, [track.artists]);
+interface ITrack {
+  index: number,
+  track: TrackData,
+  namePriority: string,
+}
 
-  const albumImage = useMemo(() => {
-    return track.album.images[0]?.url;
-  }, [track.album.images]);
-
+export const Track: React.FC<ITrack> = ({ track, index, namePriority }) => {
   return (
     <div key={track.id} className={styles.track}>
       <span className={styles.number}>{index+1}</span>
-      <img src={albumImage} alt="album" className={styles.image} />
-      <div className={styles.trackName}>
-        <label className={styles.artist}>{ artists }</label>
+      <img src={track.image} alt="album" className={styles.image} />
+      <div className={mergeClassNames([styles.trackName, namePriority])}>
+        <label className={styles.artist}>{ track.artists }</label>
         <label className={styles.name}>{ track.name }</label>
       </div>
       <label className={styles.album}>
-        { track.album.name }
+        { track.album }
       </label>
       <label className={styles.duration}>
         { formatDuration(track.duration_ms, 1000)}
