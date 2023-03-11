@@ -58,7 +58,6 @@ const ArtistsPage = () => {
           }
         </ScrollViewGradient>
       </div>
-
     </div>
   );
 }
