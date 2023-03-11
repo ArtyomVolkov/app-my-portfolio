@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -13,6 +14,7 @@ import { mergeClassNames } from '@utils/common';
 import styles from './style.module.scss';
 
 const PlayerWidget = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { onFetchUser } = useAuthActions();
   const { token, setToken } = useAuthData();
@@ -29,7 +31,9 @@ const PlayerWidget = () => {
   const onMessageReceive = (evt) => {
     if (evt.data && evt.data.authType === 'spotify-auth') {
       setToken(evt.data.access_token);
-      onFetchUser(evt.data.access_token).then();
+      onFetchUser(evt.data.access_token).then(() => {
+        navigate('/widgets/media-player/user');
+      });
     }
   };
 

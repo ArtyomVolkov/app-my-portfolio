@@ -13,7 +13,7 @@ export const useAuthActions = () => {
   const openSocialAuthModal = () => {
     const clientId = '48b22f435e084cebb6a38e338310dcaf';
     const spotifyAuth = 'https://accounts.spotify.com/authorize';
-    const redirectURI = 'http://localhost:3000/widgets/media-player/auth-callback';
+    const redirectURI = 'http://localhost:3000/widgets/media-player/spotify-auth';
     const scopes = [
       'user-read-private',
       'user-read-email',
@@ -31,6 +31,7 @@ export const useAuthActions = () => {
       top: (screen.height / 2) - (modal.height / 2),
       left: (screen.width / 2) - (modal.width / 2),
     };
+    console.log('on login', `${spotifyAuth}?client_id=${clientId}&redirect_uri=${redirectURI}&scope=${scopes}&response_type=token`)
 
     window.open(
       `${spotifyAuth}?client_id=${clientId}&redirect_uri=${redirectURI}&scope=${scopes}&response_type=token`,
@@ -70,7 +71,7 @@ export const useAuthActions = () => {
       const data = await getUserInfo(token);
 
       if (data?.error?.status === 401) {
-        navigate('/widgets/media-player/login', { replace: true });
+        onLogout();
         return;
       }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import IconButton from '@mui/material/IconButton';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
@@ -17,6 +17,10 @@ interface ITrack {
 }
 
 export const Track: React.FC<ITrack> = ({ track, index, namePriority }) => {
+  const duration = useMemo(() => {
+    return formatDuration(track.duration_ms, 1000);
+  }, [track.duration_ms]);
+
   return (
     <div key={track.id} className={styles.track}>
       <span className={styles.number}>{index+1}</span>
@@ -29,7 +33,7 @@ export const Track: React.FC<ITrack> = ({ track, index, namePriority }) => {
         { track.album }
       </label>
       <label className={styles.duration}>
-        { formatDuration(track.duration_ms, 1000)}
+        { duration }
       </label>
       <div className={styles.actions}>
         <IconButton>
