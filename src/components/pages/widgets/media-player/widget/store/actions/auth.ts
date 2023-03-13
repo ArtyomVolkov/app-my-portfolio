@@ -31,8 +31,6 @@ export const useAuthActions = () => {
       top: (screen.height / 2) - (modal.height / 2),
       left: (screen.width / 2) - (modal.width / 2),
     };
-    console.log('on login', `${spotifyAuth}?client_id=${clientId}&redirect_uri=${redirectURI}&scope=${scopes}&response_type=token`)
-
     window.open(
       `${spotifyAuth}?client_id=${clientId}&redirect_uri=${redirectURI}&scope=${scopes}&response_type=token`,
       '_blank',

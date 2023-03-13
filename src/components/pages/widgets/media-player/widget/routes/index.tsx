@@ -4,6 +4,7 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Home from '../pages/home';
 import User from '../pages/user';
 import Albums from '../pages/albums';
+import Album from '../pages/albums/album';
 import Artists from '../pages/artists';
 import Artist from '../pages/artists/artist';
 import ArtistAlbum from '../pages/artists/artist/album';
@@ -41,6 +42,7 @@ const PlayerRoutes = () => {
       <Route path="/artists/:id" element={<AuthRequire><Artist /></AuthRequire>} />
       <Route path="/artists/:artistId/:albumId" element={<AuthRequire><ArtistAlbum /></AuthRequire>} />
       <Route path="/albums" element={<AuthRequire><Albums /></AuthRequire>} />
+      <Route path="/albums/:albumId" element={<AuthRequire><Album /></AuthRequire>} />
       <Route path="/play-lists" element={<AuthRequire><PlayLists /></AuthRequire>} />
       <Route path="/play-lists/:id" element={<AuthRequire><PlayList /></AuthRequire>} />
       <Route path="/tracks" element={<AuthRequire><Tracks /></AuthRequire>} />

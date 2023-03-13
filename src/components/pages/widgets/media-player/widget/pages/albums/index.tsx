@@ -8,14 +8,20 @@ import { useAlbumsData } from '../../store/albums';
 import { useArtistsActions } from '../../store/actions/albums';
 
 import styles from './style.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const AlbumsPage = () => {
+  const navigation = useNavigate();
   const { loading, albums } = useAlbumsData();
   const { onFetchAlbums } = useArtistsActions();
 
   useEffect(() => {
     onFetchAlbums().then();
   }, []);
+
+  const onOpenAlbumDetails = (id) => {
+    navigation(id);
+  };
 
   const renderAlbums = () => {
     if (loading) {
@@ -33,6 +39,7 @@ const AlbumsPage = () => {
               image={item.image}
               title={item.name}
               subtitle={`${item.totalTracks} Tracks`}
+              onPress={() => onOpenAlbumDetails(item.id)}
             />
           ))
         }

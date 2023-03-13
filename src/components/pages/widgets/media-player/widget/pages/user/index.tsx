@@ -8,9 +8,10 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import NoteRoundedIcon from '@mui/icons-material/NoteRounded';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
-import TrackList from '../../components/track-list';
-import MediaBanner from '../../components/cards/media-banner';
 import Loader from '../../components/loader';
+import TrackList from '../../components/track-list';
+import Followers from '../../components/labels/followers';
+import MediaBanner from '../../components/cards/media-banner';
 
 import { useUserData } from '../../store/user';
 import { useUserActions } from '../../store/actions/user';
@@ -71,7 +72,7 @@ const UserPage = () => {
           </label>
           <label className={styles.followers}>
             <PeopleAltRoundedIcon />
-            <span className={styles.total}>{ `${user.followers} followers` }</span>
+            <Followers value={user.followers} />
           </label>
           <label className={styles.product}>
             <NoteRoundedIcon />

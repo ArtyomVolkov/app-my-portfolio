@@ -1,0 +1,67 @@
+.album {
+  display: flex;
+  flex-direction: column;
+  background: inherit;
+  height: 100%;
+
+  .headline {
+    display: flex;
+    align-items: center;
+
+    .backButton {
+      margin-right: 5px;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  .header {
+    .label {
+      font-size: 16px;
+      color: #0849e9;
+      font-weight: 500;
+    }
+    .details {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .tracksCount, .releaseDate {
+        font-size: 16px;
+        font-weight: 500;
+        color: #6a6969;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        svg {
+          color: #111111;
+        }
+      }
+
+      .tracksCount {
+        svg {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  .body {
+    flex: 1;
+    display: grid;
+    position: relative;
+    overflow: auto;
+    background: inherit;
+
+    .tracks {
+      .title {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+}

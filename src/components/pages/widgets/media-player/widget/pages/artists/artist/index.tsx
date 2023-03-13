@@ -8,9 +8,10 @@ import PlaylistPlayRoundedIcon from '@mui/icons-material/PlaylistPlayRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
-import MediaCard from '../../../components/cards/media';
-import MediaBanner from '../../../components/cards/media-banner';
 import Loader from '../../../components/loader';
+import MediaCard from '../../../components/cards/media';
+import Followers from '../../../components/labels/followers';
+import MediaBanner from '../../../components/cards/media-banner';
 
 import { useArtistActions } from '../../../store/actions/artist';
 import { useArtistData } from '../../../store/artist';
@@ -64,7 +65,7 @@ const Artist = () => {
             </div>
             <div className={styles.followers}>
               <PeopleAltRoundedIcon />
-              <span>{ `${artist.followers} Followers` }</span>
+              <Followers value={artist.followers} />
             </div>
           </div>
         </MediaBanner>

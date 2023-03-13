@@ -11,6 +11,7 @@ import PlaylistPlayRoundedIcon from '@mui/icons-material/PlaylistPlayRounded';
 import ScrollViewGradient from '@shared/components/scroll-view';
 import Loader from '../../../components/loader';
 import TrackList from '../../../components/track-list';
+import Followers from '../../../components/labels/followers';
 import MediaBanner from '../../../components/cards/media-banner';
 
 import { mergeClassNames } from '@utils/common';
@@ -57,7 +58,7 @@ const PlayList = () => {
             </div>
             <div className={styles.followers}>
               <PeopleAltRoundedIcon />
-              <span>{ `${playlist.followers} Followers` }</span>
+              <Followers value={playlist.followers} />
             </div>
             <div className={styles.availability}>
               <PublicRoundedIcon />
