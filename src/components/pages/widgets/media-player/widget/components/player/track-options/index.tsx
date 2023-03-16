@@ -8,10 +8,15 @@ import VolumeOffRoundedIcon from '@mui/icons-material/VolumeOffRounded';
 
 import styles from './style.module.scss';
 
-const TrackOptions = () => {
+interface ITrackOptions {
+  changeVolume: (value) => void,
+}
+
+const TrackOptions: React.FC<ITrackOptions> = ({ changeVolume }) => {
   const [volume, setVolume] = useState(70);
 
   const onChangeVolume = (e, value) => {
+    changeVolume(volume/100);
     setVolume(value);
   };
 
@@ -23,7 +28,7 @@ const TrackOptions = () => {
   };
 
   return (
-    <div className={styles.trackOptions}>
+    <div className={styles.track}>
       <div className={styles.options}>
         <IconButton>
           <MoreHorizRoundedIcon sx={{ fontSize: 28 }} />

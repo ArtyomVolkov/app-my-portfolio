@@ -38,4 +38,5 @@ export interface ITrack {
   artists: string,
   album: string,
   image: string,
+  uri?: string,
 }

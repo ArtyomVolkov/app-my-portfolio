@@ -12,13 +12,19 @@ import { mergeClassNames } from '@utils/common';
 
 import styles from './style.module.scss';
 
-const TrackActions = () => {
+interface ITrackActions {
+  onPlay: () => void,
+  onPlayNext: () => void,
+  onPlayPrevious: () => void,
+}
+const TrackActions: React.FC<ITrackActions> = ({ onPlay, onPlayNext, onPlayPrevious }) => {
   const [play, setPlay] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
 
   const onTogglePlay = () => {
     setPlay(!play);
+    onPlay();
   };
 
   const onToggleShuffle = () => {
@@ -35,7 +41,7 @@ const TrackActions = () => {
         <IconButton onClick={onToggleShuffle}>
           <ShuffleRoundedIcon sx={{ fontSize: 20 }} />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={onPlayPrevious}>
           <SkipPreviousRoundedIcon sx={{ fontSize: 28 }} />
         </IconButton>
         <IconButton onClick={onTogglePlay}>
@@ -46,7 +52,7 @@ const TrackActions = () => {
           }
 
         </IconButton>
-        <IconButton>
+        <IconButton onClick={onPlayNext}>
           <SkipNextRoundedIcon sx={{ fontSize: 28 }} />
         </IconButton>
         <IconButton

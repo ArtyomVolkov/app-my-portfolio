@@ -23,6 +23,7 @@ export const useFavoriteTracksActions = () => {
         album: track.album.name,
         artists: getTrackArtists(track.artists),
         image: getImageSrc(track.album.images, 200),
+        uri: track.uri,
       })));
       setLoading(false);
     } catch (e) {

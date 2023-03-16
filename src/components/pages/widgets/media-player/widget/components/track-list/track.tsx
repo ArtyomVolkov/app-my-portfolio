@@ -14,15 +14,20 @@ interface ITrack {
   index: number,
   track: TrackData,
   namePriority: string,
+  onSetPlayTrack?: (uri) => void,
 }
 
-export const Track: React.FC<ITrack> = ({ track, index, namePriority }) => {
+export const Track: React.FC<ITrack> = ({ track, index, namePriority, onSetPlayTrack }) => {
   const duration = useMemo(() => {
     return formatDuration(track.duration_ms, 1000);
   }, [track.duration_ms]);
 
+  const onPress = () => {
+    onSetPlayTrack(track.uri);
+  };
+
   return (
-    <div key={track.id} className={styles.track}>
+    <div key={track.id} className={styles.track} onClick={onPress}>
       <span className={styles.number}>{index+1}</span>
       <img src={track.image} alt="album" className={styles.image} />
       <div className={mergeClassNames([styles.trackName, namePriority])}>

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { getAccessToken, saveAccessToken } from '../services/auth-token';
+import { getAccessToken } from '../services/auth-token';
 
 interface IPlayerLayout {
   fullWidth: boolean,
@@ -10,6 +10,9 @@ interface IPlayerLayout {
 interface IPlayerAuthData {
   token: string,
   setToken: (token) => void,
+  getStore: () => {
+    token: string,
+  },
 }
 
 export const useLayoutData = create<IPlayerLayout>((set) => ({
@@ -24,15 +27,26 @@ export const useLayoutData = create<IPlayerLayout>((set) => ({
   }
 }));
 
-export const useAuthData = create<IPlayerAuthData>((set) => ({
-  token: getAccessToken(), // by default
+export const useAuthData = create<IPlayerAuthData>((set, get) => ({
+  token: getAccessToken(),
   setToken: (token) => {
-    // encrypted and store value in cookies
-    saveAccessToken(token);
-
     set((state) => ({
       ...state,
+      loading: false,
       token
     }));
+  },
+  setLoading: (loading) => {
+    set((state) => ({
+      ...state,
+      loading,
+    }));
+  },
+  getStore: () => {
+    const { token } = get();
+
+    return {
+      token,
+    };
   }
 }));

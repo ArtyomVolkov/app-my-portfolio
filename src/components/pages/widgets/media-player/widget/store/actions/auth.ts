@@ -1,21 +1,65 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getUserInfo } from '../../api/user';
+import { useAuthData } from '../../store';
 import { useUserData } from '../../store/user';
 
 import { getImageSrc } from '../../utils/common';
+import { saveAccessToken } from '../../services/auth-token';
 
 export const useAuthActions = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setUserData } = useUserData();
+  const { setToken, getStore } = useAuthData();
+  const { user, setUserData } = useUserData();
+
+  const onSetToken = (token) => {
+    saveAccessToken(token);
+    setToken(token);
+  };
+
+  const onFetchUser = async () => {
+    if (user) {
+      return;
+    }
+    const { token } = getStore();
+
+    if (!token) {
+      return;
+    }
+
+    try {
+      const data = await getUserInfo(token);
+
+      if (data?.error?.status === 401) {
+        onLogout();
+        return;
+      }
+
+      setUserData({
+        name: data.display_name,
+        image: getImageSrc(data.images, 400),
+        followers: data.followers.total,
+        email: data.email,
+        product: data.product,
+        country: data.country?.toLowerCase() || 'en',
+        spotifyURL: data.external_urls.spotify
+      });
+    } catch (e) {
+      navigate('/widgets/media-player/login', { replace: true });
+    }
+  };
 
   const openSocialAuthModal = () => {
     const clientId = '48b22f435e084cebb6a38e338310dcaf';
     const spotifyAuth = 'https://accounts.spotify.com/authorize';
     const redirectURI = 'http://localhost:3000/widgets/media-player/spotify-auth';
     const scopes = [
+      'streaming', // for premium Spotify account
       'user-read-private',
+      'user-read-playback-state',
+      'user-modify-playback-state',
+      'user-read-currently-playing',
       'user-read-email',
       'user-library-read',
       'user-top-read',
@@ -60,33 +104,6 @@ export const useAuthActions = () => {
     navigate(location.pathname.replace('login', ''), { replace: true });
   };
 
-  const onFetchUser = async (token) => {
-    if (!token) {
-      return;
-    }
-
-    try {
-      const data = await getUserInfo(token);
-
-      if (data?.error?.status === 401) {
-        onLogout();
-        return;
-      }
-
-      setUserData({
-        name: data.display_name,
-        image: getImageSrc(data.images, 400),
-        followers: data.followers.total,
-        email: data.email,
-        product: data.product,
-        country: data.country?.toLowerCase() || 'en',
-        spotifyURL: data.external_urls.spotify
-      });
-    } catch (e) {
-      navigate('/widgets/media-player/login', { replace: true });
-    }
-  };
-
   const onCheckRedirect = (user) => {
     if (!user) {
       return;
@@ -96,6 +113,7 @@ export const useAuthActions = () => {
   }
 
   return {
+    onSetToken,
     onLogin,
     onLogout,
     onFetchUser,

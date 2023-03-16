@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import CircularProgress from '@mui/material/CircularProgress';
@@ -7,7 +7,6 @@ import PlayerRoutes from './routes';
 import Player from './components/player';
 import NavBar from './components/nav-bar';
 
-import { useAuthData } from './store';
 import { useAuthActions } from './store/actions/auth';
 import { mergeClassNames } from '@utils/common';
 
@@ -16,8 +15,7 @@ import styles from './style.module.scss';
 const PlayerWidget = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const { onFetchUser } = useAuthActions();
-  const { token, setToken } = useAuthData();
+  const { onFetchUser, onSetToken } = useAuthActions();
 
   useEffect(() => {
     onFetchData();
@@ -29,16 +27,17 @@ const PlayerWidget = () => {
   }, []);
 
   const onMessageReceive = (evt) => {
-    if (evt.data && evt.data.authType === 'spotify-auth') {
-      setToken(evt.data.access_token);
-      onFetchUser(evt.data.access_token).then(() => {
-        navigate('/widgets/media-player/user');
-      });
+    if (!evt.data || evt.data.authType !== 'spotify-auth') {
+      return;
     }
+    onSetToken(evt.data.access_token);
+    onFetchUser().then(() => {
+      navigate('/widgets/media-player/user');
+    });
   };
 
   const onFetchData = () => {
-    onFetchUser(token).finally(() => {
+    onFetchUser().finally(() => {
       setLoading(false);
     });
   };
