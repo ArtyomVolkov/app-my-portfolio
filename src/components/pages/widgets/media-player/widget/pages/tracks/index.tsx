@@ -32,13 +32,11 @@ const TracksPage = () => {
   return (
     <div className={styles.favoriteTracks}>
       <p className={styles.title}>Favorite Tracks</p>
+      <ScrollViewGradient gateHeight={30}>
       <div className={styles.trackList}>
-        <ScrollViewGradient gateHeight={30}>
-          {
-            renderContent()
-          }
-        </ScrollViewGradient>
+        { renderContent() }
       </div>
+      </ScrollViewGradient>
     </div>
   );
 }

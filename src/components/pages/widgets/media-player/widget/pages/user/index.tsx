@@ -36,12 +36,10 @@ const UserPage = () => {
     return (
       <section className={styles.topTracks}>
         <p className={styles.title}>My Top tracks</p>
-        <ScrollViewGradient gateHeight={50}>
-          <TrackList
-            data={topTracks}
-            trackNamePriority="track"
-          />
-        </ScrollViewGradient>
+        <TrackList
+          data={topTracks}
+          trackNamePriority="track"
+        />
       </section>
     );
   };
@@ -52,48 +50,53 @@ const UserPage = () => {
 
   return (
     <div className={styles.userPage}>
-      <MediaBanner image={user.image} title={user.name} className={styles.header}>
-        <div className={styles.logout}>
-          <Button
-            color="inherit"
-            variant="outlined"
-            startIcon={<LogoutRoundedIcon />}
-            onClick={onLogout}
-          >
-            Logout
-          </Button>
-        </div>
-        <div className={styles.userCaption}>
-          <label className={styles.email}>{ user.email }</label>
-        </div>
-        <section className={styles.socialPanel}>
-          <label className={styles.country}>
-            <img src={`https://flagcdn.com/w40/${user.country}.png`} alt="country" />
-          </label>
-          <label className={styles.followers}>
-            <PeopleAltRoundedIcon />
-            <Followers value={user.followers} />
-          </label>
-          <label className={styles.product}>
-            <NoteRoundedIcon />
-            <span className={styles.subscription}>{ user.product }</span>
-          </label>
-          <label>
-            <Link
-              href={user.spotifyURL}
-              className={styles.spotifyLink}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <LaunchRoundedIcon />
-              <span>spotify</span>
-            </Link>
-          </label>
-        </section>
-      </MediaBanner>
-      {
-        renderTopTracks()
-      }
+      <p className={styles.title}>User</p>
+      <ScrollViewGradient gateHeight={50}>
+        <>
+          <MediaBanner image={user.image} title={user.name} className={styles.header}>
+            <div className={styles.logout}>
+              <Button
+                color="inherit"
+                variant="outlined"
+                startIcon={<LogoutRoundedIcon />}
+                onClick={onLogout}
+              >
+                Logout
+              </Button>
+            </div>
+            <div className={styles.userCaption}>
+              <label className={styles.email}>{ user.email }</label>
+            </div>
+            <section className={styles.socialPanel}>
+              <label className={styles.country}>
+                <img src={`https://flagcdn.com/w40/${user.country}.png`} alt="country" />
+              </label>
+              <label className={styles.followers}>
+                <PeopleAltRoundedIcon />
+                <Followers value={user.followers} />
+              </label>
+              <label className={styles.product}>
+                <NoteRoundedIcon />
+                <span className={styles.subscription}>{ user.product }</span>
+              </label>
+              <label>
+                <Link
+                  href={user.spotifyURL}
+                  className={styles.spotifyLink}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <LaunchRoundedIcon />
+                  <span>spotify</span>
+                </Link>
+              </label>
+            </section>
+          </MediaBanner>
+          {
+            renderTopTracks()
+          }
+        </>
+      </ScrollViewGradient>
     </div>
   );
 }

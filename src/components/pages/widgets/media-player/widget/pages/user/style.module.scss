@@ -4,6 +4,10 @@
   height: 100%;
   background: inherit; // for scroll-view gate gradient
 
+  .title {
+    font-weight: 500;
+  }
+
   .userHeadline {
     display: flex;
 
@@ -100,6 +104,7 @@
     flex-direction: column;
     overflow: hidden;
     background: inherit; // for scroll-view gate gradient
+    padding-bottom: 10px;
 
     .title {
       font-weight: 500;

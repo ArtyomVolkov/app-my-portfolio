@@ -18,6 +18,7 @@ export const useUserActions = () => {
       const topTracks = await getTopItems(token, 'tracks');
 
       setTopTracks(topTracks.items.map((item) =>({
+        uri: item.uri,
         id: item.id,
         name: item.name,
         duration_ms: item.duration_ms,

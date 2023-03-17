@@ -10,11 +10,11 @@
   }
 
   .playListCards {
-    padding: 1px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     overflow: auto;
     gap: 20px;
+    padding-bottom: 20px;
   }
 }

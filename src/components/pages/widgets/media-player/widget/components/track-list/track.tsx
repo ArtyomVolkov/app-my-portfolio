@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import IconButton from '@mui/material/IconButton';
+import PlayCircleOutlineRoundedIcon from '@mui/icons-material/PlayCircleOutlineRounded';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 
 import { ITrack as TrackData } from '../../shared/interfaces/music-store';
@@ -11,13 +12,14 @@ import { formatDuration } from '../../utils/common';
 import styles from './style.module.scss';
 
 interface ITrack {
+  isActive: boolean,
   index: number,
   track: TrackData,
   namePriority: string,
   onSetPlayTrack?: (uri) => void,
 }
 
-export const Track: React.FC<ITrack> = ({ track, index, namePriority, onSetPlayTrack }) => {
+export const Track: React.FC<ITrack> = ({ track, isActive, index, namePriority, onSetPlayTrack }) => {
   const duration = useMemo(() => {
     return formatDuration(track.duration_ms, 1000);
   }, [track.duration_ms]);
@@ -27,8 +29,16 @@ export const Track: React.FC<ITrack> = ({ track, index, namePriority, onSetPlayT
   };
 
   return (
-    <div key={track.id} className={styles.track} onClick={onPress}>
-      <span className={styles.number}>{index+1}</span>
+    <div
+      key={track.id}
+      onClick={onPress}
+      className={mergeClassNames([styles.track, isActive && styles.active])}
+    >
+      <span className={styles.number}>
+        {
+          isActive ? <PlayCircleOutlineRoundedIcon className={styles.playIcon} /> : `${index+1}`
+        }
+      </span>
       <img src={track.image} alt="album" className={styles.image} />
       <div className={mergeClassNames([styles.trackName, namePriority])}>
         <label className={styles.artist}>{ track.artists }</label>

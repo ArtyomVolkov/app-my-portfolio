@@ -5,12 +5,13 @@ import { ILoading } from '../shared/interfaces/music-store';
 interface ITrackData {
   name: string,
   artists: string,
+  duration: number,
+  position: number,
   album: {
     name: string,
     image: string,
   },
-  duration: number,
-  position: number,
+  uri?: string,
 }
 
 interface IPlayer extends ILoading {

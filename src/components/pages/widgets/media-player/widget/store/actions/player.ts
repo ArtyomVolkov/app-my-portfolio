@@ -90,10 +90,20 @@ export const usePlayerActions = () => {
         name: data.track_window.current_track.album.name,
         image: getImageSrc(data.track_window.current_track.album.images, 300)
       },
+      uri: data.track_window.current_track.uri
     });
   };
 
   const onSetPlayTrack = async (trackURI) => {
+    const { paused, track } = getStore();
+
+    if (!paused && track.uri === trackURI) {
+      return;
+    }
+    setTrack({
+      ...track,
+      uri: trackURI,
+    });
     await setPlayTrack(token, trackURI);
   };
 
