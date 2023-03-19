@@ -5,6 +5,7 @@ export interface IUser {
   country: string,
   followers: number,
   product: string,
+  uri: string,
   spotifyURL: string,
 }
 

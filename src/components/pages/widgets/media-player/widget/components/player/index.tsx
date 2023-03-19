@@ -6,26 +6,63 @@ import TrackOptions from './track-options';
 
 import { useAuthData } from '../../store';
 import { usePlayerData } from '../../store/player';
+import { useUserData } from '../../store/user';
+
 import { usePlayerActions } from '../../store/actions/player';
 import { mergeClassNames } from '@utils/common';
+
+import SpotifyPlayer from '../../services/spotify-player';
 
 import styles from './style.module.scss';
 
 const Player = () => {
   const { token } = useAuthData();
-  const { loading, paused, track } = usePlayerData();
-  const { onInit, onDestroy, onTogglePlay, onPlayNext, onPlayPrevious, onChangeVolume, onChangePosition } = usePlayerActions();
+  const { user } = useUserData();
+  const { initialized, paused, track } = usePlayerData();
+  const { setTransferPlayback, setPlaybackChange, onTogglePlay, onPlayNext, onPlayPrevious, onChangeVolume, onChangeSeek } = usePlayerActions();
 
   useEffect(() => {
-    onInit();
-
-    return () => {
-      onDestroy();
-    };
+    SpotifyPlayer.initialize(token, onInitialized);
   }, [token]);
 
+  useEffect(() => {
+    return () => {
+      SpotifyPlayer.removeEventListener('ready', onReady);
+      SpotifyPlayer.removeEventListener('playback_error', onError);
+      SpotifyPlayer.removeEventListener('initialization_error', onError);
+      SpotifyPlayer.removeEventListener('authentication_error', onError);
+      SpotifyPlayer.removeEventListener('player_state_changed', onPlayerStateChange);
+      SpotifyPlayer.destroy();
+    }
+  }, [])
+
+  const onInitialized = () => {
+    SpotifyPlayer.addEventListener('ready', onReady);
+    SpotifyPlayer.addEventListener('playback_error', onError);
+    SpotifyPlayer.addEventListener('initialization_error', onError);
+    SpotifyPlayer.addEventListener('authentication_error', onError);
+    SpotifyPlayer.addEventListener('player_state_changed', onPlayerStateChange);
+  };
+
+  const onReady = async ({ device_id }) => {
+    console.log('Ready with Device ID', device_id);
+    await setTransferPlayback(device_id);
+  };
+
+  const onError = ({ message }) => {
+    console.error(message);
+  };
+
+  const onPlayerStateChange = (data) => {
+    setPlaybackChange(data);
+  };
+
+  if (!user) {
+    return null;
+  }
+
   return (
-    <div className={mergeClassNames([styles.player, loading && styles.loading])}>
+    <div className={mergeClassNames([styles.player, !initialized && styles.loading])}>
       <div className={styles.songMedia}>
         <div className={styles.songImage}>
           <img
@@ -40,6 +77,7 @@ const Player = () => {
       </div>
       <div className={styles.trackPanel}>
         <TrackActions
+          paused={paused}
           onPlay={onTogglePlay}
           onPlayNext={onPlayNext}
           onPlayPrevious={onPlayPrevious}
@@ -48,7 +86,7 @@ const Player = () => {
           paused={paused}
           duration={track.duration}
           position={track.position}
-          changePosition={onChangePosition}
+          changePosition={onChangeSeek}
         />
       </div>
       <div className={styles.trackOptions}>

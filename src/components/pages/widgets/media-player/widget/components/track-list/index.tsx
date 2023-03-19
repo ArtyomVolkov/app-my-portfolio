@@ -3,19 +3,18 @@ import React from 'react';
 import Track from './track';
 
 import { usePlayerData } from '../../store/player';
-import { usePlayerActions } from '../../store/actions/player';
 import { ITrack } from '../../shared/interfaces/music-store';
 
 import styles from './style.module.scss';
 
 interface ITrackList {
   data: Array<ITrack>,
-  trackNamePriority?: 'artist'|'track'
+  trackNamePriority?: 'artist'|'track',
+  onSetPlayTrack?: (uri) => void,
 }
 
-const TrackList: React.FC<ITrackList> = ({ data, trackNamePriority= 'artist' }) => {
-  const { track } = usePlayerData();
-  const { onSetPlayTrack } = usePlayerActions();
+const TrackList: React.FC<ITrackList> = ({ data, trackNamePriority= 'artist', onSetPlayTrack }) => {
+  const { paused, track } = usePlayerData();
 
   if (!data) {
     return null;
@@ -28,6 +27,8 @@ const TrackList: React.FC<ITrackList> = ({ data, trackNamePriority= 'artist' }) 
             key={item.id}
             index={index}
             track={item}
+            paused={paused && track.uri === item.uri}
+            loading={track.loading && track.uri === item.uri}
             isActive={track.uri && track.uri === item.uri}
             namePriority={trackNamePriority}
             onSetPlayTrack={onSetPlayTrack}

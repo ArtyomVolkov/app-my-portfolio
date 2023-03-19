@@ -1,8 +1,7 @@
 import { create } from 'zustand';
 
-import { ILoading } from '../shared/interfaces/music-store';
-
 interface ITrackData {
+  loading: boolean,
   name: string,
   artists: string,
   duration: number,
@@ -14,14 +13,17 @@ interface ITrackData {
   uri?: string,
 }
 
-interface IPlayer extends ILoading {
+interface IPlayer {
+  initialized: boolean,
   paused: boolean,
   shuffle: boolean,
+  repeat: number,
   track: ITrackData,
-  setPlayState: (value: boolean) => void,
+  setPlayState: ({ shuffle, paused, repeat }: { shuffle: boolean, paused: boolean, repeat: number }) => void,
   setTrack: (track: ITrackData) => void,
+  setInitialize: (value: boolean) => void,
   getStore: () => ({
-    loading: boolean,
+    initialized: boolean,
     paused: boolean,
     shuffle: boolean,
     track: ITrackData,
@@ -29,10 +31,13 @@ interface IPlayer extends ILoading {
 }
 
 export const usePlayerData = create<IPlayer>((set, get) => ({
+  initialized: false,
   paused: true,
   loading: true,
   shuffle: false,
+  repeat: 0,
   track: {
+    loading: false,
     name: null,
     artists: null,
     duration: 0,
@@ -42,10 +47,10 @@ export const usePlayerData = create<IPlayer>((set, get) => ({
       image: null,
     },
   },
-  setLoading: (loading) => {
+  setInitialize: (initialized) => {
     set((state) => ({
       ...state,
-      loading,
+      initialized,
     }));
   },
   setTrack: (track) => {
@@ -54,16 +59,18 @@ export const usePlayerData = create<IPlayer>((set, get) => ({
       track,
     }));
   },
-  setPlayState: (paused) => {
+  setPlayState: ({ shuffle, paused, repeat }) => {
     set((state) => ({
       ...state,
+      shuffle,
+      repeat,
       paused,
     }));
   },
   getStore: () => {
-    const { paused, loading, shuffle, track,  } = get();
+    const { paused, shuffle, track, initialized } = get();
     return {
-      paused, loading, shuffle, track
+      initialized, paused, shuffle, track
     }
   }
 }));

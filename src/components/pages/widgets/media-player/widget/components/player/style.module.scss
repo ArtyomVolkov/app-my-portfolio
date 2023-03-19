@@ -10,7 +10,14 @@
 
   &.loading {
     opacity: 0.5;
-    pointer-events: none;
+    .songMedia, .trackPanel, .trackOptions {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  .songMedia, .trackPanel, .trackOptions {
+    transition: opacity 0.5s;
   }
 
   .songMedia {

@@ -10,7 +10,7 @@ import { useFavoriteTracksData } from '../../store/tracks';
 import styles from './style.module.scss';
 
 const TracksPage = () => {
-  const { onFetchData } = useFavoriteTracksActions();
+  const { onFetchData, onSetPlayTrack } = useFavoriteTracksActions();
   const { tracks, loading } = useFavoriteTracksData();
 
   useEffect(() => {
@@ -25,7 +25,11 @@ const TracksPage = () => {
       return null;
     }
     return (
-      <TrackList data={tracks} />
+      <TrackList
+        trackNamePriority="track"
+        data={tracks}
+        onSetPlayTrack={onSetPlayTrack}
+      />
     );
   };
 

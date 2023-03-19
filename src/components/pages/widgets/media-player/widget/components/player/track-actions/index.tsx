@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import IconButton from '@mui/material/IconButton';
 import PauseRounded from '@mui/icons-material/PauseRounded';
@@ -13,14 +13,21 @@ import { mergeClassNames } from '@utils/common';
 import styles from './style.module.scss';
 
 interface ITrackActions {
+  paused: boolean,
   onPlay: () => void,
   onPlayNext: () => void,
   onPlayPrevious: () => void,
 }
-const TrackActions: React.FC<ITrackActions> = ({ onPlay, onPlayNext, onPlayPrevious }) => {
-  const [play, setPlay] = useState(false);
+const TrackActions: React.FC<ITrackActions> = ({ paused, onPlay, onPlayNext, onPlayPrevious }) => {
+  const [play, setPlay] = useState(!paused);
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
+
+  useEffect(() => {
+    if (play === paused) {
+      setPlay(!paused);
+    }
+  }, [paused]);
 
   const onTogglePlay = () => {
     setPlay(!play);

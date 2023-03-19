@@ -37,6 +37,7 @@ export const useAuthActions = () => {
       }
 
       setUserData({
+        uri: data.uri,
         name: data.display_name,
         image: getImageSrc(data.images, 400),
         followers: data.followers.total,
