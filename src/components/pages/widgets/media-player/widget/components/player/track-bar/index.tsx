@@ -8,6 +8,7 @@ import { formatDuration } from '../../../utils/common';
 import styles from './style.module.scss';
 
 interface ITrackBar {
+  loading: boolean,
   paused: boolean,
   duration: number,
   position: number,
@@ -16,6 +17,7 @@ interface ITrackBar {
 }
 
 const TrackBar: React.FC<ITrackBar> = ({
+  loading,
   paused,
   position = 0,
   duration = 200,
@@ -32,10 +34,14 @@ const TrackBar: React.FC<ITrackBar> = ({
   }, []);
 
   useEffect(() => {
+    if (loading && position) {
+      setValue(0);
+      return;
+    }
     if (position !== value) {
       setValue(position);
     }
-  }, [position]);
+  }, [position, loading]);
 
   useEffect(() => {
     !paused ? onStartUpdate() : onStopUpdate();

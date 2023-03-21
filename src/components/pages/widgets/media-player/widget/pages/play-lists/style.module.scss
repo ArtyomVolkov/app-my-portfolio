@@ -10,9 +10,8 @@
   }
 
   .playListCards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     overflow: auto;
     gap: 20px;
     padding-bottom: 20px;

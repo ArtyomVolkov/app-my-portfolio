@@ -24,7 +24,7 @@ const PlayList = () => {
   const params = useParams();
   const navigation = useNavigate();
   const { loading, playlist, tracks } = usePlaylistData();
-  const { onFetchPlaylist } = usePlayListActions();
+  const { onFetchPlaylist, onSetPlayTrack } = usePlayListActions();
 
   useEffect(() => {
     onFetchPlaylist(params.id).then();
@@ -72,7 +72,7 @@ const PlayList = () => {
         </MediaBanner>
         <div className={styles.tracks}>
           <p className={styles.title}>Tracks</p>
-          <TrackList data={tracks} />
+          <TrackList data={tracks} onSetPlayTrack={onSetPlayTrack} />
         </div>
       </>
     )

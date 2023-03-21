@@ -9,9 +9,9 @@ import NoteRoundedIcon from '@mui/icons-material/NoteRounded';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
 import Loader from '../../components/loader';
-import TrackList from '../../components/track-list';
 import Followers from '../../components/labels/followers';
 import MediaBanner from '../../components/cards/media-banner';
+import TopArtists from './top-artists';
 
 import { useUserData } from '../../store/user';
 import { useUserActions } from '../../store/actions/user';
@@ -20,7 +20,7 @@ import { useAuthActions } from '../../store/actions/auth';
 import styles from './style.module.scss';
 
 const UserPage = () => {
-  const { loading, user, topTracks } = useUserData();
+  const { loading, user } = useUserData();
   const { onLogout } = useAuthActions();
   const { onFetchTopTracks } = useUserActions();
 
@@ -28,19 +28,15 @@ const UserPage = () => {
     onFetchTopTracks().then();
   }, []);
 
-  const renderTopTracks = () => {
+  const renderTopContent = () => {
     if (loading) {
       return <Loader />;
     }
 
     return (
-      <section className={styles.topTracks}>
-        <p className={styles.title}>My Top tracks</p>
-        <TrackList
-          data={topTracks}
-          trackNamePriority="track"
-        />
-      </section>
+      <>
+        <TopArtists />
+      </>
     );
   };
 
@@ -51,7 +47,7 @@ const UserPage = () => {
   return (
     <div className={styles.userPage}>
       <p className={styles.title}>User</p>
-      <ScrollViewGradient gateHeight={50}>
+      <ScrollViewGradient gateHeight={35}>
         <>
           <MediaBanner image={user.image} title={user.name} className={styles.header}>
             <div className={styles.logout}>
@@ -93,7 +89,7 @@ const UserPage = () => {
             </section>
           </MediaBanner>
           {
-            renderTopTracks()
+            renderTopContent()
           }
         </>
       </ScrollViewGradient>

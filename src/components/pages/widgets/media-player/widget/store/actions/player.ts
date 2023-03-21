@@ -1,4 +1,4 @@
-import { setPlayTrack, transferPlayback } from '../../api/player';
+import { transferPlayback } from '../../api/player';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
 import { useAuthData } from '../../store';
@@ -18,12 +18,15 @@ export const usePlayerActions = () => {
     if (!data) {
       return;
     }
-    const { initialized } = getStore();
+    const { initialized, track } = getStore();
 
     if (!initialized) {
       setInitialize(true);
     }
-    // TODO: prevent double update (check data props)
+    if (data.loading || track.loading) {
+      return;
+    }
+    // TODO: prevent double update (check data props); check fast track select
     setPlayState({
       paused: data.paused,
       shuffle: data.shuffle,
@@ -43,22 +46,13 @@ export const usePlayerActions = () => {
     });
   };
 
-  const onSetPlayTrack = async (trackURI) => {
-    const { paused, track } = getStore();
-
-    if (!paused && track.uri === trackURI) {
-      return;
-    }
-    setTrack({
-      ...track,
-      uri: trackURI,
-    });
-    await setPlayTrack(token, trackURI);
-  };
-
   const onTogglePlay = () => {
     SpotifyPlayer.togglePlay().then();
   };
+
+  const onPauseTrack = () => {
+    SpotifyPlayer.pauseTrack().then();
+  }
 
   const onPlayNext = () => {
     SpotifyPlayer.nextTrack().then();
@@ -84,6 +78,6 @@ export const usePlayerActions = () => {
     onTogglePlay,
     onChangeVolume,
     onChangeSeek,
-    onSetPlayTrack,
+    onPauseTrack
   }
 };

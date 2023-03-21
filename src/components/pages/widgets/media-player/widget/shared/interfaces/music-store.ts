@@ -25,6 +25,7 @@ export interface IArtist {
 
 export interface IAlbum {
   id: string,
+  uri: string,
   name: string,
   image: string,
   releaseDate: string,

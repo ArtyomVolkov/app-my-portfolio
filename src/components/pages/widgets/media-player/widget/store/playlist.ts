@@ -4,6 +4,7 @@ import { ITrack, ILoading } from '../shared/interfaces/music-store';
 
 export interface IPlaylistData {
   id: string,
+  uri: string,
   public: boolean,
   name: string,
   image: string,

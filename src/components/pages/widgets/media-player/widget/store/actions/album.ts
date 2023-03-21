@@ -3,11 +3,13 @@ import { getAlbum } from '../../api/albums';
 import { useAuthData } from '../../store';
 import { useAlbumData } from '../../store/album';
 
+import { useSharedActions } from './shared';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
 export const useAlbumActions = () => {
   const { token } = useAuthData();
-  const { album, setLoading, setAlbum, setAlbumTracks } = useAlbumData();
+  const { album, tracks, setLoading, setAlbum, setAlbumTracks } = useAlbumData();
+  const { onSetActiveTrack } = useSharedActions();
 
   const onFetchData = async (albumId) => {
     if (album && album.id === albumId) {
@@ -21,6 +23,7 @@ export const useAlbumActions = () => {
 
       setAlbum({
         id: data.id,
+        uri: data.uri,
         name: data.name,
         label: data.label,
         image: albumImage,
@@ -29,6 +32,7 @@ export const useAlbumActions = () => {
       });
       setAlbumTracks(data.tracks.items.map((item) => ({
         id: item.id,
+        uri: item.uri,
         name: item.name,
         duration_ms: item.duration_ms,
         artists: getTrackArtists(item.artists),
@@ -41,7 +45,12 @@ export const useAlbumActions = () => {
     }
   };
 
+  const onSetPlayTrack = async (trackURI) => {
+    await onSetActiveTrack(album.uri, tracks, trackURI);
+  };
+
   return {
     onFetchData,
+    onSetPlayTrack,
   }
 };

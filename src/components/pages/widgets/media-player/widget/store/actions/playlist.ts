@@ -3,11 +3,13 @@ import { getPlaylist } from '../../api/user';
 import { useAuthData } from '../../store';
 import { usePlaylistData } from '../../store/playlist';
 
+import { useSharedActions } from './shared';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
 export const usePlayListActions = () => {
   const { token } = useAuthData();
-  const { playlist, setPlaylist, setLoading, setPlaylistTracks } = usePlaylistData();
+  const { tracks, playlist, setPlaylist, setLoading, setPlaylistTracks } = usePlaylistData();
+  const { onSetActiveTrack } = useSharedActions();
 
   const onFetchPlaylist = async (playlistId) => {
     if (!playlistId || playlistId === playlist?.id) {
@@ -18,9 +20,9 @@ export const usePlayListActions = () => {
     try {
       const data = await getPlaylist(token, playlistId);
 
-      setLoading(false);
       setPlaylist({
         id: data.id,
+        uri: data.uri,
         public: data.public,
         name: data.name,
         image: getImageSrc(data.images),
@@ -30,6 +32,7 @@ export const usePlayListActions = () => {
       });
       const tracks = data.tracks.items.map(({ track }) => ({
         id: track.id,
+        uri: track.uri,
         name: track.name,
         image: getImageSrc(track.album.images),
         album: track.album.name,
@@ -37,12 +40,18 @@ export const usePlayListActions = () => {
         duration_ms: track.duration_ms
       }));
       setPlaylistTracks(tracks);
+      setLoading(false);
     } catch (e) {
       setLoading(false);
     }
   };
 
+  const onSetPlayTrack = async (trackURI) => {
+    await onSetActiveTrack(playlist.uri, tracks, trackURI);
+  };
+
   return {
     onFetchPlaylist,
+    onSetPlayTrack,
   }
 };

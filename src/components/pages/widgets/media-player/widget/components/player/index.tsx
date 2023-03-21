@@ -34,7 +34,7 @@ const Player = () => {
       SpotifyPlayer.removeEventListener('player_state_changed', onPlayerStateChange);
       SpotifyPlayer.destroy();
     }
-  }, [])
+  }, []);
 
   const onInitialized = () => {
     SpotifyPlayer.addEventListener('ready', onReady);
@@ -84,6 +84,7 @@ const Player = () => {
         />
         <TrackBar
           paused={paused}
+          loading={track.loading}
           duration={track.duration}
           position={track.position}
           changePosition={onChangeSeek}

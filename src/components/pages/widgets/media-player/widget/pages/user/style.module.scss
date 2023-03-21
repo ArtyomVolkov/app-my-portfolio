@@ -98,7 +98,7 @@
     }
   }
 
-  .topTracks {
+  .topArtists {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -110,8 +110,15 @@
       font-weight: 500;
     }
 
-    .trackList {
-      display: flex;
+    .artistsCards {
+      display: grid;
+      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+      .artistCard {
+        min-width: 150px;
+        min-height: 150px;
+      }
     }
   }
 }

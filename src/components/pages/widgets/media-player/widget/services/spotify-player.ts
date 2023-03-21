@@ -54,6 +54,10 @@ class SpotifyPlayer {
     this.instance.removeListener(name, callback);
   };
 
+  public pauseTrack = async () => {
+    await this.instance.pause();
+  }
+
   public togglePlay = async () => {
     await this.instance.togglePlay();
   }

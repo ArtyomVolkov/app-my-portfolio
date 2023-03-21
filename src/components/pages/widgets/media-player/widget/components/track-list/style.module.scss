@@ -72,7 +72,6 @@
   }
 
   .trackName {
-    flex: 1;
     display: flex;
     flex-direction: column;
     white-space: nowrap;
@@ -120,7 +119,6 @@
   }
 
   .album {
-    flex: 1;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

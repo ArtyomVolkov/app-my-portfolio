@@ -2,11 +2,14 @@ import { getTopItems } from '../../api/user';
 
 import { useAuthData } from '../../store';
 import { useUserData } from '../../store/user';
-import { getImageSrc, getTrackArtists } from '../../utils/common';
+
+import { useSharedActions } from './shared';
+import { getImageSrc } from '../../utils/common';
 
 export const useUserActions = () => {
   const { token } = useAuthData();
-  const { setLoading, topTracks, setTopTracks } = useUserData();
+  const { user, topTracks, setLoading, setTopArtists } = useUserData();
+  const { onSetActiveTrack } = useSharedActions();
 
   const onFetchTopTracks = async () => {
     if (topTracks) {
@@ -15,16 +18,13 @@ export const useUserActions = () => {
     setLoading(true);
 
     try {
-      const topTracks = await getTopItems(token, 'tracks');
+      const artists = await getTopItems(token, 'artists');
 
-      setTopTracks(topTracks.items.map((item) =>({
-        uri: item.uri,
+      setTopArtists(artists.items.map((item) => ({
         id: item.id,
         name: item.name,
-        duration_ms: item.duration_ms,
-        album: item.album.name,
-        artists: getTrackArtists(item.artists),
-        image: getImageSrc(item.album.images, 200),
+        genres: item.genres,
+        image: getImageSrc(item.images)
       })));
       setLoading(false);
     } catch (e) {
@@ -32,7 +32,12 @@ export const useUserActions = () => {
     }
   };
 
+  const onSetPlayTrack = async (trackURI) => {
+    await onSetActiveTrack(`${user.uri}:top:tracks`, topTracks, trackURI); //`${user.uri}:top:tracks`
+  };
+
   return {
     onFetchTopTracks,
+    onSetPlayTrack
   }
 };

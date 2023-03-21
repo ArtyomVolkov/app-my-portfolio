@@ -40,10 +40,10 @@ export const Track: React.FC<ITrack> = ({ track, paused, loading, isActive, inde
       return <CircularProgress className={styles.loadingTrack} size={20} />;
     }
     if (paused) {
-      return <PauseCircleOutlineRoundedIcon className={styles.playIcon} />;
+      return <PlayCircleOutlineRoundedIcon className={styles.playIcon} />;
     }
     if (isActive) {
-      return <PlayCircleOutlineRoundedIcon className={styles.playIcon} />;
+      return <PauseCircleOutlineRoundedIcon className={styles.playIcon} />;
     }
     return <span className={styles.number}>{index+1}</span>;
   }

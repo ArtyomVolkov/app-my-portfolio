@@ -13,7 +13,7 @@ export const transferPlayback = async (token, deviceId) => {
   if (resp.status === 202) {
     return null;
   }
-  return resp.json();
+  return await resp.json();
 };
 
 export const setPlayTrack = async (token, contextURI = '', uris = []) => {
@@ -38,5 +38,5 @@ export const setPlayTrack = async (token, contextURI = '', uris = []) => {
   if (resp.status === 202) {
     return null;
   }
-  return resp.json();
+  return await resp.json();
 };

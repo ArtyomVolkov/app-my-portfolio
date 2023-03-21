@@ -20,7 +20,7 @@ import styles from './style.module.scss';
 const Album = () => {
   const params = useParams<{ albumId: string }>();
   const navigation = useNavigate();
-  const { onFetchData } = useAlbumActions();
+  const { onFetchData, onSetPlayTrack } = useAlbumActions();
   const { loading, album, tracks } = useAlbumData();
 
   useEffect(() => {
@@ -59,6 +59,7 @@ const Album = () => {
           <TrackList
             data={tracks}
             trackNamePriority="track"
+            onSetPlayTrack={onSetPlayTrack}
           />
         </div>
       </>
