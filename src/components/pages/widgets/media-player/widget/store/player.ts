@@ -33,7 +33,6 @@ interface IPlayer {
 export const usePlayerData = create<IPlayer>((set, get) => ({
   initialized: false,
   paused: true,
-  loading: true,
   shuffle: false,
   repeat: 0,
   track: {

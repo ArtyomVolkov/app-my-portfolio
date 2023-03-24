@@ -26,7 +26,7 @@ interface ITrack {
 
 export const Track: React.FC<ITrack> = ({ track, paused, loading, isActive, index, namePriority, onSetPlayTrack }) => {
   const duration = useMemo(() => {
-    return formatDuration(track.duration_ms, 1000);
+    return formatDuration(track.duration_ms);
   }, [track.duration_ms]);
 
   const onPress = () => {

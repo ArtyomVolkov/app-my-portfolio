@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { getUserInfo } from '../../api/user';
+import { getUserInfo, getAccessToken } from '../../api/user';
 import { useAuthData } from '../../store';
 import { useUserData } from '../../store/user';
 
 import { getImageSrc } from '../../utils/common';
-import { saveAccessToken } from '../../services/auth-token';
+import { removeAccessToken, saveAccessToken } from '../../services/auth-token';
 
 export const useAuthActions = () => {
   const location = useLocation();
@@ -13,9 +13,17 @@ export const useAuthActions = () => {
   const { setToken, getStore } = useAuthData();
   const { user, setUserData } = useUserData();
 
-  const onSetToken = (token) => {
-    saveAccessToken(token);
-    setToken(token);
+  const onFetchAccessToken = async (code) => {
+    try {
+      const { access_token } = await getAccessToken(code);
+
+      setToken(access_token);
+      saveAccessToken(access_token);
+
+      await onFetchUser();
+      navigate('/widgets/media-player/user');
+    } catch (e) {
+    }
   };
 
   const onFetchUser = async () => {
@@ -77,7 +85,7 @@ export const useAuthActions = () => {
       left: (screen.width / 2) - (modal.width / 2),
     };
     window.open(
-      `${spotifyAuth}?client_id=${clientId}&redirect_uri=${redirectURI}&scope=${scopes}&response_type=token`,
+      `${spotifyAuth}?client_id=${clientId}&redirect_uri=${redirectURI}&scope=${scopes}&response_type=code`,
       '_blank',
       [
         'menubar=no',
@@ -98,10 +106,9 @@ export const useAuthActions = () => {
   };
 
   const onLogout = () => {
-    const expires = new Date().toUTCString();
-
+    setToken(null);
     setUserData(null);
-    document.cookie = `_MPT='';expires=${expires};path=/;Secure`;
+    removeAccessToken();
     navigate(location.pathname.replace('login', ''), { replace: true });
   };
 
@@ -114,9 +121,9 @@ export const useAuthActions = () => {
   }
 
   return {
-    onSetToken,
     onLogin,
     onLogout,
+    onFetchAccessToken,
     onFetchUser,
     onCheckRedirect
   }

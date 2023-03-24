@@ -1,9 +1,9 @@
 import path from 'path';
 import env from 'dotenv';
 
-import webpack, { Configuration as WebpackConfig } from 'webpack';
+import 'webpack';
+import DotEnvWebpack from 'dotenv-webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import InterpolateHtmlPlugin from 'interpolate-html-plugin';
 import { Configuration as WebpackDevServer } from 'webpack-dev-server';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
@@ -98,13 +98,7 @@ const MODULE = {
 };
 
 const PLUGINS = [
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    'process.env.SPOTIFY_AUTH': JSON.stringify(process.env.SPOTIFY_AUTH),
-  }),
-  new InterpolateHtmlPlugin({
-    PUBLIC_URL: '',
-  }),
+  new DotEnvWebpack(),
   new HtmlWebpackPlugin({
     template: path.resolve(__dirname, './public/index.html'),
     minify: {
@@ -159,8 +153,16 @@ const OPTIMIZATION = {
     : [],
 };
 
-interface Configuration extends WebpackConfig {
+interface Configuration {
   devServer?: WebpackDevServer;
+  devtool: boolean | string;
+  output: { path: string; filename: string; publicPath: string };
+  entry: string[];
+  performance: { maxEntrypointSize: number; maxAssetSize: number };
+  resolve: { extensions: string[]; plugins: TsconfigPathsPlugin[]; alias: { '@store': string; '@api': string; '@shared': string; '@components': string; '@pages': string; '@assets': string; '@constants': string } };
+  optimization: { minimize: boolean; minimizer: any };
+  plugins: any[];
+  module: typeof MODULE
 }
 
 const config: Configuration = {

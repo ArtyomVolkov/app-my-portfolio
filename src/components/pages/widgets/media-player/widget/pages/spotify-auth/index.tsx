@@ -6,7 +6,7 @@ const MediaPlayerAuthCallback = () => {
   }, []);
 
   const sendAuthData = () => {
-    const hash = location.hash.replace(/^#\/?/, '').split('&');
+    const hash = location.search.replace('?', '').split('&');
     const data = hash.reduce((previous, current) => {
       const [key, value] = current.split('=');
 
@@ -23,8 +23,8 @@ const MediaPlayerAuthCallback = () => {
         ...data,
         authType: 'spotify-auth'
       }, '*');
-      window.close();
     }
+    window.close();
   }
 
   return null;

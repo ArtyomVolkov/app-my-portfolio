@@ -1,9 +1,8 @@
-export const formatDuration = (value: number, multiplicity: number = 1) => {
-  const timeValue = Math.floor(value / multiplicity);
-  const minute = Math.floor(timeValue / 60);
-  const secondLeft = timeValue - minute * 60;
+export const formatDuration = (value: number) => {
+  const minutes = Math.floor((value % 3600000) / 60000);
+  const seconds = Math.floor(((value % 360000) % 60000) / 1000);
 
-  return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
+  return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 };
 
 export const getImageSrc = (data: Array<{ url: string, width: number, height: number }>, maxSize = 300) => {

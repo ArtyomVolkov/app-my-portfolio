@@ -20,3 +20,9 @@ export const saveAccessToken = (token) => {
 
   document.cookie = `_MPT=${AES.encrypt(token, process.env.SPOTIFY_AUTH).toString()};expires=${expires};path=/;Secure`;
 }
+
+export const removeAccessToken = () => {
+  const expires = new Date().toUTCString();
+
+  document.cookie = `_MPT='';expires=${expires};path=/;Secure`;
+};

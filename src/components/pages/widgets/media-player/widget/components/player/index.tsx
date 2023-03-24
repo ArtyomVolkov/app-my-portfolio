@@ -28,6 +28,9 @@ const Player = () => {
   useEffect(() => {
     return () => {
       SpotifyPlayer.removeEventListener('ready', onReady);
+      SpotifyPlayer.removeEventListener('not_ready', onNotReady);
+      SpotifyPlayer.removeEventListener('autoplay_failed', onAutoPlayFailed);
+      SpotifyPlayer.removeEventListener('account_error', onError);
       SpotifyPlayer.removeEventListener('playback_error', onError);
       SpotifyPlayer.removeEventListener('initialization_error', onError);
       SpotifyPlayer.removeEventListener('authentication_error', onError);
@@ -36,17 +39,29 @@ const Player = () => {
     }
   }, []);
 
-  const onInitialized = () => {
+  const onInitialized = (data) => {
+    console.log(data);
     SpotifyPlayer.addEventListener('ready', onReady);
+    SpotifyPlayer.addEventListener('not_ready', onNotReady);
+    SpotifyPlayer.addEventListener('account_error', onError);
     SpotifyPlayer.addEventListener('playback_error', onError);
     SpotifyPlayer.addEventListener('initialization_error', onError);
     SpotifyPlayer.addEventListener('authentication_error', onError);
+    SpotifyPlayer.addEventListener('autoplay_failed', onAutoPlayFailed);
     SpotifyPlayer.addEventListener('player_state_changed', onPlayerStateChange);
   };
 
-  const onReady = async ({ device_id }) => {
-    console.log('Ready with Device ID', device_id);
-    await setTransferPlayback(device_id);
+  const onReady = async (data) => {
+    console.log('Ready with Device ID', data);
+    await setTransferPlayback(data.device_id);
+  };
+
+  const onNotReady = async ({ device_id }) => {
+    console.log('Not Ready with Device ID', device_id);
+  };
+
+  const onAutoPlayFailed = () => {
+    console.log('Autoplay is not allowed by the browser autoplay rules');
   };
 
   const onError = ({ message }) => {

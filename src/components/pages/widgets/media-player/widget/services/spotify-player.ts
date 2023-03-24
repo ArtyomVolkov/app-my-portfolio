@@ -15,8 +15,6 @@ class SpotifyPlayer {
     if (this.instance) {
       return;
     }
-    this.createScript();
-    document.body.appendChild(this.script);
     window.onSpotifyWebPlaybackSDKReady = () => {
       this.instance = new Spotify.Player({
         name: 'A.Volkov Player Widget',
@@ -27,6 +25,8 @@ class SpotifyPlayer {
         onInit(this.instance);
       }).catch(onInit);
     }
+    this.createScript();
+    document.body.appendChild(this.script);
   };
 
   public destroy = () => {
