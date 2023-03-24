@@ -99,6 +99,7 @@ const Player = () => {
         />
         <TrackBar
           paused={paused}
+          trackUri={track.uri}
           loading={track.loading}
           duration={track.duration}
           position={track.position}

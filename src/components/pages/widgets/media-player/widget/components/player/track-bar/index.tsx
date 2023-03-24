@@ -23,6 +23,7 @@ interface IEventMessageData {
 }
 
 interface ITrackBar {
+  trackUri: string
   loading: boolean,
   paused: boolean,
   duration: number,
@@ -31,13 +32,25 @@ interface ITrackBar {
 }
 
 class TrackBar extends React.Component<ITrackBar, any> {
+  static getDerivedStateFromProps(props, state) {
+    if (props.trackUri === state.trackUri) {
+      return null;
+    }
+    return {
+      value: props.position,
+      trackUri: props.trackUri,
+    }
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
+      trackUri: props.trackUri,
       value: props.position,
     };
   }
+
   componentDidMount() {
     window.addEventListener('message', this.onMessageReceive);
   }
@@ -73,6 +86,7 @@ class TrackBar extends React.Component<ITrackBar, any> {
   render() {
     const { value } = this.state;
     const { duration } = this.props;
+    // console.log(this.state.uri, this.props.trackUri);
 
     return (
       <div className={styles.trackBar}>
