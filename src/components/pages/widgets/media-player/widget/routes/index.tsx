@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
-import Home from '../pages/home';
+import Search from '../pages/search';
 import User from '../pages/user';
 import Albums from '../pages/albums';
 import Album from '../pages/albums/album';
@@ -35,8 +35,8 @@ const AuthRequire = ({ children }) => {
 const PlayerRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<AuthRequire><Home /></AuthRequire>} />
-      <Route path="/home" element={<AuthRequire><Home /></AuthRequire>} />
+      <Route path="/" element={<AuthRequire><Search /></AuthRequire>} />
+      <Route path="/search" element={<AuthRequire><Search /></AuthRequire>} />
       <Route path="/user" element={<AuthRequire><User /></AuthRequire>} />
       <Route path="/artists" element={<AuthRequire><Artists /></AuthRequire>} />
       <Route path="/artists/:id" element={<AuthRequire><Artist /></AuthRequire>} />

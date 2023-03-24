@@ -29,7 +29,7 @@ const PlayerWidget = () => {
       return;
     }
 
-    await onFetchAccessToken(evt.data.code).then();
+    await onFetchAccessToken(evt.data.code);
   };
 
   const onFetchData = () => {

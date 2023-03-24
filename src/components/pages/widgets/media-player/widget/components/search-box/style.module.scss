@@ -1,0 +1,22 @@
+.searchBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .searchPanel {
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+
+    .searchIcon {
+      font-size: 18px;
+      color: #464646;
+    }
+  }
+
+  .searchGroup {
+    button {
+      text-transform: unset;
+    }
+  }
+}

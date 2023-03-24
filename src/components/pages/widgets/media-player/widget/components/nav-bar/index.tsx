@@ -35,7 +35,7 @@ const NavBar = () => {
     }
     return [
       { label: 'User', icon: <AccountBoxRoundedIcon />, path: 'user'},
-      { label: 'Search', icon: <ContentPasteSearchRoundedIcon />, path: 'home'},
+      { label: 'Search', icon: <ContentPasteSearchRoundedIcon />, path: 'search'},
       { label: 'Albums', icon: <AlbumIcon />, path: 'albums'},
       { label: 'Artists', icon: <AssignmentIndRoundedIcon />, path: 'artists'},
       { label: 'Play Lists', icon: <QueueMusicRoundedIcon />, path: 'play-lists'},

@@ -21,7 +21,7 @@ export const useAuthActions = () => {
       saveAccessToken(access_token);
 
       await onFetchUser();
-      navigate('/widgets/media-player/user');
+      navigate('/widgets/media-player/search');
     } catch (e) {
     }
   };
