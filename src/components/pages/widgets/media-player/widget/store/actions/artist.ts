@@ -16,18 +16,18 @@ export const useArtistActions = () => {
     setLoading(true);
 
     try {
-      const artist = await getArtist(token, artistId);
+      const artist = await getArtist(artistId);
       const albums = await getArtistAlbums(token, artistId);
 
       setArtist({
-        id: artist.id,
-        name: artist.name,
-        genres: artist.genres,
-        followers: artist.followers.total,
-        totalAlbums: albums.total,
-        image: getImageSrc(artist.images)
+        id: artist.data.id,
+        name: artist.data.name,
+        genres: artist.data.genres,
+        followers: artist.data.followers.total,
+        totalAlbums: artist.data.total,
+        image: getImageSrc(artist.data.images)
       });
-      setAlbums(albums.items.map((item) => ({
+      setAlbums(albums.data.items.map((item) => ({
         id: item.id,
         name: item.name,
         releaseDate: item.release_date,

@@ -1,10 +1,8 @@
 import { getPlaylists } from '../../api/user';
 
-import { useAuthData } from '../../store';
 import { usePlaylistsData } from '../../store/playlists';
 
 export const usePlayListsActions = () => {
-  const { token } = useAuthData();
   const { playlists, setPlaylists, setLoading } = usePlaylistsData();
 
   const onFetchPlaylists = async () => {
@@ -14,7 +12,7 @@ export const usePlayListsActions = () => {
     setLoading(true);
 
     try {
-      const data = await getPlaylists(token);
+      const { data } = await getPlaylists();
 
       setLoading(false);
       setPlaylists(data.items);

@@ -4,7 +4,6 @@ import TrackBar from './track-bar';
 import TrackActions from './track-actions';
 import TrackOptions from './track-options';
 
-import { useAuthData } from '../../store';
 import { usePlayerData } from '../../store/player';
 import { useUserData } from '../../store/user';
 
@@ -16,14 +15,15 @@ import SpotifyPlayer from '../../services/spotify-player';
 import styles from './style.module.scss';
 
 const Player = () => {
-  const { token } = useAuthData();
   const { user } = useUserData();
   const { initialized, paused, track } = usePlayerData();
   const { setTransferPlayback, setPlaybackChange, onTogglePlay, onPlayNext, onPlayPrevious, onChangeVolume, onChangeSeek } = usePlayerActions();
 
   useEffect(() => {
-    SpotifyPlayer.initialize(token, onInitialized);
-  }, [token]);
+    if (user) {
+      SpotifyPlayer.initialize(onInitialized);
+    }
+  }, [user]);
 
   useEffect(() => {
     return () => {
@@ -39,8 +39,7 @@ const Player = () => {
     }
   }, []);
 
-  const onInitialized = (data) => {
-    console.log(data);
+  const onInitialized = () => {
     SpotifyPlayer.addEventListener('ready', onReady);
     SpotifyPlayer.addEventListener('not_ready', onNotReady);
     SpotifyPlayer.addEventListener('account_error', onError);
@@ -80,10 +79,14 @@ const Player = () => {
     <div className={mergeClassNames([styles.player, !initialized && styles.loading])}>
       <div className={styles.songMedia}>
         <div className={styles.songImage}>
-          <img
-            src={track.album.image || "https://findicons.com/files/icons/2455/web_icons/48/music.png"}
-            alt="player-icon"
-          />
+          {
+            track.album.image && (
+              <img
+                src={track.album.image}
+                alt="player-icon"
+              />
+            )
+          }
         </div>
         <div className={styles.captions}>
           <label className={styles.trackName}>{ track.name }</label>

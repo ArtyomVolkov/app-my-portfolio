@@ -1,13 +1,10 @@
-import { getTopItems } from '../../api/user';
-
-import { useAuthData } from '../../store';
 import { useUserData } from '../../store/user';
 
+import { getTopItems } from '../../api/user';
 import { useSharedActions } from './shared';
 import { getImageSrc } from '../../utils/common';
 
 export const useUserActions = () => {
-  const { token } = useAuthData();
   const { user, topTracks, setLoading, setTopArtists } = useUserData();
   const { onSetActiveTrack } = useSharedActions();
 
@@ -18,9 +15,9 @@ export const useUserActions = () => {
     setLoading(true);
 
     try {
-      const artists = await getTopItems(token, 'artists');
+      const { data } = await getTopItems('artists');
 
-      setTopArtists(artists.items.map((item) => ({
+      setTopArtists(data.items.map((item) => ({
         id: item.id,
         name: item.name,
         genres: item.genres,

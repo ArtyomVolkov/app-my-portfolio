@@ -1,17 +1,15 @@
 import { transferPlayback } from '../../api/player';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
-import { useAuthData } from '../../store';
 import { usePlayerData } from '../../store/player';
 
 import SpotifyPlayer from '../../services/spotify-player';
 
 export const usePlayerActions = () => {
-  const { token } = useAuthData();
   const { setInitialize, setTrack, setPlayState, getStore } = usePlayerData();
 
   const setTransferPlayback = async (id) => {
-    await transferPlayback(token, id);
+    await transferPlayback(id);
   };
 
   const setPlaybackChange = (data) => {

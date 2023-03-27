@@ -1,24 +1,22 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { getUserInfo, getAccessToken } from '../../api/user';
-import { useAuthData } from '../../store';
+import { getUserInfo } from '../../api/user';
+import { fetchAccessToken } from '../../api/auth';
 import { useUserData } from '../../store/user';
 
 import { getImageSrc } from '../../utils/common';
-import { removeAccessToken, saveAccessToken } from '../../services/auth-token';
+import { removeAccessToken, saveTokens, getAccessToken } from '../../services/auth-token';
 
 export const useAuthActions = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setToken, getStore } = useAuthData();
   const { user, setUserData } = useUserData();
 
   const onFetchAccessToken = async (code) => {
     try {
-      const { access_token } = await getAccessToken(code);
+      const { access_token, refresh_token } = await fetchAccessToken(code);
 
-      setToken(access_token);
-      saveAccessToken(access_token);
+      saveTokens(access_token, refresh_token);
 
       await onFetchUser();
       navigate('/widgets/media-player/search');
@@ -30,19 +28,14 @@ export const useAuthActions = () => {
     if (user) {
       return;
     }
-    const { token } = getStore();
+    const token = getAccessToken();
 
     if (!token) {
       return;
     }
 
     try {
-      const data = await getUserInfo(token);
-
-      if (data?.error?.status === 401) {
-        onLogout();
-        return;
-      }
+      const { data } = await getUserInfo();
 
       setUserData({
         uri: data.uri,
@@ -106,7 +99,6 @@ export const useAuthActions = () => {
   };
 
   const onLogout = () => {
-    setToken(null);
     setUserData(null);
     removeAccessToken();
     navigate(location.pathname.replace('login', ''), { replace: true });

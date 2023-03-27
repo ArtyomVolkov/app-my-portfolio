@@ -1,3 +1,5 @@
+import { getAccessToken } from './auth-token';
+
 class SpotifyPlayer {
   private script: any;
   public instance: Spotify.Player = null;
@@ -8,8 +10,10 @@ class SpotifyPlayer {
     this.script.async = true;
   };
 
-  public initialize = (authToken, onInit) => {
-    if (!authToken) {
+  public initialize = (onInit) => {
+    const token = getAccessToken();
+
+    if (!token) {
       return;
     }
     if (this.instance) {
@@ -19,7 +23,7 @@ class SpotifyPlayer {
       this.instance = new Spotify.Player({
         name: 'A.Volkov Player Widget',
         volume: 0.75,
-        getOAuthToken: (cb) => cb(authToken)
+        getOAuthToken: (cb) => cb(token)
       });
       this.instance.connect().then(() => {
         onInit(this.instance);
@@ -33,7 +37,7 @@ class SpotifyPlayer {
     // for manual remove from DOM (Spotify SDK doesn't remove iframe after destroy function)
     const iFrame = document.querySelector('iframe[src^="https://sdk.scdn.co/"]');
 
-    this.instance.disconnect();
+    this.instance?.disconnect();
     window.onSpotifyWebPlaybackSDKReady = null;
 
     if (this.script) {
@@ -47,11 +51,11 @@ class SpotifyPlayer {
   };
 
   public addEventListener = (name, callback) => {
-    this.instance.addListener(name, callback);
+    this.instance?.addListener(name, callback);
   };
 
   public removeEventListener = (name, callback) => {
-    this.instance.removeListener(name, callback);
+    this.instance?.removeListener(name, callback);
   };
 
   public pauseTrack = async () => {

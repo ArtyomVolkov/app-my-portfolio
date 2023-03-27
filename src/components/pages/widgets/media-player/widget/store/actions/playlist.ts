@@ -1,13 +1,11 @@
 import { getPlaylist } from '../../api/user';
 
-import { useAuthData } from '../../store';
 import { usePlaylistData } from '../../store/playlist';
 
 import { useSharedActions } from './shared';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
 export const usePlayListActions = () => {
-  const { token } = useAuthData();
   const { tracks, playlist, setPlaylist, setLoading, setPlaylistTracks } = usePlaylistData();
   const { onSetActiveTrack } = useSharedActions();
 
@@ -18,7 +16,7 @@ export const usePlayListActions = () => {
     setLoading(true);
 
     try {
-      const data = await getPlaylist(token, playlistId);
+      const { data } = await getPlaylist(playlistId);
 
       setPlaylist({
         id: data.id,

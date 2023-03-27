@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -12,6 +13,7 @@ import { mergeClassNames } from '@utils/common';
 import styles from './style.module.scss';
 
 const PlayerWidget = () => {
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
   const { onFetchUser, onFetchAccessToken } = useAuthActions();
 
@@ -33,6 +35,10 @@ const PlayerWidget = () => {
   };
 
   const onFetchData = () => {
+    if (location.pathname.includes('spotify-auth')) {
+      setLoading(false);
+      return;
+    }
     onFetchUser().finally(() => {
       setLoading(false);
     });

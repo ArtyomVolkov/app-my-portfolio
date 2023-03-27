@@ -1,13 +1,11 @@
 import { getAlbum } from '../../api/albums';
 
-import { useAuthData } from '../../store';
 import { useArtistAlbum } from '../../store/artist-album';
 
 import { useSharedActions } from './shared';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
 export const useArtistAlbumActions = () => {
-  const { token } = useAuthData();
   const { album, tracks, setLoading, setAlbum, setAlbumTracks } = useArtistAlbum();
   const { onSetActiveTrack } = useSharedActions();
 
@@ -18,7 +16,7 @@ export const useArtistAlbumActions = () => {
     setLoading(true);
 
     try {
-      const data = await getAlbum(token, albumId);
+      const { data } = await getAlbum(albumId);
       const albumImage = getImageSrc(data.images);
 
       setAlbum({

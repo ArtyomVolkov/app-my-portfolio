@@ -1,7 +1,5 @@
 import { create } from 'zustand';
 
-import { getAccessToken } from '../services/auth-token';
-
 interface IPlayerLayout {
   fullWidth: boolean,
   toggleWidth: () => void,
@@ -28,18 +26,12 @@ export const useLayoutData = create<IPlayerLayout>((set) => ({
 }));
 
 export const useAuthData = create<IPlayerAuthData>((set, get) => ({
-  token: getAccessToken(),
+  token: null,
   setToken: (token) => {
     set((state) => ({
       ...state,
       loading: false,
       token
-    }));
-  },
-  setLoading: (loading) => {
-    set((state) => ({
-      ...state,
-      loading,
     }));
   },
   getStore: () => {

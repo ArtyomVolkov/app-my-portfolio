@@ -5,7 +5,7 @@ export const getCookies = () => {
     const [key, value] = cur.split('=');
 
     if (key) {
-      prev[key] = value;
+      prev[key.trim()] = value;
     }
     return prev;
   }, {});

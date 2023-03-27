@@ -1,11 +1,10 @@
-import { useAuthData } from '../index';
 import { usePlayerData } from '../player';
 
 import { usePlayerActions } from './player';
 import { setPlayTrack } from '../../api/player';
+import { getAccessToken } from '../../services/auth-token';
 
 export const useSharedActions = () => {
-  const { token } = useAuthData();
   const { setTrack, getStore, setPlayState } = usePlayerData();
   const { onTogglePlay } = usePlayerActions();
 
@@ -40,6 +39,7 @@ export const useSharedActions = () => {
       },
     });
     try {
+      const token = getAccessToken();
       await setPlayTrack(token, context, [trackURI]);
       const { track } = getStore();
 

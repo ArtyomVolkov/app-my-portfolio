@@ -2,13 +2,11 @@ import { getFavoriteTracks } from '../../api/tracks';
 import { getTrackArtists, getImageSrc } from '../../utils/common';
 import { useSharedActions } from '../../store/actions/shared';
 
-import { useAuthData } from '../../store';
 import { useFavoriteTracksData } from '../../store/tracks';
 import { useUserData } from '../../store/user';
 
 export const useFavoriteTracksActions = () => {
   const { onSetActiveTrack } = useSharedActions();
-  const { token } = useAuthData();
   const { user } = useUserData();
   const { tracks, setLoading, setTracks } = useFavoriteTracksData();
 
@@ -19,7 +17,7 @@ export const useFavoriteTracksActions = () => {
     setLoading(true);
 
     try {
-      const data = await getFavoriteTracks(token);
+      const { data } = await getFavoriteTracks();
       setTracks(data.items.map(({ track }) => ({
         id: track.id,
         name: track.name,
