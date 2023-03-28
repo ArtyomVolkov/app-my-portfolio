@@ -22,11 +22,7 @@
 
   &.loading {
     animation: pulsar 2s infinite;
-
-    .songMedia, .trackPanel, .trackOptions {
-      opacity: 0.5;
-      pointer-events: none;
-    }
+    pointer-events: none;
   }
 
   .songMedia, .trackPanel, .trackOptions {
@@ -34,12 +30,13 @@
   }
 
   .songMedia {
-    flex: 1;
+    width: 25%;
     display: grid;
     grid-template-columns: auto 1fr;
     min-width: 210px;
     grid-column-gap: 10px;
     overflow: hidden;
+    transition: min-width 0.5s;
 
     .songImage {
       width: 70px;
@@ -85,7 +82,7 @@
   }
 
   .trackPanel {
-    flex: 3;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -94,10 +91,12 @@
   }
 
   .trackOptions {
-    flex: 1;
+    width: 25%;
     min-width: 140px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    overflow: hidden;
+    transition: min-width 0.5s
   }
 }

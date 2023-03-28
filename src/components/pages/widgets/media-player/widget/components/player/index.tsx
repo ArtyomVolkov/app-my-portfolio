@@ -52,7 +52,11 @@ const Player = () => {
 
   const onReady = async (data) => {
     console.log('Ready with Device ID', data);
-    await setTransferPlayback(data.device_id);
+    try {
+      await setTransferPlayback(data.device_id);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onNotReady = async ({ device_id }) => {

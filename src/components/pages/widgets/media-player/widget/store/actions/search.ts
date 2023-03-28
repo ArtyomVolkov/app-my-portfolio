@@ -1,21 +1,61 @@
 import { searchData } from '../../api/search';
+import { getImageSrc, getTrackArtists } from '../../utils/common';
 
 import { useSearchData } from '../../store/search';
 
 export const useSearchActions = () => {
-  const { setLoading, setSearch, setSearchType, getState } = useSearchData();
+  const { setLoading, setSearch, setSearchType, getState, setAllResult } = useSearchData();
 
   const onSearch = async () => {
-    const { search, searchType } = getState();
+    const { loading, search, searchType } = getState();
 
-    if (!search) {
+    if (loading || !search) {
       return;
     }
 
     setLoading(true);
-    const data = await searchData(search, searchType);
+    const { data } = await searchData(search, searchType === 'all' ? 'album,artist,playlist,track' : searchType);
+
+    if (searchType === 'all') {
+      setAllResult({
+        albums: {
+          data: data.albums.items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            image: getImageSrc(item.images),
+            releaseDate: item.release_date,
+            totalTracks: item.total_tracks,
+          }))
+        },
+        artists: {
+          data: data.artists.items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            image: getImageSrc(item.images)
+          }))
+        },
+        playlists: {
+          data: data.playlists.items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            image: getImageSrc(item.images),
+            totalTracks: item.tracks.total,
+          }))
+        },
+        tracks: {
+          data: data.tracks.items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            duration_ms: item.duration_ms,
+            album: item.album.name,
+            artists: getTrackArtists(item.artists),
+            image: getImageSrc(item.album.images, 100),
+            uri: item.uri,
+          }))
+        },
+      });
+    }
     setLoading(false);
-    console.log(data);
   };
 
   const onChangeSearch = (e) => {

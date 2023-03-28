@@ -1,10 +1,27 @@
 import { create } from 'zustand';
 
-import { ILoading } from '../shared/interfaces/music-store';
+import { ILoading, IAlbum, IArtist } from '../shared/interfaces/music-store';
 
 interface ISearch extends ILoading {
   search: string,
   searchType: string,
+  albums: {
+    data: IAlbum[]
+  },
+  artists: {
+    data: IArtist[]
+  },
+  playlists: {
+    data: any[]
+  },
+  tracks: {
+    data: []
+  },
+  setAllResult: (data: { albums: any, artists: any, playlists: any, tracks: any }) => void,
+  setAlbums: (data) => void,
+  setArtists: (data) => void,
+  setPlaylists: (data) => void,
+  setTracks: (data) => void,
   setSearch: (value: string) => void,
   setSearchType: (type: string) => void,
   getState: () => ({
@@ -17,23 +34,52 @@ interface ISearch extends ILoading {
 export const useSearchData = create<ISearch>((set, get) => ({
   loading: false,
   search: '',
+  albums: null,
+  artists: null,
+  playlists: null,
+  tracks: null,
   searchType: 'all',
   setLoading: (loading) => {
-    set((state) => ({
-      ...state,
+    set(() => ({
       loading,
     }));
   },
   setSearch: (value) => {
-    set((state) => ({
-      ...state,
+    set(() => ({
       search: value,
     }));
   },
   setSearchType: (value) => {
-    set((state) => ({
-      ...state,
+    set(() => ({
       searchType: value,
+    }));
+  },
+  setAllResult: (data) => {
+    set(() => ({
+      albums: data.albums,
+      artists: data.artists,
+      playlists: data.playlists,
+      tracks: data.tracks
+    }));
+  },
+  setArtists: (data) => {
+    set(() => ({
+      artists: data,
+    }));
+  },
+  setAlbums: (data) => {
+    set(() => ({
+      albums: data,
+    }));
+  },
+  setPlaylists: (data) => {
+    set(() => ({
+      playlists: data,
+    }));
+  },
+  setTracks: (data) => {
+    set(() => ({
+      tracks: data,
     }));
   },
   getState: () => {
