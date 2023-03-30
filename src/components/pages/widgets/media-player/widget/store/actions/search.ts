@@ -19,7 +19,7 @@ export const useSearchActions = () => {
     if (searchType === 'all') {
       setAllResult({
         albums: {
-          data: data.albums.items.map((item) => ({
+          data: data.albums.items.map((item: { [key: string]: any }) => ({
             id: item.id,
             name: item.name,
             image: getImageSrc(item.images),
@@ -31,6 +31,7 @@ export const useSearchActions = () => {
           data: data.artists.items.map((item) => ({
             id: item.id,
             name: item.name,
+            followers: item.followers.total,
             image: getImageSrc(item.images)
           }))
         },

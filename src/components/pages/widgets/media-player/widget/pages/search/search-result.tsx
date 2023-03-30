@@ -1,12 +1,13 @@
 import React from 'react';
 import { shallow } from 'zustand/shallow'
 
-import CircularProgress from '@mui/material/CircularProgress';
 import ScrollViewGradient from '@shared/components/scroll-view';
+import Loader from '../../components/loader';
 import SearchPlaceholder from '../../components/placeholders/search';
 import Artists from '../search/artists';
 import Albums from '../search/albums';
 import Playlists from '../search/playlists';
+import Tracks from '../search/tracks';
 
 import { useSearchData } from '../../store/search';
 
@@ -33,6 +34,7 @@ const SearchResult = () => {
             <Artists />
             <Albums />
             <Playlists />
+            <Tracks />
           </div>
         );
       }
@@ -53,7 +55,7 @@ const SearchResult = () => {
       }
       case 'track': {
         return (
-          <p>Tracks</p>
+          <Tracks gridLayout />
         );
       }
       default:
@@ -66,7 +68,7 @@ const SearchResult = () => {
       return <SearchPlaceholder />;
     }
     return (
-      <ScrollViewGradient gateHeight={30}>
+      <ScrollViewGradient gateHeight={30} resetScrollPosition>
         { renderSections() }
       </ScrollViewGradient>
     );
@@ -76,9 +78,7 @@ const SearchResult = () => {
     <div className={styles.searchResult}>
       {
         loading && (
-          <div className={styles.loader}>
-            <CircularProgress />
-          </div>
+          <Loader />
         )
       }
       {

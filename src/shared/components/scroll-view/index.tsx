@@ -6,9 +6,10 @@ interface IScrollView {
   children: JSX.Element,
   gateHeight?: number,
   gradientColor?: string
+  resetScrollPosition?: boolean
 }
 
-const ScrollViewGradient: React.FC<IScrollView> = ({ children, gateHeight = 40, gradientColor }) => {
+const ScrollViewGradient: React.FC<IScrollView> = ({ children, gateHeight = 40, resetScrollPosition , gradientColor }) => {
   const childrenRef = useRef(null);
   const headerRef = useRef(null);
   const footerRef = useRef(null);
@@ -27,6 +28,12 @@ const ScrollViewGradient: React.FC<IScrollView> = ({ children, gateHeight = 40, 
     setBackground();
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (childrenRef.current && resetScrollPosition) {
+      childrenRef.current.scrollTo({ top: 0 });
+    }
+  }, [children]);
 
   const onResizeChange = () => {
     if (!childrenRef.current) {

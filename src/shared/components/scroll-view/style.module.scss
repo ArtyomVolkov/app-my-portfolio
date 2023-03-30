@@ -28,3 +28,31 @@
     @include gradient();
   }
 }
+
+.scrollViewHorizontal {
+  position: relative;
+  overflow: auto;
+  display: grid;
+  background: inherit;
+
+  .children {
+    overflow: auto;
+    background: inherit;
+  }
+
+  .leftBox {
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 100;
+    opacity: 0;
+  }
+
+  .rightBox {
+    pointer-events: none;
+    position: absolute;
+    z-index: 100;
+    opacity: 0;
+    right: 0;
+  }
+}

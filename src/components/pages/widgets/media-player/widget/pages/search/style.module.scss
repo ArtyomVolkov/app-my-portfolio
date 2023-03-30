@@ -22,6 +22,7 @@
   }
 
   .searchResult {
+    position: relative;
     display: grid;
     height: 100%;
     background: inherit;
@@ -38,18 +39,21 @@
 
     .sections {
       display: grid;
-      gap: 15px;
+      gap: 5px;
       background: inherit;
       padding-bottom: 10px;
     }
   }
 }
 
-.artists, .albums, .playlists {
+.artists, .albums, .playlists, .tracks {
   display: grid;
-  padding-bottom: 10px;
+  padding-bottom: 0;
+  background: inherit;
 
   &.gridLayout {
+    padding-bottom: 10px;
+
     .title {
       display: none;
     }
@@ -70,7 +74,6 @@
     display: flex;
     flex-direction: row;
     gap: 15px;
-    overflow: auto;
 
     .mediaCard {
       min-width: 150px;
