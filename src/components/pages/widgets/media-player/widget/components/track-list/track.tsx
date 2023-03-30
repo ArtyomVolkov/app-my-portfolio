@@ -69,7 +69,7 @@ export const Track: React.FC<ITrack> = ({ track, paused, loading, isActive, inde
         { duration }
       </label>
       <div className={styles.actions}>
-        <IconButton>
+        <IconButton onClick={(e) => e.stopPropagation()}>
           <MoreHorizRoundedIcon sx={{ fontSize: 18 }} />
         </IconButton>
       </div>

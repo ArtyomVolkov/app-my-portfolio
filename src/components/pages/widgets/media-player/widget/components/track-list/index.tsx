@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Track from './track';
+import Ripple from '@shared/components/ripple';
 
 import { usePlayerData } from '../../store/player';
 import { ITrack } from '../../shared/interfaces/music-store';
@@ -23,16 +24,17 @@ const TrackList: React.FC<ITrackList> = ({ data, trackNamePriority= 'artist', on
     <div className={styles.trackList}>
       {
         data.map((item, index) => (
-          <Track
-            key={item.id}
-            index={index}
-            track={item}
-            paused={paused && track.uri === item.uri}
-            loading={track.loading && track.uri === item.uri}
-            isActive={track.uri && track.uri === item.uri}
-            namePriority={trackNamePriority}
-            onSetPlayTrack={onSetPlayTrack}
-          />
+          <Ripple key={item.id}>
+            <Track
+              index={index}
+              track={item}
+              paused={paused && track.uri === item.uri}
+              loading={track.loading && track.uri === item.uri}
+              isActive={track.uri && track.uri === item.uri}
+              namePriority={trackNamePriority}
+              onSetPlayTrack={onSetPlayTrack}
+            />
+          </Ripple>
         ))
       }
     </div>
