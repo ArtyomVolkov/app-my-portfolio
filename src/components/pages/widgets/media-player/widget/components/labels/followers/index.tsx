@@ -5,12 +5,12 @@ interface IFollowers {
   format?: string,
 }
 
-const Followers: React.FC<IFollowers> = ({ value, format = 'en' }) => {
+const Followers: React.FC<IFollowers> = ({ value, format  }) => {
   if (Number.isNaN(value)) {
     return null;
   }
   return (
-    <span>{ new Intl.NumberFormat(format).format(value)  + ' Followers' }</span>
+    <span>{ `${value.toLocaleString(format)}`  + ' Followers' }</span>
   );
 }
 

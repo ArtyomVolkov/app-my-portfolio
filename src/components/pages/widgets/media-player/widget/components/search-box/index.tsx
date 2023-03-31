@@ -15,7 +15,10 @@ import { useSearchActions } from '../../store/actions/search';
 import styles from './style.module.scss';
 
 const SearchBox = () => {
-  const { search, searchType } = useSearchData();
+  const { search, searchType } = useSearchData((state) => ({
+    search: state.search,
+    searchType: state.searchType
+  }));
   const { onChangeSearch, onChangeSearchType, onSearch } = useSearchActions();
 
   const onKeyDown = (e) => {

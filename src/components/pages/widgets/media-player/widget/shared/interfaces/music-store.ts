@@ -33,6 +33,14 @@ export interface IAlbum {
   label?: string,
 }
 
+export interface IPlaylist {
+  id: string,
+  uri: string,
+  name: string,
+  image: string,
+  totalTracks: number,
+}
+
 export interface ITrack {
   id: string,
   name: string,

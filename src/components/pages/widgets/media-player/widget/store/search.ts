@@ -1,23 +1,38 @@
 import { create } from 'zustand';
 
-import { ILoading, IAlbum, IArtist } from '../shared/interfaces/music-store';
+import { ILoading, IAlbum, IArtist, ITrack, IPlaylist } from '../shared/interfaces/music-store';
+
+export enum ESearchType {
+  all = 'all',
+  album = 'album',
+  artist = 'artist',
+  playlist = 'playlist',
+  track = 'track'
+}
 
 interface ISearch extends ILoading {
   search: string,
   searchType: string,
+  all: {
+    search: string,
+  },
   albums: {
+    search: string,
     data: IAlbum[]
   },
   artists: {
+    search: string,
     data: IArtist[]
   },
   playlists: {
-    data: any[]
+    search: string,
+    data: IPlaylist[]
   },
   tracks: {
-    data: []
+    search: string,
+    data: ITrack[]
   },
-  setAllResult: (data: { albums: any, artists: any, playlists: any, tracks: any }) => void,
+  setAllResult: (data: { all: any, albums: any, artists: any, playlists: any, tracks: any }) => void,
   setAlbums: (data) => void,
   setArtists: (data) => void,
   setPlaylists: (data) => void,
@@ -28,12 +43,32 @@ interface ISearch extends ILoading {
     loading: boolean,
     search: string,
     searchType: string,
+    all: {
+      search: string,
+    },
+    albums: {
+      search: string,
+      data: IAlbum[]
+    },
+    artists: {
+      search: string,
+      data: IArtist[]
+    },
+    playlists: {
+      search: string,
+      data: any[]
+    },
+    tracks: {
+      search: string,
+      data: ITrack[]
+    },
   }),
 }
 
 export const useSearchData = create<ISearch>((set, get) => ({
   loading: false,
   search: '',
+  all: null,
   albums: null,
   artists: null,
   playlists: null,
@@ -56,6 +91,9 @@ export const useSearchData = create<ISearch>((set, get) => ({
   },
   setAllResult: (data) => {
     set(() => ({
+      all: {
+        search: data.all.search,
+      },
       albums: data.albums,
       artists: data.artists,
       playlists: data.playlists,
@@ -89,6 +127,11 @@ export const useSearchData = create<ISearch>((set, get) => ({
       loading: state.loading,
       search: state.search,
       searchType: state.searchType,
+      all: state.all,
+      albums: state.albums,
+      artists: state.artists,
+      playlists: state.playlists,
+      tracks: state.tracks,
     }
   }
 }));

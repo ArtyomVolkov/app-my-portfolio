@@ -78,7 +78,7 @@ const SearchResult = () => {
     <div className={styles.searchResult}>
       {
         loading && (
-          <Loader />
+          <Loader className={styles.loader} />
         )
       }
       {

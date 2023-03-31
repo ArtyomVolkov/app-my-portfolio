@@ -1,12 +1,10 @@
 import { getArtist, getArtistAlbums } from '../../api/artists';
 
-import { useAuthData } from '../../store';
 import { useArtistData } from '../../store/artist';
 
 import { getImageSrc } from '../../utils/common';
 
 export const useArtistActions = () => {
-  const { token } = useAuthData();
   const { artist, setLoading, setArtist, setAlbums } = useArtistData();
 
   const onFetchArtist = async (artistId) => {
@@ -17,14 +15,14 @@ export const useArtistActions = () => {
 
     try {
       const artist = await getArtist(artistId);
-      const albums = await getArtistAlbums(token, artistId);
+      const albums = await getArtistAlbums(artistId);
 
       setArtist({
         id: artist.data.id,
         name: artist.data.name,
         genres: artist.data.genres,
         followers: artist.data.followers.total,
-        totalAlbums: artist.data.total,
+        totalAlbums: albums.data.total,
         image: getImageSrc(artist.data.images)
       });
       setAlbums(albums.data.items.map((item) => ({

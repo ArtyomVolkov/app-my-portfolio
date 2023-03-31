@@ -8,6 +8,6 @@ export const getArtist = async (artistId) => {
   return await http.get(`https://api.spotify.com/v1/artists/${artistId}`);
 };
 
-export const getArtistAlbums = async (token, artistId) => {
+export const getArtistAlbums = async (artistId) => {
   return await http.get(`https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album`);
 };
