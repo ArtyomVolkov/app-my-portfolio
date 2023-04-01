@@ -17,7 +17,11 @@ import { useArtistAlbumActions } from '../../../../store/actions/artist-album';
 
 import styles from './style.module.scss';
 
-const ArtistAlbum = () => {
+interface IArtistAlbum {
+  backButtonText?: string
+}
+
+const ArtistAlbum: React.FC<IArtistAlbum> = ({ backButtonText }) => {
   const params = useParams<{ artistId: string, albumId: string }>();
   const navigation = useNavigate();
   const { onFetchData, onSetPlayTrack } = useArtistAlbumActions();
@@ -71,7 +75,11 @@ const ArtistAlbum = () => {
         <IconButton className={styles.backButton} onClick={backToArtistsAlbums}>
           <ChevronLeftRoundedIcon />
         </IconButton>
-        <p className={styles.title}>Back to Artist's Albums</p>
+        <p className={styles.title}>
+          {
+            backButtonText || `Back to Artist's Albums`
+          }
+        </p>
       </div>
       <div className={styles.body}>
         <ScrollViewGradient gateHeight={30}>

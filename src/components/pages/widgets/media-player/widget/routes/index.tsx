@@ -37,14 +37,18 @@ const PlayerRoutes = () => {
     <Routes>
       <Route path="/" element={<AuthRequire><Search /></AuthRequire>} />
       <Route path="/search" element={<AuthRequire><Search /></AuthRequire>} />
+      <Route path="/search/artist/:id" element={<AuthRequire><Artist backButtonText="Back to Search page" /></AuthRequire>} />
+      <Route path="/search/artist/:artistId/:albumId" element={<AuthRequire><ArtistAlbum /></AuthRequire>} />
+      <Route path="/search/album/:albumId" element={<AuthRequire><Album backButtonText="Back to Search page" /></AuthRequire>} />
+      <Route path="/search/playlist/:id" element={<AuthRequire><PlayList backButtonText="Back to Search page" /></AuthRequire>} />
       <Route path="/user" element={<AuthRequire><User /></AuthRequire>} />
       <Route path="/artists" element={<AuthRequire><Artists /></AuthRequire>} />
-      <Route path="/artists/:id" element={<AuthRequire><Artist /></AuthRequire>} />
+      <Route path="/artists/:id" element={<AuthRequire><Artist backButtonText="Back to Artists" /></AuthRequire>} />
       <Route path="/artists/:artistId/:albumId" element={<AuthRequire><ArtistAlbum /></AuthRequire>} />
       <Route path="/albums" element={<AuthRequire><Albums /></AuthRequire>} />
-      <Route path="/albums/:albumId" element={<AuthRequire><Album /></AuthRequire>} />
-      <Route path="/play-lists" element={<AuthRequire><PlayLists /></AuthRequire>} />
-      <Route path="/play-lists/:id" element={<AuthRequire><PlayList /></AuthRequire>} />
+      <Route path="/albums/:albumId" element={<AuthRequire><Album backButtonText="Back to Albums"/></AuthRequire>} />
+      <Route path="/playlists" element={<AuthRequire><PlayLists /></AuthRequire>} />
+      <Route path="/playlists/:id" element={<AuthRequire><PlayList backButtonText="Back to Playlists" /></AuthRequire>} />
       <Route path="/tracks" element={<AuthRequire><Tracks /></AuthRequire>} />
       <Route path="/login" element={<Login />} />
       <Route path="/spotify-auth" element={<SpotifyAuth />} />

@@ -18,7 +18,11 @@ import { useArtistData } from '../../../store/artist';
 
 import styles from './style.module.scss';
 
-const Artist = () => {
+interface IArtist {
+  backButtonText?: string
+}
+
+const Artist: React.FC<IArtist> = ({ backButtonText }) => {
   const params = useParams();
   const navigation = useNavigate();
   const { loading, artist, albums } = useArtistData();
@@ -95,7 +99,11 @@ const Artist = () => {
         <IconButton className={styles.backButton} onClick={backToArtists}>
           <ChevronLeftRoundedIcon />
         </IconButton>
-        <p className={styles.title}>Back to Artists</p>
+        <p className={styles.title}>
+          {
+            backButtonText || 'Back'
+          }
+        </p>
       </div>
       <div className={styles.body}>
         <ScrollViewGradient gateHeight={30}>

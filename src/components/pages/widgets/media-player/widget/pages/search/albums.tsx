@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import MediaCard from '../../components/cards/media';
 import ScrollViewGradient from '@shared/components/scroll-view/horizontal';
@@ -9,7 +10,12 @@ import { mergeClassNames } from '@utils/common';
 import styles from './style.module.scss';
 
 const Albums = ({ gridLayout = false }) => {
+  const navigation = useNavigate();
   const albums = useSearchData((state) => state.albums);
+
+  const onOpenAlbumPage = (id) => {
+    navigation(`album/${id}`);
+  };
 
   if (!albums) {
     return null;
@@ -28,6 +34,7 @@ const Albums = ({ gridLayout = false }) => {
                 title={item.name}
                 subtitle={`${item.totalTracks} Tracks`}
                 className={styles.mediaCard}
+                onPress={() => onOpenAlbumPage(item.id)}
               />
             ))
           }

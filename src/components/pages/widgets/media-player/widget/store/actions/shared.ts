@@ -2,7 +2,6 @@ import { usePlayerData } from '../player';
 
 import { usePlayerActions } from './player';
 import { setPlayTrack } from '../../api/player';
-import { getAccessToken } from '../../services/auth-token';
 
 export const useSharedActions = () => {
   const { setTrack, getStore, setPlayState } = usePlayerData();
@@ -15,11 +14,13 @@ export const useSharedActions = () => {
       onTogglePlay();
       return;
     }
-    const trackItem = tracks.find(({ uri }) => trackURI === uri);
+    const trackItemIndex = tracks.findIndex(({ uri }) => trackURI === uri);
 
-    if (!trackItem) {
+    if (trackItemIndex < 0) {
       return;
     }
+    const trackItem = tracks[trackItemIndex];
+    const trackUris = !context ? tracks.map(({ uri }) => uri) :[trackURI];
 
     setPlayState({
       paused: true,
@@ -38,9 +39,9 @@ export const useSharedActions = () => {
         image: trackItem.image,
       },
     });
+
     try {
-      const token = getAccessToken();
-      await setPlayTrack(token, context, [trackURI]);
+      await setPlayTrack(context, trackUris, trackItemIndex);
       const { track } = getStore();
 
       setTrack({

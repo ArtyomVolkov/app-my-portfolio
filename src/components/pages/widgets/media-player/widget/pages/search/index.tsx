@@ -8,6 +8,7 @@ import styles from './style.module.scss';
 const Search = () => {
   return (
     <div className={styles.searchPage}>
+      <p className={styles.title}>Search</p>
       <div className={styles.header}>
         <SearchBox />
       </div>

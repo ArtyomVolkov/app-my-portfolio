@@ -67,8 +67,8 @@ const Player = () => {
     console.log('Autoplay is not allowed by the browser autoplay rules');
   };
 
-  const onError = ({ message }) => {
-    console.error(message);
+  const onError = (message) => {
+    console.log(message);
   };
 
   const onPlayerStateChange = (data) => {

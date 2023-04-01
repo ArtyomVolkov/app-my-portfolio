@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import MediaCard from '../../components/cards/media';
 import ScrollViewGradient from '@shared/components/scroll-view/horizontal';
@@ -9,7 +10,12 @@ import { useSearchData } from '../../store/search';
 import styles from './style.module.scss';
 
 const Artists = ({ gridLayout = false }) => {
+  const navigation = useNavigate();
   const artists = useSearchData((state) => state.artists);
+
+  const onOpenArtistPage = (id) => {
+    navigation(`artist/${id}`);
+  };
 
   if (!artists) {
     return null;
@@ -28,6 +34,7 @@ const Artists = ({ gridLayout = false }) => {
                 title={item.name}
                 subtitle={`${item.followers.toLocaleString()} followers`}
                 className={styles.mediaCard}
+                onPress={() => onOpenArtistPage(item.id)}
               />
             ))
           }

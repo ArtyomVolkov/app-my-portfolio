@@ -10,6 +10,13 @@ class SpotifyPlayer {
     this.script.async = true;
   };
 
+  private getOAuthToken = (cb) => {
+    console.log('request access token');
+    // TODO: make a separate request
+    const token = getAccessToken();
+    cb(token);
+  };
+
   public initialize = (onInit) => {
     const token = getAccessToken();
 
@@ -23,7 +30,7 @@ class SpotifyPlayer {
       this.instance = new Spotify.Player({
         name: 'A.Volkov Player Widget',
         volume: 0.75,
-        getOAuthToken: (cb) => cb(token)
+        getOAuthToken: this.getOAuthToken
       });
       this.instance.connect().then(() => {
         onInit(this.instance);

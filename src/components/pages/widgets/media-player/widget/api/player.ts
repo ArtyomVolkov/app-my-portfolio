@@ -6,11 +6,12 @@ export const transferPlayback = async (deviceId) => {
   });
 };
 
-export const setPlayTrack = async (token, contextURI = '', uris = []) => {
-  const payload: { uris?: string[], offset?: { uri: string }, context_uri?: string } = {};
+export const setPlayTrack = async (contextURI = '', uris = [], position = 0) => {
+  const payload: { uris?: string[], offset?: { uri?: string, position?: number }, context_uri?: string } = {};
 
   if (!contextURI && uris) {
     payload.uris = [...uris];
+    payload.offset = { position };
   } else {
     payload.context_uri = contextURI;
     payload.offset = {

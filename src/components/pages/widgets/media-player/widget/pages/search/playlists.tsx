@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import MediaCard from '../../components/cards/media';
 import ScrollViewGradient from '@shared/components/scroll-view/horizontal';
@@ -10,7 +11,12 @@ import { mergeClassNames } from '@utils/common';
 import styles from './style.module.scss';
 
 const Playlists = ({ gridLayout = false }) => {
+  const navigation = useNavigate();
   const playlists = useSearchData((state) => state.playlists);
+
+  const onOpenPlaylistPage = (id) => {
+    navigation(`playlist/${id}`);
+  };
 
   if (!playlists) {
     return null;
@@ -29,6 +35,7 @@ const Playlists = ({ gridLayout = false }) => {
                 title={item.name}
                 subtitle={`${item.totalTracks} Tracks`}
                 className={styles.mediaCard}
+                onPress={() => onOpenPlaylistPage(item.id)}
               />
             ))
           }

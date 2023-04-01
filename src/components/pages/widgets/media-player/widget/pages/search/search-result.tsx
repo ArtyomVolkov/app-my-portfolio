@@ -59,7 +59,7 @@ const SearchResult = () => {
         );
       }
       default:
-        return null
+        return null;
     }
   }
 

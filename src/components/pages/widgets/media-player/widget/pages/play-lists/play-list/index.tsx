@@ -20,7 +20,11 @@ import { usePlaylistData } from '../../../store/playlist';
 
 import styles from './style.module.scss';
 
-const PlayList = () => {
+interface IPlayList {
+  backButtonText?: string
+}
+
+const PlayList: React.FC<IPlayList> = ({ backButtonText }) => {
   const params = useParams();
   const navigation = useNavigate();
   const { loading, playlist, tracks } = usePlaylistData();
@@ -84,7 +88,9 @@ const PlayList = () => {
        <IconButton className={styles.backButton} onClick={backToPlayLists}>
          <ChevronLeftRoundedIcon />
        </IconButton>
-       <p className={styles.title}>Playlist</p>
+       <p className={styles.title}>
+         { backButtonText || 'Back' }
+       </p>
      </div>
      <div className={styles.body}>
        <ScrollViewGradient gateHeight={30}>

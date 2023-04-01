@@ -21,7 +21,7 @@
 
   .albumCards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, max-content));
     gap: 20px;
     padding-bottom: 20px;
   }
