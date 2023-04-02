@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { shallow } from 'zustand/shallow';
 
-import CircularProgress from '@mui/material/CircularProgress';
-
-import PlayerRoutes from './routes';
 import Player from './components/player';
 import NavBar from './components/nav-bar';
+import Loader from './components/loader';
+import PlayerRoutes from './routes';
 
 import { useAuthActions } from './store/actions/auth';
 import { mergeClassNames } from '@utils/common';
+
+import { useLayoutData } from './store';
 
 import styles from './style.module.scss';
 
@@ -16,6 +18,10 @@ const PlayerWidget = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
   const { onFetchUser, onFetchAccessToken } = useAuthActions();
+  const { fullScreen, toggleFullscreen } = useLayoutData((state) => ({
+    fullScreen: state.fullScreen,
+    toggleFullscreen: state.toggleFullScreen,
+  }), shallow);
 
   useEffect(() => {
     onFetchData();
@@ -44,13 +50,15 @@ const PlayerWidget = () => {
     });
   };
 
+  const onKeyDown = (e) => {
+    if (fullScreen && e.code === 'Escape') {
+      toggleFullscreen();
+    }
+  };
+
   const renderAppContent = () => {
     if (loading) {
-      return (
-        <div className={styles.loaderWrap}>
-          <CircularProgress />
-        </div>
-      );
+      return <Loader className={styles.loader} />;
     }
     return (
       <>
@@ -66,7 +74,14 @@ const PlayerWidget = () => {
   }
 
   return (
-    <div className={mergeClassNames([styles.playerWidget, loading && styles.loading])}>
+    <div
+      onKeyDown={onKeyDown}
+      className={mergeClassNames([
+        styles.playerWidget,
+        fullScreen && styles.fullScreen,
+        loading && styles.loading
+      ])}
+    >
       { renderAppContent() }
     </div>
   );

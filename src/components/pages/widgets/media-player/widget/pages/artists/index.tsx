@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
-import MediaCard from '../../components/cards/media';
+import Header from '../../components/header';
 import Loader from '../../components/loader';
+import MediaCard from '../../components/cards/media';
 
 import { useArtistsActions } from '../../store/actions/artists';
 import { useArtistsData } from '../../store/artists';
@@ -48,9 +49,7 @@ const ArtistsPage = () => {
 
   return (
     <div className={styles.artists}>
-      <div className={styles.header}>
-        <p className={styles.title}>Artists</p>
-      </div>
+      <Header title="Artists" />
       <div className={styles.body}>
         <ScrollViewGradient gateHeight={30}>
           {

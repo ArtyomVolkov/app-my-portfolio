@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Chip from '@mui/material/Chip';
-import IconButton from '@mui/material/IconButton';
-import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import PlaylistPlayRoundedIcon from '@mui/icons-material/PlaylistPlayRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
+import Header from '../../../components/header';
 import Loader from '../../../components/loader';
 import MediaCard from '../../../components/cards/media';
 import Followers from '../../../components/labels/followers';
@@ -31,10 +30,6 @@ const Artist: React.FC<IArtist> = ({ backButtonText }) => {
   useEffect(() => {
     onFetchArtist(params.id).then();
   }, []);
-
-  const backToArtists = () => {
-    navigation(-1);
-  };
 
   const onOpenArtistAlbumPage = (album) => {
     navigation(album.id);
@@ -95,16 +90,7 @@ const Artist: React.FC<IArtist> = ({ backButtonText }) => {
 
   return (
     <div className={styles.artist}>
-      <div className={styles.headline}>
-        <IconButton className={styles.backButton} onClick={backToArtists}>
-          <ChevronLeftRoundedIcon />
-        </IconButton>
-        <p className={styles.title}>
-          {
-            backButtonText || 'Back'
-          }
-        </p>
-      </div>
+      <Header title={ backButtonText || 'Back'} useHistory />
       <div className={styles.body}>
         <ScrollViewGradient gateHeight={30}>
           {

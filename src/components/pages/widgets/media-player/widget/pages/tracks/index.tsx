@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
+import Header from '../../components/header';
 import Loader from '../../components/loader';
 import TrackList from '../../components/track-list';
 
@@ -35,7 +36,7 @@ const TracksPage = () => {
 
   return (
     <div className={styles.favoriteTracks}>
-      <p className={styles.title}>Favorite Tracks</p>
+      <Header title="Favorite Tracks" />
       <ScrollViewGradient gateHeight={30}>
       <div className={styles.trackList}>
         { renderContent() }

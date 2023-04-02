@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import IconButton from '@mui/material/IconButton';
 import PlaylistPlayRoundedIcon from '@mui/icons-material/PlaylistPlayRounded';
 import InsertInvitationRoundedIcon from '@mui/icons-material/InsertInvitationRounded';
-import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
 import Loader from '../../../components/loader';
+import Header from '../../../components/header';
 import TrackList from '../../../components/track-list';
 import MediaBanner from '../../../components/cards/media-banner';
 
@@ -23,17 +22,12 @@ interface IAlbum {
 
 const Album: React.FC<IAlbum> = ({ backButtonText }) => {
   const params = useParams<{ albumId: string }>();
-  const navigation = useNavigate();
   const { onFetchData, onSetPlayTrack } = useAlbumActions();
   const { loading, album, tracks } = useAlbumData();
 
   useEffect(() => {
     onFetchData(params.albumId).then();
   }, []);
-
-  const backToAlbumsPage = () => {
-    navigation(-1);
-  };
 
   const renderContent = () => {
     if (loading) {
@@ -72,16 +66,10 @@ const Album: React.FC<IAlbum> = ({ backButtonText }) => {
 
   return (
     <div className={styles.album}>
-      <div className={styles.headline}>
-        <IconButton className={styles.backButton} onClick={backToAlbumsPage}>
-          <ChevronLeftRoundedIcon />
-        </IconButton>
-        <p className={styles.title}>
-          {
-            backButtonText || `Back to Artist's Albums`
-          }
-        </p>
-      </div>
+      <Header
+        title={backButtonText || `Back to Artist's Albums`}
+        useHistory
+      />
       <div className={styles.body}>
         <ScrollViewGradient gateHeight={30}>
           {

@@ -1,44 +1,23 @@
 import { create } from 'zustand';
 
 interface IPlayerLayout {
+  fullScreen: boolean,
   fullWidth: boolean,
   toggleWidth: () => void,
-}
-
-interface IPlayerAuthData {
-  token: string,
-  setToken: (token) => void,
-  getStore: () => {
-    token: string,
-  },
+  toggleFullScreen: () => void,
 }
 
 export const useLayoutData = create<IPlayerLayout>((set) => ({
   fullWidth: false,
-  toggleWidth: () => {
-    set((state) => {
-      return {
-        ...state,
-        fullWidth: !state.fullWidth
-      }
-    })
-  }
-}));
-
-export const useAuthData = create<IPlayerAuthData>((set, get) => ({
-  token: null,
-  setToken: (token) => {
+  fullScreen: false,
+  toggleFullScreen: () => {
     set((state) => ({
-      ...state,
-      loading: false,
-      token
+      fullScreen: !state.fullScreen
     }));
   },
-  getStore: () => {
-    const { token } = get();
-
-    return {
-      token,
-    };
+  toggleWidth: () => {
+    set((state) => ({
+      fullWidth: !state.fullWidth
+    }))
   }
 }));

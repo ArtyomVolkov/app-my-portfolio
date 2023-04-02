@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { shallow } from 'zustand/shallow';
 
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -25,7 +26,10 @@ const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useUserData();
-  const { fullWidth, toggleWidth } = useLayoutData();
+  const [fullWidth, toggleWidth ] = useLayoutData((state) => [
+    state.fullWidth,
+    state.toggleWidth
+  ], shallow);
 
   const navItems = useMemo(() => {
     if (!user) {

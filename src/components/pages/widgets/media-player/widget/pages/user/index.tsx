@@ -9,6 +9,7 @@ import NoteRoundedIcon from '@mui/icons-material/NoteRounded';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
 import Loader from '../../components/loader';
+import Header from '../../components/header';
 import Followers from '../../components/labels/followers';
 import MediaBanner from '../../components/cards/media-banner';
 import TopArtists from './top-artists';
@@ -46,7 +47,7 @@ const UserPage = () => {
 
   return (
     <div className={styles.userPage}>
-      <p className={styles.title}>User</p>
+      <Header title="User" />
       <ScrollViewGradient gateHeight={35}>
         <>
           <MediaBanner image={user.image} title={user.name} className={styles.header}>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
+import Header from '../../components/header';
 import MediaCard from '../../components/cards/media';
 import Loader from '../../components/loader';
 
@@ -48,7 +49,7 @@ const PlayListsPage = () => {
 
   return (
     <div className={styles.playLists}>
-      <p className={styles.title}>Playlists</p>
+      <Header title="Playlists" />
       <ScrollViewGradient gateHeight={30}>
         {
           renderMainContent()

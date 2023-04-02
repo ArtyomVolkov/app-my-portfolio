@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Chip from '@mui/material/Chip';
-import IconButton from '@mui/material/IconButton';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
-import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import PlaylistPlayRoundedIcon from '@mui/icons-material/PlaylistPlayRounded';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
+import Header from '../../../components/header';
 import Loader from '../../../components/loader';
 import TrackList from '../../../components/track-list';
 import Followers from '../../../components/labels/followers';
@@ -16,6 +15,7 @@ import MediaBanner from '../../../components/cards/media-banner';
 
 import { mergeClassNames } from '@utils/common';
 import { usePlayListActions } from '../../../store/actions/playlist';
+
 import { usePlaylistData } from '../../../store/playlist';
 
 import styles from './style.module.scss';
@@ -26,17 +26,12 @@ interface IPlayList {
 
 const PlayList: React.FC<IPlayList> = ({ backButtonText }) => {
   const params = useParams();
-  const navigation = useNavigate();
   const { loading, playlist, tracks } = usePlaylistData();
   const { onFetchPlaylist, onSetPlayTrack } = usePlayListActions();
 
   useEffect(() => {
     onFetchPlaylist(params.id).then();
   }, []);
-
-  const backToPlayLists = () => {
-    navigation(-1);
-  };
 
   const renderContent = () => {
     if (loading) {
@@ -84,14 +79,7 @@ const PlayList: React.FC<IPlayList> = ({ backButtonText }) => {
 
   return (
    <div className={styles.playList}>
-     <div className={styles.headline}>
-       <IconButton className={styles.backButton} onClick={backToPlayLists}>
-         <ChevronLeftRoundedIcon />
-       </IconButton>
-       <p className={styles.title}>
-         { backButtonText || 'Back' }
-       </p>
-     </div>
+     <Header title={backButtonText || 'Back'} useHistory />
      <div className={styles.body}>
        <ScrollViewGradient gateHeight={30}>
          {

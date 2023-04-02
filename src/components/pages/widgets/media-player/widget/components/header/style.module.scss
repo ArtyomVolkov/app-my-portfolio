@@ -1,0 +1,28 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+
+  .headline {
+    display: flex;
+    align-items: center;
+    line-height: 32px;
+
+    .backButton {
+      margin-right: 5px;
+      padding: 4px;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+
+  .fullscreen {
+    padding: 3px;
+  }
+}

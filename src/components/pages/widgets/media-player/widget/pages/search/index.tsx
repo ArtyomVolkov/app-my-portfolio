@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Header from '../../components/header';
 import SearchBox from '../../components/search-box';
 import SearchResult from './search-result';
 
@@ -8,7 +9,7 @@ import styles from './style.module.scss';
 const Search = () => {
   return (
     <div className={styles.searchPage}>
-      <p className={styles.title}>Search</p>
+      <Header title="Search" />
       <div className={styles.header}>
         <SearchBox />
       </div>

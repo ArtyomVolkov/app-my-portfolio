@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
 import Loader from '../../components/loader';
+import Header from '../../components/header';
 import MediaCard from '../../components/cards/media';
 
 import { useAlbumsData } from '../../store/albums';
 import { useArtistsActions } from '../../store/actions/albums';
 
 import styles from './style.module.scss';
-import { useNavigate } from 'react-router-dom';
 
 const AlbumsPage = () => {
   const navigation = useNavigate();
@@ -50,7 +51,7 @@ const AlbumsPage = () => {
   return (
     <div className={styles.albums}>
       <div className={styles.header}>
-        <p className={styles.title}>Albums</p>
+        <Header title="Albums" />
       </div>
       <div className={styles.body}>
         <ScrollViewGradient gateHeight={30}>
