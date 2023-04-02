@@ -1,4 +1,5 @@
 import { getAccessToken } from './auth-token';
+import { fetchRefreshToken } from '@pages/widgets/media-player/widget/api/auth';
 
 class SpotifyPlayer {
   private script: any;
@@ -10,11 +11,10 @@ class SpotifyPlayer {
     this.script.async = true;
   };
 
-  private getOAuthToken = (cb) => {
+  private getOAuthToken = async (cb) => {
     console.log('request access token');
-    // TODO: make a separate request
-    const token = getAccessToken();
-    cb(token);
+    const { access_token } = await fetchRefreshToken();
+    cb(access_token);
   };
 
   public initialize = (onInit) => {

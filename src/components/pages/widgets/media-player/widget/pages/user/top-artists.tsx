@@ -12,7 +12,6 @@ const TopArtists = () => {
     return null;
   }
 
-  console.log(topArtists);
   return (
     <article className={styles.topArtists}>
       <p className={styles.title}>My Top Artists</p>

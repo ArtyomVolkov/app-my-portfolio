@@ -38,7 +38,6 @@ const PlayListsPage = () => {
               image={item.images[0]?.url}
               title={item.name}
               subtitle={`${item.tracks.total} Tracks`}
-              className={styles.playList}
               onPress={() => onOpenPlayList(item.id)}
             />
           ))
