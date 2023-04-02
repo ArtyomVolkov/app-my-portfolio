@@ -5,11 +5,16 @@
   align-items: center;
   justify-content: center;
 
-  .activeRepeat {
-    color: #1e57ef;
+  .shuffle, .repeat {
+    &.active {
+      color: black;
 
+      svg {
+        transform: scale(1.2);
+      }
+    }
     svg {
-      // font-size: 22px;
+      font-size: 18px;
     }
   }
 }

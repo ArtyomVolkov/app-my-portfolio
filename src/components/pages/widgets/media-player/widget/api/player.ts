@@ -6,6 +6,18 @@ export const transferPlayback = async (deviceId) => {
   });
 };
 
+export const toggleShuffle = async (deviceId, shuffle) => {
+  return await http.put(`https://api.spotify.com/v1/me/player/shuffle?state=${shuffle}`, {
+    device_id: deviceId
+  });
+};
+
+export const toggleRepeat = async (deviceId, repeat) => {
+  return await http.put(`https://api.spotify.com/v1/me/player/repeat?state=${repeat}`, {
+    device_id: deviceId
+  });
+};
+
 export const setPlayTrack = async (contextURI = '', uris = [], position = 0) => {
   const payload: { uris?: string[], offset?: { uri?: string, position?: number }, context_uri?: string } = {};
 
@@ -20,3 +32,4 @@ export const setPlayTrack = async (contextURI = '', uris = [], position = 0) => 
   }
   return await http.put('https://api.spotify.com/v1/me/player/play', payload);
 };
+

@@ -12,3 +12,10 @@ export const getImageSrc = (data: Array<{ url: string, width: number, height: nu
 export const getTrackArtists = (data: Array<{ name: string }>) => {
   return data.map(({ name }) => name).join(', ');
 };
+
+export const getRotePaths = (pathname: string) => {
+  const paths = pathname.split('/');
+  const pmIndex = paths.indexOf('media-player');
+
+  return paths.filter((item,  index) => index > pmIndex);
+}

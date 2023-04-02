@@ -63,13 +63,14 @@ class TrackBar extends React.Component<ITrackBar, any> {
     if (!event.data || event.data.type !== 'SP_MESSAGE') {
       return;
     }
+
     if (this.props.loading && this.state.value) {
       this.setState({ value: 0 });
       return;
     }
 
     if (['PLAYER_STATE_CHANGED', 'PROGRESS'].includes(event.data.body?.data?.name)) {
-      if (this.props.loading || this.state.value === event.data.body.data?.eventData?.position) {
+      if (this.props.loading || this.state.value === event.data.body.data?.eventData?.position || !event.data.body.data?.eventData) {
         return;
       }
       this.setState({

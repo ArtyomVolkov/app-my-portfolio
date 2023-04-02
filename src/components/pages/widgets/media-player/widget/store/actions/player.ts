@@ -21,9 +21,10 @@ export const usePlayerActions = () => {
     if (!initialized) {
       setInitialize(true);
     }
-    if (data.loading || track.loading) {
+    if (data.loading || track.loading || !data.track_window.current_track) {
       return;
     }
+    console.log(data);
     // TODO: prevent double update (check data props); check fast track select
     setPlayState({
       paused: data.paused,
@@ -46,6 +47,29 @@ export const usePlayerActions = () => {
 
   const onTogglePlay = () => {
     SpotifyPlayer.togglePlay().then();
+  };
+
+  const onToggleShuffle = async () => {
+    const { shuffle, paused, repeat }  = getStore();
+
+    setPlayState({
+      paused: paused,
+      shuffle: !shuffle,
+      repeat: repeat,
+    });
+    SpotifyPlayer.toggleShuffle(!shuffle).then();
+  };
+
+  const onChangeRepeat = async () => {
+    const { shuffle, paused, repeat }  = getStore();
+    const repeatMode = repeat === 2 ? 0 : (repeat+1);
+
+    setPlayState({
+      paused: paused,
+      shuffle: shuffle,
+      repeat: repeatMode,
+    });
+    await SpotifyPlayer.toggleRepeat(repeatMode);
   };
 
   const onPauseTrack = () => {
@@ -76,6 +100,8 @@ export const usePlayerActions = () => {
     onTogglePlay,
     onChangeVolume,
     onChangeSeek,
-    onPauseTrack
+    onPauseTrack,
+    onToggleShuffle,
+    onChangeRepeat
   }
 };

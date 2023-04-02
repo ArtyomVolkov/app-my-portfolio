@@ -25,6 +25,7 @@ interface IPlayer {
   getStore: () => ({
     initialized: boolean,
     paused: boolean,
+    repeat: number,
     shuffle: boolean,
     track: ITrackData,
   }),
@@ -47,29 +48,26 @@ export const usePlayerData = create<IPlayer>((set, get) => ({
     },
   },
   setInitialize: (initialized) => {
-    set((state) => ({
-      ...state,
+    set(() => ({
       initialized,
     }));
   },
   setTrack: (track) => {
-    set((state) => ({
-      ...state,
+    set(() => ({
       track,
     }));
   },
   setPlayState: ({ shuffle, paused, repeat }) => {
-    set((state) => ({
-      ...state,
+    set(() => ({
       shuffle,
       repeat,
       paused,
     }));
   },
   getStore: () => {
-    const { paused, shuffle, track, initialized } = get();
+    const { paused, shuffle, track, initialized, repeat } = get();
     return {
-      initialized, paused, shuffle, track
+      initialized, paused, shuffle, repeat, track
     }
   }
 }));

@@ -16,6 +16,7 @@ import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';
 import AlbumIcon from '@mui/icons-material/Album';
 
 import { mergeClassNames } from '@utils/common';
+import { getRotePaths } from '../../utils/common';
 
 import { useLayoutData } from '../../store';
 import { useUserData } from '../../store/user';
@@ -48,11 +49,7 @@ const NavBar = () => {
   }, [user]);
 
   const activePath = useMemo(() => {
-    const paths = location.pathname.split('/');
-    const pmIndex = paths.indexOf('media-player');
-
-    return paths.filter((item,  index) => index > pmIndex);
-
+    return getRotePaths(location.pathname);
   }, [location.pathname]);
 
   const navigateTo = (path) => {

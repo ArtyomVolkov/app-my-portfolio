@@ -1,8 +1,11 @@
 import { getAccessToken } from './auth-token';
-import { fetchRefreshToken } from '@pages/widgets/media-player/widget/api/auth';
+import { fetchRefreshToken } from '../api/auth';
+import { toggleShuffle, toggleRepeat } from '../api/player';
+import { KMRepeatMode } from '../shared/enums/player';
 
 class SpotifyPlayer {
   private script: any;
+  private deviceId: string;
   public instance: Spotify.Player = null;
 
   private createScript = () => {
@@ -57,6 +60,10 @@ class SpotifyPlayer {
     this.instance = null;
   };
 
+  public setDeviceId = (id) => {
+    this.deviceId = id;
+  }
+
   public addEventListener = (name, callback) => {
     this.instance?.addListener(name, callback);
   };
@@ -71,6 +78,14 @@ class SpotifyPlayer {
 
   public togglePlay = async () => {
     await this.instance.togglePlay();
+  }
+
+  public toggleShuffle = async (shuffle) => {
+    await toggleShuffle(this.deviceId, shuffle);
+  }
+
+  public toggleRepeat = async (mode) => {
+    await toggleRepeat(this.deviceId, KMRepeatMode[mode]);
   }
 
   public nextTrack = async () => {

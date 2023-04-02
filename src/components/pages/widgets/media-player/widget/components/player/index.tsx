@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { shallow } from 'zustand/shallow';
 
 import TrackBar from './track-bar';
 import TrackActions from './track-actions';
@@ -15,9 +16,24 @@ import SpotifyPlayer from '../../services/spotify-player';
 import styles from './style.module.scss';
 
 const Player = () => {
-  const { user } = useUserData();
-  const { initialized, paused, track } = usePlayerData();
-  const { setTransferPlayback, setPlaybackChange, onTogglePlay, onPlayNext, onPlayPrevious, onChangeVolume, onChangeSeek } = usePlayerActions();
+  const user = useUserData((state) => state.user);
+  const { initialized, paused, track } = usePlayerData((state) => ({
+    initialized: state.initialized,
+    paused: state.paused,
+    track: state.track,
+  }), shallow);
+
+  const {
+    setTransferPlayback,
+    setPlaybackChange,
+    onTogglePlay,
+    onPlayNext,
+    onPlayPrevious,
+    onChangeVolume,
+    onChangeSeek,
+    onToggleShuffle,
+    onChangeRepeat
+  } = usePlayerActions();
 
   useEffect(() => {
     if (user) {
@@ -52,6 +68,7 @@ const Player = () => {
 
   const onReady = async (data) => {
     console.log('Ready with Device ID', data);
+    SpotifyPlayer.setDeviceId(data.device_id);
     try {
       await setTransferPlayback(data.device_id);
     } catch (e) {
@@ -99,9 +116,10 @@ const Player = () => {
       </div>
       <div className={styles.trackPanel}>
         <TrackActions
-          paused={paused}
           onPlay={onTogglePlay}
           onPlayNext={onPlayNext}
+          onToggleShuffle={onToggleShuffle}
+          onChangeRepeat={onChangeRepeat}
           onPlayPrevious={onPlayPrevious}
         />
         <TrackBar
