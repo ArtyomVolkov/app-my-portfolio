@@ -21,10 +21,10 @@
 
   &:hover {
     cursor: pointer;
-    background: #dfdfdf;
+    background: #e9e9e9;
   }
 
-  &.active, &:active {
+  &.active {
     box-shadow: inset 0 0 11px 2px #c0c0c0;
   }
 

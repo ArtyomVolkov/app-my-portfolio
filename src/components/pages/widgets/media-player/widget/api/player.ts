@@ -13,9 +13,7 @@ export const toggleShuffle = async (deviceId, shuffle) => {
 };
 
 export const toggleRepeat = async (deviceId, repeat) => {
-  return await http.put(`https://api.spotify.com/v1/me/player/repeat?state=${repeat}`, {
-    device_id: deviceId
-  });
+  return await http.put(`https://api.spotify.com/v1/me/player/repeat?state=${repeat}&device_id=${deviceId}`);
 };
 
 export const setPlayTrack = async (contextURI = '', uris = [], position = 0) => {

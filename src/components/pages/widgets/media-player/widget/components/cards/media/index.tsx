@@ -18,7 +18,7 @@ const MediaCard: React.FC<IMediaCard> = ({ image, title, subtitle, className, on
       onClick={onPress}
       className={mergeClassNames([styles.mediaCard, className])}
     >
-      <div className={styles.image}>
+      <div className={mergeClassNames([styles.image, !image && styles.noImage ])}>
         <img
           alt="album"
           src={image}

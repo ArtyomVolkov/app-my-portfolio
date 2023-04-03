@@ -126,6 +126,7 @@ export const useSearchActions = () => {
         search,
       },
       albums: {
+        search,
         data: data.albums.items.map((item: { [key: string]: any }) => ({
           id: item.id,
           name: item.name,
@@ -135,6 +136,7 @@ export const useSearchActions = () => {
         }))
       },
       artists: {
+        search,
         data: data.artists.items.map((item) => ({
           id: item.id,
           name: item.name,
@@ -143,6 +145,7 @@ export const useSearchActions = () => {
         }))
       },
       playlists: {
+        search,
         data: data.playlists.items.map((item) => ({
           id: item.id,
           name: item.name,
@@ -151,6 +154,7 @@ export const useSearchActions = () => {
         }))
       },
       tracks: {
+        search,
         data: data.tracks.items.map((item) => ({
           id: item.id,
           name: item.name,

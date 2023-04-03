@@ -24,7 +24,6 @@ export const usePlayerActions = () => {
     if (data.loading || track.loading || !data.track_window.current_track) {
       return;
     }
-    console.log(data);
     // TODO: prevent double update (check data props); check fast track select
     setPlayState({
       paused: data.paused,
@@ -62,7 +61,7 @@ export const usePlayerActions = () => {
 
   const onChangeRepeat = async () => {
     const { shuffle, paused, repeat }  = getStore();
-    const repeatMode = repeat === 2 ? 0 : (repeat+1);
+    const repeatMode = repeat === 2 ? 0 : 2;
 
     setPlayState({
       paused: paused,
