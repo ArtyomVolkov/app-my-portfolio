@@ -1,5 +1,5 @@
 import { getFavoriteTracks } from '../../api/tracks';
-import { getTrackArtists, getImageSrc } from '../../utils/common';
+import { getImageSrc, getTrackArtists } from '../../utils/common';
 import { useSharedActions } from '../../store/actions/shared';
 
 import { useFavoriteTracksData } from '../../store/tracks';
@@ -7,8 +7,12 @@ import { useUserData } from '../../store/user';
 
 export const useFavoriteTracksActions = () => {
   const { onSetActiveTrack } = useSharedActions();
-  const { user } = useUserData();
-  const { tracks, setLoading, setTracks } = useFavoriteTracksData();
+  const user = useUserData((state) => state.user);
+  const { tracks, setLoading, setTracks } = useFavoriteTracksData((state) => ({
+    tracks: state.tracks,
+    setTracks: state.setTracks,
+    setLoading: state.setLoading,
+  }));
 
   const onFetchData = async () => {
     if (tracks) {

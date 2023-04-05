@@ -47,7 +47,6 @@ const TrackActions: React.FC<ITrackActions> = ({ onPlay, onPlayNext, onPlayPrevi
               ? <PauseRounded sx={{ fontSize: 34 }} />
               : <PlayArrowRounded sx={{ fontSize: 34 }} />
           }
-
         </IconButton>
         <IconButton onClick={onPlayNext}>
           <SkipNextRoundedIcon sx={{ fontSize: 28 }} />

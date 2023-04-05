@@ -6,6 +6,8 @@ import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import VolumeUpRoundedIcon from '@mui/icons-material/VolumeUpRounded';
 import VolumeOffRoundedIcon from '@mui/icons-material/VolumeOffRounded';
 
+import FavoriteButton from '../../../components/buttons/favorite';
+
 import styles from './style.module.scss';
 
 interface ITrackOptions {
@@ -30,8 +32,9 @@ const TrackOptions: React.FC<ITrackOptions> = ({ changeVolume }) => {
   return (
     <div className={styles.track}>
       <div className={styles.options}>
+        <FavoriteButton />
         <IconButton>
-          <MoreHorizRoundedIcon sx={{ fontSize: 28 }} />
+          <MoreHorizRoundedIcon sx={{ fontSize: 22 }} />
         </IconButton>
       </div>
       <div className={styles.volume}>

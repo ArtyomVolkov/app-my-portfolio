@@ -13,6 +13,7 @@ import PlayLists from '../pages/play-lists';
 import PlayList from '../pages/play-lists/play-list';
 import Login from '../pages/login';
 import SpotifyAuth from '../pages/spotify-auth'
+import Page404 from '../pages/404';
 
 import { useUserData } from '../store/user';
 
@@ -54,7 +55,7 @@ const PlayerRoutes = () => {
       <Route path="/tracks" element={<AuthRequire><Tracks /></AuthRequire>} />
       <Route path="/login" element={<Login />} />
       <Route path="/spotify-auth" element={<SpotifyAuth />} />
-      <Route path="/*" element={<h1>404</h1>} />
+      <Route path="/*" element={<Page404 />} />
     </Routes>
   );
 }
