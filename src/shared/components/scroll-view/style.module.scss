@@ -12,10 +12,12 @@
   display: flex;
   flex-direction: column;
   background: inherit;
+  height: inherit;
 
   .children {
     overflow: auto;
     background: inherit;
+    height: inherit;
   }
 
   .header {

@@ -1,40 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import MediaCard from '../../components/cards/media';
+import Loader from '../../components/loader';
 
-import { useUserData } from '../../store/user';
+import { IStore } from '../../store';
+import actions from '../../store/actions/user';
 
 import styles from './style.module.scss';
 
 const TopArtists = () => {
   const navigation = useNavigate();
-  const { topArtists } = useUserData();
+  const loading = useSelector((store: IStore) => store.user.loading);
+  const topArtists = useSelector((store: IStore) => store.user.topArtists);
+
+  useEffect(() => {
+    actions.onFetchTopArtists().then();
+  }, []);
 
   const onOpenArtistsPage = (id) => {
     navigation(`artist/${id}`);
   };
 
-  if (!topArtists) {
-    return null;
-  }
-
   return (
     <article className={styles.topArtists}>
-      <p className={styles.title}>My Top Artists</p>
-      <section className={styles.artistsCards}>
-        {
-          topArtists.map((item) => (
-            <MediaCard
-              key={item.id}
-              image={item.image}
-              title={item.name}
-              className={styles.artistCard}
-              onPress={() => onOpenArtistsPage(item.id)}
-            />
-          ))
-        }
-      </section>
+      {
+        loading && <Loader />
+      }
+      {
+        topArtists && (
+          <>
+            <p className={styles.title}>My Top Artists</p>
+            <section className={styles.artistsCards}>
+              {
+                topArtists.map((item) => (
+                  <MediaCard
+                    key={item.id}
+                    image={item.image}
+                    title={item.name}
+                    className={styles.artistCard}
+                    onPress={() => onOpenArtistsPage(item.id)}
+                  />
+                ))
+              }
+            </section>
+          </>
+        )
+      }
     </article>
   );
 }

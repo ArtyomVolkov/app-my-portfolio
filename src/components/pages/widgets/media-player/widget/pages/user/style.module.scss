@@ -90,12 +90,13 @@
   }
 
   .topArtists {
-    flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     background: inherit; // for scroll-view gate gradient
     padding-bottom: 10px;
+    position: relative;
+    min-height: calc(100% - 155px);
 
     .title {
       font-weight: 500;

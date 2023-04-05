@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { shallow } from 'zustand/shallow';
+import { useSelector } from 'react-redux';
 
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -18,19 +18,16 @@ import AlbumIcon from '@mui/icons-material/Album';
 import { mergeClassNames } from '@utils/common';
 import { getRotePaths } from '../../utils/common';
 
-import { useLayoutData } from '../../store';
-import { useUserData } from '../../store/user';
+import { IStore } from '../../store';
+import appActions from '../../store/actions/app';
 
 import styles from './style.module.scss';
 
 const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useUserData();
-  const [fullWidth, toggleWidth ] = useLayoutData((state) => [
-    state.fullWidth,
-    state.toggleWidth
-  ], shallow);
+  const user = useSelector((store: IStore) => store.user.data);
+  const fullWidth = useSelector((store: IStore) => store.app.fullWidth);
 
   const navItems = useMemo(() => {
     if (!user) {
@@ -60,7 +57,7 @@ const NavBar = () => {
 
   return (
     <div className={mergeClassNames([styles.navBar, fullWidth && styles.small])}>
-      <IconButton onClick={toggleWidth} className={styles.layoutIcon}>
+      <IconButton onClick={appActions.toggleWidth} className={styles.layoutIcon}>
         <MenuRoundedIcon />
       </IconButton>
       <div className={styles.navItems}>
@@ -73,7 +70,11 @@ const NavBar = () => {
               classes={{
                 startIcon: styles.muiStartIcon
               }}
-              className={mergeClassNames([styles.navItem, activePath.includes(item.path) && styles.active])}
+              className={mergeClassNames([
+                styles.navItem,
+                item.path === 'search' && activePath.includes('') ? styles.active :
+                activePath.includes(item.path) && styles.active
+              ])}
               onClick={() => navigateTo(item.path)}
             >
               { item.label }

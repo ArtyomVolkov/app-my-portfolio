@@ -11,7 +11,7 @@ export interface IUser {
 
 export interface ILoading {
   loading: boolean,
-  setLoading: (loading: boolean) => void,
+  setLoading?: (loading: boolean) => void,
 }
 
 export interface IArtist {

@@ -1,23 +1,16 @@
-import { create } from 'zustand';
+import { configureStore } from '@reduxjs/toolkit';
 
-interface IPlayerLayout {
-  fullScreen: boolean,
-  fullWidth: boolean,
-  toggleWidth: () => void,
-  toggleFullScreen: () => void,
+import app, { IAppStore } from './reducers/app';
+import user, { IUserStore } from './reducers/user';
+
+export interface IStore {
+  app: IAppStore,
+  user: IUserStore,
 }
 
-export const useLayoutData = create<IPlayerLayout>((set) => ({
-  fullWidth: false,
-  fullScreen: false,
-  toggleFullScreen: () => {
-    set((state) => ({
-      fullScreen: !state.fullScreen
-    }));
-  },
-  toggleWidth: () => {
-    set((state) => ({
-      fullWidth: !state.fullWidth
-    }))
+export default configureStore<IStore>({
+  reducer: {
+    app,
+    user,
   }
-}));
+});

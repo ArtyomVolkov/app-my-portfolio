@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import Button from '@mui/material/Button';
 import MusicOffRoundedIcon from '@mui/icons-material/MusicOffRounded';
 
-import { useUserData } from '../../store/user';
-import { useAuthActions } from '../../store/actions/auth';
+import actions from '../../store/actions/user';
+import { IStore } from '../../store';
 
 import styles from './style.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const SpotifyIcon = () => (
   <svg
@@ -22,12 +24,16 @@ const SpotifyIcon = () => (
 );
 
 const LoginPage = () => {
-  const { user } = useUserData();
-  const { onLogin, onCheckRedirect } = useAuthActions();
+  const navigate = useNavigate();
+  const user = useSelector((store: IStore) => store.user.data);
 
   useEffect(() => {
-    onCheckRedirect(user);
+    checkRedirect()
   }, [user]);
+
+  const checkRedirect = () => {
+    actions.onCheckRedirect(user, navigate);
+  };
 
   if (user) {
     return null;
@@ -39,7 +45,7 @@ const LoginPage = () => {
         <MusicOffRoundedIcon className={styles.musicIcon} />
         <p className={styles.subtitle}>To be able to listen to music you should be logged in</p>
         <Button
-          onClick={onLogin}
+          onClick={actions.onLogin}
           variant="outlined"
           color="inherit"
           className={styles.loginButton}

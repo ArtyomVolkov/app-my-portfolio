@@ -1,13 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { shallow } from 'zustand/shallow';
+import { useSelector } from 'react-redux';
 
 import IconButton from '@mui/material/IconButton';
 import FullscreenRoundedIcon from '@mui/icons-material/FullscreenRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import FullscreenExitRoundedIcon from '@mui/icons-material/FullscreenExitRounded';
 
-import { useLayoutData } from '../../store';
+import { IStore } from '../../store';
+import actions from '../../store/actions/app';
 
 import styles from './style.module.scss';
 
@@ -18,10 +19,7 @@ interface IHeader {
 
 const Header: React.FC<IHeader> = ({ title, useHistory }) => {
   const navigation = useNavigate();
-  const [fullScreen, toggleFullScreen] = useLayoutData((state) => [
-    state.fullScreen,
-    state.toggleFullScreen
-  ], shallow);
+  const fullScreen = useSelector((state: IStore) => state.app.fullScreen);
 
   const onGoBack = () => {
     navigation(-1);
@@ -39,7 +37,7 @@ const Header: React.FC<IHeader> = ({ title, useHistory }) => {
         }
         <p className={styles.title}>{ title }</p>
       </div>
-      <IconButton className={styles.fullscreen} onClick={toggleFullScreen}>
+      <IconButton className={styles.fullscreen} onClick={actions.toggleFullScreen}>
         {
           fullScreen ? <FullscreenExitRoundedIcon /> : <FullscreenRoundedIcon />
         }

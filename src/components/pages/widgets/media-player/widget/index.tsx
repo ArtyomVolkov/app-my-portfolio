@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { shallow } from 'zustand/shallow';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Player from './components/player';
 import NavBar from './components/nav-bar';
 import Loader from './components/loader';
 import PlayerRoutes from './routes';
 
-import { useAuthActions } from './store/actions/auth';
 import { mergeClassNames } from '@utils/common';
 
-import { useLayoutData } from './store';
+import STORE, { IStore } from './store';
+import actions from './store/actions/app';
+import userActions from './store/actions/user';
 
 import styles from './style.module.scss';
 
+const StoreProvider = ({ children }) => (
+  <Provider store={STORE}>
+    { children }
+  </Provider>
+);
+
 const PlayerWidget = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(true);
-  const { onFetchUser, onFetchAccessToken } = useAuthActions();
-  const { fullScreen, toggleFullscreen } = useLayoutData((state) => ({
-    fullScreen: state.fullScreen,
-    toggleFullscreen: state.toggleFullScreen,
-  }), shallow);
+  const fullScreen = useSelector((state: IStore) => state.app.fullScreen);
 
   useEffect(() => {
     onFetchData();
@@ -37,7 +42,7 @@ const PlayerWidget = () => {
       return;
     }
 
-    await onFetchAccessToken(evt.data.code);
+    await userActions.onFetchAccessToken(evt.data.code, navigate);
   };
 
   const onFetchData = () => {
@@ -45,14 +50,14 @@ const PlayerWidget = () => {
       setLoading(false);
       return;
     }
-    onFetchUser().finally(() => {
+    userActions.onFetchUser(navigate).finally(() => {
       setLoading(false);
     });
   };
 
   const onKeyDown = (e) => {
     if (fullScreen && e.code === 'Escape') {
-      toggleFullscreen();
+      actions.toggleFullScreen();
     }
   };
 
@@ -87,4 +92,8 @@ const PlayerWidget = () => {
   );
 }
 
-export default PlayerWidget;
+export default () => (
+  <StoreProvider>
+    <PlayerWidget />
+  </StoreProvider>
+);

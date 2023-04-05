@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { shallow } from 'zustand/shallow';
+import { useSelector } from 'react-redux';
 
 import TrackBar from './track-bar';
 import TrackActions from './track-actions';
 import TrackOptions from './track-options';
 
 import { usePlayerData } from '../../store/player';
-import { useUserData } from '../../store/user';
+import { IStore } from '../../store';
 
 import { usePlayerActions } from '../../store/actions/player';
 import { mergeClassNames } from '@utils/common';
@@ -16,12 +16,13 @@ import SpotifyPlayer from '../../services/spotify-player';
 import styles from './style.module.scss';
 
 const Player = () => {
-  const user = useUserData((state) => state.user);
+  const user = useSelector((store: IStore) => store.user.data);
+
   const { initialized, paused, track } = usePlayerData((state) => ({
     initialized: state.initialized,
     paused: state.paused,
     track: state.track,
-  }), shallow);
+  }));
 
   const {
     setTransferPlayback,

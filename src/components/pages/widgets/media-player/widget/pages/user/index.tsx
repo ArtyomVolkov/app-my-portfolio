@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
@@ -8,38 +10,23 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import NoteRoundedIcon from '@mui/icons-material/NoteRounded';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
-import Loader from '../../components/loader';
 import Header from '../../components/header';
 import Followers from '../../components/labels/followers';
 import MediaBanner from '../../components/cards/media-banner';
 import TopArtists from './top-artists';
 
-import { useUserData } from '../../store/user';
-import { useUserActions } from '../../store/actions/user';
-import { useAuthActions } from '../../store/actions/auth';
+import { IStore } from '../../store';
+import actions from '../../store/actions/user';
 
 import styles from './style.module.scss';
 
 const UserPage = () => {
-  const { loading, user } = useUserData();
-  const { onLogout } = useAuthActions();
-  const { onFetchTopTracks } = useUserActions();
+  const navigation = useNavigate();
+  const user = useSelector((store: IStore) => store.user.data);
 
-  useEffect(() => {
-    onFetchTopTracks().then();
-  }, []);
-
-  const renderTopContent = () => {
-    if (loading) {
-      return <Loader />;
-    }
-
-    return (
-      <>
-        <TopArtists />
-      </>
-    );
-  };
+  const onLogout = () => {
+    actions.onLogout(navigation);
+  }
 
   if (!user) {
     return null;
@@ -50,7 +37,7 @@ const UserPage = () => {
       <Header title="User" />
       <ScrollViewGradient gateHeight={35}>
         <>
-          <MediaBanner image={user.image} title={user.name} className={styles.header}>
+          <MediaBanner image={user.image} title={user.name}>
             <div className={styles.logout}>
               <Button
                 color="inherit"
@@ -89,9 +76,7 @@ const UserPage = () => {
               </label>
             </section>
           </MediaBanner>
-          {
-            renderTopContent()
-          }
+          <TopArtists />
         </>
       </ScrollViewGradient>
     </div>

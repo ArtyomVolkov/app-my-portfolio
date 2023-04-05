@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 import Search from '../pages/search';
@@ -15,11 +16,11 @@ import Login from '../pages/login';
 import SpotifyAuth from '../pages/spotify-auth'
 import Page404 from '../pages/404';
 
-import { useUserData } from '../store/user';
+import { IStore } from '../store';
 
 const AuthRequire = ({ children }) => {
   const location = useLocation();
-  const { user } = useUserData();
+  const user = useSelector((store: IStore) => store.user.data);
 
   if (user) {
     return children;
