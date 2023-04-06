@@ -26,8 +26,8 @@ interface ITrack {
 
 export const Track: React.FC<ITrack> = ({ track, paused, loading, isActive, index, namePriority, onSetPlayTrack }) => {
   const duration = useMemo(() => {
-    return formatDuration(track.duration_ms);
-  }, [track.duration_ms]);
+    return formatDuration(track.duration);
+  }, [track.duration]);
 
   const onPress = () => {
     if (onSetPlayTrack) {
@@ -57,13 +57,13 @@ export const Track: React.FC<ITrack> = ({ track, paused, loading, isActive, inde
       {
         renderTrackLabel()
       }
-      <img src={track.image} alt="album" className={styles.image} />
+      <img src={track.album.image} alt="album" className={styles.image} />
       <div className={mergeClassNames([styles.trackName, namePriority])}>
         <label className={styles.artist}>{ track.artists }</label>
         <label className={styles.name}>{ track.name }</label>
       </div>
       <label className={styles.album}>
-        { track.album }
+        { track.album.name }
       </label>
       <label className={styles.duration}>
         { duration }

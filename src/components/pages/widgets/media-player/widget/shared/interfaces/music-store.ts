@@ -44,9 +44,13 @@ export interface IPlaylist {
 export interface ITrack {
   id: string,
   name: string,
-  duration_ms: number
+  duration: number
+  position: number,
+  loading: boolean,
   artists: string,
-  album: string,
-  image: string,
+  album: {
+    name: string,
+    image: string,
+  },
   uri?: string,
 }

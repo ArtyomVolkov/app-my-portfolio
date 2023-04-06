@@ -1,63 +1,62 @@
-import { usePlayerData } from '../player';
+import store from '../../store';
+import { actions } from '../reducers/player';
+import playerActions from '../../store/actions/player';
 
-import { usePlayerActions } from './player';
 import { setPlayTrack } from '../../api/player';
 
-export const useSharedActions = () => {
-  const { setTrack, getStore, setPlayState } = usePlayerData();
-  const { onTogglePlay } = usePlayerActions();
+const onSetActiveTrack = async (context, tracks, trackURI = null) => {
+  const { track, repeat } = store.getState().player;
 
-  const onSetActiveTrack = async (context, tracks, trackURI = null) => {
-    const { track } = getStore();
+  if (track.uri === trackURI) {
+    playerActions.onTogglePlay();
+    return;
+  }
+  const trackItemIndex = tracks.findIndex(({ uri }) => trackURI === uri);
 
-    if (track.uri === trackURI) {
-      onTogglePlay();
-      return;
-    }
-    const trackItemIndex = tracks.findIndex(({ uri }) => trackURI === uri);
+  if (trackItemIndex < 0) {
+    return;
+  }
+  const trackItem = tracks[trackItemIndex];
+  const trackUris = !context ? tracks.map(({ uri }) => uri) :[trackURI];
 
-    if (trackItemIndex < 0) {
-      return;
-    }
-    const trackItem = tracks[trackItemIndex];
-    const trackUris = !context ? tracks.map(({ uri }) => uri) :[trackURI];
-
-    setPlayState({
+  store.dispatch(
+    actions.setPlayState({
       paused: true,
       shuffle: false,
-      repeat: 0
-    });
-    setTrack({
+      repeat
+    })
+  );
+  store.dispatch(
+    actions.setTrack({
       loading: true,
+      id: trackItem.id,
       position: 0,
       uri: trackItem.uri,
       artists: trackItem.artists,
       name: trackItem.name,
-      duration: trackItem.duration_ms,
-      album: {
-        name: trackItem.album,
-        image: trackItem.image,
-      },
-    });
+      duration: trackItem.duration,
+      album: trackItem.album,
+    })
+  );
 
-    try {
-      await setPlayTrack(context, trackUris, trackItemIndex);
-      const { track } = getStore();
+  try {
+    await setPlayTrack(context, trackUris, trackItemIndex);
+    const { track } = store.getState().player;
 
-      setTrack({
-        ...track,
-        loading: false,
-      });
-    } catch (e) {
-      const { track } = getStore();
-      setTrack({
-        ...track,
-        loading: false,
-      });
-    }
-  };
+    store.dispatch(actions.setTrack({
+      ...track,
+      loading: false,
+    }));
+  } catch (e) {
+    const { track } = store.getState().player;
 
-  return {
-    onSetActiveTrack
+    store.dispatch(actions.setTrack({
+      ...track,
+      loading: false,
+    }));
   }
 };
+
+export default {
+  onSetActiveTrack,
+}

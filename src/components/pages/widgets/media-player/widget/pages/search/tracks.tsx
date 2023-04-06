@@ -3,17 +3,16 @@ import React from 'react';
 import TrackList from '../../components/track-list';
 
 import { useSearchData } from '../../store/search';
-import { useSharedActions } from '../../store/actions/shared';
+import sharedActions from '../../store/actions/shared';
 import { mergeClassNames } from '@utils/common';
 
 import styles from './style.module.scss';
 
 const Tracks = ({ gridLayout = false }) => {
   const tracks = useSearchData((state) => state.tracks);
-  const { onSetActiveTrack } = useSharedActions()
 
   const onSetPlayTrack = async (uri) => {
-    await onSetActiveTrack(null, tracks.data, uri);
+    await sharedActions.onSetActiveTrack(null, tracks.data, uri);
   }
 
   if (!tracks) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'zustand/shallow';
+import { useSelector } from 'react-redux';
 
 import IconButton from '@mui/material/IconButton';
 import PauseRounded from '@mui/icons-material/PauseRounded';
@@ -10,7 +10,7 @@ import CachedRoundedIcon from '@mui/icons-material/CachedRounded';
 import ShuffleRoundedIcon from '@mui/icons-material/ShuffleRounded';
 
 import { mergeClassNames } from '@utils/common';
-import { usePlayerData } from '../../../store/player';
+import { IStore } from '../../../store';
 
 import styles from './style.module.scss';
 
@@ -23,11 +23,11 @@ interface ITrackActions {
 }
 
 const TrackActions: React.FC<ITrackActions> = ({ onPlay, onPlayNext, onPlayPrevious, onToggleShuffle, onChangeRepeat }) => {
-  const { shuffle, repeat, paused } = usePlayerData((state) => ({
-    shuffle: state.shuffle,
-    repeat: state.repeat,
-    paused: state.paused
-  }), shallow);
+  const { shuffle, repeat, paused } = useSelector((store: IStore) => ({
+    shuffle: store.player.shuffle,
+    repeat: store.player.repeat,
+    paused: store.player.paused
+  }));
 
   return (
     <div className={styles.trackActions}>

@@ -2,12 +2,11 @@ import { getPlaylist } from '../../api/user';
 
 import { usePlaylistData } from '../../store/playlist';
 
-import { useSharedActions } from './shared';
+import sharedActions from '../../store/actions/shared';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
 export const usePlayListActions = () => {
   const { tracks, playlist, setPlaylist, setLoading, setPlaylistTracks } = usePlaylistData();
-  const { onSetActiveTrack } = useSharedActions();
 
   const onFetchPlaylist = async (playlistId) => {
     if (!playlistId || playlistId === playlist?.id) {
@@ -45,7 +44,7 @@ export const usePlayListActions = () => {
   };
 
   const onSetPlayTrack = async (trackURI) => {
-    await onSetActiveTrack(playlist.uri, tracks, trackURI);
+    await sharedActions.onSetActiveTrack(playlist.uri, tracks, trackURI);
   };
 
   return {

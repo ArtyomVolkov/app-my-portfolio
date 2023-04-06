@@ -72,7 +72,7 @@ const NavBar = () => {
               }}
               className={mergeClassNames([
                 styles.navItem,
-                item.path === 'search' && activePath.includes('') ? styles.active :
+                item.path === 'search' && (!activePath.length || activePath.includes('')) ? styles.active :
                 activePath.includes(item.path) && styles.active
               ])}
               onClick={() => navigateTo(item.path)}

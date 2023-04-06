@@ -42,6 +42,13 @@ class TrackBar extends React.Component<ITrackBar, any> {
     }
   };
 
+  static defaultProps = {
+    position: 0,
+    duration: 0,
+    paused: true,
+    loading: false,
+  }
+
   constructor(props) {
     super(props);
 

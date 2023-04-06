@@ -5,10 +5,9 @@ import TrackBar from './track-bar';
 import TrackActions from './track-actions';
 import TrackOptions from './track-options';
 
-import { usePlayerData } from '../../store/player';
 import { IStore } from '../../store';
+import playerActions from '../../store/actions/player';
 
-import { usePlayerActions } from '../../store/actions/player';
 import { mergeClassNames } from '@utils/common';
 
 import SpotifyPlayer from '../../services/spotify-player';
@@ -17,24 +16,7 @@ import styles from './style.module.scss';
 
 const Player = () => {
   const user = useSelector((store: IStore) => store.user.data);
-
-  const { initialized, paused, track } = usePlayerData((state) => ({
-    initialized: state.initialized,
-    paused: state.paused,
-    track: state.track,
-  }));
-
-  const {
-    setTransferPlayback,
-    setPlaybackChange,
-    onTogglePlay,
-    onPlayNext,
-    onPlayPrevious,
-    onChangeVolume,
-    onChangeSeek,
-    onToggleShuffle,
-    onChangeRepeat
-  } = usePlayerActions();
+  const player = useSelector((store: IStore) => store.player);
 
   useEffect(() => {
     if (user) {
@@ -71,7 +53,7 @@ const Player = () => {
     console.log('Ready with Device ID', data);
     SpotifyPlayer.setDeviceId(data.device_id);
     try {
-      await setTransferPlayback(data.device_id);
+      await playerActions.setTransferPlayback(data.device_id);
     } catch (e) {
       console.log(e);
     }
@@ -90,7 +72,7 @@ const Player = () => {
   };
 
   const onPlayerStateChange = (data) => {
-    setPlaybackChange(data);
+    playerActions.setPlaybackChange(data);
   };
 
   if (!user) {
@@ -98,43 +80,43 @@ const Player = () => {
   }
 
   return (
-    <div className={mergeClassNames([styles.player, !initialized && styles.loading])}>
+    <div className={mergeClassNames([styles.player, !player.initialized && styles.loading])}>
       <div className={styles.songMedia}>
         <div className={styles.songImage}>
           {
-            track.album.image && (
+            player.track?.album.image && (
               <img
-                src={track.album.image}
+                src={player.track.album.image}
                 alt="player-icon"
               />
             )
           }
         </div>
         <div className={styles.captions}>
-          <label className={styles.trackName}>{ track.name }</label>
-          <label className={styles.trackArtists}>{ track.artists }</label>
+          <label className={styles.trackName}>{ player.track?.name }</label>
+          <label className={styles.trackArtists}>{ player.track?.artists }</label>
         </div>
       </div>
       <div className={styles.trackPanel}>
         <TrackActions
-          onPlay={onTogglePlay}
-          onPlayNext={onPlayNext}
-          onToggleShuffle={onToggleShuffle}
-          onChangeRepeat={onChangeRepeat}
-          onPlayPrevious={onPlayPrevious}
+          onPlay={playerActions.onTogglePlay}
+          onPlayNext={playerActions.onPlayNext}
+          onToggleShuffle={playerActions.onToggleShuffle}
+          onChangeRepeat={playerActions.onChangeRepeat}
+          onPlayPrevious={playerActions.onPlayPrevious}
         />
         <TrackBar
-          paused={paused}
-          trackUri={track.uri}
-          loading={track.loading}
-          duration={track.duration}
-          position={track.position}
-          changePosition={onChangeSeek}
+          paused={player.paused}
+          trackUri={player.track?.uri}
+          loading={player.track?.loading}
+          duration={player.track?.duration}
+          position={player.track?.position}
+          changePosition={playerActions.onChangeSeek}
         />
       </div>
       <div className={styles.trackOptions}>
         <TrackOptions
-          changeVolume={onChangeVolume}
+          changeVolume={playerActions.onChangeVolume}
         />
       </div>
     </div>

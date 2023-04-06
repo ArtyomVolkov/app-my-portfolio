@@ -1,10 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Track from './track';
 import Ripple from '@shared/components/ripple';
 
-import { usePlayerData } from '../../store/player';
 import { ITrack } from '../../shared/interfaces/music-store';
+import { IStore } from '../../store';
 
 import styles from './style.module.scss';
 
@@ -15,7 +16,7 @@ interface ITrackList {
 }
 
 const TrackList: React.FC<ITrackList> = ({ data, trackNamePriority= 'artist', onSetPlayTrack }) => {
-  const { paused, track } = usePlayerData();
+  const player = useSelector((store: IStore) => store.player);
 
   if (!data) {
     return null;
@@ -28,9 +29,9 @@ const TrackList: React.FC<ITrackList> = ({ data, trackNamePriority= 'artist', on
             <Track
               index={index}
               track={item}
-              paused={paused && track.uri === item.uri}
-              loading={track.loading && track.uri === item.uri}
-              isActive={track.uri && track.uri === item.uri}
+              paused={player.paused && player?.track?.uri === item.uri}
+              loading={player?.track?.loading && player?.track?.uri === item.uri}
+              isActive={player?.track?.uri && player?.track?.uri === item.uri}
               namePriority={trackNamePriority}
               onSetPlayTrack={onSetPlayTrack}
             />

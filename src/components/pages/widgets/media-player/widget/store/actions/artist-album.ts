@@ -2,12 +2,11 @@ import { getAlbum } from '../../api/albums';
 
 import { useArtistAlbum } from '../../store/artist-album';
 
-import { useSharedActions } from './shared';
+import sharedActions from '../../store/actions/shared';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
 export const useArtistAlbumActions = () => {
   const { album, tracks, setLoading, setAlbum, setAlbumTracks } = useArtistAlbum();
-  const { onSetActiveTrack } = useSharedActions();
 
   const onFetchData = async (albumId) => {
     if (album && album.id === albumId) {
@@ -44,7 +43,7 @@ export const useArtistAlbumActions = () => {
   };
 
   const onSetPlayTrack = async (trackURI) => {
-    await onSetActiveTrack(album.uri, tracks, trackURI);
+    await sharedActions.onSetActiveTrack(album.uri, tracks, trackURI);
   };
 
   return {

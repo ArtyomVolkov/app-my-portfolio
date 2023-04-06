@@ -15,5 +15,6 @@
     overflow: auto;
     background: inherit;
     padding-bottom: 10px;
+    min-height: calc(100% - 10px);
   }
 }

@@ -1,5 +1,6 @@
 import store from '../../store';
 import { actions } from '../reducers/user';
+import sharedActions from './shared';
 
 import { getTopItems, getUserInfo } from '../../api/user';
 import { fetchAccessToken } from '../../api/auth';
@@ -136,8 +137,9 @@ const onCheckRedirect = (user, navigate) => {
 }
 
 const onSetPlayTrack = async (trackURI) => {
-  console.log(trackURI);
-  // await onSetActiveTrack(`${user.uri}:top:tracks`, topTracks, trackURI); //`${user.uri}:top:tracks`
+  const { data } = store.getState().user;
+
+  await sharedActions.onSetActiveTrack(`${data.uri}:top:tracks`, [], trackURI);
 };
 
 export default {
