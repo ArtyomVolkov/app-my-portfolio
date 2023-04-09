@@ -13,8 +13,10 @@
 .player {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 4px 8px;
   border-radius: 12px;
+  min-height: 80px;
   background: #ebebeb;
   grid-column-gap: 10px;
   transition: opacity 0.3s;
@@ -23,6 +25,25 @@
   &.loading {
     animation: pulsar 2s infinite;
     pointer-events: none;
+  }
+
+  &.error {
+    .errorContent {
+      display: flex;
+      flex-direction: column;
+      min-width: 200px;
+
+      .title {
+        margin-bottom: 8px;
+        font-weight: 500;
+        text-align: center;
+        color: #d01613;
+      }
+
+      .refreshButton {
+        text-transform: unset;
+      }
+    }
   }
 
   .songMedia, .trackPanel, .trackOptions {

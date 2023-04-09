@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import TrackBar from './track-bar';
 import TrackActions from './track-actions';
 import TrackOptions from './track-options';
+import PlayerError from './error';
 
 import { IStore } from '../../store';
 import playerActions from '../../store/actions/player';
@@ -50,12 +51,12 @@ const Player = () => {
   };
 
   const onReady = async (data) => {
-    console.log('Ready with Device ID', data);
     SpotifyPlayer.setDeviceId(data.device_id);
+
     try {
       await playerActions.setTransferPlayback(data.device_id);
     } catch (e) {
-      console.log(e);
+      playerActions.setInitializeError();
     }
   };
 
@@ -75,50 +76,71 @@ const Player = () => {
     playerActions.setPlaybackChange(data);
   };
 
+  const renderPlayerContent = () => {
+    if (player.error) {
+      return <PlayerError />;
+    }
+    return (
+      <>
+        <div className={styles.songMedia}>
+          <div className={styles.songImage}>
+            {
+              player.track?.album.image && (
+                <img
+                  src={player.track.album.image}
+                  alt="player-icon"
+                />
+              )
+            }
+          </div>
+          <div className={styles.captions}>
+            <label className={styles.trackName}>{ player.track?.name }</label>
+            <label className={styles.trackArtists}>{ player.track?.artists }</label>
+          </div>
+        </div>
+        <div className={styles.trackPanel}>
+          <TrackActions
+            onPlay={playerActions.onTogglePlay}
+            onPlayNext={playerActions.onPlayNext}
+            onToggleShuffle={playerActions.onToggleShuffle}
+            onChangeRepeat={playerActions.onChangeRepeat}
+            onPlayPrevious={playerActions.onPlayPrevious}
+          />
+          <TrackBar
+            paused={player.paused}
+            trackUri={player.track?.uri}
+            loading={player.track?.loading}
+            duration={player.track?.duration}
+            position={player.track?.position}
+            changePosition={playerActions.onChangeSeek}
+          />
+        </div>
+        <div className={styles.trackOptions}>
+          <TrackOptions
+            changeVolume={playerActions.onChangeVolume}
+          />
+        </div>
+      </>
+    )
+  }
+
   if (!user) {
     return null;
   }
 
   return (
-    <div className={mergeClassNames([styles.player, !player.initialized && styles.loading])}>
-      <div className={styles.songMedia}>
-        <div className={styles.songImage}>
-          {
-            player.track?.album.image && (
-              <img
-                src={player.track.album.image}
-                alt="player-icon"
-              />
-            )
-          }
-        </div>
-        <div className={styles.captions}>
-          <label className={styles.trackName}>{ player.track?.name }</label>
-          <label className={styles.trackArtists}>{ player.track?.artists }</label>
-        </div>
-      </div>
-      <div className={styles.trackPanel}>
-        <TrackActions
-          onPlay={playerActions.onTogglePlay}
-          onPlayNext={playerActions.onPlayNext}
-          onToggleShuffle={playerActions.onToggleShuffle}
-          onChangeRepeat={playerActions.onChangeRepeat}
-          onPlayPrevious={playerActions.onPlayPrevious}
-        />
-        <TrackBar
-          paused={player.paused}
-          trackUri={player.track?.uri}
-          loading={player.track?.loading}
-          duration={player.track?.duration}
-          position={player.track?.position}
-          changePosition={playerActions.onChangeSeek}
-        />
-      </div>
-      <div className={styles.trackOptions}>
-        <TrackOptions
-          changeVolume={playerActions.onChangeVolume}
-        />
-      </div>
+    <div
+      className={
+        mergeClassNames([
+          styles.player,
+          player.loading && styles.loading,
+          player.error && styles.error,
+        ])
+      }
+    >
+      {
+        renderPlayerContent()
+      }
     </div>
   );
 }

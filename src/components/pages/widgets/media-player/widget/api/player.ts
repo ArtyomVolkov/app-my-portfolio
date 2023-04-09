@@ -1,5 +1,9 @@
 import http from '../services/http';
 
+export const getDevices = async () => {
+  return await http.get('https://api.spotify.com/v1/me/player/devices')
+}
+
 export const transferPlayback = async (deviceId) => {
   return await http.put('https://api.spotify.com/v1/me/player', {
     device_ids: [deviceId]

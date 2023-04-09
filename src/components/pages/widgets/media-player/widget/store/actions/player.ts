@@ -1,4 +1,4 @@
-import { transferPlayback } from '../../api/player';
+import { transferPlayback, getDevices } from '../../api/player';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
 import store from '../../store';
@@ -53,13 +53,23 @@ const onChangeRepeat = async () => {
   await SpotifyPlayer.toggleRepeat(repeatMode);
 };
 
-const setTransferPlayback = async (id) => {
-  const { deviceId } = store.getState().player;
+const onRefreshInit = async () => {
+  store.dispatch(actions.setLoading(true));
+  await setTransferPlayback(SpotifyPlayer.getDeviceId());
+}
 
+const setTransferPlayback = async (id) => {
   await transferPlayback(id);
-  if (!deviceId) {
-    store.dispatch(actions.setInitialize());
-  }
+  store.dispatch(actions.setInitialize());
+};
+
+const getPlayerDevices = async () => {
+  const data = await getDevices();
+  console.log(data);
+};
+
+const setInitializeError = () => {
+  store.dispatch(actions.setErrorInitialize());
 };
 
 const setPlaybackChange = (data) => {
@@ -100,8 +110,11 @@ const setPlaybackChange = (data) => {
 };
 
 export default {
+  getPlayerDevices,
+  setInitializeError,
   setTransferPlayback,
   setPlaybackChange,
+  onRefreshInit,
   onTogglePlay,
   onToggleShuffle,
   onChangeRepeat,

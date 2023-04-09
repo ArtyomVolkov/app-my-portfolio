@@ -14,7 +14,7 @@ export interface IPlayerStore extends ILoading {
 
 export const initialState: IPlayerStore = {
   deviceId: null,
-  loading: false,
+  loading: true,
   error: false,
   initialized: false,
   paused: false,
@@ -36,7 +36,16 @@ const player = createSlice({
     setInitialize: (state: IPlayerStore) => {
       return {
         ...state,
+        error: false,
+        loading: false,
         initialized: true,
+      }
+    },
+    setErrorInitialize: (state: IPlayerStore) => {
+      return {
+        ...state,
+        error: true,
+        loading: false,
       }
     },
     setDeviceId: (state, data: { payload: string }) => {

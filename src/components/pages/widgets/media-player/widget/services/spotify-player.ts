@@ -15,7 +15,6 @@ class SpotifyPlayer {
   };
 
   private getOAuthToken = async (cb) => {
-    console.log('request access token');
     const { access_token } = await fetchRefreshToken();
     cb(access_token);
   };
@@ -62,6 +61,10 @@ class SpotifyPlayer {
 
   public setDeviceId = (id) => {
     this.deviceId = id;
+  }
+
+  public getDeviceId = () => {
+    return this.deviceId;
   }
 
   public addEventListener = (name, callback) => {
