@@ -41,6 +41,17 @@ export interface IPlaylist {
   totalTracks: number,
 }
 
+export interface IPlaylistInfo {
+  id: string,
+  uri: string,
+  name: string,
+  image: string,
+  owner: string,
+  totalTracks: number,
+  followers: number,
+  public: boolean,
+}
+
 export interface ITrack {
   id: string,
   name: string,

@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: inherit; // for scroll-view gate gradient
+  background: inherit;
 
   .playListCards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, max-content));
     overflow: auto;
     gap: 20px;
     padding-bottom: 20px;

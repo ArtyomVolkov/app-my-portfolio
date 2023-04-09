@@ -10,8 +10,8 @@ import Artists from '../pages/artists';
 import Artist from '../pages/artists/artist';
 import ArtistAlbum from '../pages/artists/artist/album';
 import Tracks from '../pages/tracks';
-import PlayLists from '../pages/play-lists';
-import PlayList from '../pages/play-lists/play-list';
+import PlayLists from '../pages/playlists';
+import PlayList from '../pages/playlists/playlist';
 import Login from '../pages/login';
 import SpotifyAuth from '../pages/spotify-auth'
 import Page404 from '../pages/404';
@@ -42,7 +42,7 @@ const PlayerRoutes = () => {
       <Route path="/search/artist/:id" element={<AuthRequire><Artist backButtonText="Back to Search page" /></AuthRequire>} />
       <Route path="/search/artist/:artistId/:albumId" element={<AuthRequire><ArtistAlbum /></AuthRequire>} />
       <Route path="/search/album/:albumId" element={<AuthRequire><Album /></AuthRequire>} />
-      <Route path="/search/playlist/:id" element={<AuthRequire><PlayList backButtonText="Back to Search page" /></AuthRequire>} />
+      <Route path="/search/playlist/:id" element={<AuthRequire><PlayList /></AuthRequire>} />
       <Route path="/user" element={<AuthRequire><User /></AuthRequire>} />
       <Route path="/user/artist/:id" element={<AuthRequire><Artist backButtonText="Back to User page" /></AuthRequire>} />
       <Route path="/user/artist/:artistId/:albumId" element={<AuthRequire><ArtistAlbum /></AuthRequire>} />
@@ -52,7 +52,7 @@ const PlayerRoutes = () => {
       <Route path="/albums" element={<AuthRequire><Albums /></AuthRequire>} />
       <Route path="/albums/:albumId" element={<AuthRequire><Album /></AuthRequire>} />
       <Route path="/playlists" element={<AuthRequire><PlayLists /></AuthRequire>} />
-      <Route path="/playlists/:id" element={<AuthRequire><PlayList backButtonText="Back to Playlists" /></AuthRequire>} />
+      <Route path="/playlists/:id" element={<AuthRequire><PlayList /></AuthRequire>} />
       <Route path="/tracks" element={<AuthRequire><Tracks /></AuthRequire>} />
       <Route path="/login" element={<Login />} />
       <Route path="/spotify-auth" element={<SpotifyAuth />} />

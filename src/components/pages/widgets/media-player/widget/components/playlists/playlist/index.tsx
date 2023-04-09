@@ -14,23 +14,27 @@ import Followers from '../../../components/labels/followers';
 import MediaBanner from '../../../components/cards/media-banner';
 
 import { mergeClassNames } from '@utils/common';
-import { usePlayListActions } from '../../../store/actions/playlist';
 
-import { usePlaylistData } from '../../../store/playlist';
+import { IPlaylistInfo, ITrack } from '../../../shared/interfaces/music-store';
 
 import styles from './style.module.scss';
 
-interface IPlayList {
-  backButtonText?: string
+interface IPlaylist {
+  loading: boolean,
+  playlist: IPlaylistInfo,
+  tracks: Array<ITrack>,
+  backButtonText?: string,
+  actions: {
+    onFetchPlaylist: (playlistId) => Promise<any>,
+    onSetPlayTrack: (uri) => void,
+  }
 }
 
-const PlayList: React.FC<IPlayList> = ({ backButtonText }) => {
+const PlayList: React.FC<IPlaylist> = ({ loading, playlist, tracks, actions, backButtonText }) => {
   const params = useParams();
-  const { loading, playlist, tracks } = usePlaylistData();
-  const { onFetchPlaylist, onSetPlayTrack } = usePlayListActions();
 
   useEffect(() => {
-    onFetchPlaylist(params.id).then();
+    actions.onFetchPlaylist(params.id).then();
   }, []);
 
   const renderContent = () => {
@@ -40,6 +44,7 @@ const PlayList: React.FC<IPlayList> = ({ backButtonText }) => {
     if (!playlist) {
       return null;
     }
+
     return (
       <>
         <MediaBanner
@@ -71,23 +76,26 @@ const PlayList: React.FC<IPlayList> = ({ backButtonText }) => {
         </MediaBanner>
         <div className={styles.tracks}>
           <p className={styles.title}>Tracks</p>
-          <TrackList data={tracks} onSetPlayTrack={onSetPlayTrack} />
+          <TrackList
+            data={tracks}
+            onSetPlayTrack={actions.onSetPlayTrack}
+          />
         </div>
       </>
     )
   };
 
   return (
-   <div className={styles.playList}>
-     <Header title={backButtonText || 'Back'} useHistory />
-     <div className={styles.body}>
-       <ScrollViewGradient gateHeight={30}>
-         {
-           renderContent()
-         }
-       </ScrollViewGradient>
-     </div>
-   </div>
+    <div className={styles.playList}>
+      <Header title={backButtonText || 'Back'} useHistory />
+      <div className={styles.body}>
+        <ScrollViewGradient gateHeight={30}>
+          {
+            renderContent()
+          }
+        </ScrollViewGradient>
+      </div>
+    </div>
   );
 }
 

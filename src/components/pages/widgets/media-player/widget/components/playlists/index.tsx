@@ -2,22 +2,29 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
+import Loader from '../../components/loader';
 import Header from '../../components/header';
 import MediaCard from '../../components/cards/media';
-import Loader from '../../components/loader';
 
-import { usePlayListsActions } from '../../store/actions/playlists';
-import { usePlaylistsData } from '../../store/playlists';
+import { IPlaylist } from '../../shared/interfaces/music-store';
 
 import styles from './style.module.scss';
 
-const PlayListsPage = () => {
+interface IPlaylists {
+  playlists: {
+    loading: boolean,
+    data: Array<IPlaylist>,
+  },
+  actions: {
+    onFetchPlaylists: () => Promise<any>
+  }
+}
+
+const Playlists: React.FC<IPlaylists> = ({ actions, playlists }) => {
   const navigation = useNavigate();
-  const { onFetchPlaylists } = usePlayListsActions();
-  const { loading, playlists } = usePlaylistsData();
 
   useEffect(() => {
-    onFetchPlaylists().then();
+    actions.onFetchPlaylists().then();
   }, []);
 
   const onOpenPlayList = (id) => {
@@ -25,19 +32,23 @@ const PlayListsPage = () => {
   };
 
   const renderMainContent = () => {
-    if (loading) {
+    if (playlists.loading) {
       return <Loader />;
+    }
+
+    if (!playlists.data) {
+      return null;
     }
 
     return (
       <section className={styles.playListCards}>
         {
-          playlists.map((item) => (
+          playlists.data.map((item) => (
             <MediaCard
               key={item.id}
-              image={item.images[0]?.url}
+              image={item.image}
               title={item.name}
-              subtitle={`${item.tracks.total} Tracks`}
+              subtitle={`${item.totalTracks} Tracks`}
               onPress={() => onOpenPlayList(item.id)}
             />
           ))
@@ -58,4 +69,4 @@ const PlayListsPage = () => {
   );
 }
 
-export default PlayListsPage;
+export default Playlists;
