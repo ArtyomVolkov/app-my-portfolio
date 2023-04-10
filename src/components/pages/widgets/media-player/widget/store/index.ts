@@ -6,12 +6,14 @@ import albums, { IAlbumsStore } from './reducers/albums';
 import player, { IPlayerStore } from './reducers/player';
 import favoriteTracks, { IFavoriteTracksStore } from './reducers/favorite-tracks';
 import playlists, { IPlaylistsStore } from './reducers/playlists';
+import artists, { IArtistsStore } from './reducers/artists';
 
 export interface IStore {
   app: IAppStore,
   user: IUserStore,
   albums: IAlbumsStore,
   player: IPlayerStore,
+  artists: IArtistsStore,
   playlists: IPlaylistsStore,
   favoriteTracks: IFavoriteTracksStore,
 }
@@ -22,6 +24,7 @@ export default configureStore<IStore>({
     user,
     albums,
     player,
+    artists,
     playlists,
     favoriteTracks,
   }
