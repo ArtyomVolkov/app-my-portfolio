@@ -1,18 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import TrackList from '../../components/track-list';
 
-import { useSearchData } from '../../store/search';
 import sharedActions from '../../store/actions/shared';
 import { mergeClassNames } from '@utils/common';
+
+import { IStore } from '@pages/widgets/media-player/widget/store';
 
 import styles from './style.module.scss';
 
 const Tracks = ({ gridLayout = false }) => {
-  const tracks = useSearchData((state) => state.tracks);
+  const tracks = useSelector((store: IStore) => store.search.tracks);
 
   const onSetPlayTrack = async (uri) => {
-    await sharedActions.onSetActiveTrack(null, tracks.data, uri);
+    await sharedActions.onSetActiveTrack(null, tracks, uri);
   }
 
   if (!tracks) {
@@ -24,7 +26,7 @@ const Tracks = ({ gridLayout = false }) => {
       <p className={styles.title}>Tracks</p>
       <TrackList
         trackNamePriority="track"
-        data={tracks.data}
+        data={tracks}
         onSetPlayTrack={onSetPlayTrack}
       />
     </section>

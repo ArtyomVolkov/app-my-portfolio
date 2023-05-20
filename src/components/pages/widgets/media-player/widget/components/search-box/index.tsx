@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
@@ -9,21 +10,21 @@ import ToggleButton from '@mui/material/ToggleButton';
 import InputBase from '@mui/material/InputBase';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-import { useSearchData } from '../../store/search';
-import { useSearchActions } from '../../store/actions/search';
+import { IStore } from '@pages/widgets/media-player/widget/store';
+import { ESearchType } from '../../shared/enums/search';
+import searchActions from '../../store/actions/search';
 
 import styles from './style.module.scss';
 
 const SearchBox = () => {
-  const { search, searchType } = useSearchData((state) => ({
-    search: state.search,
-    searchType: state.searchType
+  const { search, searchType } = useSelector((store: IStore) => ({
+    search: store.search.term,
+    searchType: store.search.searchType,
   }));
-  const { onChangeSearch, onChangeSearchType, onSearch } = useSearchActions();
 
   const onKeyDown = (e) => {
     if (e.key === 'Enter') {
-      return onSearch();
+      return searchActions.onSearchAll(search);
     }
   };
 
@@ -31,8 +32,7 @@ const SearchBox = () => {
     if (!value) {
       return;
     }
-    onChangeSearchType(value);
-    await onSearch();
+    await searchActions.onChangeSearchType(value);
   };
 
   return (
@@ -40,13 +40,12 @@ const SearchBox = () => {
       <Paper className={styles.searchPanel}>
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          value={search}
-          onChange={onChangeSearch}
+          onChange={searchActions.onChangeSearchTerm}
           onKeyDown={onKeyDown}
           placeholder="what do you want to listen to?"
         />
         <Divider sx={{ height: 24, m: 0.5 }} orientation="vertical" />
-        <IconButton type="button" sx={{ p: '5px' }} onClick={onSearch}>
+        <IconButton type="button" sx={{ p: '5px' }} onClick={() => searchActions.onSearchAll()}>
           <SearchIcon className={styles.searchIcon} />
         </IconButton>
       </Paper>
@@ -57,11 +56,11 @@ const SearchBox = () => {
         onChange={onChangeType}
         className={styles.searchGroup}
       >
-        <ToggleButton value="all">All</ToggleButton>
-        <ToggleButton value="artist">Artists</ToggleButton>
-        <ToggleButton value="album">Albums</ToggleButton>
-        <ToggleButton value="playlist">Playlists</ToggleButton>
-        <ToggleButton value="track">Tracks</ToggleButton>
+        <ToggleButton value={ESearchType.All}>All</ToggleButton>
+        <ToggleButton value={ESearchType.Artists}>Artists</ToggleButton>
+        <ToggleButton value={ESearchType.Albums}>Albums</ToggleButton>
+        <ToggleButton value={ESearchType.Playlists}>Playlists</ToggleButton>
+        <ToggleButton value={ESearchType.Tracks}>Tracks</ToggleButton>
       </ToggleButtonGroup>
     </div>
   )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'zustand/shallow'
+import { useSelector } from 'react-redux';
 
 import ScrollViewGradient from '@shared/components/scroll-view';
 import Loader from '../../components/loader';
@@ -9,26 +9,17 @@ import Albums from '../search/albums';
 import Playlists from '../search/playlists';
 import Tracks from '../search/tracks';
 
-import { useSearchData } from '../../store/search';
+import { IStore } from '../../store';
+import { ESearchType } from '../../shared/enums/search';
 
 import styles from './style.module.scss';
 
 const SearchResult = () => {
-  const { loading, searchType, artists, albums, playlists, tracks } = useSearchData(
-    (state) => ({
-      loading: state.loading,
-      searchType: state.searchType,
-      artists: state.artists,
-      albums: state.albums,
-      playlists: state.playlists,
-      tracks: state.tracks
-    }),
-    shallow,
-  );
+  const search = useSelector((store: IStore) => store.search);
 
   const renderSections = () => {
-    switch (searchType) {
-      case 'all': {
+    switch (search.searchType) {
+      case ESearchType.All: {
         return (
           <div className={styles.sections}>
             <Artists />
@@ -38,22 +29,22 @@ const SearchResult = () => {
           </div>
         );
       }
-      case 'artist': {
+      case ESearchType.Artists: {
         return (
           <Artists gridLayout />
         );
       }
-      case 'album': {
+      case ESearchType.Albums: {
         return (
           <Albums gridLayout />
         );
       }
-      case 'playlist': {
+      case ESearchType.Playlists: {
         return (
           <Playlists gridLayout />
         );
       }
-      case 'track': {
+      case ESearchType.Tracks: {
         return (
           <Tracks gridLayout />
         );
@@ -64,7 +55,7 @@ const SearchResult = () => {
   }
 
   const renderContent = () => {
-    if (!loading && (!artists && !albums && !playlists && !tracks)) {
+    if (!search.loading && (!search.artists && !search.albums && !search.playlists && !search.tracks)) {
       return <SearchPlaceholder />;
     }
     return (
@@ -77,7 +68,7 @@ const SearchResult = () => {
   return (
     <div className={styles.searchResult}>
       {
-        loading && (
+        search.loading && (
           <Loader className={styles.loader} />
         )
       }

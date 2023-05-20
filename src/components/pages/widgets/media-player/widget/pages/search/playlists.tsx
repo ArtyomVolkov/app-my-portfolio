@@ -1,18 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import MediaCard from '../../components/cards/media';
 import ScrollViewGradient from '@shared/components/scroll-view/horizontal';
 
-import { useSearchData } from '../../store/search';
-
 import { mergeClassNames } from '@utils/common';
+
+import { IStore } from '@pages/widgets/media-player/widget/store';
 
 import styles from './style.module.scss';
 
 const Playlists = ({ gridLayout = false }) => {
   const navigation = useNavigate();
-  const playlists = useSearchData((state) => state.playlists);
+  const playlists = useSelector((store: IStore) => store.search.playlists);
 
   const onOpenPlaylistPage = (id) => {
     navigation(`playlist/${id}`);
@@ -28,7 +29,7 @@ const Playlists = ({ gridLayout = false }) => {
       <ScrollViewGradient>
         <div className={styles.cards}>
           {
-            playlists.data.map((item) => (
+            playlists.map((item) => (
               <MediaCard
                 key={item.id}
                 image={item.image}
