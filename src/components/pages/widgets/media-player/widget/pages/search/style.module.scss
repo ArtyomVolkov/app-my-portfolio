@@ -35,40 +35,40 @@
       padding-bottom: 10px;
     }
   }
-}
 
-.artists, .albums, .playlists, .tracks {
-  display: grid;
-  padding-bottom: 0;
-  background: inherit;
+  .artists, .albums, .playlists, .tracks {
+    display: grid;
+    padding-bottom: 0;
+    background: inherit;
 
-  &.gridLayout {
-    padding-bottom: 10px;
+    &.gridLayout {
+      padding-bottom: 10px;
+
+      .title {
+        display: none;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
+      }
+    }
 
     .title {
-      display: none;
+      font-size: 18px;
+      margin: 10px 0;
     }
 
     .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-    }
-  }
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
 
-  .title {
-    font-size: 18px;
-    margin: 10px 0;
-  }
-
-  .cards {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-
-    .mediaCard {
-      min-width: 150px;
-      min-height: 200px;
+      .mediaCard {
+        min-width: 150px;
+        min-height: 200px;
+      }
     }
   }
 }

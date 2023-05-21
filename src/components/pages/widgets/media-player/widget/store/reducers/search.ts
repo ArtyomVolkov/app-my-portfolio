@@ -5,6 +5,7 @@ import { ILoading, IArtist, ITrack, IAlbum, IPlaylist } from '../../shared/inter
 
 export interface ISearchStore extends ILoading {
   term: string,
+  findByTerm?: string,
   searchType: ESearchType,
   artists: Array<IArtist>,
   albums: Array<IAlbum>,
@@ -16,6 +17,7 @@ export const initialState: ISearchStore = {
   loading: false,
   searchType: ESearchType.All,
   term: '',
+  findByTerm: '',
   albums: null,
   artists: null,
   playlists: null,
@@ -48,6 +50,7 @@ const search = createSlice({
       return {
         ...state,
         loading: false,
+        findByTerm: data.payload.findByTerm,
         albums: data.payload.albums,
         artists: data.payload.artists,
         playlists: data.payload.playlists,

@@ -4,7 +4,7 @@ import { actions } from '../reducers/search';
 import { searchData } from '../../api/search';
 import { getImageSrc, getTrackArtists } from '../../utils/common';
 
-const onSearchAll = async (term?: string) => {
+const onSearchAll = async () => {
   const { search } = store.getState();
 
   if (!search.term) {
@@ -16,6 +16,7 @@ const onSearchAll = async (term?: string) => {
     const { data } = await searchData(search.term, 'album,artist,playlist,track');
 
     store.dispatch(actions.setSearchResult({
+      findByTerm: search.term,
       albums: data.albums.items.map((album) => ({
         id: album.id,
         name: album.name,
@@ -55,8 +56,13 @@ const onSearchAll = async (term?: string) => {
 };
 
 const onChangeSearchType = async (searchType) => {
+  const { search } = store.getState();
+
   store.dispatch(actions.setSearchType(searchType));
 
+  if (search.term === search.findByTerm) {
+    return;
+  }
   await onSearchAll();
 };
 

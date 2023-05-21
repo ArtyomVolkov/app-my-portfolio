@@ -17,14 +17,11 @@ import searchActions from '../../store/actions/search';
 import styles from './style.module.scss';
 
 const SearchBox = () => {
-  const { search, searchType } = useSelector((store: IStore) => ({
-    search: store.search.term,
-    searchType: store.search.searchType,
-  }));
+  const searchType = useSelector((store: IStore) => store.search.searchType);
 
   const onKeyDown = (e) => {
     if (e.key === 'Enter') {
-      return searchActions.onSearchAll(search);
+      return searchActions.onSearchAll();
     }
   };
 
