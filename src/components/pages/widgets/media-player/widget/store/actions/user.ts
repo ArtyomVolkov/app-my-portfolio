@@ -88,6 +88,7 @@ const openSocialAuthModal = () => {
     'user-read-email',
     'user-library-read',
     'user-top-read',
+    'user-library-modify',
     'user-read-recently-played',
     'user-follow-modify',
     'user-follow-read',

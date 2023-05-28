@@ -6,34 +6,48 @@ import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 
 import { IStore } from '../../../store';
-import { isFavoriteTrack } from '../../../api/tracks';
+
+import favoriteTracks from '../../../store/actions/favorite-tracks';
 
 import styles from './style.module.scss';
 
 const FavoriteButton = () => {
   const [loading, setLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const trackUri = useSelector((store: IStore) => store.player?.track?.uri);
+  const track = useSelector((store: IStore) => store.player?.track);
 
   useEffect(() => {
     onCheckIsFavorite().then();
-  }, [trackUri]);
+  }, [track?.id]);
 
   const onCheckIsFavorite = async () => {
-    if (!trackUri) {
+    if (!track?.id) {
       return;
     }
     setLoading(true);
 
-    const trackId = trackUri.replaceAll('spotify:track:', '');
-    const { data } = await isFavoriteTrack([trackId]);
+    const favorite = await favoriteTracks.onCheckIsFavorite(track);
 
-    setIsFavorite(data[0]);
+    setIsFavorite(favorite);
+    setLoading(false);
+  };
+
+  const onToggleFavorite = async () => {
+    setLoading(true);
+    setIsFavorite(!isFavorite);
+
+    const error = isFavorite
+      ? await favoriteTracks.onRemoveTrackToFavorite(track)
+      : await favoriteTracks.onAddTrackToFavorite(track);
+
+    if (error) {
+      setIsFavorite((state) => !state);
+    }
     setLoading(false);
   };
 
   return (
-    <IconButton disabled={loading} className={styles.favoriteButton}>
+    <IconButton disabled={loading} className={styles.favoriteButton} onClick={onToggleFavorite}>
       {
         isFavorite
           ? <FavoriteRoundedIcon sx={{ fontSize: 20 }} className={styles.favorite} />
