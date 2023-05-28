@@ -15,9 +15,6 @@ const handleError = (error, message) => {
 };
 
 const onSuccess = (response) => {
-  if (response.config.requestAbort) {
-    // RequestAbort.clear(response.config.requestAbort, true);
-  }
   if (response.config.showError && (response.data.errors)) {
     // show message
   }
@@ -65,13 +62,11 @@ const onError = async (error) => {
 
 interface IAxiosConfig extends CreateAxiosDefaults {
   showError: boolean,
-  requestAbort: any,
   useRefreshToken: boolean,
 }
 
 const AxiosConfig: IAxiosConfig = {
   showError: false,
-  requestAbort: null,
   useRefreshToken: true,
   timeout: 30000,
   headers: {
@@ -84,9 +79,6 @@ const instance: AxiosInstance = axios.create(AxiosConfig);
 instance.interceptors.request.use((config: any) => {
   const token = getAccessToken();
 
-  if (config.requestAbort) {
-    // config.signal = RequestAbort.setRequest(config.requestAbort).signal;
-  }
   return {
     ...config,
     headers: {

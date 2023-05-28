@@ -1,4 +1,5 @@
 import http from '../services/http';
+import RequestAbort, { ERequest } from '../services/request-abort';
 
 export const getDevices = async () => {
   return await http.get('https://api.spotify.com/v1/me/player/devices')
@@ -21,6 +22,8 @@ export const toggleRepeat = async (deviceId, repeat) => {
 };
 
 export const setPlayTrack = async (contextURI = '', uris = [], position = 0) => {
+  RequestAbort.cancelPendingRequests(ERequest.SET_PLAY_TRACK);
+
   const payload: { uris?: string[], offset?: { uri?: string, position?: number }, context_uri?: string } = {};
 
   if (!contextURI && uris) {
@@ -32,6 +35,8 @@ export const setPlayTrack = async (contextURI = '', uris = [], position = 0) => 
       uri: uris.join(',')
     };
   }
-  return await http.put('https://api.spotify.com/v1/me/player/play', payload);
+  return await http.put('https://api.spotify.com/v1/me/player/play', payload, {
+    signal: RequestAbort.setRequest(ERequest.SET_PLAY_TRACK).signal
+  });
 };
 

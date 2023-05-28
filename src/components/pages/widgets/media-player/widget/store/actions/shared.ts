@@ -38,22 +38,13 @@ const onSetActiveTrack = async (context, tracks, trackURI = null) => {
       album: trackItem.album,
     })
   );
-
   try {
     await setPlayTrack(context, trackUris, trackItemIndex);
-    const { track } = store.getState().player;
-
-    store.dispatch(actions.setTrack({
-      ...track,
-      loading: false,
-    }));
   } catch (e) {
-    const { track } = store.getState().player;
-
-    store.dispatch(actions.setTrack({
-      ...track,
-      loading: false,
-    }));
+    if (!e.canceled && !store.getState().player.paused) {
+      // stop active track
+      playerActions.onPauseTrack();
+    }
   }
 };
 

@@ -76,15 +76,20 @@ const setPlaybackChange = (data) => {
   if (!data) {
     return;
   }
-  const { initialized, track } = store.getState().player;
+  const { initialized, track, paused } = store.getState().player;
 
   if (!initialized) {
     store.dispatch(actions.setInitialize());
   }
-  if (data.loading || track?.loading || !data.track_window.current_track) {
+  if (!data.track_window) {
     return;
   }
-  // TODO: prevent double update (check data props); check fast track select
+  // TODO: prevent double update (check data props)
+  if (track?.id === data.track_window.current_track.id) {
+    if (track.loading === data.loading && paused === data.paused) {
+      return;
+    }
+  }
   store.dispatch(
     actions.setPlayState({
       paused: data.paused,
