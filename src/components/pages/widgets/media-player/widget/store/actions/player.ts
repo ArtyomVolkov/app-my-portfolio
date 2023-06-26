@@ -55,7 +55,13 @@ const onChangeRepeat = async () => {
 
 const onRefreshInit = async () => {
   store.dispatch(actions.setLoading(true));
-  await setTransferPlayback(SpotifyPlayer.getDeviceId());
+
+  try {
+    await setTransferPlayback(SpotifyPlayer.getDeviceId());
+    store.dispatch(actions.setLoading(false));
+  } catch (e) {
+    store.dispatch(actions.setLoading(false));
+  }
 }
 
 const setTransferPlayback = async (id) => {

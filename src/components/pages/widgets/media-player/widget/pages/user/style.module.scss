@@ -105,7 +105,7 @@
     .artistsCards {
       display: grid;
       gap: 15px;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 
       .artistCard {
         min-width: 150px;
