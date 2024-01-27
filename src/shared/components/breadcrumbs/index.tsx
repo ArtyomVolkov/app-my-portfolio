@@ -12,7 +12,7 @@ const Breadcrumbs = () => {
   const navigation = useNavigate();
   const location = useLocation();
 
-  const navigateTo = (event: React.MouseEvent<HTMLLabelElement>, pathname) => {
+  const navigateTo = (event: React.MouseEvent<HTMLDivElement>, pathname) => {
     event.preventDefault();
     navigation(pathname);
   };
@@ -23,12 +23,12 @@ const Breadcrumbs = () => {
     return paths.map((item, index) => {
       if (!item) {
         return (
-          <label key={index} onClick={(e) => navigateTo(e, '/')}>
+          <div key={index} onClick={(e) => navigateTo(e, '/')}>
             <Link underline="hover" color="inherit" href="/" className={styles.link}>
               { PATH_MAP.home.icon }
               <span className={styles.pageLabel}>{ PATH_MAP.home.label }</span>
             </Link>
-          </label>
+          </div>
         );
       }
 
@@ -38,7 +38,7 @@ const Breadcrumbs = () => {
       const path = paths.slice(0, (index+1)).join('/');
 
       return (
-        <label key={item} onClick={(e) => navigateTo(e, path)}>
+        <div key={item} onClick={(e) => navigateTo(e, path)}>
           <Link
             underline="hover"
             color="inherit"
@@ -48,7 +48,7 @@ const Breadcrumbs = () => {
             { PATH_MAP[item].icon }
             <span className={styles.pageLabel}>{ PATH_MAP[item]?.label }</span>
           </Link>
-        </label>
+        </div>
       )
     })
   };

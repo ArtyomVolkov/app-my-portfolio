@@ -24,8 +24,8 @@ const Avatar: React.FC<IAvatar> = ({ title, subtitle, image }) => {
         </MuiAvatar>
       </IconButton>
       <div className={styles.info}>
-        <label className={styles.title}>{title}</label>
-        <label className={styles.subTitle}>{subtitle}</label>
+        <span className={styles.title}>{title}</span>
+        <span className={styles.subTitle}>{subtitle}</span>
       </div>
     </div>
   );

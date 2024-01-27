@@ -23,6 +23,8 @@ export enum Tool {
   JIRA = 'jira',
   AZURE = 'azure',
   DOCKER = 'docker',
+  XCODE = 'xCode',
+  ANDROID_STUDIO = 'androidStudio'
 }
 
 export enum Technology {
@@ -42,6 +44,7 @@ export enum Technology {
   REACT = 'react',
   REACT_CONTEXT = 'reactContext',
   REACT_NATIVE = 'reactNative',
+  CAPACITOR = 'capacitor',
   FLUTTER = 'flutter',
   ANGULAR = 'angular',
   ANGULARJS = 'angularjs',
@@ -53,6 +56,7 @@ export enum Technology {
   SVG = 'svg',
   D3JS = 'd3js',
   CANVAS = 'canvas',
+  MICRO_FRONT_END = 'microFrontEnd',
   MATERIAL_UI = 'materialUI',
   SEMANTIC_UI = 'semanticUI',
   KENDO_UI = 'kendoUI',

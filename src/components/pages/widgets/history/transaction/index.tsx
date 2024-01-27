@@ -31,8 +31,8 @@ const Transaction: React.FC<Transaction> = ({ title, data }) => {
                 <item.icon />
               </div>
               <div className="details">
-                <label className="title">{item.title}</label>
-                <label className="date">{item.date}</label>
+                <span className="title">{item.title}</span>
+                <span className="date">{item.date}</span>
               </div>
               <div className="divider" />
             </li>

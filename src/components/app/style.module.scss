@@ -8,7 +8,7 @@
   transition: filter 0.25s;
 
   &[aria-hidden="true"] {
-    filter: blur(5px);
+    // filter: blur(5px);
   }
 }
 

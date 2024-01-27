@@ -37,13 +37,13 @@ export const Languages: { [key in ELanguage]: ILanguage } = {
 export const Tools: { [key in ETool]: ITool } = {
   npm: {
     key: ETool.NPM,
-    label: 'NPM',
+    label: 'Npm',
     link: '',
     type: Development.TOOL,
   },
   git: {
     key: ETool.GIT,
-    label: 'GIT',
+    label: 'Git',
     link: '',
     type: Development.TOOL,
   },
@@ -68,6 +68,18 @@ export const Tools: { [key in ETool]: ITool } = {
   webstorm: {
     key: ETool.WEBSTORM_IDEA,
     label: 'WebStorm IDEA',
+    link: '',
+    type: Development.TOOL,
+  },
+  [ETool.XCODE] : {
+    key: ETool.XCODE,
+    label: 'Xcode',
+    link: '',
+    type: Development.TOOL,
+  },
+  [ETool.ANDROID_STUDIO] : {
+    key: ETool.ANDROID_STUDIO,
+    label: 'Android Studio',
     link: '',
     type: Development.TOOL,
   },
@@ -202,6 +214,16 @@ export const Technologies: {[key in ETechnology]: ITechnology } = {
   flutter: {
     key: ETechnology.FLUTTER,
     label: 'Flutter',
+    type: Development.TECHNOLOGY
+  },
+  [ETechnology.CAPACITOR]: {
+    key: ETechnology.CAPACITOR,
+    label: 'Capacitor',
+    type: Development.TECHNOLOGY
+  },
+  [ETechnology.MICRO_FRONT_END]: {
+    key: ETechnology.MICRO_FRONT_END,
+    label: 'Micro Front-End',
     type: Development.TECHNOLOGY
   },
   angular: {

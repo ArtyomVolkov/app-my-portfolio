@@ -13,7 +13,7 @@ const Experience = () => (
       PROJECTS.map((item, index) => (
         <section className={styles.projectCard} key={index}>
           <p className={styles.name}>{ item.name }</p>
-          <label className={styles.description}>{item.description}</label>
+          <span className={styles.description}>{item.description}</span>
           <div className={styles.pillWidget}>
             <img
               src={`https://flagcdn.com/w40/${item.countryCode}.png`}
@@ -21,7 +21,7 @@ const Experience = () => (
               width={40}
               alt="country"
             />
-            <label>{item.period}</label>
+            <span>{item.period}</span>
           </div>
           <TechnologyList data={item.technologies} className={styles.technologyList} />
           <Divider />

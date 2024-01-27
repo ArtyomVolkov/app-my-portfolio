@@ -2,26 +2,28 @@ import { Language, Project, Technology, Tool } from '@shared/interfaces/develop'
 import { Languages, Tools, Technologies } from '@shared/dtos/develop';
 
 export const LANGUAGES: Array<Language> = [
-  Languages.javascript,
   Languages.typescript,
+  Languages.javascript,
   Languages.dart,
   Languages.java,
 ];
 
 export const TOOLS: Array<Tool> = [
+  Tools.aws,
+  Tools.azure,
   Tools.npm,
   Tools.git,
   Tools.webpack,
   Tools.webstorm,
+  Tools.xCode,
+  Tools.androidStudio,
   Tools.firebase,
-  Tools.sonar,
   Tools.gla,
-  Tools.zeplin,
   Tools.figma,
   Tools.jenkins,
-  Tools.aws,
   Tools.jira,
-  Tools.azure,
+  Tools.sonar,
+  Tools.zeplin,
 ];
 
 export const TECHNOLOGIES: Array<Technology> = [
@@ -37,6 +39,8 @@ export const TECHNOLOGIES: Array<Technology> = [
   Technologies.css,
   Technologies.react,
   Technologies.reactNative,
+  Technologies.capacitor,
+  Technologies.microFrontEnd,
   Technologies.flutter,
   Technologies.angular,
   Technologies.materialUI,
@@ -65,6 +69,54 @@ export const TECHNOLOGIES: Array<Technology> = [
 ];
 
 export const PROJECTS: Array<Project> = [
+  {
+    name: 'WalkMe™',
+    description: 'WalkMe, the leading digital adoption platform, overlays on any application, identifying where workflows break and providing personalized guidance and automation to help your people get the job done.',
+    technologies: [
+      Languages.typescript,
+      Technologies.react,
+      Technologies.redux,
+      Technologies.microFrontEnd,
+      Technologies.lodash,
+      Tools.webpack,
+      Tools.figma,
+    ],
+    responsibilities: [
+      'Building UI architecture for internal web apps',
+      'Develop, manage application pages, UI components, animations, optimization',
+      'Collaborate with PO on defining User Stories',
+      'Bug fixing, refactoring',
+    ],
+    countryCode: 'il',
+    period: 'now',
+  },
+  {
+    name: 'Akeso',
+    description: 'Mobile app (android, ios) for manually adding of tracking health data, some kind of Health app on ios, but with a lot of settings and report generation stuff.',
+    technologies: [
+      Languages.typescript,
+      Technologies.capacitor,
+      Technologies.react,
+      Technologies.redux,
+      Technologies.materialUI,
+      Technologies.svg,
+      Technologies.lodash,
+      Tools.xCode,
+      Tools.androidStudio,
+      Tools.webpack,
+      Tools.figma,
+    ],
+    responsibilities: [
+      'Building app UI architecture from the scratch',
+      'Develop, manage application pages, UI components, animations, optimization',
+      'Manage of app builds in App Store, Google Play',
+      'Conduct regular code reviews to improve code quality',
+      'Mentoring of team members',
+      'Bug fixing, refactoring',
+    ],
+    countryCode: 'us',
+    period: '9 months',
+  },
   {
     name: 'Wineshipping',
     description: `The most comprehensive alcohol logistics network in the U.S. Fast and reliable service, warehouses near your customers, personalized support, and the innovative technology that powers our network…`,
