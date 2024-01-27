@@ -16,7 +16,8 @@ interface IAlbums {
     data: Array<IAlbum>,
   },
   actions: {
-    onFetchAlbums: () => Promise<any>
+    onFetchAlbums: () => Promise<any>,
+    [key: string]: any,
   }
 }
 
