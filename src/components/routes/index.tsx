@@ -18,7 +18,7 @@ const AppRoutes = () => (
     <Route
       path="/"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Profile />
         </Suspense>
       )}
@@ -26,7 +26,7 @@ const AppRoutes = () => (
     <Route
       path="/profile"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Profile />
         </Suspense>
       )}
@@ -34,7 +34,7 @@ const AppRoutes = () => (
     <Route
       path="/components"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Components />
         </Suspense>
       )}
@@ -42,7 +42,7 @@ const AppRoutes = () => (
     <Route
       path="/components/shapes"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Shapes />
         </Suspense>
       )}
@@ -50,7 +50,7 @@ const AppRoutes = () => (
     <Route
       path="/widgets"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Widgets />
         </Suspense>
       )}
@@ -58,7 +58,7 @@ const AppRoutes = () => (
     <Route
       path="/widgets/history"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <History />
         </Suspense>
       )}
@@ -66,7 +66,7 @@ const AppRoutes = () => (
     <Route
       path="/widgets/gallery"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Gallery />
         </Suspense>
       )}
@@ -74,7 +74,7 @@ const AppRoutes = () => (
     <Route
       path="/games"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Games />
         </Suspense>
       )}
@@ -82,7 +82,7 @@ const AppRoutes = () => (
     <Route
       path="/games/puzzle"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Puzzle />
         </Suspense>
       )}
@@ -90,7 +90,7 @@ const AppRoutes = () => (
     <Route
       path="/games/sudoku"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Sudoku />
         </Suspense>
       )}
@@ -98,7 +98,7 @@ const AppRoutes = () => (
     <Route
       path="/games/nonogram"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Katana />
         </Suspense>
       )}
@@ -106,7 +106,7 @@ const AppRoutes = () => (
     <Route
       path="*"
       element={(
-        <Suspense fallback="loading...">
+        <Suspense fallback="">
           <Page404 />
         </Suspense>
       )}
