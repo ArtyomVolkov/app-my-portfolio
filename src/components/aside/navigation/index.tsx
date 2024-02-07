@@ -8,6 +8,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItemButton';
 
 import HomeIcon from '@mui/icons-material/Home';
+import BarChartSharp from '@mui/icons-material/BarChartSharp';
 import AccountIcon from '@mui/icons-material/AccountBox';
 import ComponentsIcon from '@mui/icons-material/DashboardCustomize';
 import WidgetsIcon from '@mui/icons-material/Widgets';
@@ -65,6 +66,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   nonogram: {
     label: 'Nonogram',
     icon: <GridOnRoundedIcon />,
+  },
+  charts: {
+    label: 'Charts',
+    icon: <BarChartSharp />
   }
 };
 
@@ -72,6 +77,7 @@ export const NAV_OPTIONS: Array<string> = [
   'profile',
   'components',
   'widgets',
+  'charts',
   'games',
 ];
 
