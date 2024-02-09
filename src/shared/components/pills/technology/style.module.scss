@@ -37,4 +37,8 @@
       color: white;
     }
   }
+
+  :global(.MuiChip-label) {
+    line-height: 1em;
+  }
 }
