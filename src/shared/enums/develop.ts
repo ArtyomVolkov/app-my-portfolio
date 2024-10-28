@@ -76,7 +76,8 @@ export enum Technology {
   KANBAN = 'kanban',
   LEAN = 'lean',
   EXP = 'exp',
-  PEXELS = 'pexels'
+  PEXELS = 'pexels',
+  VISUAL_CROSSING_WEATHER = 'visualCrossingWeather',
 }
 
 export enum Development {

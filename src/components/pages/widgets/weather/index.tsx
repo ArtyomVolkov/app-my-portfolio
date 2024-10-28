@@ -2,20 +2,20 @@ import React from 'react';
 
 import Main from '@components/main';
 import TechnologyList from '@shared/components/lists/technologies';
-import GalleryGrid from '@pages/widgets/gallery/grid';
+import WeatherWidget from '@pages/widgets/weather/widget';
 
-import { TECHNOLOGIES } from '@pages/widgets/gallery/data';
+import { TECHNOLOGIES } from '@pages/widgets/weather/data';
 
 import styles from './style.module.scss';
 
-const Gallery = () => {
+const Weather = () => {
   return (
-    <Main className={styles.natureGallery}>
-      <h3 className={styles.title}>Gallery</h3>
+    <Main className={styles.weather}>
+      <h3 className={styles.title}>Weather</h3>
       <TechnologyList data={TECHNOLOGIES} className={styles.technologyList} />
-      <GalleryGrid />
+      <WeatherWidget />
     </Main>
   );
 };
 
-export default Gallery;
+export default Weather;

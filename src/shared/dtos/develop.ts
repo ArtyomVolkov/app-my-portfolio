@@ -390,5 +390,10 @@ export const Technologies: {[key in ETechnology]: ITechnology } = {
     key: ETechnology.PEXELS,
     label: 'Pexels (api)',
     type: Development.TECHNOLOGY
+  },
+  visualCrossingWeather: {
+    key: ETechnology.VISUAL_CROSSING_WEATHER,
+    label: 'Visual Crossing Weather (api)',
+    type: Development.TECHNOLOGY
   }
 }

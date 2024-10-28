@@ -1,0 +1,12 @@
+.weather {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    margin-top: 0;
+  }
+
+  .technologyList {
+    margin-bottom: 20px;
+  }
+}

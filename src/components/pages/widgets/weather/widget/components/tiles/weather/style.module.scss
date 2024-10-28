@@ -1,0 +1,24 @@
+.weatherTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: white;
+
+  .temperature {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+
+    .min {
+      color: grey;
+    }
+
+    .max {
+      font-weight: 600;
+    }
+  }
+}

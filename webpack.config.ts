@@ -14,7 +14,9 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 // const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-env.config();
+env.config({
+  path: './.env'
+});
 
 const isProd = process.env.NODE_ENV !== 'development';
 
@@ -85,7 +87,7 @@ const MODULE = {
       ],
     },
     {
-      test: /\.(jpe?g|png|gif|svg)$/i,
+      test: /\.(jpe?g|png|gif)$/i,
       exclude: /node_modules/,
       use: {
         loader: 'file-loader',
@@ -94,12 +96,16 @@ const MODULE = {
         },
       },
     },
+    {
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    }
   ],
 };
 
 const PLUGINS = [
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    'process.env': JSON.stringify(process.env),
   }),
   new InterpolateHtmlPlugin({
     PUBLIC_URL: '',
