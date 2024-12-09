@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import WeatherIcon from './components/weather-icon';
-import Weekly from './components/weekly';
+import Weekly from './components/dashboard/weekly';
+import Daily from './components/dashboard/daily';
+import Tabs from './components/tabs';
 
 import { fetchForecastData } from './api';
 
@@ -15,6 +17,19 @@ const WeatherWidget = () => {
   useEffect(() => {
     fetchData().then();
   }, []);
+
+  const tabs = [
+    {
+      key: 'daily',
+      label: 'Daily',
+      component: <Daily />
+    },
+    {
+      key: 'weekly',
+      label: 'Weekly',
+      component:  <Weekly data={forecast} />
+    }
+  ];
 
   const fetchData = async () => {
     const data = await fetchForecastData();
@@ -65,7 +80,10 @@ const WeatherWidget = () => {
           </span>
         </div>
         <div className={styles.dashboard}>
-          <Weekly data={forecast} />
+          <Tabs
+            defaultActive="weekly"
+            tabs={tabs}
+          />
         </div>
       </>
     );

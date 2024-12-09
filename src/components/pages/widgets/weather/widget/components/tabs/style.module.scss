@@ -1,0 +1,43 @@
+.tabs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .tabList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    .tabItem {
+      color: #adadad;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:active {
+        opacity: 0.4;
+      }
+
+      &.active {
+        color: black;
+        border-color: black;
+      }
+    }
+  }
+
+  .tabView {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+}

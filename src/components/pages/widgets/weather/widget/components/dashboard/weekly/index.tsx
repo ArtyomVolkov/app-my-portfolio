@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import WeatherTile from '../tiles/weather';
+import WeatherTile from '../../../components/tiles/weather';
 
 import styles from './style.module.scss';
 
