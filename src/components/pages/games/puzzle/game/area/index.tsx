@@ -16,7 +16,12 @@ interface PuzzleArea {
 
 const PuzzleArea: React.FC<PuzzleArea> = ({ size, level, isOver, items, zeroIndex }) => (
   <div className={styles.area}>
-    <div className={styles.holst} style={{ width: size * level }}>
+    <div
+      className={styles.holst}
+      style={{
+        gridTemplateColumns: `${Array(level).fill('1fr').join(' ')}`
+      }}
+    >
       {
         isOver && <div className={styles.gameOver}>Game Over!</div>
       }

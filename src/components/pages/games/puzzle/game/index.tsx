@@ -7,14 +7,24 @@ import Controls from './toolbar/controls';
 import styles from './style.module.scss';
 
 const generateItems = (size) => {
-  const list = Array(Math.pow(size, 2)-1)
+  const length = Math.pow(size, 2)-1;
+  const crypt = {};
+  const pattern = Array(length)
     .fill(0)
     .map((item, index) => index+1)
-    .sort(() => Math.random() - 0.5);
+    .sort((a, b) => a%size > b%size ? 1 : -1);
 
-  list.push(0);
+  pattern.push(0);
 
-  return list;
+  const list = Array(length).fill(1).map((item, index) => index+1);
+
+  Array(length).fill(1).forEach((item, index) => {
+    const randomIndex = Math.round(Math.random()*(list.length-1));
+    crypt[index+1] = list[randomIndex];
+    list.splice(randomIndex, 1);
+  });
+
+  return pattern.map((item) => crypt[item]);
 }
 
 export enum Level {
