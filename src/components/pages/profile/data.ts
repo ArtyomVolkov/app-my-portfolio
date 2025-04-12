@@ -88,7 +88,7 @@ export const PROJECTS: Array<Project> = [
       'Bug fixing, refactoring',
     ],
     countryCode: 'il',
-    period: 'now',
+    period: '2 years',
   },
   {
     name: 'Akeso',

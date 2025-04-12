@@ -4,6 +4,8 @@
   flex-direction: row;
   align-items: stretch;
   justify-content: stretch;
+  backdrop-filter: blur(2px);
+  transition: backdrop-filter 0.5s;
 
   .image {
     width: 100%;

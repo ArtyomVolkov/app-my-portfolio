@@ -26,8 +26,8 @@ const Summary = () => {
           <p className={styles.title}>Artem Volkov</p>
           <p className={styles.subtitle}>Senior FrontEnd Software Engineer</p>
           <span className={styles.description}>
-            Software Engineer (8+ years) with vast development experience of web-applications using libs/frameworks
-            such as: React, React-Native, Capacitor, Flutter, Angular, AngularJs, Backbone.
+            Software Engineer (11+ years) with vast development experience of web-applications using libs/frameworks
+            such as: React, React-Native, Capacitor, Flutter, Angular, AngularJs, BackboneJs.
             <br/>
             Good experience with OOP, FP and GoF's design patterns.
             <br/>
