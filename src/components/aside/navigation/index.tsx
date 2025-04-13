@@ -18,6 +18,7 @@ import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import GridOnRoundedIcon from '@mui/icons-material/GridOnRounded';
 import CollectionsIcon from '@mui/icons-material/Collections';
+import GradientOutlinedIcon from '@mui/icons-material/GradientOutlined';
 
 import styles from './style.module.scss';
 
@@ -61,6 +62,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   gallery: {
     label: 'Gallery',
     icon: <CollectionsIcon />
+  },
+  matrix: {
+    label: 'Matrix',
+    icon: <GradientOutlinedIcon />
   },
   nonogram: {
     label: 'Nonogram',
