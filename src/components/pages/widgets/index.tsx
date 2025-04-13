@@ -5,6 +5,7 @@ import NavButton from '@shared/components/buttons/navigation';
 
 // import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 import CollectionsIcon from '@mui/icons-material/Collections';
+import GradientOutlinedIcon from '@mui/icons-material/GradientOutlined';
 
 import styles from './style.module.scss';
 
@@ -20,6 +21,11 @@ const WidgetsPage = () => {
         path="/widgets/gallery"
         title="Gallery"
         icon={<CollectionsIcon className="icon"/>}
+      />
+      <NavButton
+        path="/widgets/matrix"
+        title="Matrix"
+        icon={<GradientOutlinedIcon className="icon"/>}
       />
     </Main>
   );
