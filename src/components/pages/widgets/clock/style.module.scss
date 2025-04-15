@@ -1,0 +1,41 @@
+.clockWidgets {
+  display: flex;
+  flex-direction: column;
+
+  .clockWidget {
+    margin-top: 15px;
+    display: flex;
+    gap: 16px;
+    width: fit-content;
+    min-height: 300px;
+    padding: 16px;
+    border: 1px solid #dcdcdc;
+    border-radius: 16px;
+    background: #f9f9f9;
+
+    .clock {
+      min-width: 300px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .circle, .seconds {
+        position: absolute;
+        transform: rotate(-90deg);
+
+        .progressArc {
+          transition: stroke-dashoffset 0.35s;
+        }
+      }
+
+      .timeValue {
+        color: #607D8B;
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        font-family: "system-ui", sans-serif;
+      }
+    }
+  }
+}

@@ -36,7 +36,6 @@ const Rotation: React.FC<Rotation> = ({position = {x: 0, y: 0}, children, classN
     if (!rotate.current.active) {
       return;
     }
-    console.log('mouse move')
     const x = e.clientX - rotate.current.startX + rotate.current.x;
     const y = rotate.current.startY - e.clientY + rotate.current.y;
 

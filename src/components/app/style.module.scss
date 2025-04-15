@@ -20,10 +20,10 @@
 
   &.fullWidth {
     aside {
-      width: 80px;
+      width: 75px;
     }
     .mainContent {
-      margin-left: 80px;
+      margin-left: 75px;
     }
   }
 
@@ -47,6 +47,22 @@
     }
     aside {
       width: 60px;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .appEntry {
+    .mainContent {
+      grid-template-rows: 65px 1fr;
+    }
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .appEntry {
+    .mainContent {
+      grid-template-rows: 50px 1fr;
     }
   }
 }
