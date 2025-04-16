@@ -19,6 +19,7 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import GridOnRoundedIcon from '@mui/icons-material/GridOnRounded';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import GradientOutlinedIcon from '@mui/icons-material/GradientOutlined';
+import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
 
 import styles from './style.module.scss';
 
@@ -66,6 +67,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   matrix: {
     label: 'Matrix',
     icon: <GradientOutlinedIcon />
+  },
+  clock: {
+    label: 'Clock',
+    icon: <WatchLaterOutlinedIcon />
   },
   nonogram: {
     label: 'Nonogram',

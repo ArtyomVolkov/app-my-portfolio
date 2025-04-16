@@ -5,10 +5,13 @@ const Page404 = lazy(() => import('@pages/404'));
 const Profile = lazy(() => import('@pages/profile'));
 const Components = lazy(() => import('@pages/components'));
 const Shapes = lazy(() => import('@pages/components/shapes'));
+
 const Widgets = lazy(() => import('@pages/widgets'));
 const History = lazy(() => import('@pages/widgets/history'));
 const Gallery = lazy(() => import('@pages/widgets/gallery'));
 const Matrix = lazy(() => import('@pages/widgets/matrix'));
+const Clock = lazy(() => import('@pages/widgets/clock'));
+
 const Games = lazy(() => import('@pages/games'));
 const Puzzle = lazy(() => import('@pages/games/puzzle'));
 const Sudoku = lazy(() => import('@pages/games/sudoku'));
@@ -77,6 +80,14 @@ const AppRoutes = () => (
       element={(
         <Suspense fallback="">
           <Matrix />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/widgets/clock"
+      element={(
+        <Suspense fallback="">
+          <Clock />
         </Suspense>
       )}
     />
