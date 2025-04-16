@@ -1,0 +1,13 @@
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+
+  .hr {
+    flex: 1;
+    background: #dcdcdc;
+    height: 2px;
+    border-radius: 10px;
+  }
+}

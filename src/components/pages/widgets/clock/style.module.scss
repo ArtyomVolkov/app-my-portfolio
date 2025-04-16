@@ -4,7 +4,8 @@
 
   .clockWidget {
     margin-top: 15px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 300px 1fr;
     gap: 16px;
     width: fit-content;
     min-height: 300px;
@@ -19,14 +20,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background: #ebeaea;
+      border-radius: 12px;
+
+      &.useAnimation {
+        .progressArc {
+          transition: stroke-dashoffset 0.35s, stroke 0.5s;
+        }
+      }
 
       .circle, .seconds {
         position: absolute;
         transform: rotate(-90deg);
-
-        .progressArc {
-          transition: stroke-dashoffset 0.35s;
-        }
       }
 
       .timeValue {
@@ -35,6 +40,62 @@
         font-weight: 700;
         text-align: center;
         font-family: "system-ui", sans-serif;
+      }
+    }
+
+    .settings {
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid #dcdcdc;
+      padding: 0 18px;
+      gap: 16px;
+
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .option {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+
+        label[for*="shape-type"] {
+          cursor: pointer;
+        }
+
+        input[type="radio"] {
+          cursor: pointer;
+        }
+
+        input[type="range"] {
+          width: 78px;
+          cursor: pointer;
+        }
+
+        .title {
+          color: #5e5d54;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .subtitle {
+          font-size: 12px;
+          color: #5e5d54;
+          font-weight: 600;
+        }
+      }
+
+      .divider {
+        gap: 15px;
+        margin-top: 15px;
+
+        .title {
+          color: #5e5d54;
+          font-weight: 600;
+        }
       }
     }
   }
