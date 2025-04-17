@@ -1,7 +1,7 @@
-@import "../../assets/styles/style-guide";
+@use "../../assets/styles/style-guide";
 
 :global(html) {
-  @include scroll-style;
+  @include style-guide.scroll-style;
 }
 :global(body) {
   margin: 0;

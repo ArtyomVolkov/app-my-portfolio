@@ -1,7 +1,7 @@
-@import "../../../../../assets/styles/style-guide";
+@use "../../../../../assets/styles/style-guide";
 
 .puzzleGameWidget {
-  @include card-shadow;
+  @include style-guide.card-shadow;
   display: flex;
   max-width: fit-content;
 }

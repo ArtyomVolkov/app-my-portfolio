@@ -1,4 +1,4 @@
-@import "../../../../../assets/styles/style-guide";
+@use "../../../../../assets/styles/style-guide";
 
 $border-width: 2px;
 $border: $border-width solid black;
@@ -20,7 +20,7 @@ $cell-size: 21px;
 }
 
 .gameWidget {
-  @include card-shadow;
+  @include style-guide.card-shadow;
   display: flex;
   width: min-content;
   flex-direction: column;

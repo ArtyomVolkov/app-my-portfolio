@@ -1,4 +1,4 @@
-@import "../style.module";
+@use "../style.module";
 
 .area {
   display: grid;
@@ -28,7 +28,7 @@
   }
 
   .cell {
-    @include cell(white);
+    @include style.cell(white);
     overflow: hidden;
 
     &:hover {
@@ -36,8 +36,8 @@
     }
 
     &.divider {
-      border-right: $border;
-      border-width: calc(#{$border-width} - 1px);
+      border-right: style.$border;
+      border-width: calc(#{style.$border-width} - 1px);
     }
 
     .filled {
@@ -62,8 +62,8 @@
     grid-column-gap: 1px;
 
     &.divider {
-      border-bottom: $border;
-      border-width: calc(#{$border-width} - 1px);
+      border-bottom: style.$border;
+      border-width: calc(#{style.$border-width} - 1px);
     }
   }
 }
