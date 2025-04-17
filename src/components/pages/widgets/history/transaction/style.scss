@@ -1,8 +1,8 @@
-@import "@assets/styles/style-guide";
+@use "../../../../../assets/styles/style-guide";
 
 .history-widget {
-  @include reset;
-  @include card-shadow;
+  @include style-guide.reset;
+  @include style-guide.card-shadow;
   max-width: 400px;
 
   .headline {

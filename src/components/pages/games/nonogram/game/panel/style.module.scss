@@ -1,4 +1,4 @@
-@import "../style.module";
+@use "../style.module";
 
 .panel {
   display: grid;
@@ -7,7 +7,7 @@
   &:global(.horizontal) {
     grid-row-gap: 1px;
     background: #5e5d54;
-    border-right: $border;
+    border-right: style.$border;
 
     .row {
       display: flex;
@@ -20,8 +20,8 @@
       }
 
       &.divider {
-        border-bottom: $border;
-        border-width: calc(#{$border-width} - 1px);
+        border-bottom: style.$border;
+        border-width: calc(#{style.$border-width} - 1px);
       }
     }
   }
@@ -31,7 +31,7 @@
     grid-column-gap: 1px;
     background: #5e5d54;
     flex-direction: row;
-    border-left: $border;
+    border-left: style.$border;
 
     .row {
       display: flex;
@@ -40,8 +40,8 @@
       justify-content: end;
 
       &.divider {
-        border-right: $border;
-        border-width: calc(#{$border-width} - 1px);
+        border-right: style.$border;
+        border-width: calc(#{style.$border-width} - 1px);
       }
 
       &.hover {
@@ -52,7 +52,7 @@
 
   .cell {
     position: relative;
-    @include cell(wheat);
+    @include style.cell(wheat);
 
     .crossIcon {
       position: absolute;
