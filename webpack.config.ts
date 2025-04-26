@@ -103,7 +103,7 @@ const PLUGINS = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.PEXELS_API_KEY': JSON.stringify(process.env.PEXELS_API_KEY),
-    'process.env.FIREBASE_APY_KEY': JSON.stringify(process.env.FIREBASE_APY_KEY),
+    'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
   }),
   new InterpolateHtmlPlugin({
     PUBLIC_URL: '',
