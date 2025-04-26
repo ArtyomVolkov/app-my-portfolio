@@ -24,6 +24,8 @@ const ALIAS = {
   '@api': path.resolve(__dirname, 'src/api'),
   '@assets': path.resolve(__dirname, 'src/assets'),
   '@constants': path.resolve(__dirname, 'src/constants'),
+  '@services': path.resolve(__dirname, 'src/services'),
+  '@config': path.resolve(__dirname, 'src/config'),
   '@pages': path.resolve(__dirname, 'src/pages'),
   '@components': path.resolve(__dirname, 'src/components'),
   '@shared': path.resolve(__dirname, 'src/shared'),
@@ -101,6 +103,7 @@ const PLUGINS = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.PEXELS_API_KEY': JSON.stringify(process.env.PEXELS_API_KEY),
+    'process.env.FIREBASE_APY_KEY': JSON.stringify(process.env.FIREBASE_APY_KEY),
   }),
   new InterpolateHtmlPlugin({
     PUBLIC_URL: '',

@@ -5,37 +5,37 @@
   .technologyList {
     margin-bottom: 5px;
   }
+}
 
-  .heapSizePill {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    width: 100%;
-    max-width: 200px;
-    height: 30px;
-    border-radius: 30px;
-    border: 1px solid black;
-    position: relative;
-    overflow: hidden;
-    background: black;
+.heapSizePill {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  width: 100%;
+  max-width: 200px;
+  height: 30px;
+  border-radius: 30px;
+  border: 1px solid black;
+  position: relative;
+  overflow: hidden;
+  background: black;
 
-    .heapSize {
-      position: absolute;
-      z-index: 100;
-      font-size: 12px;
-      font-weight: 500;
-      //filter: invert(0.75);
-    }
+  .heapSize {
+    position: absolute;
+    z-index: 100;
+    font-size: 12px;
+    font-weight: 500;
+    //filter: invert(0.75);
+  }
 
-    .progress {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 50%;
-      height: 100%;
-      transition: all 0.35s;
-    }
+  .progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    transition: all 0.35s;
   }
 }
