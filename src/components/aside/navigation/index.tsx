@@ -20,6 +20,7 @@ import GridOnRoundedIcon from '@mui/icons-material/GridOnRounded';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import GradientOutlinedIcon from '@mui/icons-material/GradientOutlined';
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
+import MemoryOutlinedIcon from '@mui/icons-material/MemoryOutlined';
 
 import styles from './style.module.scss';
 
@@ -71,6 +72,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   clock: {
     label: 'Clock',
     icon: <WatchLaterOutlinedIcon />
+  },
+  memory: {
+    label: 'Memory',
+    icon: <MemoryOutlinedIcon />
   },
   nonogram: {
     label: 'Nonogram',

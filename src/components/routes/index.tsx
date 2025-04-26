@@ -11,6 +11,7 @@ const History = lazy(() => import('@pages/widgets/history'));
 const Gallery = lazy(() => import('@pages/widgets/gallery'));
 const Matrix = lazy(() => import('@pages/widgets/matrix'));
 const Clock = lazy(() => import('@pages/widgets/clock'));
+const Memory = lazy(() => import('@pages/widgets/memory'));
 
 const Games = lazy(() => import('@pages/games'));
 const Puzzle = lazy(() => import('@pages/games/puzzle'));
@@ -88,6 +89,14 @@ const AppRoutes = () => (
       element={(
         <Suspense fallback="">
           <Clock />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/widgets/memory"
+      element={(
+        <Suspense fallback="">
+          <Memory />
         </Suspense>
       )}
     />

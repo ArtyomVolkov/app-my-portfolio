@@ -7,6 +7,7 @@ import NavButton from '@shared/components/buttons/navigation';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import GradientOutlinedIcon from '@mui/icons-material/GradientOutlined';
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
+import MemoryOutlinedIcon from '@mui/icons-material/MemoryOutlined';
 
 import styles from './style.module.scss';
 
@@ -32,6 +33,11 @@ const WidgetsPage = () => {
         path="/widgets/clock"
         title="Clock"
         icon={<WatchLaterOutlinedIcon className="icon"/>}
+      />
+      <NavButton
+        path="/widgets/memory"
+        title="Memory"
+        icon={<MemoryOutlinedIcon className="icon"/>}
       />
     </Main>
   );
