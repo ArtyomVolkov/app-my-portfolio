@@ -36,9 +36,7 @@ const MemoryWidget = () => {
   }, [memoryData.memory.usedJSHeapSize, memoryData.memory.jsHeapSizeLimit]);
 
   return (
-    <>
-      <p>Pretty simple heap size component for display measure of browser memory</p>
-      <section className={styles.heapSizePill}>
+    <section className={styles.heapSizePill}>
       <span
         className={styles.heapSize}
         style={{
@@ -49,15 +47,14 @@ const MemoryWidget = () => {
           `${formatBytes(memoryData.memory.usedJSHeapSize)} / ${formatBytes(memoryData.memory.jsHeapSizeLimit)}`
         }
       </span>
-        <span
-          className={styles.progress}
-          style={{
-            width: `${progress.value}%`,
-            background: `hsl(${progress.background}deg 100% 60%)`,
-          }}
-        />
-      </section>
-    </>
+      <span
+        className={styles.progress}
+        style={{
+          width: `${progress.value}%`,
+          background: `hsl(${progress.background}deg 100% 60%)`,
+        }}
+      />
+    </section>
   )
 };
 

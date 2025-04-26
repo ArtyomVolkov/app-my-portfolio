@@ -13,6 +13,7 @@ const Memory = () => {
     <Main className={styles.memoryWidgets}>
       <h3>Memory</h3>
       <TechnologyList data={TECHNOLOGIES} className={styles.technologyList} />
+      <p>Pretty simple heap size component for display measure of browser memory</p>
       <MemoryWidget />
     </Main>
   );
