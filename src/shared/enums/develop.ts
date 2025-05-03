@@ -53,6 +53,7 @@ export enum Technology {
   REDUX = 'redux',
   MOBX = 'mobx',
   RXJS = 'rxjs',
+  ZUSTAND = 'zustand',
   SVG = 'svg',
   D3JS = 'd3js',
   CANVAS = 'canvas',

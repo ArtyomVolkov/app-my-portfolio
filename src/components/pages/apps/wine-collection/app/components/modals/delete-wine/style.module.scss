@@ -1,0 +1,31 @@
+.wineAppDeleteWineModal {
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  font-family: "system-ui", sans-serif;
+
+  .header {
+    padding: 20px;
+    border-bottom: 1px solid #dcdcdc;
+
+    .title {
+      font-size: 20px;
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    min-height: 25px;
+    padding: 20px;
+    background: #eaeaea;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #dcdcdc;
+    gap: 10px;
+    padding: 20px;
+  }
+}

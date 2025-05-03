@@ -21,10 +21,20 @@ import CollectionsIcon from '@mui/icons-material/Collections';
 import GradientOutlinedIcon from '@mui/icons-material/GradientOutlined';
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
 import MemoryOutlinedIcon from '@mui/icons-material/MemoryOutlined';
+import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
+import LiquorOutlinedIcon from '@mui/icons-material/LiquorOutlined';
 
 import styles from './style.module.scss';
 
 export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement }} = {
+  apps: {
+    label: 'Apps',
+    icon: <AppsOutlinedIcon />,
+  },
+  ['wine-collection']: {
+    label: 'Wine Collection',
+    icon: <LiquorOutlinedIcon />,
+  },
   home: {
     label: 'Home',
     icon: <HomeIcon />,
@@ -88,6 +98,7 @@ export const NAV_OPTIONS: Array<string> = [
   'components',
   'widgets',
   'games',
+  'apps'
 ];
 
 const Navigation = () => {

@@ -1,0 +1,29 @@
+.wineAppNoData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: white;
+  box-shadow: 1px 1px 5px 1px rgba(115, 115, 115, 0.44);
+  margin: auto;
+  max-width: 600px;
+  min-width: 375px;
+  border-radius: 12px;
+  gap: 14px;
+
+  .icon {
+    font-size: 54px;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: #1e88e5;
+    font-weight: 600;
+  }
+}

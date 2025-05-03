@@ -1,0 +1,162 @@
+@use '../../style.module';
+
+.wineAppWineDetails {
+  display: flex;
+  border: 1px solid #dadada;
+  border-radius: 10px;
+  margin: 10px;
+  background: white;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .skeleton {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    .imageBox {
+      width: 300px;
+      border: 1px solid #dcdcdc;
+      background: #f5f5f5;
+      border-radius: 5px;
+      margin: 12px 0 12px 12px;
+      padding: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include style.skeletonAnimation(3s);
+
+      .image {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        color: #a0a0a0;
+      }
+    }
+
+    .details {
+      .formFields {
+        display: grid;
+
+        .rating {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .label {
+            width: 100px;
+            height: 18px;
+            background: #e3e3e3;
+            border-radius: 4px;
+            @include style.skeletonAnimation(3s);
+          }
+
+          .stars {
+            width: 240px;
+            height: 24px;
+            background: #e3e3e3;
+            border-radius: 4px;
+            @include style.skeletonAnimation(3s);
+          }
+        }
+
+        .fieldBox {
+          width: 100%;
+          height: 40px;
+          background: #e3e3e3;
+          border-radius: 4px;
+          @include style.skeletonAnimation(2s);
+        }
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+
+        .button {
+          height: 36px;
+          border-radius: 4px;
+          background: #dadada;
+          @include style.skeletonAnimation(1.5s);
+
+          &.save {
+            width: 69px;
+          }
+
+          &.delete {
+            width: 86px;
+          }
+        }
+      }
+    }
+  }
+
+  .imageBox {
+    display: flex;
+    padding: 12px 0 12px 12px;
+    position: relative;
+
+    img {
+      width: 300px;
+      height: 100%;
+      object-fit: contain;
+      border: 1px solid #dcdcdc;
+      background: #f5f5f5;
+      border-radius: 5px;
+    }
+
+    .backButton {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      background: white;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    transition: opacity 0.35s;
+
+    &.submitting {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .fullName {
+      font-size: 18px;
+    }
+
+    .formFields {
+      padding: 12px 0 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      overflow: auto;
+
+      .fieldLabel {
+        color: #5e5e5e;
+        display: flex;
+        padding-bottom: 5px;
+        font-size: 14px;
+      }
+    }
+
+    .actions {
+      padding: 12px;
+      border-top: 1px solid #dcdcdc;
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+    }
+  }
+}

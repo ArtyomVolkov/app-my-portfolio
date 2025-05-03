@@ -83,7 +83,7 @@ export const Tools: { [key in ETool]: ITool } = {
     link: '',
     type: Development.TOOL,
   },
-  firebase: {
+  [ETool.FIREBASE]: {
     key: ETool.FIREBASE,
     label: 'Firebase',
     link: '',
@@ -294,6 +294,11 @@ export const Technologies: {[key in ETechnology]: ITechnology } = {
   redux: {
     key: ETechnology.REDUX,
     label: 'Redux',
+    type: Development.TECHNOLOGY
+  },
+  zustand: {
+    key: ETechnology.ZUSTAND,
+    label: 'Zustand',
     type: Development.TECHNOLOGY
   },
   mobx: {

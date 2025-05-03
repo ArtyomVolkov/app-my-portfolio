@@ -2,13 +2,20 @@
   display: flex;
   flex-direction: column;
   padding: 6px 12px;
+  border-radius: 12px;
+  gap: 6px;
+  transition: box-shadow 0.35s;
   box-shadow: 0 3px 6px 2px #dadada;
-  border-radius: 4px;
+
+  &:hover {
+    box-shadow: 0 1px 6px 5px #bed4ee
+  }
 
   .iconBox {
-    margin-top: 4px;
+    display: flex;
+    margin-top: 6px;
     padding: 15px;
-    border-radius: 4px;
+    border-radius: 100px;
     background: #343434;
     color: white;
 
