@@ -140,11 +140,6 @@ const AddNewWineModal = ({ onClose, onSubmit }) => {
             label="Alcohol"
             size="small"
             value={formFields.alcohol}
-            slotProps={{
-              input: {
-                endAdornment: <span>%</span>
-              }
-            }}
             onChange={(e) => onChangeFormField('alcohol', e.target.value)}
           />
           <TextField

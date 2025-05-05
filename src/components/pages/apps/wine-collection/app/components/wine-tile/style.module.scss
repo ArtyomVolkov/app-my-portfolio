@@ -21,7 +21,7 @@
 
   .wineImage {
     width: 80px;
-    object-fit: cover;
+    object-fit: contain;
     aspect-ratio: 1/1;
     background: white;
     border-radius: 5px;

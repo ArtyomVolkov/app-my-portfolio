@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 
 import DeleteWineModal from '@pages/apps/wine-collection/app/components/modals/delete-wine';
+import NoData from '@pages/apps/wine-collection/app/components/no-data';
 
 import { useStore } from '@pages/apps/wine-collection/app/store';
 import { useAppModal } from '@pages/apps/wine-collection/app/store/app-modal';
@@ -22,7 +23,6 @@ import { TWine } from '@pages/apps/wine-collection/app/dto';
 import { mergeClassNames } from '@utils/common';
 
 import styles from './style.module.scss'
-import NoData from '@pages/apps/wine-collection/app/components/no-data';
 
 const WineDetails = () => {
   const { actions, wineDetails } = useStore((store) => store);

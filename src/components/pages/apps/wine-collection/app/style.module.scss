@@ -10,12 +10,25 @@
   background: #f5f5f5;
   max-width: 1024px;
   max-height: 820px;
+  min-width: 670px;
 }
 
 @mixin ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@mixin touchStyle {
+  cursor: pointer;
+  transition: opacity 0.35s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    opacity: 0.4;
+  }
 }
 
 @mixin skeletonAnimation($duration) {

@@ -5,10 +5,10 @@
   justify-content: center;
   padding: 20px;
   background: white;
-  box-shadow: 1px 1px 5px 1px rgba(115, 115, 115, 0.44);
-  margin: auto;
-  max-width: 600px;
+  border: 1px solid #dadada;
+  margin: 12px;
   min-width: 375px;
+  height: 100%;
   border-radius: 12px;
   gap: 14px;
 
@@ -22,8 +22,7 @@
   }
 
   .subtitle {
-    font-size: 16px;
-    color: #1e88e5;
-    font-weight: 600;
+    font-size: 14px;
+    color: #7c7c7c;
   }
 }

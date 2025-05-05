@@ -1,3 +1,5 @@
+@use "../../style.module";
+
 .wineAppWineListPage {
   display: flex;
   flex-direction: column;
@@ -9,6 +11,33 @@
     padding: 16px 12px;
     border-bottom: 1px solid #dcdcdc;
     background: white;
+
+    .avatar {
+      @include style.touchStyle;
+    }
+
+    .searchIcon {
+      color: #696969;
+      margin-right: 5px;
+    }
+
+    .clearIcon {
+      font-size: 20px;
+      color: #696969;
+      @include style.touchStyle;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+
+      .divider {
+        width: 1px;
+        height: 100%;
+        background: #dcdcdc;
+        margin: 0 10px;
+      }
+    }
   }
 
   .body {
@@ -16,6 +45,25 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
+    position: relative;
+
+    .skeleton {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .wineList {
+
+        .tile {
+          height: 115px;
+          border-radius: 10px;
+          background: #e3e3e3;
+          @include style.skeletonAnimation(1.5s);
+        }
+      }
+    }
 
     .wineList {
       display: flex;

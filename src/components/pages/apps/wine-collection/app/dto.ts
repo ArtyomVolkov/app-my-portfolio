@@ -1,3 +1,19 @@
+export type TAuth = {
+  uid: string,
+  email: string,
+  displayName: string,
+  emailVerified: boolean,
+  photoURL?: string,
+  phoneNumber?: string,
+}
+
+export type TUser = TAuth & {
+  createdAt: string,
+  lastLoginAt: string,
+  settings?: {
+  }
+}
+
 export type TWine = {
   id: string,
   brand: string,

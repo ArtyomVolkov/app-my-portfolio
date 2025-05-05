@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import WineList from '@pages/apps/wine-collection/app/pages/wine-list';
+import UserPage from '@pages/apps/wine-collection/app/pages/user';
 import Login from '@pages/apps/wine-collection/app/pages/login';
 import Page404 from '@pages/apps/wine-collection/app/pages/404';
 import SignUpPage from '@pages/apps/wine-collection/app/pages/sign-up';
@@ -19,24 +19,17 @@ const AuthRequire = ({ children }) => {
   if (user) {
     return children;
   }
-  return <Navigate to={'login'} replace={true} />;
+
+  return <Navigate to={'/apps/wine-collection/login'} replace={true} />;
 };
 
 const AppRoutes = () => {
-  const { loading, actions } = useStore((store) => store);
-
-  useEffect(() => {
-    onAuthStateChanged(getAuth(), (userData) => {
-      actions.setUser(userData ? userData.toJSON() : null);
-    }, () => {
-      actions.setUser(null);
-    });
-  }, []);
+  const loading = useStore((store) => store.loading);
 
   if (loading) {
     return (
       <AppLoader />
-    )
+    );
   }
 
   return (
@@ -44,6 +37,7 @@ const AppRoutes = () => {
       <Route path="/" element={<AuthRequire><WineList /></AuthRequire>} />
       <Route path="/login" index element={<Login />} />
       <Route path="/sign-up" element={<SignUpPage />} />
+      <Route path="/user" element={<AuthRequire><UserPage /></AuthRequire>} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/wine-list" element={<AuthRequire><WineList /></AuthRequire>} />
       <Route path="/wine-list/:id" element={<AuthRequire><WineDetails /></AuthRequire>} />
