@@ -12,7 +12,6 @@ interface IWineTile {
 
 const WineTile: React.FC<IWineTile> = ({ wine }) => {
   const navigate = useNavigate();
-  const toFiveRate = (value) => value/10*5;
 
   const openDetailsPage = () => {
     navigate(`wine-list/${wine.id}`);
@@ -23,9 +22,9 @@ const WineTile: React.FC<IWineTile> = ({ wine }) => {
       <img src={wine.imageURL} alt={wine.fullName} className={styles.wineImage} />
       <div className={styles.details}>
         <Rating
-          value={toFiveRate(wine.rate)}
+          value={wine.rate}
           size="small"
-          max={5}
+          max={10}
           precision={0.5}
           readOnly
         />

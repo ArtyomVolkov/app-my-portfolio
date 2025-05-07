@@ -2,6 +2,7 @@ import React, { useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import TextField from '@mui/material/TextField';
+import Badge from '@mui/material/Badge';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -13,6 +14,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined';
 
 import AddNewWineModal from '@pages/apps/wine-collection/app/components/modals/new-wine';
+import FilterWineModal from '@pages/apps/wine-collection/app/components/modals/filter-wine';
 import WineTile from '@pages/apps/wine-collection/app/components/wine-tile';
 import NoData from '@pages/apps/wine-collection/app/components/no-data';
 
@@ -21,6 +23,51 @@ import { useAppModal } from '@pages/apps/wine-collection/app/store/app-modal';
 
 import styles from './style.module.scss';
 
+const searchWineFilter = (search, filter, wineList) => {
+  let data = wineList ? [...wineList] : [];
+  const filterKeys = filter ? Object.keys(filter) : [];
+
+  if (search) {
+    data.filter((item) => {
+      return item.fullName.trim().toLowerCase().includes(search.trim().toLowerCase())
+        || item.brand.trim().toLowerCase().includes(search.trim().toLowerCase());
+    });
+  }
+  if (!filterKeys?.length) {
+    return data;
+  }
+  filterKeys.forEach((key) => {
+    const filterItem = filter[key];
+
+    if (!filterItem || !filterItem.length) {
+      return;
+    }
+    data = data.filter((item) => {
+      if (!item[key]) {
+        return;
+      }
+      if (key === 'rate' || key === 'year') {
+        return item[key] >= filterItem[0] && item[key] <= filterItem[1];
+      }
+      if (key === 'price') {
+        const price = Number(item[key].split(' ')[0]);
+
+        return price >= filterItem[0] && price <= filterItem[1];
+      }
+      if (key === 'match') {
+        const matches = item[key].split(',');
+
+        return  matches.some((item) => filterItem.includes(item.trim().toLowerCase()));
+      }
+      if (Array.isArray(filterItem)) {
+        return filterItem.includes(item[key].toLowerCase());
+      }
+    });
+  });
+
+  return data;
+};
+
 const WineAppWineListPage = () => {
   const navigation = useNavigate();
   const { user, actions, wineList } = useStore((store) => store);
@@ -28,14 +75,15 @@ const WineAppWineListPage = () => {
   const inputSearchRef = useRef(null);
 
   const filteredList = useMemo(() => {
-    if (!wineList.search) {
-      return wineList.data;
+    return searchWineFilter(wineList.search, wineList.filters, wineList.data);
+  }, [wineList.search, wineList.data, wineList.filters]);
+
+  const filterCount = useMemo(() => {
+    if (!wineList?.filters || !Object.keys(wineList?.filters).length) {
+      return 0;
     }
-    return wineList.data?.filter((item) => {
-      return item.fullName.trim().toLowerCase().includes(wineList.search.trim().toLowerCase())
-        || item.brand.trim().toLowerCase().includes(wineList.search.trim().toLowerCase());
-    });
-  }, [wineList.search, wineList.data]);
+    return Object.keys(wineList.filters).filter((item) => wineList.filters[item]).length;
+  }, [wineList.filters]);
 
   const onAddNewWine = () => {
     openModal({
@@ -46,6 +94,19 @@ const WineAppWineListPage = () => {
         <AddNewWineModal
           onSubmit={actions.onAddNewWine}
           onClose={() => closeModal('new-wine-modal')}
+        />
+      ),
+    });
+  };
+
+  const onFilterWine = () => {
+    openModal({
+      name: 'filter-wine-modal',
+      props: {
+      },
+      content: (
+        <FilterWineModal
+          onClose={() => closeModal('filter-wine-modal')}
         />
       ),
     });
@@ -132,9 +193,11 @@ const WineAppWineListPage = () => {
           }}
         />
         <div className={styles.actions}>
-          <Button variant="outlined" color="inherit">
-            <FilterAltIcon />
-          </Button>
+          <Badge badgeContent={filterCount} color="primary" invisible={!filterCount}>
+            <Button variant="outlined" color="primary" onClick={onFilterWine}>
+              <FilterAltIcon />
+            </Button>
+          </Badge>
           <Button variant="contained" onClick={onAddNewWine}>
             <PostAddOutlinedIcon />
           </Button>

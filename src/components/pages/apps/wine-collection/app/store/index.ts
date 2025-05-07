@@ -36,6 +36,7 @@ type TState = {
     data: Array<TWine>,
     search?: string,
     filters?: {
+      [key: string]: []|string|any
     }
   }
   wineDetails?: TWine,
@@ -56,6 +57,7 @@ type TActions = {
   onUpdateWine: (data: TWine) => Promise<string | null>,
   subscribeAuthStateChanged: () => void;
   onDownloadWineList: () => void;
+  onUpdateWineListFilter: (data) => void,
   onUploadWineList: () => Promise<string | null>;
   onSearchWine: (value: string) => void,
   onClearAppData?: () => void;
@@ -68,7 +70,8 @@ export const useStore = create<TState>((set, get) => ({
     loading: true,
     data: null,
     search: '',
-    filters: null
+    filters: {
+    }
   },
   actions: {
     subscribeAuthStateChanged: async () => {
@@ -299,6 +302,16 @@ export const useStore = create<TState>((set, get) => ({
           search: value
         }
       });
+    },
+    onUpdateWineListFilter: (data) => {
+      set({
+        wineList: {
+          ...get().wineList,
+          filters: {
+            ...data
+          }
+        }
+      })
     }
   },
 }));
