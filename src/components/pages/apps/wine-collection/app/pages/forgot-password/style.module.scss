@@ -1,0 +1,25 @@
+.wineAppForgotPasswordPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .resetPasswordForm {
+    width: 275px;
+    box-shadow: 1px 1px 5px 1px #73737370;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 16px 16px;
+    position: relative;
+    background: white;
+    transition: opacity 0.35s ease;
+
+    &.loading {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}

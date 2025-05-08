@@ -1,0 +1,73 @@
+.wineAppUserPage {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dadada;
+  border-radius: 10px;
+  margin: 10px;
+  background: white;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+
+  .backButton {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+
+  .userDetails {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: auto;
+    border-radius: 15px;
+    min-width: 320px;
+    background: whitesmoke;
+    box-shadow: 1px 1px 7px 2px #dadada;
+
+    .displayName {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .email {
+      color: grey;
+      font-size: 14px;
+    }
+
+    .userImage {
+      width: 100%;
+      max-width: 100px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+
+    .info {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: #858585;
+      border-top: 1px solid #dcdcdc;
+      padding: 10px 0;
+      margin-top: 10px;
+
+      .row {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: space-between;
+      }
+    }
+
+    .actions {
+      display: flex;
+    }
+  }
+}

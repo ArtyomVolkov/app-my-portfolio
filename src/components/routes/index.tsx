@@ -18,6 +18,9 @@ const Puzzle = lazy(() => import('@pages/games/puzzle'));
 const Sudoku = lazy(() => import('@pages/games/sudoku'));
 const Katana = lazy(() => import('@pages/games/nonogram'));
 
+const Apps = lazy(() => import('@pages/apps'));
+const WineCollection = lazy(() => import('@pages/apps/wine-collection'));
+
 const AppRoutes = () => (
   <Routes>
     <Route
@@ -25,6 +28,22 @@ const AppRoutes = () => (
       element={(
         <Suspense fallback="">
           <Profile />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/apps"
+      element={(
+        <Suspense fallback="">
+          <Apps />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/apps/wine-collection/*" // for nested routes
+      element={(
+        <Suspense fallback="">
+          <WineCollection />
         </Suspense>
       )}
     />

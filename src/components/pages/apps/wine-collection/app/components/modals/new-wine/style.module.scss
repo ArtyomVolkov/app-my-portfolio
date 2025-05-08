@@ -1,0 +1,45 @@
+.wineAppNewWineModal {
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  font-family: "system-ui", sans-serif;
+
+  &.loading {
+    .formFields {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+
+  .header {
+    padding: 20px;
+    border-bottom: 1px solid #dcdcdc;
+
+    .title {
+      font-size: 20px;
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow: auto;
+
+    .formFields {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      transition: opacity 0.35s;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid #dcdcdc;
+  }
+}

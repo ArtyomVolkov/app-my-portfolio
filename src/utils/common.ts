@@ -11,4 +11,14 @@ export const formatBytes = (bytes: number, decimals = 2) => {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+};
+
+export const getErrorMessage = (error) => {
+  if (error?.message) {
+    return error.message;
+  }
+  if (error?.data?.message) {
+    return error.data.message;
+  }
+  return 'Something went wrong';
 }
