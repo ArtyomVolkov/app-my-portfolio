@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import debounce from 'lodash/debounce';
 import { useNavigate, useLocation } from "react-router-dom";
 
-import AppLogo from '@pages/apps/wine-collection/app/components/app-logo';
 import TextField from '@mui/material/TextField';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import AppLogo from '@pages/apps/wine-collection/app/components/app-logo';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 
 import { useStore } from '../../store';
+import { checkEmail } from '../../apis/email-validator';
 
 import { mergeClassNames } from '@utils/common';
 
@@ -25,16 +31,53 @@ const WineAppSignUpPage = () => {
     password: null,
     confirmPassword: null,
   });
+  const [emailValidation, setEmailValidation] = useState({
+    loading: false,
+    isValid: true,
+  });
+
+  const onCheckEmail = async (value) => {
+    if (!value || !value.trim().length) {
+      setEmailValidation({
+        ...emailValidation,
+        loading: false
+      });
+      return;
+    }
+
+    setEmailValidation({
+      ...emailValidation,
+      loading: true
+    });
+    const isValid = await checkEmail(value.trim());
+    setEmailValidation({
+      isValid,
+      loading: false
+    });
+  };
+
+  const onCheckEmailDebounce = useCallback(
+    debounce(onCheckEmail, 500, { leading: false, trailing: true }),
+    [debounce]
+  );
 
   const onChangeFormField = (name, value) => {
     setFormData({
       ...formData,
       [name]: value
     });
+    if (name === 'email') {
+      setEmailValidation({
+        ...emailValidation,
+        loading: true,
+      });
+      onCheckEmailDebounce(value);
+    }
   };
 
   const onSignUp = async () => {
     setLoading(true)
+    setError('');
     const error = await actions.onSignUp(formData.email, formData.password);
     setLoading(false);
 
@@ -49,6 +92,26 @@ const WineAppSignUpPage = () => {
     navigate(location.pathname.replace('sign-up', 'login'));
   };
 
+  const isDisableToSubmit = () => {
+    return emailValidation.loading || !!error || !emailValidation.isValid
+      || !formData.password || !formData.email?.trim()?.length
+  };
+
+  const renderEmailAdornment = () => {
+    const email = formData.email?.trim() || '';
+
+    if (emailValidation.loading) {
+      return <CircularProgress className={styles.loadingIcon} size={20} />;
+    }
+    if (email.length > 0 && emailValidation.isValid) {
+      return <CheckCircleOutlineRoundedIcon className={styles.checkIcon} />;
+    }
+    if (!emailValidation.isValid && email.length > 0) {
+      return <CancelRoundedIcon className={styles.errorIcon} />
+    }
+    return null
+  };
+
   return (
     <div className={styles.wineAppSignUpPage}>
       <form className={mergeClassNames([styles.signUpForm, loading && styles.loading])}>
@@ -57,8 +120,14 @@ const WineAppSignUpPage = () => {
           placeholder="email"
           type="email"
           variant="outlined"
+          className={styles.emailField}
           label="Email"
           size="small"
+          slotProps={{
+            input: {
+              endAdornment: renderEmailAdornment()
+            }
+          }}
           onChange={(e) => onChangeFormField('email', e.target.value)}
         />
         <TextField
@@ -76,7 +145,7 @@ const WineAppSignUpPage = () => {
           variant="contained"
           startIcon={<PersonAddAltOutlinedIcon />}
           onClick={onSignUp}
-          disabled={!!error || !formData.email || !formData.password}
+          disabled={isDisableToSubmit()}
         >
           Sign Up
         </Button>
