@@ -128,8 +128,9 @@ const PLUGINS = [
   new ForkTsCheckerWebpackPlugin(),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
-    filename: !isProd ? '[name].css' : '[name].css',
-    chunkFilename: !isProd ? '[id].css' : '[id].css'
+    filename: !isProd ? '[name].css' : '[name].[hash].css',
+    chunkFilename: !isProd ? '[id].css' : '[id].[hash].css',
+    runtime: true,
   }),
   // new BundleAnalyzer(),
 ];
