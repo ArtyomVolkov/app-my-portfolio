@@ -62,6 +62,8 @@ const SLIDER_MARKS = {
   ],
   price: [
     { value: 100, label: '100' },
+    { value: 1000, label: '1000' },
+    { value: 2000, label: '2000' },
     { value: 5000, label: '5000' },
   ]
 };
@@ -78,7 +80,7 @@ const FilterWineModal = ({ onClose }) => {
   });
 
   const hasAnyFilter = useMemo(() => {
-    return Object.keys(form)?.filter((item) => form[item]?.length > 0);
+    return Object.keys(form)?.filter((item) => form[item]?.length > 0).length > 0;
   }, [form]);
 
   const onChangeFormField = (name, value) => {
@@ -224,9 +226,9 @@ const FilterWineModal = ({ onClose }) => {
                 valueLabelDisplay="auto"
                 disableSwap
                 onChange={(e, value) => onChangeFormField('price', value)}
-                min={SLIDER_MARKS.price[0].value}
-                max={SLIDER_MARKS.price[1].value}
                 step={10}
+                min={SLIDER_MARKS.price[0].value}
+                max={SLIDER_MARKS.price[SLIDER_MARKS.price.length-1].value}
                 marks={SLIDER_MARKS.price}
                 value={form.price || INITIAL_FILTERS.price}
               />

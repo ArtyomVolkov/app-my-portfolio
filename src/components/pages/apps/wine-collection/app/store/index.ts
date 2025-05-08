@@ -58,6 +58,7 @@ type TActions = {
   subscribeAuthStateChanged: () => void;
   onDownloadWineList: () => void;
   onUpdateWineListFilter: (data) => void,
+  onClearAllWineListFilter: () => void,
   onUploadWineList: () => Promise<string | null>;
   onSearchWine: (value: string) => void,
   onClearAppData?: () => void;
@@ -310,6 +311,15 @@ export const useStore = create<TState>((set, get) => ({
           filters: {
             ...data
           }
+        }
+      })
+    },
+    onClearAllWineListFilter: () => {
+      set({
+        wineList: {
+          ...get().wineList,
+          search: '',
+          filters: {}
         }
       })
     }

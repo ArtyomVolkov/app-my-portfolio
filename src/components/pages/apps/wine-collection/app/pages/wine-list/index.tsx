@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import TextField from '@mui/material/TextField';
 import Badge from '@mui/material/Badge';
-
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
@@ -19,54 +18,10 @@ import WineTile from '@pages/apps/wine-collection/app/components/wine-tile';
 import NoData from '@pages/apps/wine-collection/app/components/no-data';
 
 import { useStore } from '@pages/apps/wine-collection/app/store';
+import storeHelpers from '@pages/apps/wine-collection/app/store/helpers';
 import { useAppModal } from '@pages/apps/wine-collection/app/store/app-modal';
 
 import styles from './style.module.scss';
-
-const searchWineFilter = (search, filter, wineList) => {
-  let data = wineList ? [...wineList] : [];
-  const filterKeys = filter ? Object.keys(filter) : [];
-
-  if (search) {
-    data.filter((item) => {
-      return item.fullName.trim().toLowerCase().includes(search.trim().toLowerCase())
-        || item.brand.trim().toLowerCase().includes(search.trim().toLowerCase());
-    });
-  }
-  if (!filterKeys?.length) {
-    return data;
-  }
-  filterKeys.forEach((key) => {
-    const filterItem = filter[key];
-
-    if (!filterItem || !filterItem.length) {
-      return;
-    }
-    data = data.filter((item) => {
-      if (!item[key]) {
-        return;
-      }
-      if (key === 'rate' || key === 'year') {
-        return item[key] >= filterItem[0] && item[key] <= filterItem[1];
-      }
-      if (key === 'price') {
-        const price = Number(item[key].split(' ')[0]);
-
-        return price >= filterItem[0] && price <= filterItem[1];
-      }
-      if (key === 'match') {
-        const matches = item[key].split(',');
-
-        return  matches.some((item) => filterItem.includes(item.trim().toLowerCase()));
-      }
-      if (Array.isArray(filterItem)) {
-        return filterItem.includes(item[key].toLowerCase());
-      }
-    });
-  });
-
-  return data;
-};
 
 const WineAppWineListPage = () => {
   const navigation = useNavigate();
@@ -74,15 +29,16 @@ const WineAppWineListPage = () => {
   const { openModal, closeModal } = useAppModal((store) => store);
   const inputSearchRef = useRef(null);
 
+  const hasAnyFilter = useMemo(() => {
+    return storeHelpers.hasAnyFilter(wineList.search, wineList.filters);
+  }, [wineList.filters, wineList.search]);
+
   const filteredList = useMemo(() => {
-    return searchWineFilter(wineList.search, wineList.filters, wineList.data);
+    return storeHelpers.searchWineFilter(wineList.search, wineList.filters, wineList.data);
   }, [wineList.search, wineList.data, wineList.filters]);
 
   const filterCount = useMemo(() => {
-    if (!wineList?.filters || !Object.keys(wineList?.filters).length) {
-      return 0;
-    }
-    return Object.keys(wineList.filters).filter((item) => wineList.filters[item]).length;
+    return storeHelpers.getFilterCount(wineList?.filters);
   }, [wineList.filters]);
 
   const onAddNewWine = () => {
@@ -122,18 +78,25 @@ const WineAppWineListPage = () => {
   };
 
   const renderNoData = () => {
-    const noResults = wineList.search && !filteredList?.length;
+    const noResults = !filteredList?.length;
 
-    if (wineList.loading || !noResults) {
+    if (wineList.loading || !wineList.data || !noResults) {
       return null;
     }
 
     return (
       <NoData
-        title={noResults ? "No results" : "No wine data"}
-        subtitle={noResults
-          ? "Sorry we couldn't find any results, try to clear filters or change search term."
-          : "You don't have saved wines yet"}
+        title={hasAnyFilter && noResults ? "No results" : "No wine data"}
+        subtitle={hasAnyFilter && noResults
+          ? "Sorry we couldn't find any results, try to clear filters."
+          : "You don't have saved wines yet."}
+        content={hasAnyFilter && (
+          <div>
+            <Button variant="outlined" onClick={actions.onClearAllWineListFilter}>
+              Clear all filters
+            </Button>
+          </div>
+        )}
       />
     )
   };
