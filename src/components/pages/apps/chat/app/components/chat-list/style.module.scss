@@ -1,0 +1,148 @@
+@use "../../style.module";
+
+.chatList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 210px;
+  border-right: 1px solid var(--border-color);
+  user-select: none;
+  //@include style.backdrop;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+
+    .userDetails {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-between;
+
+      .user {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: black;
+        }
+
+        .name {
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+
+      .actions {
+        display: flex;
+      }
+    }
+
+    .searchBox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .input {
+        display: flex;
+        background: rgb(255 255 255 / 15%);
+        padding: 5px;
+        border-radius: 20px;
+
+        input {
+          outline: none;
+          border: 0;
+          margin: 0;
+          padding: 0 10px;
+          max-width: 125px;
+          background: transparent;
+          color: white;
+
+          &::placeholder {
+            color: #bdbdbd;
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .addIcon {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .body {
+    flex: 1;
+    overflow: auto;
+
+    .chats {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      .chatItem {
+        display: flex;
+        gap: 12px;
+        padding: 12px;
+        border-bottom: 1px solid var(--border-color);
+        transition: all 0.35s;
+
+        &:hover {
+          background: rgb(255 255 255 / 15%);
+          cursor: pointer;
+        }
+
+        &:active {
+          opacity: 0.5;
+        }
+
+        &:last-child {
+          border-bottom: 0;
+        }
+
+        &.active {
+          background: #033650;
+        }
+
+        .avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: black;
+        }
+
+        .details {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          color: #dadada;
+
+          .name {
+            font-size: 14px;
+          }
+
+          .lastMessage {
+            color: #607D8B;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

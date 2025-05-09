@@ -23,6 +23,7 @@ import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
 import MemoryOutlinedIcon from '@mui/icons-material/MemoryOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import LiquorOutlinedIcon from '@mui/icons-material/LiquorOutlined';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 
 import styles from './style.module.scss';
 
@@ -34,6 +35,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   ['wine-collection']: {
     label: 'Wine Collection',
     icon: <LiquorOutlinedIcon />,
+  },
+  chat: {
+    label: 'Chat',
+    icon: <ChatOutlinedIcon />
   },
   home: {
     label: 'Home',

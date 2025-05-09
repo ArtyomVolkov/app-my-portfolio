@@ -20,6 +20,7 @@ const Katana = lazy(() => import('@pages/games/nonogram'));
 
 const Apps = lazy(() => import('@pages/apps'));
 const WineCollection = lazy(() => import('@pages/apps/wine-collection'));
+const ChatApp = lazy(() => import('@pages/apps/chat'));
 
 const AppRoutes = () => (
   <Routes>
@@ -40,10 +41,18 @@ const AppRoutes = () => (
       )}
     />
     <Route
-      path="/apps/wine-collection/*" // for nested routes
+      path="/apps/wine-collection/*" // for nested routes (auth)
       element={(
         <Suspense fallback="">
           <WineCollection />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/apps/chat/*" // for nested routes (auth)
+      element={(
+        <Suspense fallback="">
+          <ChatApp />
         </Suspense>
       )}
     />
