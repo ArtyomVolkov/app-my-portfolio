@@ -8,42 +8,37 @@
   width: 256px;
   background-color: #fbfbfb;
 
-  .screenResize {
-    position: absolute;
-    top: 65px;
-    right: -15px;
-    padding: 2px;
-    background: #fbfbfb;
-    border: 1px solid #dcdcdc;
+  .header {
+    display: flex;
+    position: relative;
+    gap: 20px;
+    align-items: center;
+    background: inherit;
+    overflow: hidden;
+    padding: 10px;
 
-    &:hover {
-      background: white;
-    }
+    .screenResize {
+      background: #fbfbfb;
+      transition: background-color 0.35s;
 
-    .icon {
-      transition: transform 0.5s;
+      &:hover {
+        background: #e9e9e9;
+      }
 
-      &.left {
-        transform: rotateZ(180deg);
+      .icon {
+        font-size: 36px;
+        color: #434343;
       }
     }
-  }
-}
 
-@media screen and (max-width: 1023px) {
-  .sideBar {
-    .screenResize {
-      top: 50px;
+    .appLogo {
+      white-space: nowrap;
+      font-family: system-ui;
+      font-size: 18px;
+      font-weight: 500;
     }
   }
 }
 
 @media screen and (max-width: 767px) {
-  .sideBar {
-    .screenResize {
-      padding: 0;
-      top: 35px;
-      right: -15px ;
-    }
-  }
 }

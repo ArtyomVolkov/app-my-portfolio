@@ -117,8 +117,11 @@ const Navigation = () => {
         className={styles.navItem}
         onClick={() => navigateTo(item)}
         selected={location.pathname.includes(item)}
+        classes={{
+          selected: styles.selected
+        }}
       >
-        <ListItemIcon>
+        <ListItemIcon className={styles.icon}>
           { PATH_MAP[item]?.icon }
         </ListItemIcon>
         <ListItemText primary={PATH_MAP[item]?.label} />

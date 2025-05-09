@@ -19,7 +19,7 @@ const NavButton: React.FC<NavButton> = ({ path, title, icon }) => {
   };
 
   return (
-    <Button className={styles.navButton} onClick={navigateTo}>
+    <Button className={styles.navButton} onClick={navigateTo} color="inherit">
       <div className={styles.iconBox}>
         { icon }
       </div>

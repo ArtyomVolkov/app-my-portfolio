@@ -1,5 +1,5 @@
 nav {
-  margin-top: 20px;
+  margin-top: 6px;
 }
 
 .navList {
@@ -12,6 +12,16 @@ nav {
     border-radius: 10px;
     margin: 0 10px;
     overflow: hidden;
+    border: 1px solid transparent;
+
+    &.selected {
+      background: #eaeaea;
+      border-color: #dcdcdc;
+    }
+
+    .icon {
+      color: #434343;
+    }
   }
 }
 
