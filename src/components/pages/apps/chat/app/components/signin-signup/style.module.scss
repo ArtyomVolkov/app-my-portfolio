@@ -1,0 +1,140 @@
+@use "../../style.module";
+
+.signInWidget {
+  display: flex;
+  padding: 20px;
+  border-radius: 20px;
+  width: 250px;
+  height: fit-content;
+  margin: auto;
+  transition: height 0.5s;
+  @include style.backdrop;
+
+  .login, .signUp {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    transition: opacity 0.35s;
+
+    &.submitting {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  .formFields {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: #434343;
+
+      &.invalid {
+        input {
+          border-color: #d24a4a;
+          background: #ffe3e3;
+
+          &:focus-within {
+            border-color: #d24a4a;
+          }
+        }
+      }
+
+      input {
+        outline: none;
+        border: 1px solid transparent;
+        margin: 0;
+        padding: 6px 12px;
+        background: rgb(255 255 255 / 15%);
+        border-radius: 15px;
+        color: #434343;
+        transition: all 0.35s;
+        text-overflow: ellipsis;
+
+        &::placeholder {
+          color: #bdbdbd;
+          font-size: 0.9rem;
+        }
+
+        &:focus-within {
+          border-color: #dcdcdc;
+        }
+      }
+    }
+  }
+
+  .errorBox {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #ff3e3e7d;
+    border-radius: 10px;
+    border: 1px solid #d24a4a;
+    font-size: 12px;
+  }
+
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    .submit {
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #434343;
+
+      hr {
+        margin: 0;
+        width: 100%;
+        border-color: #434343;
+      }
+    }
+
+    button {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      width: 100%;
+      min-height: 40px;
+      transition: all 0.35s;
+      outline: none;
+      cursor: pointer;
+
+      &:focus-within {
+        border-color: #434343;
+      }
+
+      &:hover {
+        opacity: 0.7;
+      }
+
+      &:active {
+        opacity: 0.4;
+      }
+
+      &[disabled] {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+    }
+
+    .loadingIcon {
+      font-size: 24px;
+    }
+  }
+}

@@ -13,7 +13,7 @@ import {
   onSnapshot,
   writeBatch,
 } from 'firebase/firestore';
-import { FBAuth, FBStore, DBName } from '../firebase';
+import { FBAuth, FBStore } from '../firebase';
 
 import {
   signInWithEmailAndPassword,
@@ -90,7 +90,7 @@ export const useStore = create<TState>((set, get) => ({
           set({loading: false});
           return;
         }
-        const docRef = doc(FBStore, DBName, authData.uid);
+        const docRef = doc(FBStore, 'users', authData.uid);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -162,7 +162,7 @@ export const useStore = create<TState>((set, get) => ({
       });
     },
     onSubscribeWineList: (pathSegments) => {
-      return onSnapshot(collection(FBStore, DBName, ...pathSegments), (doc) => {
+      return onSnapshot(collection(FBStore, 'users', ...pathSegments), (doc) => {
         const wineList = [];
 
         doc.forEach((item) => wineList.push({id: item.id, ...item.data()}));
@@ -173,7 +173,7 @@ export const useStore = create<TState>((set, get) => ({
     onAddNewWine: async (data) => {
       try {
         const user = get().user;
-        const docRef = doc(FBStore, DBName, user.uid);
+        const docRef = doc(FBStore, 'users', user.uid);
 
         await addDoc(collection(docRef, 'wine-list'), {
           ...data,
@@ -187,7 +187,7 @@ export const useStore = create<TState>((set, get) => ({
     onUpdateWine: async (data) => {
       try {
         const user = get().user;
-        const docRef = doc(FBStore, DBName, user.uid);
+        const docRef = doc(FBStore, 'users', user.uid);
 
         await updateDoc(doc(collection(docRef, 'wine-list'), data.id), {
           ...data,
@@ -200,7 +200,7 @@ export const useStore = create<TState>((set, get) => ({
     onDeleteWine: async (id) => {
       try {
         const user = get().user;
-        const docRef = doc(FBStore, DBName, user.uid);
+        const docRef = doc(FBStore, 'users', user.uid);
 
         await deleteDoc(doc(collection(docRef, 'wine-list'), id));
       } catch (e) {
@@ -216,7 +216,7 @@ export const useStore = create<TState>((set, get) => ({
           set({wineDetails: wineData});
           return;
         }
-        const docRef = doc(FBStore, DBName, user.uid);
+        const docRef = doc(FBStore, 'users', user.uid);
 
         const wine = await getDoc(doc(docRef, 'wine-list', id));
         const data = wine.data();
@@ -250,7 +250,7 @@ export const useStore = create<TState>((set, get) => ({
             const file = fileInputNode.files[0];
             const importData = JSON.parse(await file.text());
             const batch = writeBatch(FBStore);
-            const docRef = doc(FBStore, DBName, get().user.uid);
+            const docRef = doc(FBStore, 'users', get().user.uid);
             const collectionRef = collection(docRef, 'wine-list');
             const list = await getDocs(collectionRef);
             const ids = [];

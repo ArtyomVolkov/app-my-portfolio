@@ -1,0 +1,26 @@
+@use "../../style.module";
+
+.appLoader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  .loader {
+    color: #043046;
+    padding: 10px 14px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    border-radius: 10px;
+    @include style.backdrop;
+
+    .icon {
+      font-size: 50px;
+      color: #043046;
+    }
+  }
+}

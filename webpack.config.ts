@@ -103,7 +103,8 @@ const PLUGINS = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.PEXELS_API_KEY': JSON.stringify(process.env.PEXELS_API_KEY),
-    'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
+    'process.env.WINE_COLLECTION_FIREBASE_API_KEY': JSON.stringify(process.env.WINE_COLLECTION_FIREBASE_API_KEY),
+    'process.env.CHAT_APP_FIREBASE_API_KEY': JSON.stringify(process.env.CHAT_APP_FIREBASE_API_KEY),
     'process.env.HUNTER_API_KEY': JSON.stringify(process.env.HUNTER_API_KEY),
   }),
   new InterpolateHtmlPlugin({

@@ -79,6 +79,8 @@
 
       .addIcon {
         font-size: 24px;
+        border-radius: 50%;
+        @include style.touchable;
       }
     }
   }

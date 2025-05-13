@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
-import styles from './style.module.scss';
 import { mergeClassNames } from '@utils/common';
+
+import { useStore } from '../../store';
+
+import styles from './style.module.scss';
 
 const MOCK_DATA = {
   list: Array(20).fill(1)
@@ -11,6 +14,18 @@ const MOCK_DATA = {
 };
 
 const ChatList = () => {
+  const { actions, chats } = useStore((store) => store);
+
+  useEffect(() => {
+    const unsubscribe = actions.subscribeChatsChanged();
+
+    return () => {
+      unsubscribe();
+    }
+  }, []);
+  //
+  console.log(chats);
+
   return (
     <section className={styles.chatList}>
       <div className={styles.header}>
@@ -33,7 +48,7 @@ const ChatList = () => {
       <div className={styles.body}>
         <ul className={styles.chats}>
           {
-            MOCK_DATA.list.map((item, index) => (
+            chats.map((item, index) => (
               <li
                 key={item.name}
                 className={mergeClassNames([styles.chatItem, index === 3 && styles.active])}

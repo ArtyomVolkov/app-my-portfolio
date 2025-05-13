@@ -3,6 +3,7 @@ import React from 'react';
 import Chat from './components/chat';
 import ChatList from './components/chat-list';
 import ChatDetails from './components/details';
+import AuthProvider from './providers/auth';
 
 import styles from './style.module.scss';
 
@@ -10,9 +11,11 @@ const ChatWidget = () => {
   return (
     <div className={styles.chatAppWidget}>
       <div className={styles.content}>
-        <ChatList />
-        <Chat />
-        <ChatDetails />
+        <AuthProvider>
+          <ChatList />
+          <Chat />
+          <ChatDetails />
+        </AuthProvider>
       </div>
     </div>
   );

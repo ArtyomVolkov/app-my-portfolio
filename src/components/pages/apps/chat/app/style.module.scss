@@ -24,7 +24,7 @@
     display: flex;
     height: 100%;
     color: var(--text-color);
-    backdrop-filter: blur(2px) saturate(180%);
+    backdrop-filter: blur(1px) saturate(180%);
     //background: var(--secondary-background);
 
     ::-webkit-scrollbar {
@@ -44,5 +44,19 @@
 
 @mixin backdrop {
   background-color: rgb(255 255 255 / 50%);
-  backdrop-filter: blur(2px) saturate(180%);
+  backdrop-filter: blur(10px) saturate(180%);
+}
+
+@mixin touchable {
+  cursor: pointer;
+  transition: all 0.35s;
+
+  &:hover {
+    background: #2f444f;
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
 }
