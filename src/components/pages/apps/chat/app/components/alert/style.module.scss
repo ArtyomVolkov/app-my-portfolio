@@ -1,0 +1,52 @@
+.chatAppAlert {
+  --borderColor: #dcdcdc;
+  --background: #BDBDBD;
+
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 10px;
+  background: var(--background);
+  border-radius: 10px;
+  border: 1px solid var(--borderColor);
+  font-size: 12px;
+
+  &.info {
+    --background: #3f96fd80;
+    --borderColor: #2a77d2;
+  }
+
+  &.error {
+    --background: #ff3e3e80;
+    --borderColor: #d24a4a;
+  }
+
+  &.success {
+    --background: #41cc4f80;
+    --borderColor: #26ab33;
+  }
+
+  .message {
+    flex: 1;
+    line-height: 18px;
+  }
+
+  .close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    color: var(--borderColor);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.35s;
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+}

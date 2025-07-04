@@ -1,0 +1,28 @@
+.chatAppTextInput {
+  display: flex;
+  background: rgb(255 255 255 / 15%);
+  padding: 5px;
+  border-radius: 20px;
+
+  input {
+    width: 100%;
+    outline: none;
+    border: 0;
+    margin: 0;
+    padding: 0 10px;
+    background: transparent;
+    color: inherit;
+
+    &::placeholder {
+      color: inherit;
+      font-size: 0.9rem;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active{
+      -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+  }
+}
