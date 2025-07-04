@@ -1,0 +1,116 @@
+.chatAppSnackbar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  --background: rgba(107, 107, 107, 0.58);
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+  }
+
+  .message {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    animation: fadeIn;
+    animation-fill-mode: forwards;
+    justify-content: space-between;
+    background: var(--background);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+    transition: transform 0.5s;
+    pointer-events: all;
+    min-width: 200px;
+    max-width: 300px;
+    max-height: 200px;
+    padding: 12px;
+    color: white;
+
+    &.hidden {
+      animation: fadeOut;
+      animation-fill-mode: forwards;
+    }
+
+    &[data-variant="info"] {
+      --background: #2a77d280;
+    }
+
+    &[data-variant="success"] {
+      --background: #2ad23680;
+    }
+
+    &[data-variant="warning"] {
+      --background: #ffd80b80;
+    }
+
+    &[data-variant="error"] {
+      --background: #ff080880;
+    }
+
+    .closeButton {
+      padding: 4px;
+      transition: opacity 0.35s;
+
+      &:hover {
+        opacity: 0.5;
+        cursor: pointer;
+      }
+
+      &:active {
+        opacity: 0.2;
+      }
+    }
+
+    .autoHide {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: white;
+      display: flex;
+      flex-direction: row-reverse;
+
+      @keyframes progressAnimation {
+        from {
+          flex: 0;
+        }
+        to {
+          flex: 1;
+        }
+      }
+
+      .progress {
+        transition: flex 0.2s;
+        background: var(--background);
+        animation: progressAnimation linear;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
