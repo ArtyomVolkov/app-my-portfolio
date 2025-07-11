@@ -7,7 +7,6 @@
   max-width: 210px;
   border-right: 1px solid var(--border-color);
   user-select: none;
-  //@include style.backdrop;
 
   .header {
     display: flex;
@@ -27,21 +26,13 @@
         display: flex;
         align-items: center;
         gap: 10px;
-
-        .avatar {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: black;
-        }
+        overflow: hidden;
 
         .name {
+          flex: 1;
           font-size: 14px;
           font-weight: 500;
+          @include style.ellipsis;
         }
       }
 
@@ -54,28 +45,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-
-      .input {
-        display: flex;
-        background: rgb(255 255 255 / 15%);
-        padding: 5px;
-        border-radius: 20px;
-
-        input {
-          outline: none;
-          border: 0;
-          margin: 0;
-          padding: 0 10px;
-          max-width: 125px;
-          background: transparent;
-          color: white;
-
-          &::placeholder {
-            color: #bdbdbd;
-            font-size: 0.9rem;
-          }
-        }
-      }
 
       .addIcon {
         font-size: 24px;
@@ -93,13 +62,17 @@
       margin: 0;
       padding: 0;
       list-style: none;
+      position: relative;
 
       .chatItem {
         display: flex;
         gap: 12px;
         padding: 12px;
+        background: #0000000d;
         border-bottom: 1px solid var(--border-color);
         transition: all 0.35s;
+        min-height: 65px;
+        box-sizing: border-box;
 
         &:hover {
           background: rgb(255 255 255 / 15%);
@@ -115,33 +88,60 @@
         }
 
         &.active {
-          background: #033650;
+          background: #0336509c;
+        }
+
+        &.skeleton {
+          pointer-events: none;
+
+          .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #7b7b7b8a;
+            @include style.skeletonAnimation(1.5s);
+          }
+
+          .details {
+            flex: 1;
+
+            .name, .lastMessage {
+              width: 100%;
+              height: 16px;
+              border-radius: 4px;
+              background: #7b7b7b8a;
+              @include style.skeletonAnimation(1s);
+            }
+
+            .lastMessage {
+              height: 14px;
+            }
+          }
         }
 
         .avatar {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
           color: black;
         }
 
         .details {
+          flex: 1;
           display: flex;
           flex-direction: column;
           gap: 5px;
           color: #dadada;
+          overflow: hidden;
 
           .name {
             font-size: 14px;
+            font-weight: 500;
+            line-height: 18px;
+            @include style.ellipsis();
           }
 
           .lastMessage {
             color: #607D8B;
             font-size: 12px;
+            @include style.ellipsis();
           }
         }
       }

@@ -191,6 +191,16 @@ export const Technologies: {[key in ETechnology]: ITechnology } = {
     label: 'HTML5',
     type: Development.TECHNOLOGY
   },
+  sass: {
+    key: ETechnology.SASS,
+    label: 'Sass',
+    type: Development.TECHNOLOGY
+  },
+  customUiKit: {
+    key: ETechnology.CUSTOM_UI_KIT,
+    label: 'Custom UI Kit',
+    type: Development.TECHNOLOGY
+  },
   css: {
     key: ETechnology.CSS,
     label: 'CSS3',

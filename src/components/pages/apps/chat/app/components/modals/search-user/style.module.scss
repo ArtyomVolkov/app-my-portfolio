@@ -1,0 +1,163 @@
+@use '../../../style.module';
+
+.chatAppSearchUserModal {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.71);
+  border-radius: 10px;
+  min-width: 240px;
+  gap: 18px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .title {
+      flex: 1;
+      font-size: 18px;
+    }
+
+    .close {
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include style.touchable(rgba(255, 255, 255, 0.85));
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .searchInput {
+      background: white;
+      color: #1d1b1b;
+    }
+
+    .searchResult {
+      display: flex;
+      align-items: center;
+      height: 40px;
+
+      .skeleton {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: gray;
+          @include style.skeletonAnimation(1.5s);
+        }
+
+        .userInfo {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .userName {
+            height: 16px;
+            border-radius: 4px;
+            background: grey;
+            @include style.skeletonAnimation(1s);
+          }
+
+          .createdAt {
+            height: 12px;
+            border-radius: 4px;
+            background: grey;
+            @include style.skeletonAnimation(1s);
+          }
+        }
+
+        .addUser {
+          width: 45px;
+          height: 24px;
+          border-radius: 12px;
+          background: gray;
+          @include style.skeletonAnimation(1s);
+        }
+      }
+
+      .noData {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: 1px solid #818181;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: 500;
+        box-sizing: border-box;
+        height: 100%;
+      }
+
+      .user {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: opacity 0.35s;
+
+        &.loading {
+          opacity: 0.5;
+          pointer-events: none;
+        }
+
+        .avatar {
+          width: 40px;
+          height: 40px;
+        }
+
+        .userInfo {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          user-select: none;
+
+          .userName {
+            line-height: 16px;
+          }
+
+          .createdAt {
+            font-size: 12px;
+            line-height: 12px;
+          }
+        }
+
+        .addUser {
+          width: 45px;
+          height: 24px;
+          border-radius: 12px;
+          background: white;
+          transition: all 0.35s;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:hover {
+            opacity: 0.5;
+          }
+
+          &:active {
+            opacity: 0.25;
+          }
+        }
+      }
+    }
+  }
+}

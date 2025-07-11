@@ -4,11 +4,53 @@
   display: flex;
   padding: 20px;
   border-radius: 20px;
-  width: 250px;
+  width: 270px;
   height: fit-content;
   margin: auto;
   transition: height 0.5s;
   @include style.backdrop;
+
+  button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    width: 100%;
+    min-height: 40px;
+    transition: all 0.35s;
+    outline: none;
+    cursor: pointer;
+
+    &.outlined {
+      background: transparent;
+      border-color: white;
+      color: white;
+
+      &:focus-within {
+        color: #bdbdbd;
+        border-color: #bdbdbd;
+      }
+    }
+
+    &:focus-within {
+      border-color: #434343;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active {
+      opacity: 0.4;
+    }
+
+    &[disabled] {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
 
   .login, .signUp {
     display: flex;
@@ -69,14 +111,7 @@
   }
 
   .errorBox {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background: #ff3e3e7d;
-    border-radius: 10px;
-    border: 1px solid #d24a4a;
-    font-size: 12px;
+    margin-top: 15px;
   }
 
   .actions {
@@ -84,9 +119,6 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
-
-    .submit {
-    }
 
     .divider {
       display: flex;
@@ -102,39 +134,20 @@
       }
     }
 
-    button {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid transparent;
-      border-radius: 20px;
-      width: 100%;
-      min-height: 40px;
-      transition: all 0.35s;
-      outline: none;
-      cursor: pointer;
-
-      &:focus-within {
-        border-color: #434343;
-      }
-
-      &:hover {
-        opacity: 0.7;
-      }
-
-      &:active {
-        opacity: 0.4;
-      }
-
-      &[disabled] {
-        pointer-events: none;
-        opacity: 0.5;
-      }
-    }
-
     .loadingIcon {
       font-size: 24px;
+    }
+  }
+
+  .verifyEmail {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    hr {
+      margin: 0;
+      width: 100%;
+      border-color: #434343;
     }
   }
 }

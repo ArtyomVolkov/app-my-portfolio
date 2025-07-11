@@ -3,10 +3,10 @@ import React, { useEffect } from 'react';
 import AppLoader from '../components/app-loader';
 import SignInSignUp from '../components/signin-signup';
 
-import { useStore } from '@pages/apps/chat/app/store';
+import { useAuthStore } from '@pages/apps/chat/app/store/auth';
 
 const AuthProvider = ({ children }) => {
-  const { actions, loading, user } = useStore((store) => store);
+  const { actions, loading, user } = useAuthStore((store) => store);
 
   useEffect(() => {
     const unsubscribe = actions.subscribeAuthStateChanged();
@@ -19,7 +19,8 @@ const AuthProvider = ({ children }) => {
   if (loading) {
     return <AppLoader />;
   }
-  if (!user) {
+
+  if (!user || !user.emailVerified) {
     return (
       <SignInSignUp />
     );

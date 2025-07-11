@@ -50,6 +50,9 @@
     max-height: 200px;
     padding: 12px;
     color: white;
+    word-break: break-all;
+    backdrop-filter: blur(3px);
+    border: 1px solid var(--background);
 
     &.hidden {
       animation: fadeOut;

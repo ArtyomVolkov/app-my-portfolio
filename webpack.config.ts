@@ -106,6 +106,9 @@ const PLUGINS = [
     'process.env.WINE_COLLECTION_FIREBASE_API_KEY': JSON.stringify(process.env.WINE_COLLECTION_FIREBASE_API_KEY),
     'process.env.CHAT_APP_FIREBASE_API_KEY': JSON.stringify(process.env.CHAT_APP_FIREBASE_API_KEY),
     'process.env.HUNTER_API_KEY': JSON.stringify(process.env.HUNTER_API_KEY),
+    'process.env.CLOUDINARY_NAME': JSON.stringify(process.env.CLOUDINARY_NAME),
+    'process.env.CLOUDINARY_API_KEY': JSON.stringify(process.env.CLOUDINARY_API_KEY),
+    'process.env.CLOUDINARY_API_SECRET': JSON.stringify(process.env.CLOUDINARY_API_SECRET),
   }),
   new InterpolateHtmlPlugin({
     PUBLIC_URL: '',

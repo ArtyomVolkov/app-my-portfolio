@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 
 import CircularLoader from '../../components/loaders/circular';
+import Alert from '../../components/alert';
 
 import { mergeClassNames } from '@utils/common';
 import validations from '@utils/validations';
 
-import { useStore } from '../../store';
+import { useAuthStore } from '../../store/auth';
 
 import styles from './style.module.scss';
 
-const Login = () => {
-  const actions = useStore((store) => store.actions);
+const SignIn = () => {
+  const actions = useAuthStore((store) => store.actions);
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState({
     form: false,
@@ -90,7 +91,12 @@ const Login = () => {
       </form>
       {
         error && (
-          <div className={styles.errorBox}>{error}</div>
+          <Alert
+            variant="error"
+            message={error}
+            className={styles.errorBox}
+            onClose={() => setError('')}
+          />
         )
       }
       <div className={styles.actions}>
@@ -120,4 +126,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;

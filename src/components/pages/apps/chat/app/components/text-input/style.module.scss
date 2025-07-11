@@ -1,4 +1,5 @@
 .chatAppTextInput {
+  --autofill-color: white;
   display: flex;
   background: rgb(255 255 255 / 15%);
   padding: 5px;
@@ -21,8 +22,8 @@
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
-    &:-webkit-autofill:active{
-      -webkit-box-shadow: 0 0 0 30px white inset !important;
+    &:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px var(--autofill-color) inset !important;
     }
   }
 }

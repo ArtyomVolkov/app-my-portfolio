@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { useModal, ANIMATION_DURATION } from '../../store/modal';
+import { useSnackbar, ANIMATION_DURATION } from '../../store/modal';
 
 import { mergeClassNames } from '@utils/common';
 
 import styles from './style.module.scss';
 
 const AppModal = () => {
-  const { close, modals } = useModal((store) => store);
+  const { close, stack } = useSnackbar((store) => store);
 
   const onBackdropClick = (e, item) => {
     if (!item.onClose) {
@@ -23,10 +23,10 @@ const AppModal = () => {
   return (
     <div
       className={styles.chatAppModals}
-      style={{ visibility: modals.length > 0 ? 'visible' : 'hidden'}}
+      style={{ visibility: stack.length > 0 ? 'visible' : 'hidden'}}
     >
       {
-        modals.map((item) => (
+        stack.map((item) => (
           <div
             key={item.key}
             className={mergeClassNames([styles.fallback, item.hide && styles.hidden])}

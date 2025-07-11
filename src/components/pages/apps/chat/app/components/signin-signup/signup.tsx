@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
+import Alert from '../../components/alert';
 import CircularLoader from '../../components/loaders/circular';
 
-import { useStore } from '../../store';
+import { useAuthStore } from '../../store/auth';
 
 import { mergeClassNames } from '@utils/common';
 import validations from '@utils/validations';
@@ -10,7 +11,7 @@ import validations from '@utils/validations';
 import styles from './style.module.scss';
 
 const SignUp = () => {
-  const actions = useStore((store) => store.actions);
+  const actions = useAuthStore((store) => store.actions);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [validation, setValidation] = useState({
@@ -70,6 +71,15 @@ const SignUp = () => {
             onChange={(e) => onChangeFormField('password', e.target.value)}
           />
         </div>
+        {
+          error && (
+            <Alert
+              variant="error"
+              message={error}
+              onClose={() => setError('')}
+            />
+          )
+        }
       </form>
       <div className={styles.actions}>
         <button className={styles.submit} onClick={onSubmit} disabled={isSubmitDisabled()}>

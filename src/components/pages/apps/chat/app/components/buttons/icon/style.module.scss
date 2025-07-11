@@ -1,0 +1,21 @@
+@use "../../../style.module";
+
+.chatAppIconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 24px;
+  width: 1em;
+  height: 1em;
+  @include style.touchable;
+
+  svg {
+    font-size: 1em;
+  }
+
+  &[data-disable="true"] {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+}

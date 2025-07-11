@@ -8,9 +8,12 @@ type AvatarProps = {
   size?: number;
   url?: string;
   className?: string;
+  placeholder?: boolean;
 }
 
-const Avatar: React.FC<AvatarProps> = ({size = 40, url, className}) => {
+const PlaceholderImage = 'https://static.thenounproject.com/png/363640-200.png';
+
+const Avatar: React.FC<AvatarProps> = ({size = 40, url,  placeholder = true, className}) => {
   const [loading, setLoading] = useState(!!url);
   const [error, setError] = useState(false);
 
@@ -42,9 +45,7 @@ const Avatar: React.FC<AvatarProps> = ({size = 40, url, className}) => {
         height: size,
       }}
     >
-      {
-        url && <img src={url} alt="avatar" onLoad={onLoad} onError={onError}/>
-      }
+      <img src={url || (placeholder && PlaceholderImage)} alt="avatar" onLoad={onLoad} onError={onError}/>
     </div>
   );
 };

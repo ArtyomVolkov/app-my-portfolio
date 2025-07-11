@@ -1,0 +1,27 @@
+.chatAppSpeechToText {
+  display: flex;
+  position: relative;
+
+  .icon {
+    font-size: 30px;
+  }
+
+  .loader {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: -35px;
+
+    .dots {
+      color: #e6e6e6;
+      font-size: 24px;
+    }
+
+    .duration {
+      font-size: 12px;
+      color: #b0b0b0;
+      font-weight: 500;
+    }
+  }
+}

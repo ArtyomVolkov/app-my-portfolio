@@ -41,6 +41,8 @@ export enum Technology {
   SERVICE_WORKER = 'serviceWorker',
   HTML = 'html',
   CSS = 'css',
+  CUSTOM_UI_KIT = 'customUiKit',
+  SASS = 'sass',
   REACT = 'react',
   REACT_CONTEXT = 'reactContext',
   REACT_NATIVE = 'reactNative',

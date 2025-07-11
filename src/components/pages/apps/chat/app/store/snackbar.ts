@@ -4,7 +4,7 @@ export type Variant = 'default' | 'success' | 'warning' | 'error' | 'info';
 
 type Snackbar = {
   key: string|number,
-  content: JSX.Element,
+  content: string|JSX.Element,
   variant?: Variant,
   autoHide?: number,
   closeButton?: boolean,

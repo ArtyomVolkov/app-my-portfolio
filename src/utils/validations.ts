@@ -1,20 +1,15 @@
-const RegExp = {
-  email: /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm,
-  password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm
-};
-
 const email = (value: string): string|null => {
   if (!value.length) {
     return "Email is required";
   }
-  return !RegExp.email.test(value) ? 'Invalid email' : null;
+  return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(value) ? null : 'Invalid email';
 };
 
 const password = (value) => {
   if (!value.length) {
     return "Password is required";
   }
-  return !RegExp.password.test(value) ? 'Invalid password': null
+  return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm.test(value) ? null: 'Invalid password';
 };
 
 export default { email, password };

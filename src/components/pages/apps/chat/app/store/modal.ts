@@ -1,36 +1,36 @@
 import { create } from 'zustand';
 
-type Modal = {
+type Snack = {
   key: string|number,
   content: JSX.Element,
   hide?: boolean;
 }
 
 type State = {
-  modals: Array<Modal>,
-  open: (data: Modal) => void;
+  stack: Array<Snack>,
+  open: (data: Snack) => void;
   close: (key: string|number) => void;
 }
 
 export const ANIMATION_DURATION = 500;
 
-export const useModal = create<State>((set, get) => ({
-  modals: [],
-  open: (modalData) => {
-    const modal = get().modals.find(({key}) => key === modalData.key);
+export const useSnackbar = create<State>((set, get) => ({
+  stack: [],
+  open: (data) => {
+    const modal = get().stack.find(({key}) => key === data.key);
 
     if (!modal) {
       set({
-        modals: [
-          ...get().modals,
-          modalData,
+        stack: [
+          ...get().stack,
+          data,
         ],
       })
     }
   },
   close: (key) => {
     set({
-      modals: get().modals.map((item) => {
+      stack: get().stack.map((item) => {
         if (item.key !== key) {
           return item;
         }
@@ -41,7 +41,7 @@ export const useModal = create<State>((set, get) => ({
       }),
     });
     setTimeout(() => {
-      set({modals: get().modals.filter((item) => item.key !== key)});
+      set({stack: get().stack.filter((item) => item.key !== key)});
     }, ANIMATION_DURATION);
   },
 }));

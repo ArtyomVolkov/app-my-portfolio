@@ -1,0 +1,30 @@
+.chatAppButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.35s;
+  border: 1px solid transparent;
+  outline: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+
+  &:focus, &:focus-within {
+    border-color: #4d4d4d;
+    box-shadow: 0 0 4px 2px #a6a6a6;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    background: #a0a0a06e;
+    color: #090808;
+  }
+}

@@ -13,7 +13,21 @@ export const formatBytes = (bytes: number, decimals = 2) => {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 };
 
-export const getErrorMessage = (error) => {
+export const dateFormat = (date: string, locale = 'en-US') => {
+  if (!date) {
+    return;
+  }
+  return new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(date));
+};
+
+export const getErrorMessage = (error, errorMap?: { [key: string]: string }) => {
+  if(errorMap?.[error?.code]) {
+    return errorMap[error.code];
+  }
   if (error?.message) {
     return error.message;
   }
