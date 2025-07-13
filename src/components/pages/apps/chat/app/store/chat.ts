@@ -212,7 +212,7 @@ export const useChatStore = create<State>((set, get) => {
         }
       },
       setActiveChat: (chatId) => {
-        if (!chatId) {
+        if (!chatId || get().activeChatId === chatId) {
           return;
         }
         set({

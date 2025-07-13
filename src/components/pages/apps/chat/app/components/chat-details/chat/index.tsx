@@ -31,6 +31,19 @@ const Chat = () => {
     anchorRef.current.scrollIntoView({ behavior: 'smooth' });
   }, [chat.data]);
 
+  const getDateTimeFormat = (timestamp) => {
+    const currentDate = new Date();
+    const date = new Date(timestamp);
+
+    return new Intl.DateTimeFormat(navigator.language, {
+      year: date.getFullYear() < currentDate.getFullYear() ? 'numeric' : undefined,
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    }).format(new Date(timestamp));
+  };
+
   const renderChatContent = () => {
     if (chat.loading) {
       return (
@@ -80,6 +93,9 @@ const Chat = () => {
                   <span className={styles.text}>
                     {item.image && <img src={item.image} alt="image" className={styles.image} />}
                     <span>{item.text}</span>
+                    <span className={styles.dateTime}>
+                      {getDateTimeFormat(item.createdAt)}
+                    </span>
                   </span>
                 </div>
               ))

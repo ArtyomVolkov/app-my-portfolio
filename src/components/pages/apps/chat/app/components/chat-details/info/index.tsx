@@ -22,8 +22,6 @@ const ChatDetails = () => {
     return chat.data.messages.filter((item) => item.image)
   }, [chat.data]);
 
-  console.log(media)
-
   const renderContent = () => {
     if (chat.loading) {
       return (
@@ -37,7 +35,7 @@ const ChatDetails = () => {
             <span className={styles.title} />
             <div className={styles.grid}>
               {
-                Array(15).fill(0).map((item, index) => (
+                Array(5).fill(0).map((item, index) => (
                   <span className={styles.cell} key={index} />
                 ))
               }

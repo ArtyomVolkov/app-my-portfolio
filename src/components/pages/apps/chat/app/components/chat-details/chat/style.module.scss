@@ -80,7 +80,7 @@
 
         .text {
           flex: 0.35;
-          height: 32px;
+          height: 47px;
           @include style.skeletonAnimation(1s);
         }
       }
@@ -112,11 +112,19 @@
         font-size: 14px;
         background: #6c6c6c4d;
         border-radius: 6px 6px 6px 1px;
+        position: relative;
 
         .image {
           object-fit: scale-down;
           max-width: 200px;
           height: 200px;
+        }
+
+        .dateTime {
+          width: 100%;
+          font-size: 10px;
+          font-weight: 500;
+          color: #80e00b;
         }
       }
     }
