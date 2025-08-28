@@ -1,4 +1,7 @@
-// FIFO
+/*
+ *  A Queue is a data structure that follows the First In, First Out (FIFO) principle, where the first element
+ *  added is the first one to be removed.
+ */
 class Queue<T> {
   private readonly queue: Array<T>;
 
@@ -6,10 +9,12 @@ class Queue<T> {
     this.queue = [];
   }
 
+  // Complexity: O(1)
   add(item: T) {
     this.queue.push(item);
   }
 
+  // Complexity: O(1)
   remove() {
     this.queue.shift();
   }
@@ -18,6 +23,7 @@ class Queue<T> {
     return this.queue.length;
   }
 
+  // Complexity: O(n)
   contains(value: T): boolean {
     if (['object', 'function'].includes(typeof value)) {
       return !!this.queue.find((item) => JSON.stringify(item) === JSON.stringify(value));
@@ -29,6 +35,7 @@ class Queue<T> {
     return this.getSize() === 0;
   }
 
+  // Complexity: O(1)
   peek(): T {
     return this.queue[0];
   }

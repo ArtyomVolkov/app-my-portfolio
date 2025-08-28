@@ -1,3 +1,7 @@
+/*
+ *  A Linked List is a linear data structure consisting of nodes, where each node points to the next one
+ *  in the sequence.
+ */
 class NodeItem<T> {
   value: T;
   next: NodeItem<T>;
@@ -15,6 +19,7 @@ class LinkedList<T> {
     this.head = null;
   }
 
+  // Complexity: O(n)
   push(item: T) {
     const node = new NodeItem<T>(item);
 
@@ -30,6 +35,7 @@ class LinkedList<T> {
     current.next = node;
   }
 
+  // Complexity: O(n)
   pop(): T|null {
     let current = this.head;
     let prev: NodeItem<T> | null = null;
@@ -49,6 +55,7 @@ class LinkedList<T> {
     return current.value;
   }
 
+  // Complexity: O(n)
   delete(value: T): T | null {
     let current = this.head;
     let prev: NodeItem<T> | null = null;
@@ -71,6 +78,7 @@ class LinkedList<T> {
     return current.value;
   }
 
+  // Complexity: O(n)
   find(value: T): boolean {
     let current = this.head;
     const isComplexType = ['object', 'function'].includes(typeof value);
@@ -90,6 +98,7 @@ class LinkedList<T> {
     return false;
   }
 
+  // Complexity: O(n)
   reverse() {
     let current = this.head;
     let prev = null;

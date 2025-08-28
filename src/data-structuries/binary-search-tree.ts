@@ -1,3 +1,7 @@
+/*
+ *  A Binary Search Tree (BST) is a hierarchical data structure that follows the binary tree property: for each node,
+ *  all elements in its left subtree are less than the node, and all elements in its right subtree are greater.
+ */
 type TreeTypeData = number | string;
 
 class TreeNode<T = TreeTypeData> {
@@ -25,6 +29,7 @@ class BinarySearchTree<T = TreeTypeData> {
     this.root = null;
   }
 
+  // Complexity: O(n)
   *inOrderTraversal(node = this.root) {
     if (node.left) {
       yield* this.inOrderTraversal(node.left);
@@ -36,6 +41,7 @@ class BinarySearchTree<T = TreeTypeData> {
     }
   }
 
+  // Complexity: O(n)
   *preOrderTraversal(node = this.root) {
     if (!node) {
       return;
@@ -50,6 +56,7 @@ class BinarySearchTree<T = TreeTypeData> {
     }
   }
 
+  // Complexity: O(log n) O(log n) or O(n)
   insert(value: T) {
     if (!this.root) {
       this.root = new TreeNode(value);
@@ -78,6 +85,7 @@ class BinarySearchTree<T = TreeTypeData> {
     }
   }
 
+  // Complexity: O(log n) or O(n)
   delete(value: TreeTypeData): boolean {
     for (let node of this.inOrderTraversal()) {
       if (node.left?.value === value) {
@@ -92,6 +100,7 @@ class BinarySearchTree<T = TreeTypeData> {
     return false;
   }
 
+  // Complexity: O(log n) or O(n)
   find(value: TreeTypeData): TreeNode|null {
     for (let node of this.preOrderTraversal()) {
       if (node.value === value) {
@@ -101,6 +110,7 @@ class BinarySearchTree<T = TreeTypeData> {
     return null;
   }
 
+  // Complexity: O(log n) or O(n)
   getMin(): TreeTypeData|undefined {
     let current: TreeNode|null = this.root;
 
@@ -113,6 +123,7 @@ class BinarySearchTree<T = TreeTypeData> {
     return current.value;
   }
 
+  // Complexity: O(log n) or O(n)
   getMax(): TreeTypeData|undefined {
     let current = this.root;
 

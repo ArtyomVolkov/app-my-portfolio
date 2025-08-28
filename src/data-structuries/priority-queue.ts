@@ -1,3 +1,6 @@
+/*
+ *  A Priority Queue is a data structure that maintains a collection of elements, each associated with a priority.
+ */
 type Priority<D> = [priority: number, data: D];
 
 class PriorityQueue<T> {
@@ -15,6 +18,7 @@ class PriorityQueue<T> {
     return this.getSize() === 0;
   }
 
+  // Complexity: O(n)
   add(item: Priority<T>) {
     if (this.getSize() === 0) {
       this.queue.push(item);
@@ -39,14 +43,17 @@ class PriorityQueue<T> {
     }
   }
 
+  // Complexity: O(1)
   remove() {
     this.queue.shift();
   }
 
+  // Complexity: O(1)
   peek(): T|undefined {
     return this.queue[0][1];
   }
 
+  // Complexity: O(n)
   contains(data: Priority<T>): boolean {
     const isComplexType = ['object', 'function'].includes(typeof data[1]);
 
