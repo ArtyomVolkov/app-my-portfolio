@@ -22,3 +22,34 @@ export const getErrorMessage = (error) => {
   }
   return 'Something went wrong';
 }
+
+export const toTimeInWords = (h: number, m: number): string => {
+  const numbers = [
+    'one', 'two', 'three', 'four', 'five',
+    'six', 'seven', 'eight', 'nine', 'ten',
+    'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
+    'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty',
+    'twenty one', 'twenty two', 'twenty three', 'twenty four', 'twenty five',
+    'twenty six', 'twenty seven', 'twenty eight', 'twenty nine', 'thirty',
+  ];
+  const toMinutes = (value: number) => `minute${value > 1 ? 's' : ''}`;
+
+  if (!m) {
+    return `${numbers[h - 1]} o' clock`;
+  }
+  if (m === 30) {
+    return `half past ${numbers[h - 1]}`
+  }
+  let [hours, minutes, upTo] = [h - 1, m, 'past'];
+
+  if (m > 30) {
+    hours = h;
+    minutes = 60 - m;
+    upTo = 'to'
+  }
+
+  if (minutes === 15) {
+    return `quarter ${upTo} ${numbers[hours]}`;
+  }
+  return `${numbers[minutes - 1]} ${toMinutes(minutes)} ${upTo} ${numbers[hours]}`;
+}
