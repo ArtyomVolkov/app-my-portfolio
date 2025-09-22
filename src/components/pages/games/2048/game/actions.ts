@@ -1,3 +1,4 @@
+import { MutableRefObject } from 'react'
 import { CellDirection, Grid, MergeDirection, RowDirection } from './types';
 import { CELLS, GAME_DATA, GRID_SIZE, KEY_STORE } from './data';
 
@@ -18,8 +19,9 @@ export const loadGameData = () => {
   }
 };
 
-export const mergeRow = (data: Grid, direction: RowDirection) => {
+export const mergeRow = (data: Grid, direction: RowDirection): Array<number> => {
   const n = GRID_SIZE - 1;
+  const merged = [];
 
   for (let i = 0; i < n; i++) {
     let [current, next] = direction === MergeDirection.LEFT ? [i, i + 1] : [n - i, n - i - 1];
@@ -28,11 +30,15 @@ export const mergeRow = (data: Grid, direction: RowDirection) => {
       continue;
     }
     data[current] = data[current] + data[next];
+    merged.push(current);
     data[next] = 0;
   }
+  return merged;
 };
 
-export const mergeCell = (data: Grid, direction: CellDirection) => {
+export const mergeCell = (data: Grid, direction: CellDirection): Array<number> => {
+  const merged = [];
+
   for (let i = 0; i < GRID_SIZE; i++) {
     let [current, next] = direction === MergeDirection.TOP ? [i, i + CELLS] : [GRID_SIZE - i, GRID_SIZE - i - CELLS];
 
@@ -41,7 +47,9 @@ export const mergeCell = (data: Grid, direction: CellDirection) => {
     }
     data[current] = data[current] + data[next];
     data[next] = 0;
+    merged.push(current);
   }
+  return merged;
 };
 
 export const verticalSwap = (data: Grid, direction: CellDirection) => {
@@ -128,4 +136,18 @@ export const getScore = (grid: Grid) => {
     acc += item * (Math.log2(item) - 1);
     return acc;
   }, 0);
+};
+
+export const setAnimation = (gridRef:  MutableRefObject<HTMLDivElement>, index: number, className: string) => {
+  const cell = gridRef.current.children[index];
+
+  if (!cell) {
+    return;
+  }
+  const handleAnimationEnd = () => {
+    cell.classList.remove(className);
+    cell.removeEventListener('animationend', handleAnimationEnd);
+  };
+  cell.addEventListener('animationend', handleAnimationEnd);
+  cell.classList.add(className);
 };

@@ -30,6 +30,24 @@
     }
   }
 
+  @keyframes merge  {
+    0% {
+      scale: 0.5;
+    }
+    100% {
+      scale: 1;
+    }
+  }
+
+  @keyframes increase {
+    from {
+      scale: 2;
+    }
+    to {
+      scale: 1;
+    }
+  }
+
   .header {
     width: 100%;
     display: flex;
@@ -188,7 +206,15 @@
       }
 
       &.appearAnimation {
-        animation: appear 0.4s;
+        animation: appear 0.5s;
+      }
+
+      &.mergeAnimation {
+        animation: merge 0.25s;
+
+        .cellValue {
+          animation: increase 0.25s linear; // duration should be the same as merge
+        }
       }
     }
   }

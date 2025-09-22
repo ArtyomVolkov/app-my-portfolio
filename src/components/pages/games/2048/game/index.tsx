@@ -9,6 +9,7 @@ import {
   isGameOver,
   getCellIndex,
   getScore,
+  setAnimation,
 } from './actions';
 
 import { Grid, MergeDirection } from './types';
@@ -100,19 +101,13 @@ const Game2048 = () => {
   };
 
   const setAppearAnimation = (cellIndex: number) => {
-    const cell = gridRef.current.children[cellIndex];
+    setAnimation(gridRef, cellIndex, styles.appearAnimation);
+  };
 
-    if (!cell) {
-      return;
-    }
-
-    const handleAnimationEnd = () => {
-      cell.classList.remove(styles.appearAnimation);
-      cell.removeEventListener('animationend', handleAnimationEnd);
-    };
-
-    cell.addEventListener('animationend', handleAnimationEnd);
-    cell.classList.add(styles.appearAnimation);
+  const setMergeAnimation = (indexes: Array<number>) => {
+    indexes.forEach((item) => {
+      setAnimation(gridRef, item, styles.mergeAnimation);
+    });
   };
 
   const checkIsGameOver = (data: Grid) => {
@@ -125,42 +120,50 @@ const Game2048 = () => {
 
   const shiftToRight = () => {
     const data = [...grid];
+    let merged;
 
     horizontalSwap(data, MergeDirection.RIGHT);
-    mergeRow(data, MergeDirection.RIGHT);
+    merged = mergeRow(data, MergeDirection.RIGHT);
     horizontalSwap(data, MergeDirection.RIGHT);
     generateValue(data);
     updateGridData(data);
+    setMergeAnimation(merged);
   };
 
   const shiftToLeft = () => {
     const data = [...grid];
+    let merged;
 
     horizontalSwap(data, MergeDirection.LEFT);
-    mergeRow(data, MergeDirection.LEFT);
+    merged = mergeRow(data, MergeDirection.LEFT);
     horizontalSwap(data, MergeDirection.LEFT);
     generateValue(data);
     updateGridData(data);
+    setMergeAnimation(merged);
   };
 
   const shiftToTop = () => {
     const data = [...grid];
+    let merged;
 
     verticalSwap(data, MergeDirection.TOP);
-    mergeCell(data, MergeDirection.TOP);
+    merged = mergeCell(data, MergeDirection.TOP);
     verticalSwap(data, MergeDirection.TOP);
     generateValue(data);
     updateGridData(data);
+    setMergeAnimation(merged);
   };
 
   const shiftToDown = () => {
     const data = [...grid];
+    let merged;
 
     verticalSwap(data, MergeDirection.BOTTOM);
-    mergeCell(data, MergeDirection.BOTTOM);
+    merged = mergeCell(data, MergeDirection.BOTTOM);
     verticalSwap(data, MergeDirection.BOTTOM);
     generateValue(data);
     updateGridData(data);
+    setMergeAnimation(merged);
   };
 
   const onUndo = () => {
@@ -207,10 +210,14 @@ const Game2048 = () => {
         }}
       >
         {grid.map((item, index) => (
-          <div key={index} className={styles.tile} data-value={item}>
+          <div
+            key={index}
+            className={styles.tile}
+            data-value={item}
+          >
             {
               item > 0 && (
-                <span>{item}</span>
+                <span className={styles.cellValue}>{item}</span>
               )
             }
           </div>
