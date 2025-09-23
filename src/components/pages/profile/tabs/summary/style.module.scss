@@ -7,14 +7,14 @@
   .card {
     padding: 20px;
     box-shadow: 0 3px 6px 2px #dadada;
-    border-radius: 4px;
+    border-radius: 20px;
 
     .title {
       display: flex;
       align-items: center;
       font-size: 20px;
       margin: 0 0 25px;
-      color: #626262;
+      color: #434343;
 
       .icon {
         margin-right: 10px;
@@ -31,6 +31,7 @@
     flex-direction: row;
     max-height: 250px;
     padding: 0;
+    overflow: hidden;
 
     .profileImage {
       max-width: 250px;

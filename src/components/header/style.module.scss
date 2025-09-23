@@ -1,7 +1,7 @@
 .appHeader {
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-bottom: 1px solid #dcdcdc;
   min-height: 35px;
   width: calc(100% - 32px);
@@ -11,13 +11,10 @@
 
 @media screen and (max-width: 1023px) {
   .appHeader {
-    height: 50px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .appHeader {
-    height: 40px;
-    padding: 4px 8px;
   }
 }

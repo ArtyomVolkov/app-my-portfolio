@@ -23,6 +23,7 @@ import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
 import MemoryOutlinedIcon from '@mui/icons-material/MemoryOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import LiquorOutlinedIcon from '@mui/icons-material/LiquorOutlined';
+import TwoKPlusOutlinedIcon from '@mui/icons-material/TwoKPlusOutlined';
 
 import styles from './style.module.scss';
 
@@ -66,6 +67,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   sudoku: {
     label: 'Sudoku',
     icon: <AppRegistrationIcon />
+  },
+  '2048': {
+    label: '2048',
+    icon: <TwoKPlusOutlinedIcon />
   },
   history: {
     label: 'History',
@@ -117,8 +122,11 @@ const Navigation = () => {
         className={styles.navItem}
         onClick={() => navigateTo(item)}
         selected={location.pathname.includes(item)}
+        classes={{
+          selected: styles.selected
+        }}
       >
-        <ListItemIcon>
+        <ListItemIcon className={styles.icon}>
           { PATH_MAP[item]?.icon }
         </ListItemIcon>
         <ListItemText primary={PATH_MAP[item]?.label} />
