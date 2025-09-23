@@ -79,7 +79,11 @@ const Game2048 = () => {
       return;
     }
     const newData = [...grid];
-    const [first, second] = [getCellIndex(newData), getCellIndex(newData)];
+    let [first, second] = [getCellIndex(newData), getCellIndex(newData)];
+
+    while (first === second) {
+      first = getCellIndex(newData);
+    }
 
     newData[first] = 2;
     newData[second] = 2;
@@ -177,7 +181,15 @@ const Game2048 = () => {
 
   const handleNewGame = () => {
     const newData = [...GAME_DATA];
-    const [first, second] = [getCellIndex(newData), getCellIndex(newData)];
+    let [first, second] = [getCellIndex(newData), getCellIndex(newData)];
+
+    if (first === -1 || second === -1) {
+      return;
+    }
+
+    while (first === second) {
+      first = getCellIndex(newData);
+    }
 
     newData[first] = 2;
     newData[second] = 2;
