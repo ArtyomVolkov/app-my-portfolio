@@ -16,6 +16,7 @@ const Memory = lazy(() => import('@pages/widgets/memory'));
 const Games = lazy(() => import('@pages/games'));
 const Puzzle = lazy(() => import('@pages/games/puzzle'));
 const Sudoku = lazy(() => import('@pages/games/sudoku'));
+const Game2048 = lazy(() => import('@pages/games/2048'));
 const Katana = lazy(() => import('@pages/games/nonogram'));
 
 const Apps = lazy(() => import('@pages/apps'));
@@ -132,6 +133,14 @@ const AppRoutes = () => (
       element={(
         <Suspense fallback="">
           <Puzzle />
+        </Suspense>
+      )}
+    />
+    <Route
+      path="/games/2048"
+      element={(
+        <Suspense fallback="">
+          <Game2048 />
         </Suspense>
       )}
     />
