@@ -1,0 +1,35 @@
+.uiKitWidget {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .layout {
+    width: 100%;
+    display: flex;
+    background: #efefef;
+    border-radius: 16px;
+    height: 100%;
+    overflow: hidden;
+    padding: 8px;
+    gap: 10px;
+    box-sizing: border-box;
+
+    .nav {
+      min-width: 200px;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 8px;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: auto;
+    }
+
+    .preview {
+      padding: 8px;
+      width: 100%;
+      min-height: 200px;
+      border-radius: 8px;
+      overflow: auto;
+    }
+  }
+}
