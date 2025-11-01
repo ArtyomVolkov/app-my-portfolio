@@ -1,5 +1,6 @@
 # compiled output
 /build
+/coverage
 
 # dependencies
 node_modules

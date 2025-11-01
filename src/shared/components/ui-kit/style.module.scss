@@ -1,0 +1,77 @@
+:root {
+  --text-color: #333333;
+}
+
+.Typography {
+  color: var(--text-color);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3em;
+
+  &.h1 {
+    margin-bottom: 2em;
+    font-size: 2.5em;
+  }
+
+  &.h2 {
+    font-size: 1.75em;
+    margin-bottom: 0.45em;
+  }
+
+  &.h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.4em;
+  }
+
+  &.h4 {
+    font-size: 1.25em;
+    margin-bottom: 0.35em;
+  }
+
+  &.h5 {
+    font-size: 1em;
+    margin-bottom: 0.3em;
+  }
+
+  &.h6 {
+    font-size: 0.875em;
+    margin-bottom: 0.25em;
+  }
+
+  &.p {
+    font-size: 1em;
+    font-weight: 500;
+    margin-bottom: 0.3em;
+  }
+
+  &.span {
+    font-size: 0.85em;
+    font-weight: 400;
+  }
+
+  &.line-2, &.line-3 {
+    white-space: pre-line;
+    max-height: 2.6em;
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+      content: "...";
+      position: absolute;
+      bottom: 1px;
+      right: 2px;
+      background: white;
+      padding: 0 4px;
+      border-radius: 4px;
+      font-size: 1.2em;
+      font-weight: 600;
+      line-height: 0.9em;
+    }
+  }
+
+  &.line-3 {
+    max-height: 3.9em;
+  }
+}
