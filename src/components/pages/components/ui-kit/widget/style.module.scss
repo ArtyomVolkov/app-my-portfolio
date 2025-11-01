@@ -1,18 +1,28 @@
+@use "../../../../../assets/styles/style-guide.scss";
+
 .uiKitWidget {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
 
   .layout {
     width: 100%;
     display: flex;
-    background: #efefef;
+    background: #f5f5f5;
     border-radius: 16px;
     height: 100%;
+    min-height: 400px;
     overflow: hidden;
-    padding: 8px;
-    gap: 10px;
+    border: 1px solid #ebebeb;
     box-sizing: border-box;
+
+    @include style-guide.scroll-style(
+      $width: 8px,
+      $track-color: #e0e0e0,
+      $thumb-color: var(--text-color),
+      $thumb-border: 2px
+    );
 
     .nav {
       display: flex;
@@ -20,8 +30,8 @@
       gap: 8px;
       min-width: 200px;
       box-sizing: border-box;
-      margin: 0;
       padding: 8px;
+      margin: 8px;
       background: #ffffff;
       border-radius: 8px;
       overflow: auto;
@@ -47,7 +57,8 @@
           background: #2f74c0;
           color: #ffffff;
 
-          &:hover, &:active {
+          &:hover,
+          &:active {
             opacity: 1;
           }
         }
@@ -58,7 +69,6 @@
       padding: 8px;
       width: 100%;
       min-height: 200px;
-      border-radius: 8px;
       overflow: auto;
 
       .title {
