@@ -2,7 +2,7 @@ import React from "react";
 
 import { mergeClassNames } from "@utils/common";
 
-import styles from "../style.module.scss";
+import styles from "./style.module.scss";
 
 const Tag = ({ name, children, ...rest }) => {
   return React.createElement(name, { ...rest }, children);

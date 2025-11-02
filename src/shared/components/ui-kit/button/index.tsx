@@ -2,9 +2,18 @@ import React from "react";
 
 import { mergeClassNames } from "@utils/common";
 
-import styles from "../style.module.scss";
+import Spinner from "../spinner";
 
-export type Color = "default" | "primary" | "secondary" | "danger" | "warning" | "info" | "success";
+import styles from "./style.module.scss";
+
+export type Color =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "danger"
+  | "warning"
+  | "info"
+  | "success";
 export type Variant = "solid" | "outlined" | "dashed" | "text" | "link";
 
 type ButtonProps = {
@@ -13,12 +22,14 @@ type ButtonProps = {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   children?: React.ReactNode;
+  loading?: boolean;
   onClick?: () => void;
 };
 
 const Button: React.FC<ButtonProps> = ({
   color = "default",
   variant = "solid",
+  loading = false,
   onClick,
   startIcon,
   endIcon,
@@ -31,12 +42,14 @@ const Button: React.FC<ButtonProps> = ({
         styles.Button,
         styles[variant],
         styles[color],
+        loading && styles.loading,
       ])}
       onClick={onClick}
       {...rest}
     >
       {startIcon && startIcon}
-      <span className={styles.label}>{children}</span>
+      <span className={styles.text}>{children}</span>
+      {loading && <Spinner className={styles.spinner} />}
       {endIcon && endIcon}
     </button>
   );

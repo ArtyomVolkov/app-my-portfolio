@@ -1,10 +1,12 @@
 @use "../../../../../assets/styles/style-guide.scss";
+@use "../../../../../shared/components/ui-kit/style.module.scss";
 
 .uiKitWidget {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+
 
   .layout {
     width: 100%;
