@@ -1,0 +1,31 @@
+.Divider {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+
+  &.align-left {
+    .hrLeft {
+      flex-grow: 0.05;
+    }
+  }
+
+  &.align-right {
+    .hrRight {
+      flex-grow: 0.05;
+    }
+  }
+
+  .hrLeft,
+  .hrRight {
+    flex-grow: 1;
+    border: 0;
+    border-color: var(--text-color);
+  }
+
+  .title {
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 0 10px;
+  }
+}

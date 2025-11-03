@@ -6,7 +6,7 @@ import styles from "./style.module.scss";
 
 type SectionProps = {
   title: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   classes?: {
     root?: string;
     title?: string;
