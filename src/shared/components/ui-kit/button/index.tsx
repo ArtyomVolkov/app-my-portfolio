@@ -23,6 +23,7 @@ type ButtonProps = {
   endIcon?: React.ReactNode;
   children?: React.ReactNode;
   loading?: boolean;
+  className?: string;
   onClick?: () => void;
 };
 

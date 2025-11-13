@@ -5,6 +5,7 @@ import { NavItems } from '@pages/components/ui-kit/widget/types';
 import Typography from './Typography';
 import Buttons from './Buttons';
 import Divider from './Divider';
+import Breadcrumb from './Breadcrumb';
 
 const TABS: NavItems = [
   {
@@ -21,6 +22,11 @@ const TABS: NavItems = [
     key: 'divider',
     label: 'Divider',
     component: <Divider />
+  },
+  {
+    key: 'breadcrumb',
+    label: 'Breadcrumb',
+    component: <Breadcrumb />
   }
 ];
 

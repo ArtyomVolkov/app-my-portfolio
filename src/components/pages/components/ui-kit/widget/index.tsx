@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import TABS from "@pages/components/ui-kit/widget/tabs";
 
@@ -7,6 +7,7 @@ import { mergeClassNames } from "@utils/common";
 import styles from "./style.module.scss";
 
 const UiKitWidget = () => {
+  const previewRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<string>(TABS[0].key);
 
   const renderTabItem = () => {
@@ -17,6 +18,12 @@ const UiKitWidget = () => {
     }
     return null;
   };
+
+  useEffect(() => {
+    if (previewRef.current) {
+      previewRef.current.scroll(0, 0);
+    }
+  }, [activeTab]);
 
   return (
     <div className={styles.uiKitWidget}>
@@ -35,7 +42,7 @@ const UiKitWidget = () => {
             </li>
           ))}
         </ul>
-        <div className={styles.preview}>{renderTabItem()}</div>
+        <div className={styles.preview} ref={previewRef}>{renderTabItem()}</div>
       </div>
     </div>
   );
