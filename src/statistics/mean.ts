@@ -1,8 +1,5 @@
 // Arithmetic mean
 // Formula: X̄ = (x1 + x2 + ... + xn) / n
-
-import { get } from "http";
-
 // Usage: a better example is the population of the income nation.
 const data = [2, 8, 3, 7, 4, 10, 6, 5, 9, 1, 0];
 
