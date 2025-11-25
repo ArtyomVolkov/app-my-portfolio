@@ -27,8 +27,8 @@
     "@reduxjs/toolkit": "^2.7.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^18.11.7",
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
@@ -78,11 +78,11 @@
   },
   "dependencies": {
     "notistack": "^3.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-redux": "^9.2.0",
     "react-router": "6.4.2",
-    "react-router-dom": "^6.4.2"
+    "react-router-dom": "^7.9.6"
   },
   "jest": {
     "moduleNameMapper": {

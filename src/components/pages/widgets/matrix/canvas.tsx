@@ -10,7 +10,7 @@ import styles from './style.module.scss';
 
 const MatrixCanvas = () => {
   const [fullscreen, setFullscreen] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement>();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const intervalRef = useRef(null);
 
   useEffect(() => {
