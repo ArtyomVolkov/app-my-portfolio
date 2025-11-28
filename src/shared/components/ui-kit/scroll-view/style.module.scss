@@ -1,0 +1,33 @@
+.ScrollView {
+  position: relative;
+
+  &.horizontal {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .topShadow,
+  .bottomShadow {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgb(230, 7, 7));
+  }
+
+  .topShadow {
+    top: 0;
+  }
+
+  .bottomShadow {
+    bottom: 0;
+  }
+
+  .content {
+    overflow-y: auto;
+    z-index: 0;
+  }
+}

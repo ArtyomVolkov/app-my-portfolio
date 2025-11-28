@@ -122,8 +122,6 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ options, onSelect }) => {
       }
       visibleContentWidth += liElement.offsetWidth;
     });
-
-    console.log('check fit');
     if (visibleContentWidth < ulRef.current.clientWidth) {
       showCheckFit(ulRef, list);
     } else {

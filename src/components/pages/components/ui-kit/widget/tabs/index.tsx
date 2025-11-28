@@ -6,6 +6,7 @@ import Typography from './Typography';
 import Buttons from './Buttons';
 import Divider from './Divider';
 import Breadcrumb from './Breadcrumb';
+import ScrollView from './ScrollView';
 
 const TABS: NavItems = [
   {
@@ -27,6 +28,11 @@ const TABS: NavItems = [
     key: 'breadcrumb',
     label: 'Breadcrumb',
     component: <Breadcrumb />
+  },
+  {
+    key: 'scroll-view',
+    label: 'Scroll View',
+    component: <ScrollView />
   }
 ];
 

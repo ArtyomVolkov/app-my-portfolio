@@ -36,4 +36,9 @@
     flex-wrap: wrap;
     gap: 10px;
   }
+
+  .verticalScrollView {
+    max-height: 300px;
+    min-height: 300px;
+  }
 }
