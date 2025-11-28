@@ -21,8 +21,6 @@ const ScrollViewTab = () => {
     fetchData();
   }, []);
 
-  console.log(data);
-
   return (
     <div className={styles.TabContent}>
       <h2 className={styles.title}>Scroll View</h2>
@@ -42,13 +40,13 @@ const ScrollViewTab = () => {
               )}
             </ScrollView>
             <Divider title="Horizontal" align="left" />
-            {/* <ScrollView horizontal>
-              <span>
+            <ScrollView horizontal className={styles.horizontalScrollView}>
+              <span style={{ width: "1500px", display: "inline-block" }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                 nonne merninisti licere mihi ista probare, quae sunt a te dicta?
                 Refert tamen, quo modo.
               </span>
-            </ScrollView> */}
+            </ScrollView>
           </article>
         </Section>
       </div>
