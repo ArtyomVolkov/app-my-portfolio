@@ -28,9 +28,30 @@ const cvTestScoresB = getCoefficientOfVariation(testScoresB);
 // cvTestScoresA: 6.24 (indicating lower relative variability)
 // cvTestScoresB: 15.81 (indicating higher relative variability)
 
-// Correlations coefficients: Pearson, Spearman, Kendall
+// Spearman's Correlation coefficient
+// Formula: ρ = 1 - ( (6 * Σd²) / (n(n² - 1)) )
+// Usage: to assess the strength and direction of the monotonic relationship between two variables, such as students' ranks in two different subjects.
 
+const getRank = (data: number[]): number[] => {
+  const sorted = Array.from(data).sort((a, b) => a - b);
+
+  return data.map(value => sorted.indexOf(value) + 1);
+};
+
+const getSpearmansCorrelation = (dataA: number[], dataB: number[]): number => {
+  if (dataA.length !== dataB.length || dataA.length === 0) {
+    return 0;
+  }
+
+  const rankA = getRank(dataA);
+  const rankB = getRank(dataB);
+  const dSquared = rankA.map((rank, i) => Math.pow(rank - rankB[i], 2));
+  const sumDSquared = dSquared.reduce((acc, val) => acc + val, 0);
+
+  return 1 - ( (6 * sumDSquared) / (dataA.length * (Math.pow(dataA.length, 2) - 1)) );
+};
 
 export default {
   getCoefficientOfVariation,
+  getSpearmansCorrelation,
 };
