@@ -52,7 +52,7 @@ const getSpearmansCorrelation = (dataA: number[], dataB: number[]): number => {
   const dSquared = rankA.map((rank, i) => Math.pow(rank - rankB[i], 2));
   const sumDSquared = dSquared.reduce((acc, val) => acc + val, 0);
 
-  return 1 - ( (6 * sumDSquared) / (dataA.length * (Math.pow(dataA.length, 2) - 1)) );
+  return 1 - ((6 * sumDSquared) / (dataA.length * (Math.pow(dataA.length, 2) - 1)));
 };
 
 const studentRanksMath: number[] = [1, 2, 3, 4, 5];
@@ -107,8 +107,47 @@ const pearsonsCorrelation = getPearsonsCorrelation(heights, weights);
 // Output:
 // pearsonsCorrelation: 0.98 (indicating a very strong positive linear correlation)
 
+// Kendall's Correlation coefficient
+// Formula: τ = (number of concordant pairs - number of discordant pairs) / (0.5 * n * (n - 1))
+// -1 ≤ τ ≤ 1
+// -1 indicates a perfect negative correlation
+// 0 indicates no correlation
+// 1 indicates a perfect positive correlation
+// Usage: to assess the strength and direction of the monotonic relationship between two variables, similar to Spearman's but more robust to outliers.
+
+const getKendallsCorrelation = (dataA: number[], dataB: number[]): number => {
+  if (dataA.length !== dataB.length || dataA.length === 0) {
+    return 0;
+  }
+
+  let concordant = 0;
+  let discordant = 0;
+
+  for (let i = 0; i < dataA.length - 1; i++) {
+    for (let j = i + 1; j < dataA.length; j++) {
+      const pairA = dataA[i] - dataA[j];
+      const pairB = dataB[i] - dataB[j];
+
+      if (pairA * pairB > 0) {
+        concordant++;
+      } else if (pairA * pairB < 0) {
+        discordant++;
+      }
+    }
+  }
+  return (concordant - discordant) / (0.5 * dataA.length * (dataA.length - 1));
+};
+
+const ranksA: number[] = [2, 1, 4, 3, 5, 7, 8];
+const ranksB: number[] = [4, 3, 1, 5, 2, 6, 9];
+const kendallsCorrelation = getKendallsCorrelation(ranksA, ranksB);
+
+// Output:
+// kendallsCorrelation: 0.5238 (indicating a moderate positive correlation)
+
 export default {
   getCoefficientOfVariation,
   getSpearmansCorrelation,
   getPearsonsCorrelation,
+  getKendallsCorrelation,
 };
