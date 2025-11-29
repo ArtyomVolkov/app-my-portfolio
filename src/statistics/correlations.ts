@@ -62,7 +62,53 @@ const spearmansCorrelation = getSpearmansCorrelation(studentRanksMath, studentRa
 // Output:
 // spearmansCorrelation: 0.8 (indicating a strong positive correlation)
 
+// Pearson Correlation coefficient
+// Formula: r = Σ((xi - meanX)(yi - meanY)) / (sqrt(Σ(xi - meanX)²) * sqrt(Σ(yi - meanY)²))
+// -1 ≤ r ≤ 1
+// -1 indicates a perfect negative correlation
+// 0 indicates no correlation
+// 1 indicates a perfect positive correlation
+// Usage: to measure the linear relationship between two continuous variables, such as height and weight.
+
+const getPearsonsCorrelation = (dataX: number[], dataY: number[]): number => {
+  if (dataX.length !== dataY.length || dataX.length === 0) {
+    return 0;
+  }
+
+  const meanX = mean.getArithmeticMean(dataX);
+  const meanY = mean.getArithmeticMean(dataY);
+
+  let numerator = 0;
+  let sumXSquared = 0;
+  let sumYSquared = 0;
+
+  for (let i = 0; i < dataX.length; i++) {
+    const diffX = dataX[i] - meanX;
+    const diffY = dataY[i] - meanY;
+
+    numerator += diffX * diffY;
+    sumXSquared += diffX * diffX;
+    sumYSquared += diffY * diffY;
+  }
+
+  const denominator = Math.sqrt(sumXSquared) * Math.sqrt(sumYSquared);
+
+  if (denominator === 0) {
+    return 0;
+  }
+
+  return numerator / denominator;
+};
+
+const heights: number[] = [150, 160, 170, 180, 190];
+const weights: number[] = [50, 60, 65, 80, 90];
+const pearsonsCorrelation = getPearsonsCorrelation(heights, weights);
+
+// Output:
+// pearsonsCorrelation: 0.98 (indicating a very strong positive linear correlation)
+
 export default {
   getCoefficientOfVariation,
   getSpearmansCorrelation,
+  getPearsonsCorrelation,
 };
