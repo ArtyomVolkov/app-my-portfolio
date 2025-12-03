@@ -18,9 +18,9 @@ const SpotifyApp = () => {
   return (
     <iframe
       className={styles.spotifyApp}
-      src="https://a-volkov-spotify-player.netlify.app/#/"
+      src={process.env.SPOTIFY_APP_URI}
       title="Spotify App"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      allow="autoplay; encrypted-media; fullscreen;"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
       allowFullScreen
     ></iframe>

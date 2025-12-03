@@ -105,6 +105,7 @@ const PLUGINS = [
     'process.env.PEXELS_API_KEY': JSON.stringify(process.env.PEXELS_API_KEY),
     'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
     'process.env.HUNTER_API_KEY': JSON.stringify(process.env.HUNTER_API_KEY),
+    'process.env.SPOTIFY_APP_URI': JSON.stringify(process.env.SPOTIFY_APP_URI),
   }),
   new InterpolateHtmlPlugin({
     PUBLIC_URL: '',
