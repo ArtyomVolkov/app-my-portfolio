@@ -1,16 +1,32 @@
-export const mergeClassNames = (classNames = []) => classNames.filter((item) => item).join(' ');
+export const mergeClassNames = (classNames = []) =>
+  classNames.filter((item) => item).join(" ");
 
 export const formatBytes = (bytes: number, decimals = 2) => {
   if (!bytes) {
-    return '0 Bytes';
+    return "0 Bytes";
   }
-  const k = 1024
-  const dm = decimals < 0 ? 0 : decimals
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
 
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+};
+
+export const getQueryParams = () => {
+  const hash = location.search.replace("?", "").split("&");
+
+  return hash.reduce((previous, current) => {
+    const [key, value] = current.split("=");
+
+    if (!key) {
+      return previous;
+    }
+
+    previous[key] = value;
+    return previous;
+  }, {});
 };
 
 export const getErrorMessage = (error) => {
@@ -20,5 +36,5 @@ export const getErrorMessage = (error) => {
   if (error?.data?.message) {
     return error.data.message;
   }
-  return 'Something went wrong';
-}
+  return "Something went wrong";
+};
