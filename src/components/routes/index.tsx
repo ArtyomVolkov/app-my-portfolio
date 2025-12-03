@@ -1,172 +1,181 @@
-import React, { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
 
-const Page404 = lazy(() => import('@pages/404'));
-const Profile = lazy(() => import('@pages/profile'));
-const Components = lazy(() => import('@pages/components'));
-const Shapes = lazy(() => import('@pages/components/shapes'));
+const Page404 = lazy(() => import("@pages/404"));
+const Profile = lazy(() => import("@pages/profile"));
+const Components = lazy(() => import("@pages/components"));
+const Shapes = lazy(() => import("@pages/components/shapes"));
 
-const Widgets = lazy(() => import('@pages/widgets'));
-const History = lazy(() => import('@pages/widgets/history'));
-const Gallery = lazy(() => import('@pages/widgets/gallery'));
-const Matrix = lazy(() => import('@pages/widgets/matrix'));
-const Clock = lazy(() => import('@pages/widgets/clock'));
-const Memory = lazy(() => import('@pages/widgets/memory'));
+const Widgets = lazy(() => import("@pages/widgets"));
+const History = lazy(() => import("@pages/widgets/history"));
+const Gallery = lazy(() => import("@pages/widgets/gallery"));
+const Matrix = lazy(() => import("@pages/widgets/matrix"));
+const Clock = lazy(() => import("@pages/widgets/clock"));
+const Memory = lazy(() => import("@pages/widgets/memory"));
 
-const Games = lazy(() => import('@pages/games'));
-const Puzzle = lazy(() => import('@pages/games/puzzle'));
-const Sudoku = lazy(() => import('@pages/games/sudoku'));
-const Game2048 = lazy(() => import('@pages/games/2048'));
-const Katana = lazy(() => import('@pages/games/nonogram'));
+const Games = lazy(() => import("@pages/games"));
+const Puzzle = lazy(() => import("@pages/games/puzzle"));
+const Sudoku = lazy(() => import("@pages/games/sudoku"));
+const Game2048 = lazy(() => import("@pages/games/2048"));
+const Katana = lazy(() => import("@pages/games/nonogram"));
 
-const Apps = lazy(() => import('@pages/apps'));
-const WineCollection = lazy(() => import('@pages/apps/wine-collection'));
+const Apps = lazy(() => import("@pages/apps"));
+const WineCollection = lazy(() => import("@pages/apps/wine-collection"));
+const SpotifyApp = lazy(() => import("@pages/apps/spotify-app"));
 
 const AppRoutes = () => (
   <Routes>
     <Route
       path="/"
-      element={(
+      element={
         <Suspense fallback="">
           <Profile />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/apps"
-      element={(
+      element={
         <Suspense fallback="">
           <Apps />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/apps/wine-collection/*" // for nested routes
-      element={(
+      element={
         <Suspense fallback="">
           <WineCollection />
         </Suspense>
-      )}
+      }
+    />
+    <Route
+      path="/apps/spotify-app/*" // for nested routes
+      element={
+        <Suspense fallback="">
+          <SpotifyApp />
+        </Suspense>
+      }
     />
     <Route
       path="/profile"
-      element={(
+      element={
         <Suspense fallback="">
           <Profile />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/components"
-      element={(
+      element={
         <Suspense fallback="">
           <Components />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/components/shapes"
-      element={(
+      element={
         <Suspense fallback="">
           <Shapes />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/widgets"
-      element={(
+      element={
         <Suspense fallback="">
           <Widgets />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/widgets/history"
-      element={(
+      element={
         <Suspense fallback="">
           <History />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/widgets/gallery"
-      element={(
+      element={
         <Suspense fallback="">
           <Gallery />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/widgets/matrix"
-      element={(
+      element={
         <Suspense fallback="">
           <Matrix />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/widgets/clock"
-      element={(
+      element={
         <Suspense fallback="">
           <Clock />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/widgets/memory"
-      element={(
+      element={
         <Suspense fallback="">
           <Memory />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/games"
-      element={(
+      element={
         <Suspense fallback="">
           <Games />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/games/puzzle"
-      element={(
+      element={
         <Suspense fallback="">
           <Puzzle />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/games/2048"
-      element={(
+      element={
         <Suspense fallback="">
           <Game2048 />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/games/sudoku"
-      element={(
+      element={
         <Suspense fallback="">
           <Sudoku />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="/games/nonogram"
-      element={(
+      element={
         <Suspense fallback="">
           <Katana />
         </Suspense>
-      )}
+      }
     />
     <Route
       path="*"
-      element={(
+      element={
         <Suspense fallback="">
           <Page404 />
         </Suspense>
-      )}
+      }
     />
   </Routes>
 );
