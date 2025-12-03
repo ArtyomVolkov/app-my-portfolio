@@ -16,7 +16,7 @@ class MFEAuthService {
           authType: "spotify-auth",
           ...params,
         },
-        process.env.SPOTIFY_APP_URI 
+        "*"
       );
       window.close();
     }
