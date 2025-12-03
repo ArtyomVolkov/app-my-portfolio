@@ -4,6 +4,7 @@ import Main from '@components/main';
 import NavButton from '@shared/components/buttons/navigation';
 
 import LiquorOutlinedIcon from '@mui/icons-material/LiquorOutlined';
+import MusicVideoRoundedIcon from '@mui/icons-material/MusicVideoRounded';
 
 import styles from './style.module.scss';
 
@@ -14,6 +15,11 @@ const AppsPage = () => {
         path="/apps/wine-collection"
         title="Wine collection"
         icon={<LiquorOutlinedIcon className="icon"/>}
+      />
+      <NavButton
+        path="/apps/spotify-app"
+        title="Spotify App"
+        icon={<MusicVideoRoundedIcon className="icon"/>}
       />
     </Main>
   );
