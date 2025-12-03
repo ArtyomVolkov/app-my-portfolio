@@ -24,18 +24,6 @@ const SpotifyApp = () => {
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
       allowFullScreen
     ></iframe>
-    // <section className={styles.spotifyApp}>
-    //   <p className={styles.description}>
-    //     Listen to your favorite music on Spotify.
-    //   </p>
-    //   <a
-    //     href="https://a-volkov-spotify-player.netlify.app/#/"
-    //     target="_blank"
-    //     rel="noopener noreferrer"
-    //   >
-    //     Open Spotify App
-    //   </a>
-    // </section>
   );
 };
 
