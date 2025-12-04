@@ -1,5 +1,6 @@
 import React from 'react';
 import Dialog from '@mui/material/Dialog';
+
 import { useAppModal } from '@pages/apps/wine-collection/app/store/app-modal';
 
 const AppModal = () => {
@@ -15,7 +16,7 @@ const AppModal = () => {
             scroll="paper"
             {...item.props}
           >
-            {item.content}
+            {item.content as React.ReactNode}
           </Dialog>
         ))
       }

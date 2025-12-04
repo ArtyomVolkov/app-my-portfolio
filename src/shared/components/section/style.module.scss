@@ -1,0 +1,28 @@
+.Section {
+  --background-color: #f5f5f5;
+  --border-color: #a5a5a5;
+
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  position: relative;
+
+  .title {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-weight: bold;
+    background: var(--background-color);
+    padding: 0 5px;
+  }
+
+  .content {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import ContentPasteSearchOutlinedIcon from '@mui/icons-material/ContentPasteSearchOutlined';
 
 import styles from './style.module.scss';
 
 interface INodata {
-  title?: string|JSX.Element,
-  subtitle?: string|JSX.Element,
-  content?: JSX.Element
+  title?: string|ReactNode,
+  subtitle?: string|ReactNode,
+  content?: ReactNode
 }
 
 const NoData: React.FC<INodata> = ({ title = 'No Data', subtitle = '', content }) => {

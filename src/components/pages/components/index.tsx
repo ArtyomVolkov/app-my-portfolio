@@ -4,6 +4,7 @@ import Main from '@components/main';
 import NavButton from '@shared/components/buttons/navigation';
 
 import CategoryIcon from '@mui/icons-material/Category';
+import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
 
 import styles from './style.module.scss';
 
@@ -14,6 +15,11 @@ const ComponentsPage = () => {
         path="/components/shapes"
         title="3D Shapes"
         icon={<CategoryIcon className="icon"/>}
+      />
+      <NavButton
+        path="/components/ui-kit"
+        title="UI-Kit"
+        icon={<ReceiptLongRoundedIcon className="icon"/>}
       />
     </Main>
   );

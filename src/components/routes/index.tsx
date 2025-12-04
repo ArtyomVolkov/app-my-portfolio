@@ -5,6 +5,7 @@ const Page404 = lazy(() => import("@pages/404"));
 const Profile = lazy(() => import("@pages/profile"));
 const Components = lazy(() => import("@pages/components"));
 const Shapes = lazy(() => import("@pages/components/shapes"));
+const UiKit = lazy(() => import("@pages/components/ui-kit"));
 
 const Widgets = lazy(() => import("@pages/widgets"));
 const History = lazy(() => import("@pages/widgets/history"));
@@ -78,6 +79,14 @@ const AppRoutes = () => (
       element={
         <Suspense fallback="">
           <Shapes />
+        </Suspense>
+      }
+    />
+    <Route
+      path="/components/ui-kit"
+      element={
+        <Suspense fallback="">
+          <UiKit />
         </Suspense>
       }
     />

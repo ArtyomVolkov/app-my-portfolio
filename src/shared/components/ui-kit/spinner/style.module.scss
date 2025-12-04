@@ -1,0 +1,48 @@
+.Spinner {
+  display: flex;
+  position: relative;
+  font-size: 20px;
+  width: 1em;
+  height: 1em;
+
+  @keyframes scale {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+
+  .plainCircle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+    z-index: 100;
+
+    .circle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+
+      .point {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0.25em;
+        height: 0.25em;
+        border-radius: 50%;
+        background-color: currentColor;
+        transform: scale(0);
+        box-shadow: 0 0 8px 0 currentColor;
+        animation: scale linear infinite;
+      }
+    }
+  }
+}

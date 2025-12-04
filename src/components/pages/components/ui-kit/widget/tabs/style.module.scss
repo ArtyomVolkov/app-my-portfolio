@@ -1,0 +1,52 @@
+.TabContent {
+  .title {
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #494848;
+    font-weight: 500;
+  }
+
+  .examples {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    gap: 6px;
+  }
+
+  .article {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .verticalScrollView {
+    max-height: 250px;
+    min-height: 250px;
+    --shadow-color: #f5f5f5;
+  }
+
+  .horizontalScrollView {
+    max-width: 100%;
+    min-height: 45px;
+    overflow-x: hidden;
+    --shadow-color: #f5f5f5;
+  }
+}
