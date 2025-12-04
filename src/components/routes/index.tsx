@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 
+import ErrorBoundary from "@components/error-boundary";
+
 const Page404 = lazy(() => import("@pages/404"));
 const Profile = lazy(() => import("@pages/profile"));
 const Components = lazy(() => import("@pages/components"));
@@ -46,7 +48,9 @@ const AppRoutes = () => (
       path="/apps/wine-collection/*" // for nested routes
       element={
         <Suspense fallback="">
-          <WineCollection />
+          <ErrorBoundary>
+            <WineCollection />
+          </ErrorBoundary>
         </Suspense>
       }
     />

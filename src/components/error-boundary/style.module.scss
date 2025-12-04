@@ -5,6 +5,9 @@
 
   .title {
     margin-bottom: 20px;
+    background: #F44336;
+    padding: 4px 8px;
+    border-radius: 8px;
   }
 
   pre {
@@ -21,7 +24,7 @@
   }
 
   .stackTrace {
-    max-height: 350px;
+    max-height: 200px;
     --shadow-color: #fbfbfb;
   }
 }

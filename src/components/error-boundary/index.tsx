@@ -4,9 +4,9 @@ import Main from "@components/main";
 import ScrollView from "@shared/components/ui-kit/scroll-view";
 import Typography from "@shared/components/ui-kit/typography";
 import Button from "@shared/components/ui-kit/button";
+import Divider from "@shared/components/ui-kit/divider";
 
 import styles from "./style.module.scss";
-import Divider from "@shared/components/ui-kit/divider";
 
 interface ErrorBoundaryProps {
   children: React.ReactNode | React.ReactNode[];

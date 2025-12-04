@@ -3,7 +3,6 @@ import { observer } from "mobx-react";
 
 import Header from "@components/header";
 import SideBar from "@components/aside";
-import ErrorBoundary from "@components/error-boundary";
 import AppRoutes from "@components/routes";
 
 import { mergeClassNames } from "@utils/common";
@@ -29,9 +28,7 @@ const AppContent = () => {
       <SideBar fullWidth={STORE.layout.fullWidth} />
       <div className={styles.mainContent}>
         <Header />
-        <ErrorBoundary>
-          <AppRoutes />
-        </ErrorBoundary>
+        <AppRoutes />
       </div>
     </div>
   );
