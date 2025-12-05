@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 
+import { debounce } from "lodash";
 import { mergeClassNames } from "@utils/common";
 
 import styles from "./style.module.scss";
@@ -21,8 +22,38 @@ const ScrollView: React.FC<ScrollViewProps> = ({
   className,
   onScroll,
 }) => {
-  const topShadowRef = React.useRef<HTMLDivElement>(null);
-  const bottomShadowRef = React.useRef<HTMLDivElement>(null);
+  const scrollViewRef = useRef<HTMLDivElement>(null);
+  const topShadowRef = useRef<HTMLDivElement>(null);
+  const bottomShadowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!withShadow || !scrollViewRef.current) {
+      return;
+    }
+    const observer = new ResizeObserver(onChangeContentSizeDebounced);
+    observer.observe(scrollViewRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [withShadow]);
+
+  const onChangeContentSize = () => {
+    if (!scrollViewRef.current || !bottomShadowRef.current) {
+      return;
+    }
+    const scrollWidth = horizontal
+      ? scrollViewRef.current!.scrollWidth
+      : scrollViewRef.current!.scrollHeight;
+    const clientHeight = horizontal
+      ? scrollViewRef.current!.clientWidth
+      : scrollViewRef.current!.clientHeight;
+
+    bottomShadowRef.current!.style.opacity =
+      scrollWidth > clientHeight ? "1" : "0";
+  };
+
+  const onChangeContentSizeDebounced = debounce(onChangeContentSize, 100);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     if (onScroll) {
@@ -81,6 +112,7 @@ const ScrollView: React.FC<ScrollViewProps> = ({
       <div
         className={mergeClassNames([styles.content, className])}
         onScroll={handleScroll}
+        ref={scrollViewRef}
       >
         {children}
       </div>

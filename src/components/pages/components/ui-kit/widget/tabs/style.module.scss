@@ -46,7 +46,7 @@
   .horizontalScrollView {
     max-width: 100%;
     min-height: 45px;
-    overflow-x: hidden;
+    overflow-x: auto;
     --shadow-color: #f5f5f5;
   }
 }

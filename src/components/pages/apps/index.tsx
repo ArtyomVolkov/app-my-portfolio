@@ -9,6 +9,8 @@ import MusicVideoRoundedIcon from '@mui/icons-material/MusicVideoRounded';
 import styles from './style.module.scss';
 
 const AppsPage = () => {
+  //throw new Error('Test error boundary in Apps Page');
+
   return (
     <Main className={styles.appsPage}>
       <NavButton
