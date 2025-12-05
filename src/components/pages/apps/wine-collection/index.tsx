@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import Main from '@components/main';
-import TechnologyList from '@shared/components/lists/technologies';
-import WineApp from '@pages/apps/wine-collection/app';
+import Main from "@components/main";
+import TechnologyList from "@shared/components/lists/technologies";
+import WineApp from "@pages/apps/wine-collection/app";
 
-import { TECHNOLOGIES } from '@pages/apps/wine-collection/data';
+import { TECHNOLOGIES } from "@pages/apps/wine-collection/data";
 
-import styles from './style.module.scss';
+import styles from "./style.module.scss";
 
 const WineCollection = () => {
   return (

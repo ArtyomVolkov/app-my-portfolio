@@ -32,7 +32,9 @@ const AppRoutes = () => (
       path="/"
       element={
         <Suspense fallback="">
-          <Profile />
+          <ErrorBoundary>
+            <Profile />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -58,7 +60,9 @@ const AppRoutes = () => (
       path="/apps/spotify-app/*" // for nested routes
       element={
         <Suspense fallback="">
-          <SpotifyApp />
+          <ErrorBoundary>
+            <SpotifyApp />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -66,7 +70,9 @@ const AppRoutes = () => (
       path="/profile"
       element={
         <Suspense fallback="">
-          <Profile />
+          <ErrorBoundary>
+            <Profile />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -74,7 +80,7 @@ const AppRoutes = () => (
       path="/components"
       element={
         <Suspense fallback="">
-          <Components />
+           <Components />
         </Suspense>
       }
     />
@@ -82,7 +88,9 @@ const AppRoutes = () => (
       path="/components/shapes"
       element={
         <Suspense fallback="">
-          <Shapes />
+          <ErrorBoundary>
+            <Shapes />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -90,7 +98,9 @@ const AppRoutes = () => (
       path="/components/ui-kit"
       element={
         <Suspense fallback="">
-          <UiKit />
+          <ErrorBoundary>
+            <UiKit />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -98,7 +108,7 @@ const AppRoutes = () => (
       path="/widgets"
       element={
         <Suspense fallback="">
-          <Widgets />
+           <Widgets />
         </Suspense>
       }
     />
@@ -106,7 +116,9 @@ const AppRoutes = () => (
       path="/widgets/history"
       element={
         <Suspense fallback="">
-          <History />
+          <ErrorBoundary>
+            <History />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -114,7 +126,9 @@ const AppRoutes = () => (
       path="/widgets/gallery"
       element={
         <Suspense fallback="">
-          <Gallery />
+          <ErrorBoundary>
+            <Gallery />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -122,7 +136,9 @@ const AppRoutes = () => (
       path="/widgets/matrix"
       element={
         <Suspense fallback="">
-          <Matrix />
+          <ErrorBoundary>
+            <Matrix />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -130,7 +146,9 @@ const AppRoutes = () => (
       path="/widgets/clock"
       element={
         <Suspense fallback="">
-          <Clock />
+          <ErrorBoundary>
+            <Clock />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -138,7 +156,9 @@ const AppRoutes = () => (
       path="/widgets/memory"
       element={
         <Suspense fallback="">
-          <Memory />
+          <ErrorBoundary>
+            <Memory />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -154,7 +174,9 @@ const AppRoutes = () => (
       path="/games/puzzle"
       element={
         <Suspense fallback="">
-          <Puzzle />
+          <ErrorBoundary>
+            <Puzzle />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -162,7 +184,9 @@ const AppRoutes = () => (
       path="/games/2048"
       element={
         <Suspense fallback="">
-          <Game2048 />
+          <ErrorBoundary>
+            <Game2048 />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -170,7 +194,9 @@ const AppRoutes = () => (
       path="/games/sudoku"
       element={
         <Suspense fallback="">
-          <Sudoku />
+          <ErrorBoundary>
+            <Sudoku />
+          </ErrorBoundary>
         </Suspense>
       }
     />
@@ -178,7 +204,9 @@ const AppRoutes = () => (
       path="/games/nonogram"
       element={
         <Suspense fallback="">
-          <Katana />
+          <ErrorBoundary>
+            <Katana />
+          </ErrorBoundary>
         </Suspense>
       }
     />
