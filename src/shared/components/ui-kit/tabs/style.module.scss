@@ -1,0 +1,95 @@
+.Tabs {
+  display: flex;
+  flex-direction: column;
+
+  &.vertical {
+    flex-direction: row;
+
+    .header {
+      flex-direction: column;
+      border-bottom: none;
+      border-right: 1px solid #ccc;
+      margin-right: -1px; // body border overlap
+
+      .tab {
+        margin-bottom: 0;
+        margin-right: -1px; // header border overlap
+        border-bottom: none;
+        border-right: 2px solid transparent;
+
+        &.active {
+          border-color: var(--primary-color);
+        }
+      }
+    }
+
+    .body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 0 0 16px;
+    }
+  }
+
+  .header {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+
+    .tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 12px;
+      cursor: pointer;
+      user-select: none;
+      border: none;
+      background: none;
+      font-size: 16px;
+      border-bottom: 2px solid transparent;
+      transition: border-bottom 0.25s, opacity 0.35s;
+      margin-bottom: -1px; // header border overlap
+
+      &:active {
+        opacity: 0.6;
+
+        &:active {
+          opacity: 1;
+        }
+      }
+
+      &:hover {
+        opacity: 0.7;
+      }
+
+      &.fullWidth {
+        flex: 1;
+        text-align: center;
+      }
+
+      &.active {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+        font-weight: bold;
+
+        &:hover, &:active {
+          cursor: default;
+          opacity: 1;
+        }
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+
+        &:hover, &:active {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  .body {
+    padding: 16px 0;
+  }
+}

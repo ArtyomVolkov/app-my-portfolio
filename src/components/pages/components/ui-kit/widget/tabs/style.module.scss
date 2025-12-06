@@ -49,4 +49,17 @@
     overflow-x: auto;
     --shadow-color: #f5f5f5;
   }
+
+  .tabContentPreview {
+    padding: 16px;
+    border: 1px solid #d0cbcb;
+    border-radius: 8px;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    font-weight: bold;
+    color: var(--text-color);
+  }
 }

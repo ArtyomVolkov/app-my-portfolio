@@ -7,6 +7,7 @@ import Buttons from './Buttons';
 import Divider from './Divider';
 import Breadcrumb from './Breadcrumb';
 import ScrollView from './ScrollView';
+import Tabs from './Tabs';
 
 const TABS: NavItems = [
   {
@@ -33,6 +34,11 @@ const TABS: NavItems = [
     key: 'scroll-view',
     label: 'Scroll View',
     component: <ScrollView />
+  },
+  {
+    key: 'tabs',
+    label: 'Tabs',
+    component: <Tabs />
   }
 ];
 
