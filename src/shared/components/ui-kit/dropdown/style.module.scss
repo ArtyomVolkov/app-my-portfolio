@@ -1,0 +1,71 @@
+.Dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 150px;
+  width: fit-content;
+  padding: 6px 8px;
+  border: 1px solid var(--text-color);
+  border-radius: 4px;
+  user-select: none;
+  cursor: pointer;
+  transition: opacity 0.25s, border-color 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+
+  &.open {
+    border-color: var(--primary-color);
+
+    .arrowIcon {
+      transform: rotate(90deg);
+    }
+  }
+
+  .placeholder {
+    flex: 1;
+    color: #8e8e8e;
+    font-size: 16px;
+  }
+
+  .selectedValue {
+    flex: 1;
+    font-size: 16px;
+    color: var(--text-color);
+  }
+
+  .arrowIcon {
+    width: 1em;
+    height: 1em;
+    color: var(--text-color);
+    transform: rotate(-90deg);
+    transition: transform 0.3s, opacity 0.25s;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+
+  .options {
+    position: fixed;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid var(--text-color);
+    list-style: none;
+    background-color: rgb(245 245 245);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+}
