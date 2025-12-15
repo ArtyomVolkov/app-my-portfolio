@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Button from '@mui/material/Button';
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
-import CircularProgress from '@mui/material/CircularProgress';
+import Button from "@mui/material/Button";
+import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import styles from '../style.module.scss';
+import styles from "../style.module.scss";
 
 interface ILoadMore {
-  hasMore: boolean,
-  loading?: boolean,
-  onRequestLoad: () => void,
+  hasMore: boolean;
+  loading?: boolean;
+  onRequestLoad: () => void;
 }
 
 const LoadMore: React.FC<ILoadMore> = ({ hasMore, onRequestLoad }) => {
@@ -17,12 +17,9 @@ const LoadMore: React.FC<ILoadMore> = ({ hasMore, onRequestLoad }) => {
 
   const onLoadMore = async () => {
     setLoading(true);
-
-    setTimeout(async () => {
-      await onRequestLoad();
-      setLoading(false);
-    }, 1000);
-  }
+    await onRequestLoad();
+    setLoading(false);
+  };
 
   if (!hasMore) {
     return null;
@@ -34,14 +31,14 @@ const LoadMore: React.FC<ILoadMore> = ({ hasMore, onRequestLoad }) => {
         variant="outlined"
         disabled={loading}
         onClick={onLoadMore}
-        startIcon={loading ? <CircularProgress size={16} /> : <DownloadRoundedIcon />}
-      >
-        {
-          loading ? 'Loading...' : 'Load more'
+        startIcon={
+          loading ? <CircularProgress size={16} /> : <DownloadRoundedIcon />
         }
+      >
+        {loading ? "Loading..." : "Load more"}
       </Button>
     </div>
   );
-}
+};
 
 export default LoadMore;

@@ -36,6 +36,10 @@ const GalleryGrid = () => {
     const {page, perPage} = pagination.current;
 
     const data = await getImages(page + 1, perPage);
+
+    if (!data || !data.photos) {
+      return;
+    }
     const newData = [...photos].concat(data.photos);
 
     pagination.current.page = page + 1;
