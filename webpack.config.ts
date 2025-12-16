@@ -178,8 +178,8 @@ interface Configuration extends WebpackConfig {
 
 const config: Configuration = {
   entry: {
-    main: ["regenerator-runtime/runtime.js", "./src/index.tsx"],
-    "service-worker": path.resolve(__dirname, "src/service-worker.js"),
+    main: './src/index.tsx',
+    ...(isProd ? { 'service-worker': './src/service-worker.js' } : {}),
   },
   devtool: isProd ? false : "inline-source-map",
   resolve: {

@@ -1,39 +1,49 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from "react";
 
-import { formatBytes } from '@utils/common';
+import { formatBytes } from "@utils/common";
 
-import styles from './style.module.scss';
+import styles from "./style.module.scss";
+
+type MemoryWidgetProps = {
+  ping?: number;
+};
 
 interface IMemoryData {
-  memory: {
-    jsHeapSizeLimit: number;
-    totalJSHeapSize: number;
-    usedJSHeapSize: number
-  }
+  jsHeapSizeLimit: number;
+  totalJSHeapSize: number;
+  usedJSHeapSize: number;
 }
 
-const MemoryWidget = () => {
-  const [memoryData, setMemoryData] = useState<IMemoryData>(window.performance as any);
+const MemoryWidget: React.FC<MemoryWidgetProps> = ({ ping = 500 }) => {
+  const [memoryData, setMemoryData] = useState<IMemoryData>({
+    usedJSHeapSize: 0,
+    jsHeapSizeLimit: 0,
+    totalJSHeapSize: 0,
+  });
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setMemoryData(window.performance as any);
-    }, 500);
+      setMemoryData({
+        usedJSHeapSize: performance['memory'].usedJSHeapSize,
+        jsHeapSizeLimit: performance['memory'].jsHeapSizeLimit,
+        totalJSHeapSize: performance['memory'].totalJSHeapSize,
+      });
+    }, ping);
 
     return () => {
       clearInterval(intervalId);
-    }
-  }, []);
+    };
+  }, [ping]);
 
   const progress = useMemo(() => {
-    const value = memoryData.memory.usedJSHeapSize/memoryData.memory.jsHeapSizeLimit;
+    const value = memoryData.usedJSHeapSize / memoryData.jsHeapSizeLimit;
 
     return {
       value: value * 100,
-      color: 256 - (256 * value),
-      background: 135 - (135 * value),
-    }
-  }, [memoryData.memory.usedJSHeapSize, memoryData.memory.jsHeapSizeLimit]);
+      color: 256 - 256 * value,
+      background: 135 - 135 * value,
+    };
+  }, [memoryData.usedJSHeapSize, memoryData.jsHeapSizeLimit]);
 
   return (
     <section className={styles.heapSizePill}>
@@ -43,9 +53,9 @@ const MemoryWidget = () => {
           color: `rgb(${progress.color}, ${progress.color}, ${progress.color})`,
         }}
       >
-        {
-          `${formatBytes(memoryData.memory.usedJSHeapSize)} / ${formatBytes(memoryData.memory.jsHeapSizeLimit)}`
-        }
+        {`${formatBytes(memoryData.usedJSHeapSize)} / ${formatBytes(
+          memoryData.jsHeapSizeLimit
+        )}`}
       </span>
       <span
         className={styles.progress}
@@ -55,7 +65,7 @@ const MemoryWidget = () => {
         }}
       />
     </section>
-  )
+  );
 };
 
 export default MemoryWidget;
