@@ -3,7 +3,7 @@ import { create } from 'zustand';
 export type TModal = {
   name: string,
   open?: boolean,
-  content?: JSX.Element,
+  content?: React.ReactNode,
   props?: {
     onClose?: (name: string) => void
   }
