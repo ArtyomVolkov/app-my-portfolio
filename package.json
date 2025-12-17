@@ -1,6 +1,6 @@
 {
   "name": "app-my-portfolio",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "index.js",
   "description": "",
   "scripts": {
@@ -64,6 +64,7 @@
     "mobx-react": "^7.6.0",
     "path": "^0.12.7",
     "preload-css-webpack-plugin": "^0.2.0",
+    "preload-webpack-plugin": "^2.3.0",
     "rimraf": "^6.1.2",
     "sass": "^1.86.3",
     "sass-loader": "^16.0.5",
