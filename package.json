@@ -1,6 +1,6 @@
 {
   "name": "app-my-portfolio",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "main": "index.js",
   "description": "",
   "scripts": {
@@ -55,7 +55,7 @@
     "fork-ts-checker-webpack-plugin": "^7.2.13",
     "html": "^1.0.0",
     "html-loader": "^4.2.0",
-    "html-webpack-plugin": "^5.5.0",
+    "html-webpack-plugin": "^5.6.5",
     "interpolate-html-plugin": "^4.0.0",
     "jest": "^30.0.5",
     "lodash": "^4.17.21",
