@@ -1,10 +1,12 @@
 {
   "name": "app-my-portfolio",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "description": "",
   "scripts": {
     "start": "webpack-cli serve --mode=development --open --hot",
+    "clean": "rimraf build",
+    "prebuild": "yarn clean && yarn version --patch",
     "build": "webpack --mode=production --env production --progress",
     "lint": "eslint src/**/*.{ts,tsx}",
     "server": "node server.js",
@@ -61,6 +63,7 @@
     "mobx": "^6.7.0",
     "mobx-react": "^7.6.0",
     "path": "^0.12.7",
+    "rimraf": "^6.1.2",
     "sass": "^1.86.3",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
