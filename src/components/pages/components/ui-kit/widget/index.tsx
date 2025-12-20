@@ -8,7 +8,7 @@ import styles from "./style.module.scss";
 
 const UiKitWidget = () => {
   const previewRef = useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState<string>(TABS[TABS.length - 1].key);
+  const [activeTab, setActiveTab] = useState<string>(TABS[0].key);
 
   const renderTabItem = () => {
     const tabItem = TABS.find((item) => item.key === activeTab);

@@ -31,6 +31,12 @@ export const Languages: { [key in ELanguage]: ILanguage } = {
     prefix: 'OC',
     label: 'Objective C',
     type: Development.PL
+  },
+  python: {
+    key: ELanguage.PYTHON,
+    prefix: 'PY',
+    label: 'Python',
+    type: Development.PL
   }
 };
 

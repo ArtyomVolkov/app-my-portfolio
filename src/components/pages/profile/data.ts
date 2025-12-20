@@ -4,6 +4,7 @@ import { Languages, Tools, Technologies } from '@shared/dtos/develop';
 export const LANGUAGES: Array<Language> = [
   Languages.typescript,
   Languages.javascript,
+  Languages.python,
   Languages.dart,
   Languages.java,
 ];

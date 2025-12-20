@@ -1,10 +1,14 @@
 .ScrollView {
   position: relative;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   --shadow-color: #ffffff;
 
   &.horizontal {
     max-width: 100%;
     overflow-x: auto;
+    overflow-x: hidden;
     white-space: nowrap;
 
     .topShadow {
