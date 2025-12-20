@@ -1,7 +1,8 @@
 {
   "name": "app-my-portfolio",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "main": "index.js",
+  "type": "module",
   "description": "",
   "scripts": {
     "start": "webpack-cli serve --mode=development --open --hot",
