@@ -1,6 +1,6 @@
 {
   "name": "app-my-portfolio",
-  "version": "0.0.31",
+  "version": "0.0.2",
   "main": "index.js",
   "description": "",
   "scripts": {
@@ -56,7 +56,6 @@
     "html": "^1.0.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.6.5",
-    "interpolate-html-plugin": "^4.0.0",
     "jest": "^30.0.5",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.9.4",
