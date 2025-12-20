@@ -1,11 +1,16 @@
+const appVersion = require("../package.json").version;
+
 (function () {
-  const CACHE_NAME = "portfolio-app-cache-v1";
+  const CACHE_NAME = `portfolio-app-cache: ${appVersion}`;
   const CACHE_URLS = [
-    "/",
     "/index.html",
     "/src/assets/images/*.*",
-    "/*.js",
+    "/[main.]*.js",
+    "/*.json",
     "/*.css",
+  ];
+  const EXCLUDE_URLS = [
+    'service-worker.js',
   ];
 
   const onInitCache = async () => {
@@ -14,23 +19,6 @@
       await cache.addAll(CACHE_URLS);
     } catch (error) {
       console.error("Service Worker: Cache initialization failed:", error);
-    }
-  };
-
-  const onActivateCache = async () => {
-    try {
-      const cacheNames = await caches.keys();
-
-      await Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            console.log("Service Worker: Deleting old cache:", cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    } catch (error) {
-      console.error("Service Worker: Activation failed:", error);
     }
   };
 
@@ -66,10 +54,24 @@
   });
 
   self.addEventListener("activate", (event) => {
-    event.waitUntil(onActivateCache());
+    event.waitUntil(
+        caches.keys().then((cacheNames) => {
+          return Promise.all(
+            cacheNames.map((cacheName) => {
+              if (cacheName !== CACHE_NAME) {
+                console.log("Service Worker: Deleting old cache:", cacheName);
+                return caches.delete(cacheName);
+              }
+            })
+          );
+        })
+    );
   });
 
   self.addEventListener("fetch", (event) => {
+    if (EXCLUDE_URLS.some(url => event.request.url.endsWith(url))) {
+      return;
+    }
     event.respondWith(
       onCheckNetwork(event.request, 400).catch(() =>
         getCachedData(event.request)

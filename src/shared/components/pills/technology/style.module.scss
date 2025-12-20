@@ -1,4 +1,4 @@
-.technologyPill {
+.technologyPill {  
   &:global(.javascript) {
     background: #efd81e;
 
@@ -21,6 +21,16 @@
   &:global(.dart) {
     background: #2bb1ef;
     color: black;
+
+    :global(.icon) {
+      background: black;
+      color: white;
+    }
+  }
+
+  &:global(.python) {
+    background: #009688;
+    color: white;
 
     :global(.icon) {
       background: black;

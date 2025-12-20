@@ -3,22 +3,19 @@ import env from "dotenv";
 
 import webpack, { Configuration as WebpackConfig } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import InterpolateHtmlPlugin from "interpolate-html-plugin";
+
 import { Configuration as WebpackDevServer } from "webpack-dev-server";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
 
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
-import TerserWebpackPlugin from "terser-webpack-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 // const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 env.config();
 
-const isProd = process.env.NODE_ENV !== "development";
+const isProd = process.env.NODE_ENV === "production";
 
-const filename = (ext: string, pathData) => {
+const filename = (ext: string, pathData: webpack.PathData) => {
   if (pathData.chunk && pathData.chunk.name === "service-worker") {
     return `service-worker.${ext}`;
   }
@@ -114,9 +111,6 @@ const PLUGINS = [
     "process.env.HUNTER_API_KEY": JSON.stringify(process.env.HUNTER_API_KEY),
     "process.env.SPOTIFY_APP_URI": JSON.stringify(process.env.SPOTIFY_APP_URI),
   }),
-  new InterpolateHtmlPlugin({
-    PUBLIC_URL: "",
-  }),
   new HtmlWebpackPlugin({
     template: path.resolve(__dirname, "./public/index.html"),
     minify: {
@@ -131,14 +125,16 @@ const PLUGINS = [
       minifyCSS: true,
       minifyURLs: true,
     },
-    inject: true,
+    inject: true
   }),
   new ForkTsCheckerWebpackPlugin(),
-  new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
     filename: !isProd ? "[name].css" : "[name].[hash].css",
     chunkFilename: !isProd ? "[id].css" : "[id].[hash].css",
-    runtime: true,
+    attributes: {
+      rel: "stylesheet preload",
+      as: "style",
+    }
   }),
   // new BundleAnalyzer(),
 ];
@@ -154,32 +150,14 @@ const DEV_SERVER = {
   historyApiFallback: true,
 };
 
-const OPTIMIZATION = {
-  minimize: true,
-  minimizer: isProd
-    ? [
-        new CssMinimizerPlugin(),
-        new TerserWebpackPlugin({
-          extractComments: false,
-          parallel: true,
-          terserOptions: {
-            format: {
-              comments: false,
-            },
-          },
-        }),
-      ]
-    : [],
-};
-
 interface Configuration extends WebpackConfig {
   devServer?: WebpackDevServer;
 }
 
 const config: Configuration = {
   entry: {
-    main: './src/index.tsx',
-    ...(isProd ? { 'service-worker': './src/service-worker.js' } : {}),
+    main: "./src/index.tsx",
+    ...(isProd ? { "service-worker": "./src/service-worker.js" } : {}),
   },
   devtool: isProd ? false : "inline-source-map",
   resolve: {
@@ -194,6 +172,7 @@ const config: Configuration = {
     },
     publicPath: "/",
   },
+  mode: isProd ? "production" : "development",
   module: MODULE,
   plugins: PLUGINS,
   devServer: DEV_SERVER,
@@ -201,7 +180,25 @@ const config: Configuration = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-  optimization: OPTIMIZATION,
+  optimization: {
+    minimize: true,
+    splitChunks: {
+      chunks: "all",
+      minSize: 256000,
+      maxSize: 512000,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          minSize: 20000,
+          enforce: true,
+        },
+      },
+    },
+  },
 };
 
 export default config;

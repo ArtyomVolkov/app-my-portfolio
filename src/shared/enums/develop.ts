@@ -3,7 +3,8 @@ export enum Language {
   TYPESCRIPT = 'typescript',
   DART = 'dart',
   JAVA = 'java',
-  OBJECTIVE_C = 'objectiveC'
+  OBJECTIVE_C = 'objectiveC',
+  PYTHON = 'python'
 }
 
 export enum Tool {

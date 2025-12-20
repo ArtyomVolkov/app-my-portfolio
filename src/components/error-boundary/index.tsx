@@ -61,7 +61,7 @@ class ErrorBoundary extends React.Component<
           <>
             <Divider title="Stack Trace" align="left" />
             <pre>
-              <ScrollView className={styles.stackTrace}>
+              <ScrollView classes={{ root: styles.stackTrace }}>
                 {this.state.stack}
               </ScrollView>
             </pre>
