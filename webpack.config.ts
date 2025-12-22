@@ -9,7 +9,8 @@ import { Configuration as WebpackDevServer } from "webpack-dev-server";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-// const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 env.config();
 
@@ -136,7 +137,7 @@ const PLUGINS = [
       as: "style",
     }
   }),
-  // new BundleAnalyzer(),
+  // new BundleAnalyzerPlugin(),
 ];
 
 const DEV_SERVER = {
@@ -184,7 +185,7 @@ const config: Configuration = {
     minimize: true,
     splitChunks: {
       chunks: "all",
-      minSize: 256000,
+      minSize: 20000,
       maxSize: 512000,
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
