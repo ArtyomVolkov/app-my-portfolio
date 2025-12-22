@@ -14,7 +14,7 @@ import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 env.config();
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV !== "development";
 
 const filename = (ext: string, pathData: webpack.PathData) => {
   if (pathData.chunk && pathData.chunk.name === "service-worker") {
