@@ -1,12 +1,12 @@
 {
   "name": "app-my-portfolio",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "description": "",
   "scripts": {
     "start": "webpack-cli serve --mode=development --open --hot",
     "clean": "rimraf build",
-    "prebuild": "yarn clean && yarn version --patch",
+    "prebuild": "yarn clean",
     "build": "webpack --mode=production --env production --progress",
     "lint": "eslint src/**/*.{ts,tsx}",
     "server": "node server.js",
