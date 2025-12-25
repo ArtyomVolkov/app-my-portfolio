@@ -181,7 +181,7 @@ const config: Configuration = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-  optimization: {
+  optimization: isProd ? {
     minimize: true,
     splitChunks: {
       chunks: "all",
@@ -199,7 +199,7 @@ const config: Configuration = {
         },
       },
     },
-  },
+  } : {},
 };
 
 export default config;
