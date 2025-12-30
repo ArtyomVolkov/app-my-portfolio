@@ -26,6 +26,9 @@ const Apps = lazy(() => import("@pages/apps"));
 const WineCollection = lazy(() => import("@pages/apps/wine-collection"));
 const SpotifyApp = lazy(() => import("@pages/apps/spotify-app"));
 
+const Lab = lazy(() => import("@pages/lab"));
+const OpenAi = lazy(() => import("@pages/lab/open-ai"));
+
 const AppRoutes = () => (
   <Routes>
     <Route
@@ -206,6 +209,24 @@ const AppRoutes = () => (
         <Suspense fallback="">
           <ErrorBoundary>
             <Katana />
+          </ErrorBoundary>
+        </Suspense>
+      }
+    />
+    <Route
+      path="/lab"
+      element={
+        <Suspense fallback="">
+           <Lab />
+        </Suspense>
+      }
+    />
+     <Route
+      path="/lab/open-ai"
+      element={
+        <Suspense fallback="">
+          <ErrorBoundary>
+           <OpenAi />
           </ErrorBoundary>
         </Suspense>
       }

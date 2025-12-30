@@ -98,7 +98,7 @@ const MODULE = {
           name: "[path][name].[ext]",
         },
       },
-    },
+    }
   ],
 };
 
@@ -111,6 +111,9 @@ const PLUGINS = [
     ),
     "process.env.HUNTER_API_KEY": JSON.stringify(process.env.HUNTER_API_KEY),
     "process.env.SPOTIFY_APP_URI": JSON.stringify(process.env.SPOTIFY_APP_URI),
+    "process.env.OPENAI_API_KEY": JSON.stringify(
+      process.env.OPENAI_API_KEY
+    ),
   }),
   new HtmlWebpackPlugin({
     template: path.resolve(__dirname, "./public/index.html"),

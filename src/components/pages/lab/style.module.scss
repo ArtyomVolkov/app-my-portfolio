@@ -1,0 +1,12 @@
+.labPage {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  max-height: fit-content;
+
+  .icon {
+    font-size: 24px;
+  }
+}

@@ -7,7 +7,7 @@ import styles from './style.module.scss';
 
 interface NavButton {
   path: string,
-  icon: React.ComponentElement<any, any>,
+  icon: React.ReactNode,
   title: string,
 }
 

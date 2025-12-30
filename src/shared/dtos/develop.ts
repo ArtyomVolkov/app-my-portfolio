@@ -401,5 +401,15 @@ export const Technologies: {[key in ETechnology]: ITechnology } = {
     key: ETechnology.PEXELS,
     label: 'Pexels (api)',
     type: Development.TECHNOLOGY
+  },
+  openAI: {
+    key: ETechnology.OPEN_AI,
+    label: 'Open AI (api)',
+    type: Development.TECHNOLOGY
+  },
+  customUIkit: {
+    key: ETechnology.CUSTOM_UKIT,
+    label: 'Custom UI-kit',
+    type: Development.TECHNOLOGY
   }
 }

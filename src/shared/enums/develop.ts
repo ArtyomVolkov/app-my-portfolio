@@ -78,7 +78,9 @@ export enum Technology {
   KANBAN = 'kanban',
   LEAN = 'lean',
   EXP = 'exp',
-  PEXELS = 'pexels'
+  PEXELS = 'pexels',
+  OPEN_AI = 'openAI',
+  CUSTOM_UKIT = 'customUIkit'
 }
 
 export enum Development {

@@ -25,6 +25,8 @@ import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import LiquorOutlinedIcon from '@mui/icons-material/LiquorOutlined';
 import TwoKPlusOutlinedIcon from '@mui/icons-material/TwoKPlusOutlined';
 import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
+import ScienceRoundedIcon from '@mui/icons-material/ScienceRounded';
+import OpenAiIcon from "@shared/icons/open-ai";
 
 import styles from './style.module.scss';
 
@@ -100,15 +102,24 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   nonogram: {
     label: 'Nonogram',
     icon: <GridOnRoundedIcon />,
-  }
+  },
+  lab: {
+    label: 'Lab',
+    icon: <ScienceRoundedIcon />,
+  },
+  'open-ai': {
+    label: 'Open AI',
+    icon: <OpenAiIcon />,
+  },
 };
 
 export const NAV_OPTIONS: Array<string> = [
   'profile',
+  'games',
   'components',
   'widgets',
-  'games',
-  'apps'
+  'apps',
+  'lab'
 ];
 
 const Navigation = () => {
