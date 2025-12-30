@@ -1,29 +1,27 @@
-import { makeAutoObservable } from 'mobx';
+import { create } from "zustand";
 
 export interface IAppStore {
   layout: {
-    fullWidth: boolean,
-  },
-  toggleFullWidth: () => void,
-  setFullWidth: (value: boolean) => void,
-}
-
-class AppStore implements IAppStore {
-  public layout = {
-    fullWidth: false,
+    fullWidth: boolean;
   };
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  public toggleFullWidth = () => {
-    this.layout.fullWidth = !this.layout.fullWidth;
-  }
-
-  public setFullWidth = (value: boolean) => {
-    this.layout.fullWidth = value;
-  }
+  toggleFullWidth: () => void;
+  setFullWidth: (value: boolean) => void;
 }
 
-export default new AppStore();
+export const useAppStore = create<IAppStore>((set) => ({
+  layout: {
+    fullWidth: false,
+  },
+  toggleFullWidth: () =>
+    set((state) => ({
+      layout: { ...state.layout, fullWidth: !state.layout.fullWidth },
+    })),
+  setFullWidth: (value: boolean) =>
+    set(() => ({
+      layout: { fullWidth: value },
+    })),
+}));
+
+export default {
+  useAppStore,
+};

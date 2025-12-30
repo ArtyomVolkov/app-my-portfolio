@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import { HashRouter } from 'react-router-dom';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { HashRouter } from "react-router-dom";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 
-import AppContent from '@components/app/app-content';
+import AppContent from "@components/app/app-content";
 
-import THEME from '@assets/theme/main';
+import THEME from "@assets/theme/main";
 
 const App = () => {
   return (

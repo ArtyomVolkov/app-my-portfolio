@@ -23,6 +23,8 @@ import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
 import MemoryOutlinedIcon from '@mui/icons-material/MemoryOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import LiquorOutlinedIcon from '@mui/icons-material/LiquorOutlined';
+import TwoKPlusOutlinedIcon from '@mui/icons-material/TwoKPlusOutlined';
+import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
 
 import styles from './style.module.scss';
 
@@ -51,6 +53,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
     label: '3D Shapes',
     icon: <CategoryIcon />,
   },
+  ['ui-kit']: {
+    label: 'UI-Kit',
+    icon: <ReceiptLongRoundedIcon />,
+  },
   widgets: {
     label: 'Widgets',
     icon: <WidgetsIcon />,
@@ -66,6 +72,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   sudoku: {
     label: 'Sudoku',
     icon: <AppRegistrationIcon />
+  },
+  '2048': {
+    label: '2048',
+    icon: <TwoKPlusOutlinedIcon />
   },
   history: {
     label: 'History',

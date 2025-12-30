@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import Main from '@components/main';
-import ProfileTabs from '@pages/profile/tabs';
+import Main from "@components/main";
+import ProfileTabs from "@pages/profile/tabs";
 
-import styles from './style.module.scss';
+import styles from "./style.module.scss";
 
 const ProfilePage = () => {
   return (
@@ -11,6 +11,6 @@ const ProfilePage = () => {
       <ProfileTabs />
     </Main>
   );
-}
+};
 
 export default ProfilePage;

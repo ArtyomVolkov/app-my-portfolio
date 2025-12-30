@@ -1,0 +1,82 @@
+@use "../../../../../assets/styles/style-guide.scss";
+@use "../../../../../shared/components/ui-kit/style.module.scss";
+
+.uiKitWidget {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+
+  .layout {
+    width: 100%;
+    display: flex;
+    background: #f5f5f5;
+    border-radius: 16px;
+    height: 100%;
+    min-height: 400px;
+    overflow: hidden;
+    border: 1px solid #ebebeb;
+    box-sizing: border-box;
+
+    @include style-guide.scroll-style(
+      $width: 8px,
+      $track-color: #e0e0e0,
+      $thumb-color: var(--text-color),
+      $thumb-border: 2px
+    );
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 200px;
+      box-sizing: border-box;
+      padding: 8px;
+      margin: 8px;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: auto;
+
+      .navItem {
+        padding: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+        user-select: none;
+
+        &:hover {
+          background: #f0f0f0;
+          opacity: 0.8;
+        }
+
+        &:active {
+          opacity: 0.4;
+        }
+
+        &.active {
+          background: #2f74c0;
+          color: #ffffff;
+
+          &:hover,
+          &:active {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .preview {
+      padding: 8px;
+      width: 100%;
+      min-height: 200px;
+      overflow: auto;
+
+      .title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  }
+}

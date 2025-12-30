@@ -1,4 +1,5 @@
 @use "../../assets/styles/style-guide";
+@use "../../shared/components/ui-kit/style.module.scss" as ukkit-style;
 
 :global(html) {
   @include style-guide.scroll-style;

@@ -1,5 +1,6 @@
 # compiled output
 /build
+/coverage
 
 # dependencies
 node_modules
@@ -9,3 +10,4 @@ node_modules
 
 #dotenv
 .env
+src/assets/.DS_Store
