@@ -39,10 +39,7 @@
     }
 
     .profileInfo {
-      display: flex;
-      flex-direction: column;
       padding: 20px;
-      overflow: auto;
 
       .title {
         font-size: 28px;
@@ -115,12 +112,14 @@
         margin: 15px auto 0;
       }
 
-      .title, .subtitle {
+      .title,
+      .subtitle {
         text-align: center;
       }
     }
 
-    .cell2, .cell3 {
+    .cell2,
+    .cell3 {
       grid-column-gap: 10px;
       grid-row-gap: 10px;
     }

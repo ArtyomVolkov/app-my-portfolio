@@ -1,71 +1,74 @@
-import path from 'path';
-import env from 'dotenv';
+import path from "path";
+import env from "dotenv";
 
-import webpack, { Configuration as WebpackConfig } from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import InterpolateHtmlPlugin from 'interpolate-html-plugin';
-import { Configuration as WebpackDevServer } from 'webpack-dev-server';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import webpack, { Configuration as WebpackConfig } from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import TerserWebpackPlugin from 'terser-webpack-plugin';
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-// const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+import { Configuration as WebpackDevServer } from "webpack-dev-server";
+
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 env.config();
 
-const isProd = process.env.NODE_ENV !== 'development';
+const isProd = process.env.NODE_ENV !== "development";
 
-const filename = (ext) => !isProd ? `[name].${ext}` : `[name].[contenthash].${ext}`;
+const filename = (ext: string, pathData: webpack.PathData) => {
+  if (pathData.chunk && pathData.chunk.name === "service-worker") {
+    return `service-worker.${ext}`;
+  }
+  return !isProd ? `[name].${ext}` : `[name].[contenthash].${ext}`;
+};
 
 const ALIAS = {
-  '@api': path.resolve(__dirname, 'src/api'),
-  '@assets': path.resolve(__dirname, 'src/assets'),
-  '@constants': path.resolve(__dirname, 'src/constants'),
-  '@services': path.resolve(__dirname, 'src/services'),
-  '@config': path.resolve(__dirname, 'src/config'),
-  '@pages': path.resolve(__dirname, 'src/pages'),
-  '@components': path.resolve(__dirname, 'src/components'),
-  '@shared': path.resolve(__dirname, 'src/shared'),
-  '@store': path.resolve(__dirname, 'src/store'),
+  "@api": path.resolve(__dirname, "src/api"),
+  "@assets": path.resolve(__dirname, "src/assets"),
+  "@constants": path.resolve(__dirname, "src/constants"),
+  "@services": path.resolve(__dirname, "src/services"),
+  "@config": path.resolve(__dirname, "src/config"),
+  "@pages": path.resolve(__dirname, "src/pages"),
+  "@components": path.resolve(__dirname, "src/components"),
+  "@shared": path.resolve(__dirname, "src/shared"),
+  "@store": path.resolve(__dirname, "src/store"),
 };
 
 const MODULE = {
   rules: [
     {
       test: /\.(ts|tsx)$/,
-      loader: 'ts-loader',
+      loader: "ts-loader",
       exclude: /node_modules/,
     },
     {
       test: /\.html$/,
-      loader: 'html-loader',
+      loader: "html-loader",
     },
     {
       test: /\.(jsx|js)$/,
       exclude: /(node_modules|bower_components)/,
       use: {
-        loader: 'babel-loader',
+        loader: "babel-loader",
       },
     },
     {
       test: /\.module\.(s[ac]ss|css)$/,
       exclude: /node_modules/,
       use: [
-        isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+        isProd ? MiniCssExtractPlugin.loader : "style-loader",
         {
-          loader: 'css-loader',
+          loader: "css-loader",
           options: {
             modules: {
-              localIdentName: '[local]__[hash:base64:5]',
+              localIdentName: "[local]__[hash:base64:5]",
             },
             sourceMap: !isProd,
           },
         },
         {
-          loader: 'sass-loader',
+          loader: "sass-loader",
           options: {
             sourceMap: !isProd,
           },
@@ -76,10 +79,10 @@ const MODULE = {
       test: /\.(s[ac]ss|css)$/,
       exclude: /\.module.(s[ac]ss|css)$/,
       use: [
-        isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-        'css-loader',
+        isProd ? MiniCssExtractPlugin.loader : "style-loader",
+        "css-loader",
         {
-          loader: 'sass-loader',
+          loader: "sass-loader",
           options: {
             sourceMap: !isProd,
           },
@@ -90,9 +93,9 @@ const MODULE = {
       test: /\.(jpe?g|png|gif|svg)$/i,
       exclude: /node_modules/,
       use: {
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: '[path][name].[ext]',
+          name: "[path][name].[ext]",
         },
       },
     },
@@ -101,17 +104,16 @@ const MODULE = {
 
 const PLUGINS = [
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    'process.env.PEXELS_API_KEY': JSON.stringify(process.env.PEXELS_API_KEY),
-    'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
-    'process.env.HUNTER_API_KEY': JSON.stringify(process.env.HUNTER_API_KEY),
-    'process.env.SPOTIFY_APP_URI': JSON.stringify(process.env.SPOTIFY_APP_URI),
-  }),
-  new InterpolateHtmlPlugin({
-    PUBLIC_URL: '',
+    "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+    "process.env.PEXELS_API_KEY": JSON.stringify(process.env.PEXELS_API_KEY),
+    "process.env.FIREBASE_API_KEY": JSON.stringify(
+      process.env.FIREBASE_API_KEY
+    ),
+    "process.env.HUNTER_API_KEY": JSON.stringify(process.env.HUNTER_API_KEY),
+    "process.env.SPOTIFY_APP_URI": JSON.stringify(process.env.SPOTIFY_APP_URI),
   }),
   new HtmlWebpackPlugin({
-    template: path.resolve(__dirname, './public/index.html'),
+    template: path.resolve(__dirname, "./public/index.html"),
     minify: {
       collapseWhitespace: isProd,
       removeComments: true,
@@ -124,45 +126,29 @@ const PLUGINS = [
       minifyCSS: true,
       minifyURLs: true,
     },
-    inject: true,
+    inject: true
   }),
   new ForkTsCheckerWebpackPlugin(),
-  new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
-    filename: !isProd ? '[name].css' : '[name].[hash].css',
-    chunkFilename: !isProd ? '[id].css' : '[id].[hash].css',
-    runtime: true,
+    filename: !isProd ? "[name].css" : "[name].[hash].css",
+    chunkFilename: !isProd ? "[id].css" : "[id].[hash].css",
+    attributes: {
+      rel: "stylesheet preload",
+      as: "style",
+    }
   }),
-  // new BundleAnalyzer(),
+  // new BundleAnalyzerPlugin(),
 ];
 
 const DEV_SERVER = {
   open: true,
   compress: true,
-  host: 'localhost',
+  host: "localhost",
   static: {
-    directory: path.join(__dirname, 'public'),
+    directory: path.join(__dirname, "public"),
   },
   port: 3000,
   historyApiFallback: true,
-};
-
-const OPTIMIZATION = {
-  minimize: true,
-  minimizer: isProd
-    ? [
-      new CssMinimizerPlugin(),
-      new TerserWebpackPlugin({
-        extractComments: false,
-        parallel: true,
-        terserOptions: {
-          format: {
-            comments: false,
-          },
-        },
-      }),
-    ]
-    : [],
 };
 
 interface Configuration extends WebpackConfig {
@@ -170,18 +156,24 @@ interface Configuration extends WebpackConfig {
 }
 
 const config: Configuration = {
-  entry: ['regenerator-runtime/runtime.js', './src/index.tsx'],
-  devtool: isProd ? false : 'inline-source-map',
+  entry: {
+    main: "./src/index.tsx",
+    ...(isProd ? { "service-worker": "./src/service-worker.js" } : {}),
+  },
+  devtool: isProd ? false : "inline-source-map",
   resolve: {
     alias: ALIAS,
-    extensions: ['.ts', '.tsx', '.js', '.scss'],
-    plugins: [new TsconfigPathsPlugin({configFile: './tsconfig.json'})],
+    extensions: [".ts", ".tsx", ".js", ".scss"],
+    plugins: [new TsconfigPathsPlugin({ configFile: "./tsconfig.json" })],
   },
   output: {
-    path: path.join(__dirname, '/build'),
-    filename: `${filename('js')}`,
-    publicPath: '/',
+    path: path.join(__dirname, "/build"),
+    filename: (pathData) => {
+      return filename("js", pathData);
+    },
+    publicPath: "/",
   },
+  mode: isProd ? "production" : "development",
   module: MODULE,
   plugins: PLUGINS,
   devServer: DEV_SERVER,
@@ -189,7 +181,25 @@ const config: Configuration = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-  optimization: OPTIMIZATION,
+  optimization: isProd ? {
+    minimize: true,
+    splitChunks: {
+      chunks: "all",
+      minSize: 20000,
+      maxSize: 512000,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          minSize: 20000,
+          enforce: true,
+        },
+      },
+    },
+  } : {},
 };
 
 export default config;

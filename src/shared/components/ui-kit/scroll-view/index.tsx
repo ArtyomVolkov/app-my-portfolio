@@ -10,7 +10,10 @@ type ScrollViewProps = {
   horizontal?: boolean;
   withShadow?: boolean;
   boxShadowHeight?: number;
-  className?: string;
+  classes?: {
+    root?: string;
+    content?: string;
+  };
   onScroll?: (e: React.UIEvent<HTMLDivElement>) => void;
 };
 
@@ -19,7 +22,7 @@ const ScrollView: React.FC<ScrollViewProps> = ({
   horizontal = false,
   withShadow = true,
   boxShadowHeight = 40,
-  className,
+  classes,
   onScroll,
 }) => {
   const scrollViewRef = useRef<HTMLDivElement>(null);
@@ -86,7 +89,7 @@ const ScrollView: React.FC<ScrollViewProps> = ({
       className={mergeClassNames([
         styles.ScrollView,
         horizontal && styles.horizontal,
-        className,
+        classes?.root,
       ])}
     >
       {withShadow && (
@@ -110,7 +113,7 @@ const ScrollView: React.FC<ScrollViewProps> = ({
         </>
       )}
       <div
-        className={mergeClassNames([styles.content, className])}
+        className={mergeClassNames([styles.content, classes?.content])}
         onScroll={handleScroll}
         ref={scrollViewRef}
       >

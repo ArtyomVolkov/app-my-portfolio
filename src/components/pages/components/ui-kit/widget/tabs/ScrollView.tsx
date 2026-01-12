@@ -32,7 +32,7 @@ const ScrollViewTab = () => {
         <Section title="Scroll View Variants">
           <article className={styles.article}>
             <Divider title="Vertical" align="left" />
-            <ScrollView className={styles.verticalScrollView}>
+            <ScrollView classes={{ root: styles.verticalScrollView, content: styles.content }}>
               {loading ? (
                 <p>Loading...</p>
               ) : (
@@ -40,7 +40,7 @@ const ScrollViewTab = () => {
               )}
             </ScrollView>
             <Divider title="Horizontal" align="left" />
-            <ScrollView horizontal className={styles.horizontalScrollView}>
+            <ScrollView horizontal classes={{ root: styles.horizontalScrollView, content: styles.content }}>
               <span style={{ width: "1500px", display: "inline-block" }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                 nonne merninisti licere mihi ista probare, quae sunt a te dicta?
