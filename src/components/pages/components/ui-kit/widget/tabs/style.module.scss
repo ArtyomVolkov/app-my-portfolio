@@ -31,6 +31,12 @@
     }
   }
 
+  .row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
   .buttons {
     display: flex;
     flex-wrap: wrap;
