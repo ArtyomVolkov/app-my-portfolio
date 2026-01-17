@@ -104,6 +104,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      max-width: calc-size(fit-content, size);
     }
 
     .optionText {
@@ -135,6 +136,7 @@
 
 .DropdownWrapper {
   --background: #ffffff;
+  --box-shadow-color: #31313140;
 
   @keyframes fadeIn {
     from {
@@ -184,7 +186,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     box-sizing: border-box;
-    box-shadow: 0 4px 8px #31313140;
+    box-shadow: 0 4px 8px var(--box-shadow-color);
     transform: translateY(0);
     transition: transform 0.15s, opacity 0.3s;
     z-index: 121;
@@ -198,6 +200,7 @@
 
     &[data-anchor="top"] {
       animation: fadeIn 0.35s ease forwards, slideUp 0.35s ease forwards;
+      box-shadow: 0 -4px 8px var(--box-shadow-color);
     }
 
     &[data-anchor="bottom"] {

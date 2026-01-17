@@ -47,14 +47,6 @@ const DropdownPreview = () => {
                 onSelect={onSelect}
                 defaultSelected="option5"
               />
-              <Dropdown
-                placeholder="Select Option"
-                options={OPTIONS}
-                disabled
-                minWidth={200}
-                onSelect={onSelect}
-                defaultSelected="option1"
-              />
             </div>
             <Divider title="Multiple select" align="left" />
             <div className={styles.row}>
@@ -71,15 +63,6 @@ const DropdownPreview = () => {
                 minWidth={200}
                 multiple
                 defaultSelected={["option1", "option3"]}
-                onSelect={onSelect}
-              />
-              <Dropdown
-                placeholder="Select Option(s)"
-                options={OPTIONS}
-                minWidth={200}
-                multiple
-                disabled
-                defaultSelected={["option1", "option2", "option3"]}
                 onSelect={onSelect}
               />
             </div>
@@ -99,6 +82,59 @@ const DropdownPreview = () => {
                 onSelect={onSelect}
                 fullWidth
                 multiple
+              />
+            </div>
+            <Divider title="Long option name" align="left" />
+            <div className={styles.row}>
+              <Dropdown
+                placeholder="Select option"
+                options={[
+                  {
+                    key: "longOption",
+                    label: "This is a very long option name to test width",
+                    startIcon: "📝",
+                  },
+                  ...OPTIONS,
+                ]}
+                defaultSelected="longOption"
+                minWidth={200}
+                onSelect={onSelect}
+              />
+              <Dropdown
+                placeholder="Select option"
+                options={[
+                  {
+                    key: "longOption",
+                    label:
+                      "This is a very long option name to test width in multiple select)",
+                    startIcon: "📝",
+                  },
+                  ...OPTIONS,
+                ]}
+                defaultSelected={["longOption"]}
+                minWidth={200}
+                multiple
+                onSelect={onSelect}
+              />
+            </div>
+            <Divider title="Disabled" align="left" />
+            <div className={styles.row}>
+              <Dropdown
+                placeholder="Select Option"
+                options={OPTIONS}
+                disabled
+                minWidth={200}
+                onSelect={onSelect}
+                defaultSelected="option1"
+              />
+              <Dropdown
+                placeholder="Select Option(s)"
+                options={OPTIONS}
+                minWidth={200}
+                multiple
+                disabled
+                defaultSelected={["option1", "option2", "option3"]}
+                onSelect={onSelect}
               />
             </div>
             <Divider title="Sizes" align="left" />
@@ -123,37 +159,6 @@ const DropdownPreview = () => {
                 minWidth={200}
                 onSelect={onSelect}
                 size="large"
-              />
-            </div>
-            <Divider title="Long option name" align="left" />
-            <div className={styles.row}>
-              <Dropdown
-                placeholder="Select option"
-                options={[
-                  {
-                    key: "longOption",
-                    label: "This is a very long option name to test width",
-                    startIcon: "📝",
-                  },
-                  ...OPTIONS,
-                ]}
-                minWidth={200}
-                onSelect={onSelect}
-              />
-              <Dropdown
-                placeholder="Select option"
-                options={[
-                  {
-                    key: "longOption",
-                    label: "This is a very long option name to test width",
-                    startIcon: "📝",
-                  },
-                  ...OPTIONS,
-                ]}
-                minWidth={200}
-                multiple
-                fullWidth
-                onSelect={onSelect}
               />
             </div>
           </article>
