@@ -9,6 +9,7 @@ import Breadcrumb from "./Breadcrumb";
 import ScrollView from "./ScrollView";
 import Tabs from "./Tabs";
 import Dropdown from "./Dropdown";
+import Modals from "./Modals";
 
 const TABS: NavItems = [
   {
@@ -46,6 +47,11 @@ const TABS: NavItems = [
     label: "Dropdown",
     component: <Dropdown />,
   },
+  {
+    key: "Modals",
+    label: "Modals",
+    component: <Modals />,
+  }
 ];
 
 export default TABS;

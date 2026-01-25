@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 import TABS from "@pages/components/ui-kit/widget/tabs";
+import { ModalProvider } from "@shared/components/ui-kit/modal";
 
 import { mergeClassNames } from "@utils/common";
 
@@ -28,21 +29,25 @@ const UiKitWidget = () => {
   return (
     <div className={styles.uiKitWidget}>
       <div className={styles.layout}>
-        <ul className={styles.nav}>
-          {TABS.map((item) => (
-            <li
-              key={item.key}
-              className={mergeClassNames([
-                styles.navItem,
-                activeTab === item.key && styles.active,
-              ])}
-              onClick={() => setActiveTab(item.key)}
-            >
-              {item.label}
-            </li>
-          ))}
-        </ul>
-        <div className={styles.preview} ref={previewRef}>{renderTabItem()}</div>
+        <ModalProvider>
+          <ul className={styles.nav}>
+            {TABS.map((item) => (
+              <li
+                key={item.key}
+                className={mergeClassNames([
+                  styles.navItem,
+                  activeTab === item.key && styles.active,
+                ])}
+                onClick={() => setActiveTab(item.key)}
+              >
+                {item.label}
+              </li>
+            ))}
+          </ul>
+          <div className={styles.preview} ref={previewRef}>
+            {renderTabItem()}
+          </div>
+        </ModalProvider>
       </div>
     </div>
   );
