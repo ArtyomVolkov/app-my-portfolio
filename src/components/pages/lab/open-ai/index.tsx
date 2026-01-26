@@ -8,6 +8,8 @@ import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
 import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded';
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
 
+import TextGenTab from "@pages/lab/open-ai/tabs/text-gen";
+
 import { TECHNOLOGIES } from "@pages/lab/open-ai/data";
 
 import styles from "./style.module.scss";
@@ -23,7 +25,7 @@ const OpenAiPage = () => {
             key: "text-completion",
             icon: <EditNoteRoundedIcon />,
             label: "Text Completion",
-            component: <div>Text Completion Content</div>,
+            component: <TextGenTab />,
           },
           {
             key: "image-generation",
