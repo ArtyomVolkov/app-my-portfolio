@@ -85,13 +85,35 @@ const DeleteModal = ({ onDelete, onClose }) => {
 const MovableModal = ({ onClose }) => {
   return (
     <div className={styles.modalContent}>
-      <Typography variant="h6">This is a movable modal content.</Typography>
+      <div>
+        <Typography variant="h4">This is a movable modal content.</Typography>
+        <Typography variant="p">Modal box can be movable.</Typography>
+      </div>
       <div className={styles.modalActions}>
         <Button variant="outlined" color="default" onClick={onClose}>
           Close
         </Button>
         <Button variant="solid" color="primary" onClick={onClose}>
           Ok
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+const StackedModal = ({ onClose, onNewModal }) => {
+  return (
+    <div className={styles.modalContent}>
+      <div>
+        <Typography variant="h4">This is a stacked modal content.</Typography>
+        <Typography variant="p">Modal box can be movable.</Typography>
+      </div>
+      <div className={styles.modalActions}>
+        <Button variant="outlined" color="default" onClick={onClose}>
+          Close
+        </Button>
+        <Button variant="solid" color="primary" onClick={onNewModal}>
+          New Modal
         </Button>
       </div>
     </div>
@@ -166,7 +188,6 @@ const ModalsTab = () => {
     modal.open("deleteModal", {
       header: "Delete Item",
       backDropClose: false,
-      movable: true,
       body: (
         <DeleteModal
           onDelete={() => onAction(() => modal.close("deleteModal"))}
@@ -184,6 +205,24 @@ const ModalsTab = () => {
       body: <MovableModal onClose={() => modal.close("movableModal")} />,
       movable: true,
       onClose: () => modal.close("movableModal"),
+    });
+  };
+
+  const openStackModal = () => {
+    const id = Math.random() * 10000;
+    const name = `stackedModal_${id}`;
+
+    modal.open(name, {
+      header: `Stacked Modal ${id.toFixed(0)}`,
+      backDropClose: false,
+      movable: true,
+      body: (
+        <StackedModal
+          onClose={() => modal.close(name)}
+          onNewModal={openStackModal}
+        />
+      ),
+      onClose: () => modal.close(name),
     });
   };
 
@@ -234,9 +273,13 @@ const ModalsTab = () => {
               </Button>
             </div>
             <Divider title="Movable" align="left" />
-             <Button variant="solid" color="primary" onClick={openMovableModal}>
-                Open Movable Modal
-              </Button>
+            <Button variant="solid" color="primary" onClick={openMovableModal}>
+              Open Movable Modal
+            </Button>
+            <Divider title="Modal Stack" align="left" />
+            <Button variant="dashed" color="primary" onClick={openStackModal}>
+              Open Stack Modal
+            </Button>
           </article>
         </Section>
       </div>
