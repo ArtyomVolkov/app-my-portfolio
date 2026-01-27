@@ -10,6 +10,7 @@ import ScrollView from "./ScrollView";
 import Tabs from "./Tabs";
 import Dropdown from "./Dropdown";
 import Modals from "./Modals";
+import Snackbar from "./Snackbar";
 
 const TABS: NavItems = [
   {
@@ -51,6 +52,11 @@ const TABS: NavItems = [
     key: "Modals",
     label: "Modals",
     component: <Modals />,
+  },
+  {
+    key: "snackbar",
+    label: "Snackbar",
+    component: <Snackbar />,
   }
 ];
 

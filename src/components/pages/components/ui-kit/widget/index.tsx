@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 
 import TABS from "@pages/components/ui-kit/widget/tabs";
 import { ModalProvider } from "@shared/components/ui-kit/modal";
+import { SnackbarProvider } from "@shared/components/ui-kit/snackbar";
 
 import { mergeClassNames } from "@utils/common";
 
@@ -30,23 +31,25 @@ const UiKitWidget = () => {
     <div className={styles.uiKitWidget}>
       <div className={styles.layout}>
         <ModalProvider>
-          <ul className={styles.nav}>
-            {TABS.map((item) => (
-              <li
-                key={item.key}
-                className={mergeClassNames([
-                  styles.navItem,
-                  activeTab === item.key && styles.active,
-                ])}
-                onClick={() => setActiveTab(item.key)}
-              >
-                {item.label}
-              </li>
-            ))}
-          </ul>
-          <div className={styles.preview} ref={previewRef}>
-            {renderTabItem()}
-          </div>
+          <SnackbarProvider>
+            <ul className={styles.nav}>
+              {TABS.map((item) => (
+                <li
+                  key={item.key}
+                  className={mergeClassNames([
+                    styles.navItem,
+                    activeTab === item.key && styles.active,
+                  ])}
+                  onClick={() => setActiveTab(item.key)}
+                >
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+            <div className={styles.preview} ref={previewRef}>
+              {renderTabItem()}
+            </div>
+          </SnackbarProvider>
         </ModalProvider>
       </div>
     </div>
