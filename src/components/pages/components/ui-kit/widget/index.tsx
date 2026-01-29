@@ -31,7 +31,7 @@ const UiKitWidget = () => {
     <div className={styles.uiKitWidget}>
       <div className={styles.layout}>
         <ModalProvider>
-          <SnackbarProvider>
+          <SnackbarProvider settings={{ position: "bottom-right", stackLimit: 3 }}>
             <ul className={styles.nav}>
               {TABS.map((item) => (
                 <li

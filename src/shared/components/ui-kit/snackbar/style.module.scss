@@ -5,12 +5,60 @@
   width: calc(100% - 32px); // 100% minus horizontal padding
   height: calc(100% - 32px); // 100% minus vertical padding
   align-items: center;
-  justify-content: start;
   pointer-events: none;
   top: 0;
   left: 0;
   flex-direction: column;
   gap: 8px;
+
+  &.topLeft {
+    align-items: flex-start;
+  }
+
+  &.topCenter {
+    align-items: center;
+  }
+
+  &.topRight {
+    align-items: flex-end;
+  }
+
+  &.bottomLeft {
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  &.bottomCenter {
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &.bottomRight {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}
+
+@keyframes openSnack {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes closeSnack {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 }
 
 .Snackbar {
@@ -31,6 +79,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  animation: openSnack 0.3s ease forwards;
+
+  &.terminate {
+    animation: closeSnack 0.3s ease forwards;
+  }
 
   .message {
     margin: 0;

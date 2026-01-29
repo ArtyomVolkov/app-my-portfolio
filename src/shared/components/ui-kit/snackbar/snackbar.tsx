@@ -1,13 +1,21 @@
 import React, { useEffect } from "react";
 
 import Button from "@shared/components/ui-kit/button";
-import { type SnackbarProps } from "./provider";
+import { type SnackbarProps, type SnackbarStoreItem } from "./provider";
+
+import { mergeClassNames } from "@utils/common";
 
 import styles from "./style.module.scss";
 
-const Snackbar: React.FC<SnackbarProps & { onRequestClose: () => void }> = ({
+const DefaultSettings = {
+  duration: 3000,
+};
+
+const Snackbar: React.FC<SnackbarProps & SnackbarStoreItem> = ({
   message,
   autoHide = true,
+  terminate = false,
+  duration = DefaultSettings.duration,
   onClose,
   onRequestClose,
 }) => {
@@ -17,14 +25,14 @@ const Snackbar: React.FC<SnackbarProps & { onRequestClose: () => void }> = ({
     if (!autoHide) {
       return;
     }
-    timerId.current = setTimeout(handleClose, 3000);
+    timerId.current = setTimeout(handleClose, duration);
 
     return () => {
       if (timerId.current) {
         clearTimeout(timerId.current);
       }
     };
-  }, [autoHide]);
+  }, [autoHide, duration]);
 
   const handleClose = () => {
     if (onClose) {
@@ -37,7 +45,12 @@ const Snackbar: React.FC<SnackbarProps & { onRequestClose: () => void }> = ({
   };
 
   return (
-    <div className={styles.Snackbar}>
+    <div
+      className={mergeClassNames([
+        styles.Snackbar,
+        terminate && styles.terminate,
+      ])}
+    >
       <div className={styles.message}>{message}</div>
       <Button
         className={styles.closeButton}

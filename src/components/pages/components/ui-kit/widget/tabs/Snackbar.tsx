@@ -11,15 +11,14 @@ const SnackbarTab = () => {
   const snackbar = useSnackbar();
 
   const openSnackbar = () => {
+    const id = (Math.random() * 1000).toFixed(0);
     snackbar.open({
       autoHide: false,
-      // duration: 3000,
-      stackLimit: 3,
-      position: "top-center",
+      //duration: 3000,
       onClose: () => {
         console.log("Snackbar closed");
       },
-      message: "This is a snackbar message!",
+      message: `This is a snackbar message! ID: ${id}`,
     });
   };
 
