@@ -99,3 +99,17 @@
     gap: 10px;
   }
 }
+
+.customSnackbarRoot {
+  padding: 16px !important;
+  border-radius: 8px !important;
+  align-items: flex-start !important;
+  --snack-bg-color: black !important;
+  --snack-text-color: #ffffff !important;
+
+  .customSnackbarMessage {
+    font-size: 16px;
+    max-width: 375px;
+    --text-color: rgb(227, 227, 227) !important;
+  }
+}

@@ -67,6 +67,7 @@
   pointer-events: all;
 
   width: fit-content;
+  min-width: 200px;
   max-width: calc(100vw - 32px);
   position: relative;
   background-color: var(--snack-bg-color);
@@ -85,6 +86,31 @@
     animation: closeSnack 0.3s ease forwards;
   }
 
+  &.default {
+    --snack-bg-color: var(--bg-color);
+    --snack-text-color: var(--text-color);
+  }
+
+  &.success {
+    --snack-bg-color: var(--success-color);
+    --snack-text-color: #ffffff;
+  }
+
+  &.danger {
+    --snack-bg-color: var(--danger-color);
+    --snack-text-color: #ffffff;
+  }
+
+  &.warning {
+    --snack-bg-color: var(--warning-color);
+    --snack-text-color: #ffffff;
+  }
+
+  &.info {
+    --snack-bg-color: var(--info-color);
+    --snack-text-color: #ffffff;
+  }
+
   .message {
     margin: 0;
   }
@@ -95,5 +121,6 @@
     width: 1em;
     height: 1em;
     justify-content: center;
+    color: var(--snack-text-color)
   }
 }

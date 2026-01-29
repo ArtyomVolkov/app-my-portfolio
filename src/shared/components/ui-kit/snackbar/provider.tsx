@@ -7,9 +7,10 @@ import React, {
 } from "react";
 
 import Snackbar from "./snackbar";
+import snackbarService from "./service";
+import { mergeClassNames } from "@utils/common";
 
 import styles from "./style.module.scss";
-import { mergeClassNames } from "@utils/common";
 
 const DefaultSettings: SnackbarSettings = {
   position: "top-center",
@@ -24,6 +25,8 @@ type Position =
   | "bottom-left"
   | "bottom-center"
   | "bottom-right";
+
+type Color = "default" | "success" | "danger" | "warning" | "info";
 
 type SnackbarSettings = {
   position?: Position;
@@ -45,10 +48,11 @@ type SnackbarProps = {
   message: MessageContent;
   duration?: number;
   autoHide?: boolean;
+  color?: Color;
   onClose?: () => void;
   classes?: {
     root?: string;
-    snackbarBox?: string;
+    message?: string;
   };
 };
 
@@ -58,33 +62,51 @@ type SnackbarProviderProps = {
 };
 
 type SnackbarContextType = {
-  open: (props?: SnackbarProps) => void;
+  open: (props: SnackbarProps, settings?: Partial<SnackbarSettings>) => void;
   close: (id?: string) => void;
   updateSettings?: (settings: SnackbarSettings) => void;
+};
+
+type SnackbarStack = {
+  data: Array<SnackbarData>;
+  settings: SnackbarSettings;
 };
 
 const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
   children,
   settings = DefaultSettings,
 }) => {
-  const [stack, setStack] = useState<Array<SnackbarData>>([]);
-  const [settingsData, setSettings] = useState<SnackbarSettings>({
-    position: settings.position || DefaultSettings.position,
-    stackLimit: settings.stackLimit || DefaultSettings.stackLimit,
-    terminateDuration:
-      settings.terminateDuration || DefaultSettings.terminateDuration,
+  const [stack, setStack] = useState<SnackbarStack>({
+    data: [],
+    settings: {
+      position: settings.position || DefaultSettings.position,
+      stackLimit: settings.stackLimit || DefaultSettings.stackLimit,
+      terminateDuration:
+        settings.terminateDuration || DefaultSettings.terminateDuration,
+    },
   });
 
   useEffect(() => {
-    stack.forEach((snackbar, index) => {
+    snackbarService.init({
+      open: openSnackbar,
+      close: closeSnackbar,
+    });
+
+    return () => {
+      snackbarService.destroy();
+    };
+  }, []);
+
+  useEffect(() => {
+    stack.data.forEach((snackbar, index) => {
       if (snackbar.terminate) {
-        terminate(index, settingsData.terminateDuration);
+        terminate(index, stack.settings.terminateDuration);
       }
     });
   }, [stack]);
 
   const positionClass = useMemo(() => {
-    switch (settingsData.position) {
+    switch (stack.settings.position) {
       case "top-left":
         return styles.topLeft;
       case "top-center":
@@ -100,56 +122,66 @@ const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
       default:
         return "";
     }
-  }, [settingsData.position]);
+  }, [stack.settings.position]);
 
-  const openSnackbar = (data?: SnackbarData) => {
+  const openSnackbar = (
+    data?: SnackbarData,
+    settings?: Partial<SnackbarSettings>,
+  ) => {
     const id = Math.random().toString(36);
 
     setStack((prevStack) => {
-      if (prevStack.length >= settingsData.stackLimit) {
-        prevStack.shift();
-        return [...prevStack, { id, ...data }];
+      if (prevStack.data.length >= prevStack.settings.stackLimit) {
+        prevStack.data.shift();
+        return {
+          data: [...prevStack.data, { id, ...data }],
+          settings: {
+            ...prevStack.settings,
+            ...settings,
+          },
+        };
       }
-      return [...prevStack, { id, ...data }];
+      return {
+        data: [...prevStack.data, { id, ...data }],
+        settings: {
+          ...prevStack.settings,
+          ...settings,
+        },
+      };
     });
   };
 
   const closeSnackbar = (id?: string) => {
     if (id) {
       setStack((prevStack) => {
-        return prevStack.map((item) => {
-          if (item.id === id) {
-            return { ...item, terminate: true };
-          }
-          return item;
-        });
+        return {
+          ...prevStack,
+          data: prevStack.data.map((item) => {
+            if (item.id === id) {
+              return { ...item, terminate: true };
+            }
+            return item;
+          }),
+        };
       });
       return;
     }
     setStack((prevStack) => {
-      if (prevStack.length === 0) {
+      if (prevStack.data.length === 0) {
         return prevStack;
       }
-      prevStack[0].terminate = true;
-      return [...prevStack];
+      prevStack.data[0].terminate = true;
+      return { ...prevStack };
     });
-  };
-
-  const updateSettings = (newSettings: SnackbarSettings) => {
-    setSettings((prevSettings) => ({
-      ...prevSettings,
-      ...newSettings,
-    }));
   };
 
   const terminate = (index: number, duration: number) => {
     setTimeout(() => {
       setStack((prevStack) => {
-        const newStack = [...prevStack];
-        const item = newStack[index];
+        const newStack = [...prevStack.data];
 
         newStack.splice(index, 1);
-        return newStack;
+        return { ...prevStack, data: newStack };
       });
     }, duration);
   };
@@ -158,8 +190,8 @@ const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
     return (
       <Snackbar
         key={snackbar.id}
-        {...snackbar}
         onRequestClose={() => closeSnackbar(snackbar.id)}
+        {...snackbar}
       />
     );
   };
@@ -169,12 +201,11 @@ const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
       value={{
         open: openSnackbar,
         close: closeSnackbar,
-        updateSettings,
       }}
     >
       {children}
       <div className={mergeClassNames([styles.SnackbarStack, positionClass])}>
-        {stack.map(renderSnackbar)}
+        {stack.data.map(renderSnackbar)}
       </div>
     </SnackbarContext.Provider>
   );
@@ -208,6 +239,7 @@ export {
   SnackbarContext,
   type SnackbarProps,
   type SnackbarData,
+  type SnackbarSettings,
   type SnackbarStoreItem,
   type SnackbarContextType,
 };

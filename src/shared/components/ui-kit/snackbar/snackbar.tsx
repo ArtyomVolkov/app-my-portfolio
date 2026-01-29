@@ -14,7 +14,9 @@ const DefaultSettings = {
 const Snackbar: React.FC<SnackbarProps & SnackbarStoreItem> = ({
   message,
   autoHide = true,
+  color = "default",
   terminate = false,
+  classes,
   duration = DefaultSettings.duration,
   onClose,
   onRequestClose,
@@ -49,9 +51,13 @@ const Snackbar: React.FC<SnackbarProps & SnackbarStoreItem> = ({
       className={mergeClassNames([
         styles.Snackbar,
         terminate && styles.terminate,
+        styles[color],
+        classes?.root,
       ])}
     >
-      <div className={styles.message}>{message}</div>
+      <div className={mergeClassNames([styles.message, classes?.message])}>
+        {message}
+      </div>
       <Button
         className={styles.closeButton}
         variant="link"
