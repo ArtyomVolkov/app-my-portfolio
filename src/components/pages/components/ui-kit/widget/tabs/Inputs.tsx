@@ -194,23 +194,24 @@ const InputsTab = () => {
               <Input
                 type="text"
                 fullWidth
-                label="Textarea (3 rows)"
-                value={`This is a multiline input field.\nYou can enter multiple lines of text here.`}
-                placeholder="Enter your message"
-                multiline
-                rows={3}
-              />
-              <Input
-                type="text"
-                fullWidth
                 label="Textarea (4 rows)"
                 value={`This is a multiline input field.\nYou can enter multiple lines of text here.\nYou can change resize behavior.\n`}
-                hint="Max 200 characters."
                 placeholder="Enter your message"
                 multiline
                 rows={4}
                 maxLength={200}
                 resize
+              />
+              <Input
+                type="text"
+                fullWidth
+                label="Textarea (3 rows)"
+                value={`This is a multiline input field.\nYou can enter multiple lines of text here.`}
+                placeholder="Enter your message"
+                hint="Max 200 characters."
+                maxLength={200}
+                multiline
+                rows={3}
               />
             </div>
           </article>

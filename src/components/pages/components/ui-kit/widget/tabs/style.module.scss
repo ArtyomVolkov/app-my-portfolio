@@ -1,4 +1,6 @@
 .TabContent {
+  container-type: size;
+
   .title {
     margin: 0 0 16px 0;
     font-size: 20px;
@@ -16,14 +18,32 @@
     display: flex;
     flex-direction: column;
     margin-top: 25px;
-    gap: 6px;
+    padding-bottom: 12px;
+    gap: 12px;
+
+    &.buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+
+      @container (min-width: 850px) {
+        grid-template-columns: repeat(2, 1fr);
+
+        :nth-child(1) {
+          grid-row-end: span 4;
+        }
+
+        :nth-child(2) {
+          grid-row-end: span 3;
+        }
+      }
+    }
   }
 
   .article {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    container-type: inline-size;
 
     .title {
       font-size: 14px;

@@ -67,7 +67,7 @@ const DropdownPreview = () => {
               />
             </div>
             <Divider title="Full width" align="left" />
-            <div className={styles.row}>
+            <div className={styles.grid}>
               <Dropdown
                 placeholder="Select Option"
                 options={OPTIONS}
