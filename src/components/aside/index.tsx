@@ -10,7 +10,7 @@ import { useAppStore } from "@store/app";
 
 import styles from "./style.module.scss";
 
-const SideBar = ({ fullWidth }) => {
+const SideBar = () => {
   const appStore = useAppStore();
 
   return (
@@ -21,7 +21,7 @@ const SideBar = ({ fullWidth }) => {
           onClick={appStore.toggleFullWidth}
           name="Toggle Full Width"
         >
-          {fullWidth ? (
+          {appStore.layout.fullWidth ? (
             <MenuRoundedIcon className={styles.icon} />
           ) : (
             <MenuOpenRoundedIcon className={styles.icon} />

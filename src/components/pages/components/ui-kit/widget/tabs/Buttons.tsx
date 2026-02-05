@@ -8,6 +8,8 @@ import AccountBalanceRoundedIcon from "@mui/icons-material/AccountBalanceRounded
 import Button, { Color, Variant } from "@shared/components/ui-kit/button";
 import Section from "@shared/components/section";
 
+import { mergeClassNames } from "@utils/common";
+
 import styles from "./style.module.scss";
 
 const BUTTONS: Variant[] = ["solid", "outlined", "dashed", "text", "link"];
@@ -59,7 +61,7 @@ const ButtonsTab = () => {
         Buttons are interactive elements that allow users to trigger actions or
         events.
       </p>
-      <div className={styles.examples}>
+      <div className={mergeClassNames([styles.examples, styles.buttons])}>
         <Section title="Colors">
           {COLORS.map((color) => (
             <article key={color} className={styles.article}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 
 import { mergeClassNames } from "@utils/common";
 

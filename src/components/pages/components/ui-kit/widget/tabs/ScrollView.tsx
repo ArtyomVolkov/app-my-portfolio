@@ -29,7 +29,7 @@ const ScrollViewTab = () => {
         that overflows the visible area.
       </p>
       <div className={styles.examples}>
-        <Section title="Scroll View Variants">
+        <Section title="Scroll View Variants" classes={{ root: styles.scrollViewSection }}>
           <article className={styles.article}>
             <Divider title="Vertical" align="left" />
             <ScrollView classes={{ root: styles.verticalScrollView, content: styles.content }}>

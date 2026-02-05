@@ -26,7 +26,7 @@ const AppContent = () => {
         appStore.layout.fullWidth && styles.fullWidth,
       ])}
     >
-      <SideBar fullWidth={appStore.layout.fullWidth} />
+      <SideBar />
       <div className={styles.mainContent}>
         <Header />
         <AppRoutes />

@@ -14,6 +14,7 @@ type TypographyProps = {
   className?: string;
   variant?: Variant;
   lineNumber?: 1 | 2 | 3;
+  lineBreak?: boolean;
   children?: React.ReactNode | string;
 };
 
@@ -21,6 +22,7 @@ const Typography: React.FC<TypographyProps> = ({
   className,
   children,
   variant = "h3",
+  lineBreak = false,
   lineNumber = 1,
 }) => {
   return (
@@ -30,6 +32,7 @@ const Typography: React.FC<TypographyProps> = ({
         styles.Typography,
         styles[variant],
         lineNumber && styles[`line-${lineNumber}`],
+        lineBreak && styles.lineBreak,
         className,
       ])}
     >

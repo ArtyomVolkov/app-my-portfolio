@@ -25,10 +25,10 @@ type ButtonProps = {
   loading?: boolean;
   disabled?: boolean;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
   color = "default",
   variant = "solid",
   loading = false,
@@ -36,6 +36,7 @@ const Button: React.FC<ButtonProps> = ({
   startIcon,
   endIcon,
   children,
+  className,
   ...rest
 }) => {
   return (
@@ -45,6 +46,7 @@ const Button: React.FC<ButtonProps> = ({
         styles[variant],
         styles[color],
         loading && styles.loading,
+        className,
       ])}
       onClick={onClick}
       {...rest}

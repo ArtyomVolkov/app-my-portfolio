@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 
-import styles from "./style.module.scss";
 import { mergeClassNames } from "@utils/common";
+
+import styles from "./style.module.scss";
 
 type DividerProps = {
   title?: string;
