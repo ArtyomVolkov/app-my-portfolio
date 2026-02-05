@@ -11,6 +11,7 @@ import Tabs from "./Tabs";
 import Dropdown from "./Dropdown";
 import Modals from "./Modals";
 import Snackbar from "./Snackbar";
+import Inputs from "./Inputs";
 
 const TABS: NavItems = [
   {
@@ -49,14 +50,19 @@ const TABS: NavItems = [
     component: <Dropdown />,
   },
   {
-    key: "Modals",
-    label: "Modals",
+    key: "modal",
+    label: "Modal Window",
     component: <Modals />,
   },
   {
     key: "snackbar",
     label: "Snackbar",
     component: <Snackbar />,
+  },
+  {
+    key: "input",
+    label: "Input Field",
+    component: <Inputs />,
   }
 ];
 

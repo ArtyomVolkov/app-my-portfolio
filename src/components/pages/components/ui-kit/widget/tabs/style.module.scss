@@ -23,11 +23,22 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+    container-type: inline-size;
 
     .title {
       font-size: 14px;
       font-weight: 500;
       margin: 0;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    gap: 10px;
+
+    @container (min-width: 400px) {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
   }
 

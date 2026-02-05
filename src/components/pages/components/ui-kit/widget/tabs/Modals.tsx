@@ -228,7 +228,7 @@ const ModalsTab = () => {
 
   return (
     <div className={styles.TabContent}>
-      <h2 className={styles.title}>Modals</h2>
+      <h2 className={styles.title}>Modal Window</h2>
       <p className={styles.subtitle}>
         A modal is a dialog box/popup window that is displayed on top of the
         current page.

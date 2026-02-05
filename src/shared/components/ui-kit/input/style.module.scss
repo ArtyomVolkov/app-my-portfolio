@@ -1,0 +1,191 @@
+.InputField {
+  --input-border-color: #c2c2c2;
+  --input-border-width: 1px;
+  --input-focus-border-color: var(--primary-color, #007bff);
+  --input-hover-border-color: color-mix(
+    in srgb,
+    var(--input-focus-border-color, #c2c2c2),
+    white 20%
+  );
+  --input-background-color: #fff;
+  --input-text-color: #000;
+  --input-placeholder-color: #888;
+  --input-hint-color: var(--input-text-color, #000);
+
+  display: inline-flex;
+  position: relative;
+  width: min-content;
+  flex-direction: column;
+  gap: 4px;
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.error {
+    --input-border-color: var(--error-color, #dc3545);
+    --input-hint-color: var(--error-color, #dc3545);
+    --input-focus-border-color: var(--error-color, #dc3545);
+
+    fieldset {
+      color: var(--error-color, #dc3545);
+    }
+  }
+
+  &.warning {
+    --input-border-color: var(--warning-color, #ffc107);
+    --input-hint-color: var(--warning-color, #ffc107);
+    --input-focus-border-color: var(--warning-color, #ffc107);
+
+    fieldset {
+      color: var(--warning-color, #ffc107);
+    }
+  }
+
+  &.success {
+    --input-border-color: var(--success-color, #28a745);
+    --input-hint-color: var(--success-color, #28a745);
+    --input-focus-border-color: var(--success-color, #28a745);
+
+    fieldset {
+      color: var(--success-color, #28a745);
+    }
+  }
+
+  .Input {
+    border-radius: 4px;
+    min-width: 175px;
+    display: inline-flex;
+    line-height: 1.5em;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    color: var(--input-text-color, #000);
+    background-color: var(--input-background-color, #fff);
+
+    &:hover {
+      --input-border-color: var(--input-hover-border-color);
+    }
+
+    &.focused {
+      --input-border-width: 2px;
+
+      fieldset {
+        border-color: var(--input-focus-border-color);
+
+        legend {
+          max-width: 100%;
+          opacity: 1;
+          margin-left: -1px; // to offset increased border width
+          padding: 0 4px;
+          color: var(--input-focus-border-color);
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &.filled {
+      fieldset {
+        legend {
+          max-width: 100%;
+          opacity: 1;
+          padding: 0 4px;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &.small {
+      font-size: 12px;
+
+      input {
+        padding: 6px 8px;
+      }
+    }
+
+    &.medium {
+      font-size: 16px;
+
+      input {
+        padding: 8px 12px;
+      }
+    }
+
+    &.large {
+      font-size: 20px;
+
+      input {
+        padding: 12px 16px;
+      }
+    }
+
+    fieldset {
+      position: absolute;
+      text-align: left;
+      inset: 0px 0px 0px 0px;
+      border-width: var(--input-border-width, 1px);
+      border-style: solid;
+      margin: 0;
+      padding: 0 8px;
+      pointer-events: none;
+      overflow: hidden;
+      border-color: var(--input-border-color, black);
+      border-radius: inherit;
+      min-width: 0%;
+      transition: border-color 0.25s ease;
+
+      &.withLabel {
+        inset: -0.75em 0px 0px 0px;
+      }
+
+      legend {
+        display: block;
+        float: unset;
+        width: auto;
+        overflow: hidden;
+        white-space: nowrap;
+        padding: 0;
+        font-size: 0.75em;
+        opacity: 0;
+        max-width: 0.01px;
+        transform: translateY(75%);
+        transition:
+          transform 0.3s ease,
+          opacity 0.2s ease;
+      }
+    }
+
+    input, textarea {
+      display: block;
+      font: inherit;
+      width: 100%;
+      border: 0;
+      border-radius: inherit;
+      margin: 0;
+      color: currentColor;
+      outline: none;
+      padding: 8px 12px;
+      height: 1.5em;
+      box-sizing: content-box;
+    }
+
+    textarea {
+      height: auto;
+    }
+
+    .startIcon {
+      margin-left: 8px;
+    }
+
+    .endIcon {
+      margin-right: 8px;
+    }
+  }
+
+  .hint {
+    margin: 0;
+    padding: 0 4px;
+    font-size: 0.75em;
+    color: var(--input-hint-color, #000);
+  }
+}
