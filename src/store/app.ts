@@ -10,12 +10,13 @@ export interface IAppStore {
 
 export const useAppStore = create<IAppStore>((set) => ({
   layout: {
-    fullWidth: false,
+    fullWidth: true,
   },
-  toggleFullWidth: () =>
+  toggleFullWidth: () => {
     set((state) => ({
       layout: { ...state.layout, fullWidth: !state.layout.fullWidth },
-    })),
+    }))
+  },
   setFullWidth: (value: boolean) =>
     set(() => ({
       layout: { fullWidth: value },

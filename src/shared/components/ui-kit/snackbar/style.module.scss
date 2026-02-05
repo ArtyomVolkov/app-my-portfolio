@@ -1,0 +1,126 @@
+.SnackbarStack {
+  position: absolute;
+  display: flex;
+  padding: 16px;
+  width: calc(100% - 32px); // 100% minus horizontal padding
+  height: calc(100% - 32px); // 100% minus vertical padding
+  align-items: center;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  gap: 8px;
+
+  &.topLeft {
+    align-items: flex-start;
+  }
+
+  &.topCenter {
+    align-items: center;
+  }
+
+  &.topRight {
+    align-items: flex-end;
+  }
+
+  &.bottomLeft {
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  &.bottomCenter {
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &.bottomRight {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}
+
+@keyframes openSnack {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes closeSnack {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.Snackbar {
+  --snack-bg-color: #ffffff;
+  --snack-text-color: #323232;
+  pointer-events: all;
+
+  width: fit-content;
+  min-width: 200px;
+  max-width: calc(100vw - 32px);
+  position: relative;
+  background-color: var(--snack-bg-color);
+  color: var(--snack-text-color);
+  padding: 8px 12px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: openSnack 0.3s ease forwards;
+
+  &.terminate {
+    animation: closeSnack 0.3s ease forwards;
+  }
+
+  &.default {
+    --snack-bg-color: var(--bg-color);
+    --snack-text-color: var(--text-color);
+  }
+
+  &.success {
+    --snack-bg-color: var(--success-color);
+    --snack-text-color: #ffffff;
+  }
+
+  &.danger {
+    --snack-bg-color: var(--danger-color);
+    --snack-text-color: #ffffff;
+  }
+
+  &.warning {
+    --snack-bg-color: var(--warning-color);
+    --snack-text-color: #ffffff;
+  }
+
+  &.info {
+    --snack-bg-color: var(--info-color);
+    --snack-text-color: #ffffff;
+  }
+
+  .message {
+    margin: 0;
+  }
+
+  .closeButton {
+    font-size: 24px;
+    padding: 0;
+    width: 1em;
+    height: 1em;
+    justify-content: center;
+    color: var(--snack-text-color)
+  }
+}

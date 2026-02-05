@@ -1,4 +1,6 @@
 .TabContent {
+  container-type: size;
+
   .title {
     margin: 0 0 16px 0;
     font-size: 20px;
@@ -16,7 +18,26 @@
     display: flex;
     flex-direction: column;
     margin-top: 25px;
-    gap: 6px;
+    padding-bottom: 12px;
+    gap: 12px;
+
+    &.buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+
+      @container (min-width: 850px) {
+        grid-template-columns: repeat(2, 1fr);
+
+        :nth-child(1) {
+          grid-row-end: span 4;
+        }
+
+        :nth-child(2) {
+          grid-row-end: span 3;
+        }
+      }
+    }
   }
 
   .article {
@@ -31,10 +52,31 @@
     }
   }
 
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 1fr);
+    gap: 10px;
+
+    @container (min-width: 400px) {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+  }
+
+  .row {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
   .buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+  }
+
+  .scrollViewSection {
+    min-width: 240px;
   }
 
   .verticalScrollView {
@@ -67,5 +109,38 @@
     flex: 1;
     font-weight: bold;
     color: var(--text-color);
+  }
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 375px;
+
+  .subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    white-space: pre-wrap;
+  }
+
+  .modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+}
+
+.customSnackbarRoot {
+  padding: 16px !important;
+  border-radius: 8px !important;
+  align-items: flex-start !important;
+  --snack-bg-color: black !important;
+  --snack-text-color: #ffffff !important;
+
+  .customSnackbarMessage {
+    font-size: 16px;
+    max-width: 375px;
+    --text-color: rgb(227, 227, 227) !important;
   }
 }

@@ -56,7 +56,12 @@
 
   &.text {
     &:hover {
+      opacity: 1;
       background-color: var(--background-color);
+    }
+
+    &:active {
+      opacity: 0.5;
     }
 
     &.primary,
@@ -68,6 +73,16 @@
       &:hover {
         color: #ffffff;
       }
+    }
+  }
+
+  &.link {
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &:active {
+      opacity: 0.3;
     }
   }
 
@@ -163,7 +178,7 @@
   .spinner {
     position: absolute;
     right: calc(50% - 0.5em); // center horizontally
-    top: calc(50% - 0.5em);    // center vertically
+    top: calc(50% - 0.5em); // center vertically
     font-size: 0.85em;
   }
 }
