@@ -1,8 +1,9 @@
 .breadcrumbs {
+  color: var(--text-color, #434343);
+
   .link {
     display: flex;
     align-items: center;
-    color: #434343;
 
     svg {
       margin-right: 10px;

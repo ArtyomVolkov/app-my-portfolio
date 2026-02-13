@@ -5,26 +5,26 @@
 
   .title {
     margin-bottom: 20px;
-    background: #F44336;
+    background: var(--danger-color, #F44336);
     padding: 4px 8px;
     border-radius: 8px;
   }
 
   pre {
     white-space: wrap;
-    background: #fbfbfb;
+    background: var(--bg-paper, #ebebeb);
     padding: 12px;
     border-radius: 12px;
-    border: 1px solid #d0d0d0;
+    border: 1px solid var(--border-color, #a5a5a5);
     margin: 0;
   }
 
   .errorCode {
-    color: #f21515;
+    color: var(--danger-color, #F44336);
   }
 
   .stackTrace {
     max-height: 200px;
-    --shadow-color: #fbfbfb;
+    --shadow-color: var(--bg-paper, #ebebeb);
   }
 }

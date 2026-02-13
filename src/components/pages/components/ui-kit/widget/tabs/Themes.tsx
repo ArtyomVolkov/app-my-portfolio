@@ -36,20 +36,20 @@ const ThemingTab = () => {
                 backgroundColor="#ffffff"
                 colors={[
                   { name: "Background", hex: "#ffffff" },
-                  { name: "Paper", hex: "#ebebeb" },
+                  { name: "Paper", hex: "#f7f7f7" },
                   { name: "Border", hex: "#a5a5a5" },
                   { name: "Text", hex: "#333333" },
-                  { name: "Primary", hex: "#007bff" },
+                  { name: "Primary", hex: "#2a4aff" },
                   { name: "Secondary", hex: "#fb8c00" },
                   { name: "Success", hex: "#28a745" },
                   { name: "Danger", hex: "#dc3545" },
                 ]}
               />
               <ColorPalette
-                name="Light Grey"
+                name="Light Purple"
                 outlineColor="#bebebeff"
-                active={appStore.theme === "light-grey"}
-                onSelect={() => appStore.setTheme('light-grey')}
+                active={appStore.theme === "light-purple"}
+                onSelect={() => appStore.setTheme('light-purple')}
                 textColor="#676767ff"
                 backgroundColor="#ecececff"
                 colors={[
@@ -57,7 +57,7 @@ const ThemingTab = () => {
                   { name: "Paper", hex: "#fefaf6" },
                   { name: "Border", hex: "#dbd6ce" },
                   { name: "Text", hex: "#000000" },
-                  { name: "Primary", hex: "#9c27b0" },
+                  { name: "Primary", hex: "#6313f0" },
                   { name: "Secondary", hex: "#00bcd4" },
                   { name: "Success", hex: "#8bc34a" },
                   { name: "Danger", hex: "#ff5722" },
@@ -87,11 +87,11 @@ const ThemingTab = () => {
                 ]}
               />
               <ColorPalette
-                name="Dark Gray"
+                name="Dark Azure"
                 outlineColor="#4a4a4aff"
                 textColor="#ebebeb"
-                active={appStore.theme === "dark-grey"}
-                onSelect={() => appStore.setTheme('dark-grey')}
+                active={appStore.theme === "dark-azure"}
+                onSelect={() => appStore.setTheme('dark-azure')}
                 backgroundColor="#121212ff"
                 colors={[
                   { name: "Background", hex: "#121212ff" },

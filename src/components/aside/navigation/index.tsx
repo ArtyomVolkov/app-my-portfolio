@@ -25,6 +25,7 @@ import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import LiquorOutlinedIcon from '@mui/icons-material/LiquorOutlined';
 import TwoKPlusOutlinedIcon from '@mui/icons-material/TwoKPlusOutlined';
 import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
+import SpotifyIcon from '@assets/icons/spotify';
 
 import styles from './style.module.scss';
 
@@ -100,6 +101,10 @@ export const PATH_MAP: {[key: string]: { label: string, icon: React.ReactElement
   nonogram: {
     label: 'Nonogram',
     icon: <GridOnRoundedIcon />,
+  },
+  ['spotify-app']: {
+    label: 'Spotify App',
+    icon: <SpotifyIcon />,
   }
 };
 
@@ -128,13 +133,13 @@ const Navigation = () => {
         onClick={() => navigateTo(item)}
         selected={location.pathname.includes(item)}
         classes={{
-          selected: styles.selected
+          selected: styles.selected,
         }}
       >
         <ListItemIcon className={styles.icon}>
           { PATH_MAP[item]?.icon }
         </ListItemIcon>
-        <ListItemText primary={PATH_MAP[item]?.label} />
+        <ListItemText primary={PATH_MAP[item]?.label} className={styles.text} />
       </ListItem>
     );
   }

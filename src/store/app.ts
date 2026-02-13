@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type Theme = 'light' | 'dark' | 'light-grey' | 'dark-grey' | null;
+type Theme = 'light' | 'dark' | 'light-purple' | 'dark-azure' | null;
 
 export interface IAppStore {
   layout: {

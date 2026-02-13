@@ -3,7 +3,7 @@ import React from 'react';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 
-import InlineTabs, { TabItem } from '@shared/components/tabs';
+import Tabs, { TabItem } from '@shared/components/ui-kit/tabs';
 import SummaryTab from '@pages/profile/tabs/summary';
 import ExperienceTab from '@pages/profile/tabs/experience';
 
@@ -12,19 +12,19 @@ const TABS:Array<TabItem> = [
     key: 'summary',
     label: 'Summary',
     icon: <SummarizeIcon />,
-    component: SummaryTab,
+    component: <SummaryTab />,
   },
   {
     key: 'projects',
     label: 'Projects',
-    component: ExperienceTab,
+    component: <ExperienceTab />,
     icon: <AppRegistrationIcon />,
   }
 ];
 
 const ProfileTabs = () => (
-  <InlineTabs
-    tabs={TABS}
+  <Tabs
+    items={TABS}
     defaultActive={TABS[0].key}
   />
 );

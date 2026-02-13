@@ -1,16 +1,15 @@
 @use "../../../../../assets/styles/style-guide";
 
-
 .game2048Widget {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #808080;
+  border: 2px solid var(--border-color);
   border-radius: 10px;
-  background: #f4f4f4;
   width: fit-content;
   position: relative;
   overflow: hidden;
+  background-color: var(--bg-paper);
 
   @keyframes fadeIn {
     0% {
@@ -30,7 +29,7 @@
     }
   }
 
-  @keyframes merge  {
+  @keyframes merge {
     0% {
       scale: 0.5;
     }
@@ -55,12 +54,14 @@
     align-items: center;
     padding: 12px;
     gap: 20px;
-    border-bottom: 2px solid #808080;
+    border-bottom: 2px solid var(--border-color);
     box-sizing: border-box;
+    background-color: var(--bg-paper);
 
     .title {
       font-size: 18px;
       margin: 0;
+      color: var(--primary-color);
     }
 
     .panel {
@@ -83,41 +84,25 @@
         margin: 0;
         font-size: 24px;
         font-weight: 600;
-        background-color: black;
-        color: white;
+        background-color: var(--bg-color);
+        color: var(--text-primary);
         border-radius: 4px;
         padding: 4px;
 
         .name {
-          color: grey;
+          color: var(--secondary-color);
           font-size: 16px;
         }
 
         .value {
           font-size: 24px;
+          color: var(--secondary-color);
         }
       }
     }
   }
 
   .button {
-    background: #d3d3d3;
-    border-radius: 4px;
-    transition: opacity 0.3s;
-    border: 0;
-    padding: 6px;
-    font-weight: bold;
-    color: #232323;
-
-    &:hover {
-      opacity: 0.7;
-      cursor: pointer;
-    }
-
-    &:active {
-      opacity: 0.5;
-    }
-
     &[disabled] {
       opacity: 0.3;
       cursor: not-allowed;
@@ -129,6 +114,7 @@
     grid-template-columns: repeat(4, 80px);
     gap: 8px;
     background: black;
+    border-color: black;
     width: fit-content;
     margin: 10px;
     border: 8px solid;
@@ -143,7 +129,7 @@
       font-size: 30px;
       width: 80px;
       height: 80px;
-      background: #cbcbcb;
+      background: var(--bg-paper);
       border-radius: 10px;
       font-weight: 600;
       user-select: none;
@@ -163,10 +149,12 @@
 
       &[data-value="2"] {
         background-color: #ebebeb;
+        color: black;
       }
 
       &[data-value="4"] {
         background-color: #d6d6d6;
+        color: black;
       }
 
       &[data-value="8"] {

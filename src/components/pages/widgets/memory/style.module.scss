@@ -17,10 +17,10 @@
   max-width: 200px;
   height: 30px;
   border-radius: 30px;
-  border: 1px solid black;
+  border: 1px solid var(--border-color);
   position: relative;
   overflow: hidden;
-  background: black;
+  background: var(--bg-color);
 
   .heapSize {
     position: absolute;
@@ -46,23 +46,10 @@
   flex-direction: column;
   gap: 10px;
   max-width: 445px;
-  background: #f7f7f7;
+  background: var(--bg-paper);
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid #d9d9d9;
-
-  .inputField {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: all 0.2s;
-
-    &:focus {
-      outline: none;
-      border-color: #888;
-    }
-  }
+  border: 1px solid var(--border-color);
 
   .actions {
     display: flex;

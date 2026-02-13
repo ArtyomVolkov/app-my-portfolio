@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from "react";
+import Button from "@shared/components/ui-kit/button";
+
 import {
   saveGameData,
   loadGameData,
@@ -10,12 +12,12 @@ import {
   getCellIndex,
   getScore,
   setAnimation,
-} from './actions';
+} from "./actions";
 
-import { Grid, MergeDirection } from './types';
-import { GAME_DATA, CELLS } from './data';
+import { Grid, MergeDirection } from "./types";
+import { GAME_DATA, CELLS } from "./data";
 
-import styles from './style.module.scss';
+import styles from "./style.module.scss";
 
 const Game2048 = () => {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -28,11 +30,11 @@ const Game2048 = () => {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', onKeyDown);
-    }
+      document.removeEventListener("keydown", onKeyDown);
+    };
   }, [grid]);
 
   const score = useMemo(() => getScore(grid), [grid]);
@@ -42,19 +44,19 @@ const Game2048 = () => {
       return;
     }
     switch (e.key) {
-      case 'ArrowRight': {
+      case "ArrowRight": {
         shiftToRight();
         break;
       }
-      case 'ArrowLeft': {
+      case "ArrowLeft": {
         shiftToLeft();
         break;
       }
-      case 'ArrowUp': {
+      case "ArrowUp": {
         shiftToTop();
         break;
       }
-      case 'ArrowDown': {
+      case "ArrowDown": {
         shiftToDown();
         break;
       }
@@ -202,11 +204,28 @@ const Game2048 = () => {
   return (
     <div className={styles.game2048Widget}>
       <div className={styles.header}>
-        <h3 className={styles.title}>Join the numbers and get to the 2048 tile!</h3>
+        <h3 className={styles.title}>
+          Join the numbers and get to the 2048 tile!
+        </h3>
         <div className={styles.panel}>
           <div className={styles.actions}>
-            <button onClick={onUndo} disabled={!oldData} className={styles.button}>Undo</button>
-            <button className={styles.button} onClick={handleNewGame}>New Game</button>
+            <Button
+              onClick={onUndo}
+              color="primary"
+              variant="outlined"
+              className={styles.button}
+              disabled={!oldData}
+            >
+              Undo
+            </Button>
+            <Button
+              onClick={handleNewGame}
+              variant="solid"
+              color="primary"
+              className={styles.button}
+            >
+              New Game
+            </Button>
           </div>
           <p className={styles.score}>
             <span className={styles.name}>SCORE</span>
@@ -218,38 +237,37 @@ const Game2048 = () => {
         ref={gridRef}
         className={styles.grid}
         style={{
+          borderColor: "black",
           gridTemplateColumns: `repeat(${CELLS}, 80px)`,
         }}
       >
         {grid.map((item, index) => (
-          <div
-            key={index}
-            className={styles.tile}
-            data-value={item}
-          >
-            {
-              item > 0 && (
-                <span className={styles.cellValue}>{item}</span>
-              )
-            }
+          <div key={index} className={styles.tile} data-value={item}>
+            {item > 0 && <span className={styles.cellValue}>{item}</span>}
           </div>
         ))}
       </div>
-      {
-        gameOver && (
-          <div className={styles.overlay}>
-            <div className={styles.modal}>
-              <p className={styles.title}>Game Over!</p>
-              <div className={styles.actions}>
-                <button className={styles.button} onClick={onUndo} disabled={!oldData}>Undo</button>
-                <button className={styles.button} onClick={handleNewGame}>New Game</button>
-              </div>
+      {gameOver && (
+        <div className={styles.overlay}>
+          <div className={styles.modal}>
+            <p className={styles.title}>Game Over!</p>
+            <div className={styles.actions}>
+              <button
+                className={styles.button}
+                onClick={onUndo}
+                disabled={!oldData}
+              >
+                Undo
+              </button>
+              <button className={styles.button} onClick={handleNewGame}>
+                New Game
+              </button>
             </div>
           </div>
-        )
-      }
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Game2048;

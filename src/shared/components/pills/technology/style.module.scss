@@ -1,4 +1,4 @@
-.technologyPill {  
+.technologyPill {
   &:global(.javascript) {
     background: #efd81e;
 
@@ -11,6 +11,16 @@
   &:global(.typescript) {
     background: #2f74c0;
     color: white;
+
+    :global(.icon) {
+      background: black;
+      color: white;
+    }
+  }
+
+  &:global(.objectiveC) {
+    background: #f4f5f6;
+    color: black;
 
     :global(.icon) {
       background: black;

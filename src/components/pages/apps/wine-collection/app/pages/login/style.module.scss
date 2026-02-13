@@ -7,14 +7,15 @@
 
   .loginForm {
     width: 275px;
-    box-shadow: 1px 1px 5px 1px #73737370;
+    border: 0px 2px 8px 2px var(--border-color);
+    box-shadow: 1px 1px 8px 2px var(--box-shadow-color);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 40px 16px 16px;
     position: relative;
-    background: white;
+    background: var(--bg-color);
     transition: opacity 0.35s ease;
 
     &.loading {
