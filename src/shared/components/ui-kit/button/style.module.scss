@@ -1,11 +1,16 @@
 .Button {
+  --btn-bg-color: var(--background-color, #d9d9d9);
+  --btn-text-color: var(--text-color, #333333);
+  --btn-border-color: var(--border-color, #b9b6b6);
+  --btn-solid-text-color: var(--bg-color, #007bff);
+
   display: flex;
   align-items: center;
   gap: 5px;
   background-color: transparent;
   padding: 4px 8px;
   transition: all 0.3s ease;
-  color: var(--text-color);
+  color: var(--btn-text-color);
   border-radius: 4px;
   font-weight: 500;
   font-size: 1em;
@@ -41,7 +46,7 @@
     &.warning,
     &.info,
     &.success {
-      color: #ffffff;
+      color: var(--btn-solid-text-color);
     }
   }
 
@@ -87,8 +92,7 @@
   }
 
   &.default {
-    --background-color: #d9d9d9;
-    --border-color: #b9b6b6;
+    --background-color: var(--bg-paper, #ffffff);
   }
 
   &.primary {

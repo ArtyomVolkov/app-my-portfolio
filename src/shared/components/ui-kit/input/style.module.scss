@@ -1,5 +1,6 @@
 .InputField {
-  --input-border-color: #c2c2c2;
+  --input-background-color: var(--bg-color, #ffffff);
+  --input-border-color: var(--border-color, #a5a5a5);
   --input-border-width: 1px;
   --input-focus-border-color: var(--primary-color, #007bff);
   --input-hover-border-color: color-mix(
@@ -7,8 +8,7 @@
     var(--input-focus-border-color, #c2c2c2),
     white 20%
   );
-  --input-background-color: #fff;
-  --input-text-color: #000;
+  --input-text-color: var(--text-color, #000000);
   --input-placeholder-color: #888;
   --input-hint-color: var(--input-text-color, #000);
 
@@ -155,18 +155,43 @@
       }
     }
 
-    input, textarea {
+    input[type="number"] {
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        color: red;
+      }
+    }
+
+    input,
+    textarea {
       display: block;
       font: inherit;
       width: 100%;
       border: 0;
       border-radius: inherit;
       margin: 0;
+      background-color: var(--input-background-color);
       color: currentColor;
       outline: none;
       padding: 8px 12px;
       height: 1.5em;
       box-sizing: content-box;
+
+      &:-internal-autofill-selected {
+        background-color: var(--input-background-color) !important;
+        color: var(--input-text-color) !important;
+      }
+
+      &:-webkit-autofill {
+        box-shadow: 0 0 0px 1000px var(--input-background-color) inset !important;
+        -webkit-text-fill-color: var(--input-text-color) !important;
+      }
+
+      &::placeholder {
+        color: var(--input-placeholder-color, #888);
+        opacity: 1;
+      }
     }
 
     textarea {

@@ -1,9 +1,10 @@
 .ScrollView {
+  --scroll-view-shadow-color: var(--bg-color, #f5f5f5);
+
   position: relative;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  --shadow-color: #ffffff;
 
   &.horizontal {
     max-width: 100%;
@@ -16,7 +17,7 @@
       left: 0;
       background: linear-gradient(
         to right,
-        var(--shadow-color),
+        var(--scroll-view-shadow-color),
         rgba(255, 255, 255, 0)
       );
     }
@@ -28,7 +29,7 @@
       height: 100%;
       background: linear-gradient(
         to left,
-        var(--shadow-color),
+        var(--scroll-view-shadow-color),
         rgba(255, 255, 255, 0)
       );
     }
@@ -46,13 +47,19 @@
   .topShadow {
     top: 0;
     opacity: 0;
-    background: linear-gradient(var(--shadow-color), rgba(255, 255, 255, 0));
+    background: linear-gradient(
+      var(--scroll-view-shadow-color),
+      rgba(255, 255, 255, 0)
+    );
   }
 
   .bottomShadow {
     bottom: 0;
     opacity: 1;
-    background: linear-gradient(rgba(255, 255, 255, 0), var(--shadow-color));
+    background: linear-gradient(
+      rgba(255, 255, 255, 0),
+      var(--scroll-view-shadow-color)
+    );
   }
 
   .content {
