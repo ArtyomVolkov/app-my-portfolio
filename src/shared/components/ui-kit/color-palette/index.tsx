@@ -40,11 +40,14 @@ const ColorPalette: React.FC<ColorPaletteProps> = ({
         styles.ColorPalette,
         active && styles.active,
       ])}
-      style={{
-        width: `${(colors.length - 1) * 5}ch`,
-        outlineColor: outlineColor || colors[0].hex,
-      }}
       onClick={handleClick}
+      style={
+        {
+          width: `${(colors.length - 1) * 5}ch`,
+          outlineColor: outlineColor || colors[0].hex,
+          "--palette-shadow-color": textColor,
+        } as React.CSSProperties
+      }
     >
       <div className={styles.colors}>
         {colors.map((color) => (

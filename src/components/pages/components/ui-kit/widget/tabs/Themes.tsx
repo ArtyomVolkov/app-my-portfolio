@@ -3,8 +3,8 @@ import React from "react";
 import Section from "@shared/components/section";
 import ColorPalette from "@shared/components/ui-kit/color-palette";
 import Divider from "@shared/components/ui-kit/divider";
-
-import { useAppStore } from "@store/app";
+import { LightThemes, DarkThemes } from "@shared/components/ui-kit/themes";
+import { useAppStore, type Theme } from "@store/app";
 
 import styles from "./style.module.scss";
 
@@ -27,83 +27,35 @@ const ThemingTab = () => {
           <Divider title="Light Themes" align="left" />
           <article className={styles.article}>
             <div className={styles.row}>
-              <ColorPalette
-                name="Default Light"
-                outlineColor="#a5a5a5"
-                textColor="#333333"
-                active={appStore.theme === "light"}
-                onSelect={() => appStore.setTheme('light')}
-                backgroundColor="#ffffff"
-                colors={[
-                  { name: "Background", hex: "#ffffff" },
-                  { name: "Paper", hex: "#f7f7f7" },
-                  { name: "Border", hex: "#a5a5a5" },
-                  { name: "Text", hex: "#333333" },
-                  { name: "Primary", hex: "#2a4aff" },
-                  { name: "Secondary", hex: "#fb8c00" },
-                  { name: "Success", hex: "#28a745" },
-                  { name: "Danger", hex: "#dc3545" },
-                ]}
-              />
-              <ColorPalette
-                name="Light Purple"
-                outlineColor="#bebebeff"
-                active={appStore.theme === "light-purple"}
-                onSelect={() => appStore.setTheme('light-purple')}
-                textColor="#676767ff"
-                backgroundColor="#ecececff"
-                colors={[
-                  { name: "Background", hex: "#ffffff" },
-                  { name: "Paper", hex: "#fefaf6" },
-                  { name: "Border", hex: "#dbd6ce" },
-                  { name: "Text", hex: "#000000" },
-                  { name: "Primary", hex: "#6313f0" },
-                  { name: "Secondary", hex: "#00bcd4" },
-                  { name: "Success", hex: "#8bc34a" },
-                  { name: "Danger", hex: "#ff5722" },
-                ]}
-              />
+              {LightThemes.map((theme) => (
+                <ColorPalette
+                  key={theme.key}
+                  name={theme.name}
+                  outlineColor={theme.outlineColor}
+                  textColor={theme.textColor}
+                  active={appStore.theme === theme.key}
+                  onSelect={() => appStore.setTheme(theme.key as Theme)}
+                  backgroundColor={theme.backgroundColor}
+                  colors={theme.palette}
+                />
+              ))}
             </div>
           </article>
           <Divider title="Dark Themes" align="left" />
           <article className={styles.article}>
             <div className={styles.row}>
-              <ColorPalette
-                name="Default Dark"
-                outlineColor="#555555"
-                textColor="#f0f0f0"
-                active={appStore.theme === "dark"}
-                onSelect={() => appStore.setTheme('dark')}
-                backgroundColor="#1a1a1a"
-                colors={[
-                  { name: "Background", hex: "#19192b" },
-                  { name: "Paper", hex: "#29293f" },
-                  { name: "Border", hex: "#494966" },
-                  { name: "Text", hex: "#f0f0f0" },
-                  { name: "Primary", hex: "#a8a7f1" },
-                  { name: "Secondary", hex: "#f5d299" },
-                  { name: "Success", hex: "#93e493" },
-                  { name: "Danger", hex: "#ff5722" },
-                ]}
-              />
-              <ColorPalette
-                name="Dark Azure"
-                outlineColor="#4a4a4aff"
-                textColor="#ebebeb"
-                active={appStore.theme === "dark-azure"}
-                onSelect={() => appStore.setTheme('dark-azure')}
-                backgroundColor="#121212ff"
-                colors={[
-                  { name: "Background", hex: "#121212ff" },
-                  { name: "Paper", hex: "#2c2c2cff" },
-                  { name: "Border", hex: "#4a4a4aff" },
-                  { name: "Text", hex: "#ebebeb" },
-                  { name: "Primary", hex: "#41f2ff" },
-                  { name: "Secondary", hex: "#eed47b" },
-                  { name: "Success", hex: "#50de08ff" },
-                  { name: "Danger", hex: "#eb4353ff" },
-                ]}
-              />
+              {DarkThemes.map((theme) => (
+                <ColorPalette
+                  key={theme.key}
+                  name={theme.name}
+                  outlineColor={theme.outlineColor}
+                  textColor={theme.textColor}
+                  active={appStore.theme === theme.key}
+                  onSelect={() => appStore.setTheme(theme.key as Theme)}
+                  backgroundColor={theme.backgroundColor}
+                  colors={theme.palette}
+                />
+              ))}
             </div>
           </article>
         </Section>

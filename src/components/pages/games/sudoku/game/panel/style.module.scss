@@ -2,7 +2,7 @@
   padding: 24px;
   display: flex;
   justify-content: center;
-  border-right: 1px solid #dcdcdc;
+  border-right: 1px solid var(--border-color);
   flex-direction: column;
 
   .mainActions {
@@ -24,7 +24,7 @@
   .panel {
     padding: 12px;
     border-right: 0;
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: 1px solid var(--border-color);
 
     .mainActions {
       display: grid;

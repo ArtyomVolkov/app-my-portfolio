@@ -46,6 +46,21 @@
     --box-shadow-color: rgba(0, 0, 0, 0.1);
   }
 
+  &[data-theme="light-green"] {
+    color-scheme: light;
+    --bg-color: #f2fcf2;
+    --bg-paper: #e0f7e9;
+    --text-color: #323232;
+    --border-color: #86cb88;
+    --primary-color: #4caf50;
+    --secondary-color: #ff8c00;
+    --success-color: #8bc34a;
+    --danger-color: #ff5722;
+    --warning-color: #ffc107;
+    --info-color: #0c7686;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+  }
+
   &[data-theme="dark"] {
     color-scheme: dark;
     --bg-color: #19192b;
@@ -73,6 +88,21 @@
     --danger-color: #eb4353ff;
     --warning-color: #ffc107;
     --info-color: #17a2b8;
+    --box-shadow-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &[data-theme="dark-red"] {
+    color-scheme: dark;
+    --bg-color: #1a1616;
+    --bg-paper: #272727;
+    --text-color: #d4d4d4;
+    --border-color: #4e4e4e;
+    --primary-color: #ea383b;
+    --secondary-color: #16c71e;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #1dd5f1;
     --box-shadow-color: rgba(0, 0, 0, 0.3);
   }
 }

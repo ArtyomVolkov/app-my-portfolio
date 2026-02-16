@@ -1,4 +1,6 @@
 .ColorPalette {
+  --palette-shadow-color: var(--border-color, #a5a5a5);
+
   display: flex;
   flex-direction: column;
   outline: 1.5px solid var(--border-color, #a5a5a5);
@@ -14,7 +16,7 @@
   &:hover {
     cursor: pointer;
     outline-color: var(--primary-color, #007bff);
-    box-shadow: 0 3px 6px 2px var(--border-color, #a5a5a5);
+    box-shadow: 0px 0px 6px 2px var(--palette-shadow-color, #a5a5a5);
   }
 
   &:active {

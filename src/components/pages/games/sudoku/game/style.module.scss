@@ -5,7 +5,7 @@
   display: flex;
   width: fit-content;
   overflow: hidden;
-  background-color: white;
+  background-color: var(--bg-paper);
   @include style-guide.card-shadow;
 }
 

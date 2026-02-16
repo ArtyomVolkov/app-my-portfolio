@@ -1,7 +1,7 @@
 .toolbar {
   padding: 24px;
   min-width: 160px;
-  border-right: 1px solid #dcdcdc;
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,7 +52,7 @@
       justify-content: flex-start;
       align-items: center;
       border-right: 0;
-      border-bottom: 1px solid #dcdcdc;
+      border-bottom: 1px solid var(--border-color);
 
       .controls {
         width: 160px;
