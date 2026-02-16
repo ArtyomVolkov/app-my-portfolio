@@ -1,6 +1,8 @@
 .rotationSection {
   padding: 20px;
-  border: 1px solid #dcdcdc;
+  border: 1px solid var(--border-color, #a5a5a5);
+  box-sizing: border-box;
+  border-radius: 8px;
   position: relative;
   min-height: 400px;
   display: flex;

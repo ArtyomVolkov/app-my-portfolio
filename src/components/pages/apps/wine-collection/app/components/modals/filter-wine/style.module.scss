@@ -4,10 +4,11 @@
   min-width: 450px;
   font-family: "system-ui", sans-serif;
   max-width: 450px;
+  background-color: var(--bg-paper);
 
   .header {
     padding: 20px;
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: 1px solid var(--border-color);
 
     .title {
       font-size: 20px;
@@ -43,7 +44,7 @@
       .rangeField {
         display: flex;
         flex-direction: column;
-        color: #767676;
+        color: var(--text-color);
         margin-bottom: 20px;
 
         .slider {
@@ -57,7 +58,7 @@
   .actions {
     display: flex;
     padding: 20px;
-    border-top: 1px solid #dcdcdc;
+    border-top: 1px solid var(--border-color);
 
     .secondary {
       display: flex;

@@ -1,12 +1,12 @@
 .sideBar {
-  border-right: 1px solid #dcdcdc;
+  border-right: 1px solid var(--border-color, #a5a5a5);
   position: fixed;
   left: 0;
   top: 0;
   height: 100vh;
   z-index: 100;
   width: 256px;
-  background-color: #fbfbfb;
+  background-color: var(--bg-paper, #fbfbfb);
 
   .header {
     display: flex;
@@ -18,16 +18,16 @@
     padding: 10px;
 
     .screenResize {
-      background: #fbfbfb;
+      background: var(--bg-paper, #ebebeb);
       transition: background-color 0.35s;
 
       &:hover {
-        background: #e9e9e9;
+        background: var(--bg-color, #e9e9e9);
       }
 
       .icon {
         font-size: 36px;
-        color: #434343;
+        color: var(--text-color, #333333);
       }
     }
 
@@ -38,7 +38,4 @@
       font-weight: 500;
     }
   }
-}
-
-@media screen and (max-width: 767px) {
 }

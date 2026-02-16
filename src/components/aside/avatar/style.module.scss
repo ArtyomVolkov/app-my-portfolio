@@ -24,7 +24,7 @@
     }
 
     .subTitle {
-      color: #696969;
+      color: var(--text-color, #696969);
       font-size: 12px;
     }
   }

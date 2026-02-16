@@ -4,12 +4,16 @@ import { mergeClassNames } from "@utils/common";
 
 import styles from "./style.module.scss";
 
-type TabItem = {
+export type TabItem = {
   key: string;
   label: string;
   icon?: React.ReactNode | string;
   disabled?: boolean;
-  component: React.ReactNode | string | Array<React.ReactNode | string>;
+  component:
+    | React.ReactNode
+    | React.JSX.Element
+    | string
+    | Array<React.ReactNode | string | React.JSX.Element>;
 };
 
 type TabProps = {
@@ -33,7 +37,7 @@ const Tabs: React.FC<TabProps> = ({
   classes,
 }) => {
   const [activeTab, setActiveTab] = React.useState<string>(
-    defaultActive || items[0]?.key || ""
+    defaultActive || items[0]?.key || "",
   );
 
   const onSetActiveTab = (item: TabItem) => {
@@ -73,7 +77,7 @@ const Tabs: React.FC<TabProps> = ({
             onClick={() => onSetActiveTab(item)}
           >
             {item.icon && <span className={styles.icon}>{item.icon}</span>}
-            <span> {item.label}</span>
+            <span>{item.label}</span>
           </div>
         ))}
       </div>

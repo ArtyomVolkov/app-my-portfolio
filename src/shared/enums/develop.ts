@@ -9,8 +9,10 @@ export enum Language {
 
 export enum Tool {
   NPM = 'npm',
+  VS_CODE = 'VSCode',
   GIT = 'git',
   WEBPACK = 'webpack',
+  VITE = 'vite',
   GRUNT = 'grunt',
   WEBSTORM_IDEA = 'webstorm',
   FIREBASE = 'firebase',
@@ -59,6 +61,7 @@ export enum Technology {
   D3JS = 'd3js',
   CANVAS = 'canvas',
   MICRO_FRONT_END = 'microFrontEnd',
+  ANT_DESIGN = 'antDesign',
   MATERIAL_UI = 'materialUI',
   SEMANTIC_UI = 'semanticUI',
   KENDO_UI = 'kendoUI',
@@ -68,6 +71,8 @@ export enum Technology {
   LODASH = 'lodash',
   CRYPTO_JS = 'cryptoJS',
   JEST = 'jest',
+  CYPRESS = 'cypress',
+  DETOX = 'detox',
   JASMINE = 'jasmine',
   JSDOC = 'jsdoc',
   OOP = 'oop',

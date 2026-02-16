@@ -130,7 +130,7 @@ const Modal: React.FC<ModalProps> = ({
     modalRef.current.style.cursor = "grabbing";
     modalRef.current.style.left = `${left}px`;
     modalRef.current.style.top = `${top}px`;
-    modalRef.current.style.outline = "2px solid var(--outline-color)";
+    modalRef.current.style.outline = "2px solid var(--modal-outline-color)";
     modalRef.current.style.position = "absolute";
   };
 

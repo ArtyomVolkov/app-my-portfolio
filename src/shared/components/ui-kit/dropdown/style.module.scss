@@ -1,9 +1,14 @@
 @use "../../../../assets/styles/style-guide.scss";
 
 .Dropdown {
-  --background: #ffffff;
+  --dd-background: var(--bg-color, #ffffff);
+  --dd-border-color: var(--border-color, #a5a5a5);
+  --dd-open-color: var(--primary-color, #007bff);
+  --dd-focus-color: var(--primary-color, #007bff);
+  --dd-option-tag-bg: var(--bg-paper, #ebebeb);
+  --dd-option-tag-text: var(--text-color, #333333);
 
-  background-color: var(--background);
+  background-color: var(--dd-background);
   position: relative;
   display: flex;
   align-items: center;
@@ -11,13 +16,15 @@
   min-width: 170px;
   width: fit-content;
   padding: 6px;
-  border: 2px solid var(--text-color);
+  border: 2px solid var(--dd-border-color);
   box-sizing: border-box;
   border-radius: 6px;
   user-select: none;
   cursor: pointer;
   line-height: 1.25em;
-  transition: opacity 0.25s, border-color 0.3s;
+  transition:
+    opacity 0.25s,
+    border-color 0.3s;
 
   &:hover {
     opacity: 0.7;
@@ -25,7 +32,7 @@
 
   &:focus,
   &:focus-within {
-    border-color: var(--primary-color);
+    border-color: var(--dd-focus-color);
     outline: none;
   }
 
@@ -44,7 +51,7 @@
   }
 
   &.open {
-    border-color: var(--primary-color);
+    border-color: var(--dd-open-color);
 
     .arrowIcon {
       transform: rotate(-90deg) rotateY(180deg);
@@ -76,7 +83,8 @@
   .placeholder {
     flex: 1;
     font-size: 1em;
-    color: #8e8e8e;
+    color: var(--dd-option-tag-text);
+    filter: contrast(30%);
   }
 
   .selectedOptions {
@@ -95,8 +103,9 @@
     z-index: 90;
 
     .optionTag {
-      background-color: #f0f0f0;
-      color: var(--text-color);
+      background-color: var(--dd-option-tag-bg);
+      color: var(--dd-option-tag-text);
+      filter: contrast(80%); // todo: adjust contrast for better visibility
       padding: 0 6px;
       border-radius: 4px;
       font-size: 1em;
@@ -118,9 +127,12 @@
   .arrowIcon {
     width: 1.2em;
     height: 1em;
-    color: var(--text-color);
+    color: var(--dd-border-color);
+    fill: currentColor;
     transform: rotate(-90deg);
-    transition: transform 0.3s, opacity 0.25s;
+    transition:
+      transform 0.3s,
+      opacity 0.25s;
     cursor: pointer;
     outline: none;
 
@@ -135,8 +147,11 @@
 }
 
 .DropdownWrapper {
-  --background: #ffffff;
-  --box-shadow-color: #31313140;
+  --dd-background: var(--bg-color, #ffffff);
+  --dd-border-color: var(--primary-color, #007bff);
+  --dd-scrollbar-bg: var(--bg-paper, #ebebeb);
+  --dd-scrollbar-thumb: var(--text-color, #a5a5a5);
+  --dd-box-shadow-color: #31313140;
 
   @keyframes fadeIn {
     from {
@@ -181,30 +196,36 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    border: 1px solid #c6c6c6;
-    background-color: var(--background);
+    border: 1px solid var(--dd-border-color);
+    background-color: var(--dd-background);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     box-sizing: border-box;
-    box-shadow: 0 4px 8px var(--box-shadow-color);
+    box-shadow: 0 4px 8px var(--dd-box-shadow-color);
     transform: translateY(0);
-    transition: transform 0.15s, opacity 0.3s;
+    transition:
+      transform 0.15s,
+      opacity 0.3s;
     z-index: 121;
 
     @include style-guide.scroll-style(
       $width: 8px,
-      $track-color: white,
-      $thumb-color: #d1d2db,
+      $track-color: var(--dd-scrollbar-bg),
+      $thumb-color: var(--dd-scrollbar-thumb),
       $thumb-border: 2px
     );
 
     &[data-anchor="top"] {
-      animation: fadeIn 0.35s ease forwards, slideUp 0.35s ease forwards;
+      animation:
+        fadeIn 0.35s ease forwards,
+        slideUp 0.35s ease forwards;
       box-shadow: 0 -4px 8px var(--box-shadow-color);
     }
 
     &[data-anchor="bottom"] {
-      animation: fadeIn 0.35s ease forwards, slideDown 0.35s ease forwards;
+      animation:
+        fadeIn 0.35s ease forwards,
+        slideDown 0.35s ease forwards;
     }
 
     &[data-size="small"] {
@@ -237,11 +258,14 @@
         color: var(--text-color);
         cursor: pointer;
         border-radius: 4px;
-        transition: background-color 0.25s, color 0.25s, opacity 0.35s;
+        transition:
+          background-color 0.25s,
+          color 0.25s,
+          opacity 0.35s;
 
         &:hover {
-          background-color: var(--primary-color);
-          color: #fff;
+          background-color: var(--dd-border-color);
+          color: var(--dd-background);
         }
 
         &:active {
@@ -249,12 +273,16 @@
         }
 
         &.selected {
-          background-color: #efefef;
+          background-color: var(--dd-border-color);
 
           &:hover {
-            color: var(--text-color);
+            color: var(--dd-background);
             cursor: default;
-            background-color: #efefef;
+            background-color: var(--dd-border-color);
+          }
+
+          .text {
+            color: var(--dd-background);
           }
         }
 

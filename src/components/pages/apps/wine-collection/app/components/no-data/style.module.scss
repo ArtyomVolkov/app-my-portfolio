@@ -5,8 +5,8 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: white;
-  border: 1px solid #dadada;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
   margin: 12px;
   min-width: 375px;
   height: 100%;
@@ -24,6 +24,6 @@
 
   .subtitle {
     font-size: 14px;
-    color: #7c7c7c;
+    color: var(--secondary-color);
   }
 }

@@ -14,13 +14,30 @@ nav {
     overflow: hidden;
     border: 1px solid transparent;
 
+    &:hover {
+      background: var(--bg-color, #ffffff);
+      border-color: var(--border-color, #dcdcdc);
+    }
+
     &.selected {
-      background: #eaeaea;
-      border-color: #dcdcdc;
+      background: var(--primary-color, #007bff);
+      border-color: var(--bg-color, #ffffff);
+
+      .icon {
+        color: var(--bg-color, #ffffff);
+      }
+
+      .text {
+        color: var(--bg-color, #ffffff);
+      }
+    }
+
+    .text {
+      color: var(--text-color, #434343);
     }
 
     .icon {
-      color: #434343;
+      color: var(--text-color, #434343);
     }
   }
 }

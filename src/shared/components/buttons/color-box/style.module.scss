@@ -3,17 +3,17 @@
   align-items: center;
   gap: 4px;
   padding: 4px;
-  border: 2px solid #dcdcdc;
+  border: 2px solid var(--border-color);
   border-radius: 100px;
   transition: all 0.35s;
 
   &:hover {
     cursor: pointer;
-    border-color: #2bb1ef;
+    border-color: var(--primary-color);
   }
 
   &.active {
-    border-color: #1d1b1b;
+    border-color: var(--primary-color);
   }
 
   .circlePoint {

@@ -1,11 +1,12 @@
 import React from "react";
 
 import Button from "@shared/components/ui-kit/button";
+import Input from "@shared/components/ui-kit/input";
 import WebWorkerService from "@services/web-worker";
 import Typography from "@shared/components/ui-kit/typography";
+import Divider from "@shared/components/ui-kit/divider";
 
 import styles from "./style.module.scss";
-import Divider from "@shared/components/ui-kit/divider";
 
 const MAX_RANDOM = 8;
 
@@ -70,11 +71,11 @@ const WebWorkerWidget = () => {
         {`Sum of random numbers in range 0-${MAX_RANDOM} for array of (n) items.`}
       </Typography>
       <Divider title="Calculation" align="left" />
-      <input
+      <Input
         type="number"
+        fullWidth
         placeholder="Enter a number"
         disabled={loading.worker || loading.mainThread}
-        className={styles.inputField}
         value={inputValue}
         onChange={(e) => setInputValue(Number(e.target.value))}
       />

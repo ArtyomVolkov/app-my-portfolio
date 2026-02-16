@@ -1,8 +1,6 @@
 .componentsPage {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   align-items: flex-start;
-  flex-wrap: wrap;
-  grid-column-gap: 15px;
-  grid-row-gap: 15px;
-  max-height: fit-content;
+  gap: 15px;
 }

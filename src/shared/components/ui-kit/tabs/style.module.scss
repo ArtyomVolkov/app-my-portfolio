@@ -1,4 +1,7 @@
 .Tabs {
+  --tabs-border-color: var(--border-color, #ccc);
+  --tabs-active-color: var(--primary-color, #007bff);
+
   display: flex;
   flex-direction: column;
 
@@ -8,7 +11,7 @@
     .header {
       flex-direction: column;
       border-bottom: none;
-      border-right: 1px solid #ccc;
+      border-right: 1px solid var(--tabs-border-color);
       margin-right: -1px; // body border overlap
 
       .tab {
@@ -19,7 +22,7 @@
         transition: border-right 0.35s, opacity 0.35s;
 
         &.active {
-          border-color: var(--primary-color);
+          border-color: var(--tabs-active-color);
         }
       }
     }
@@ -34,7 +37,7 @@
 
   .header {
     display: flex;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--tabs-border-color);
 
     .tab {
       display: flex;
@@ -69,8 +72,8 @@
       }
 
       &.active {
-        color: var(--primary-color);
-        border-color: var(--primary-color);
+        color: var(--tabs-active-color);
+        border-color: var(--tabs-active-color);
 
         &:hover, &:active {
           cursor: default;
@@ -85,6 +88,11 @@
         &:hover, &:active {
           opacity: 0.5;
         }
+      }
+
+      .icon {
+        display: flex;
+        font-size: 1em;
       }
     }
   }
