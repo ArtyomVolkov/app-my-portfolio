@@ -1,6 +1,6 @@
 .profilePage {
   :global(.tabs-header) {
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: 1px solid var(--border-color, #a5a5a5);
   }
 
   :global(.tab-item) {

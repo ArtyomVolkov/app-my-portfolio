@@ -4,7 +4,7 @@ import Main from "@components/main";
 import NavButton from "@shared/components/buttons/navigation";
 
 import LiquorOutlinedIcon from "@mui/icons-material/LiquorOutlined";
-import MusicVideoRoundedIcon from "@mui/icons-material/MusicVideoRounded";
+import SpotifyIcon from "@assets/icons/spotify";
 
 import styles from "./style.module.scss";
 
@@ -19,7 +19,7 @@ const AppsPage = () => {
       <NavButton
         path="/apps/spotify-app"
         title="Spotify App"
-        icon={<MusicVideoRoundedIcon className="icon" />}
+        icon={<SpotifyIcon className="icon" />}
       />
     </Main>
   );

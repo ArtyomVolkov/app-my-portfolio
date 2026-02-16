@@ -33,9 +33,10 @@ const Summary = () => {
           <p className={styles.title}>Artem Volkov</p>
           <p className={styles.subtitle}>Senior FrontEnd Software Engineer</p>
           <span className={styles.description}>
-            Software Engineer (12+ years) with vast development experience of
-            web applications using libs/frameworks such as: Node, React,
-            ReactNative, Capacitor, Flutter, Angular, AngularJS, BackboneJS.
+            Software Engineer (13+ years) with vast development experience of
+            web applications using libs/frameworks such as: Node, Next, Next,
+            React, ReactNative, Capacitor, Flutter, Angular, AngularJS,
+            BackboneJS.
             <br />
             <br />
             I have experience in the backend, particularly in delivering REST
@@ -50,6 +51,14 @@ const Summary = () => {
             JavaScript code, and handling complicated issues in UI development.
             Knowledgeable about the process of code review, code quality,
             estimations, and work planning.
+            <br />
+            <br />I have experience in leading teams of 2-5 people, mentoring
+            junior developers, and conducting technical interviews.
+            <br />
+            <br />
+            Experience with the enhancements made to Core Web Vitals metrics,
+            such as LCP, FID, and CLS, and optimizing web applications to
+            improve these metrics.
           </span>
         </ScrollView>
       </div>
@@ -91,23 +100,64 @@ const Summary = () => {
             <LanguageRoundedIcon className={styles.icon} />
             <span>Languages</span>
           </p>
-          <p>English: Upper Intermediate (B2)</p>
+          <p>English: Upper Intermediate (B2+)</p>
           <p>Ukrainian: Native</p>
         </div>
         <div className={styles.card}>
           <p className={styles.title}>
             <ContactMailRoundedIcon className={styles.icon} />
-            <span>Contacts</span>
+            <span>Social and Contact</span>
           </p>
-          <p>
-            skype: <b className={styles.link}>artyom_volkov_</b>
-          </p>
-          <p>
-            telegram: <b className={styles.link}>@artem_volkov1989</b>
-          </p>
-          <p>
-            email: <b className={styles.link}>artyom.volkow@gmail.com</b>
-          </p>
+          <div className={styles.row}>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://leetcode.com/u/artyomvolkov/"
+              className={styles.link}
+            >
+              #LeetCode
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.hackerrank.com/profile/artyom_volkow"
+              className={styles.link}
+            >
+              #HackerRank
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.codewars.com/users/Artem.Volkov"
+              className={styles.link}
+            >
+              #Codewars
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.linkedin.com/in/artem-volkov-909373109/"
+              className={styles.link}
+            >
+              #LinkedIn
+            </a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/ArtyomVolkov"
+              className={styles.link}
+            >
+              #GitHub
+            </a>
+            <a
+              href="mailto:artyom.volkow@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.link}
+            >
+              #Email
+            </a>
+          </div>
         </div>
       </section>
     </div>

@@ -2,6 +2,7 @@
 
 .puzzleGameWidget {
   @include style-guide.card-shadow;
+  background-color: var(--bg-paper);
   display: flex;
   max-width: fit-content;
 }

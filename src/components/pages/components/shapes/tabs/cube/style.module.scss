@@ -1,6 +1,9 @@
 .cubeWidget {
+  transition: filter 0.3s;
+  background: var(--bg-paper, #ebebeb);
+
   &:global(.rotating) {
-    background: #e4e4e4;
+    filter: contrast(1.1);
     cursor: grabbing;
 
     .cube .plane {

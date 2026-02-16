@@ -22,7 +22,7 @@ type InputProps = {
   startIcon?: React.ReactNode | string;
   endIcon?: React.ReactNode;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
   classes?: {
     container?: string;
     input?: string;

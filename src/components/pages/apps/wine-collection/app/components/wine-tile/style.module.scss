@@ -1,29 +1,29 @@
-@use '../../style.module';
+@use "../../style.module";
 
 .wineAppWineTile {
-  background: white;
+  background: var(--bg-color);
   display: flex;
   gap: 20px;
   padding: 12px;
   border-radius: 12px;
-  border: 1px solid #dadada;
+  border: 1px solid var(--border-color);
   transition: all 0.35s;
 
   &:hover {
-    box-shadow: 0 0 8px 2px #d8d8d8;
+    box-shadow: 0 0 8px 2px var(--border-color);
     cursor: pointer;
   }
 
   &:active {
     opacity: 0.8;
-    box-shadow: 0 0 5px #d8d8d8;
+    box-shadow: 0 0 5px var(--border-color);
   }
 
   .wineImage {
     width: 80px;
     object-fit: contain;
     aspect-ratio: 1/1;
-    background: white;
+    background: var(--bg-paper);
     border-radius: 5px;
   }
 
@@ -36,13 +36,14 @@
 
     .title {
       font-size: 18px;
+      color: var(--primary-color);
       @include style.ellipsis;
     }
 
     .subtitle {
       font-size: 14px;
       font-weight: 500;
-      color: #4c4c4c;
+      color: var(--secondary-color);
       @include style.ellipsis;
     }
 
@@ -58,16 +59,16 @@
     gap: 6px;
     flex-direction: column;
     padding-left: 20px;
-    border-left: 1px solid #dadada;
+    border-left: 1px solid var(--border-color);
     overflow: hidden;
 
     .grape {
-      color: #1e88e5;
+      color: var(--primary-color);
     }
 
     .aroma {
       font-size: 14px;
-      color: #4c4c4c;
+      color: var(--secondary-color);
       @include style.ellipsis;
     }
 
@@ -78,7 +79,7 @@
 
     .taste {
       font-size: 14px;
-      color: #4c4c4c;
+      color: var(--info-color);
       @include style.ellipsis;
     }
   }

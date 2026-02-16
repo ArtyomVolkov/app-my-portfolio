@@ -12,8 +12,14 @@ import Dropdown from "./Dropdown";
 import Modals from "./Modals";
 import Snackbar from "./Snackbar";
 import Inputs from "./Inputs";
+import Themes from "./Themes";
 
 const TABS: NavItems = [
+  {
+    key: "themes",
+    label: "Themes",
+    component: <Themes />,
+  },
   {
     key: "typography",
     label: "Typography",

@@ -4,7 +4,7 @@ import { mergeClassNames } from "@utils/common";
 
 import styles from "./style.module.scss";
 
-type TabItem = {
+export type TabItem = {
   key: string;
   label: string;
   icon?: React.ReactNode | string;
@@ -73,7 +73,7 @@ const Tabs: React.FC<TabProps> = ({
             onClick={() => onSetActiveTab(item)}
           >
             {item.icon && <span className={styles.icon}>{item.icon}</span>}
-            <span> {item.label}</span>
+            <span>{item.label}</span>
           </div>
         ))}
       </div>

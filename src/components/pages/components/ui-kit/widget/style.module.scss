@@ -12,17 +12,17 @@
   .layout {
     width: 100%;
     display: flex;
-    background: #f5f5f5;
+    background: var(--bg-color, #ebebeb);
     border-radius: 16px;
     height: 100%;
     min-height: 400px;
     overflow: hidden;
-    border: 1px solid #ebebeb;
+    border: 1px solid var(--border-color, #ebebeb);
     box-sizing: border-box;
 
     @include style-guide.scroll-style(
       $width: 8px,
-      $track-color: #e0e0e0,
+      $track-color: var(--bg-paper, #ebebeb),
       $thumb-color: var(--text-color),
       $thumb-border: 2px
     );
@@ -35,7 +35,7 @@
       box-sizing: border-box;
       padding: 8px;
       margin: 8px;
-      background: #ffffff;
+      background: var(--bg-paper, #ebebeb);
       border-radius: 8px;
       overflow: auto;
 
@@ -46,9 +46,11 @@
         font-weight: 500;
         transition: all 0.2s ease-in-out;
         user-select: none;
+        color: var(--text-color, #333333);
 
         &:hover {
-          background: #f0f0f0;
+          background: var(--bg-color, #f0f0f0);
+          filter: contrast(100%);
           opacity: 0.8;
         }
 
@@ -57,13 +59,22 @@
         }
 
         &.active {
-          background: #2f74c0;
-          color: #ffffff;
+          background: var(--primary-color, #007bff);
+          color: var(--text-color, #333333);
+          filter: contrast(100%);
 
           &:hover,
           &:active {
             opacity: 1;
           }
+
+          .text {
+            color: var(--bg-color, #333333);
+          }
+        }
+
+        .text {
+          color: var(--text-color, #333333);
         }
       }
     }

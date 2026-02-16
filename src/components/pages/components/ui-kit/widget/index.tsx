@@ -42,7 +42,7 @@ const UiKitWidget = () => {
                   ])}
                   onClick={() => setActiveTab(item.key)}
                 >
-                  {item.label}
+                  <span className={styles.text}>{item.label}</span>
                 </li>
               ))}
             </ul>

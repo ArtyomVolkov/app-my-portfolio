@@ -28,9 +28,9 @@ const generateItems = (size) => {
 }
 
 export enum Level {
-  EASY = 3,
+  EASY = 4,
   MEDIUM = 5,
-  HARD = 7,
+  HARD = 6,
 }
 
 export enum KeyCodes {

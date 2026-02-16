@@ -199,7 +199,6 @@ const Dropdown: React.FC<DropdownProps> = ({
             <span
               key={opt.key}
               className={styles.optionTag}
-              //style={{ maxWidth: `clamp(100px, 100%, ${minWidth}px)` }}
             >
               {opt.label}
             </span>

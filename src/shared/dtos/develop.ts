@@ -65,6 +65,12 @@ export const Tools: { [key in ETool]: ITool } = {
     link: '',
     type: Development.TOOL,
   },
+  vite: {
+    key: ETool.VITE,
+    label: 'Vite',
+    link: '',
+    type: Development.TOOL,
+  },
   grunt: {
     key: ETool.GRUNT,
     label: 'Grunt',
@@ -149,6 +155,12 @@ export const Tools: { [key in ETool]: ITool } = {
     link: '',
     type: Development.TOOL,
   },
+  VSCode: {
+    key: ETool.VS_CODE,
+    label: 'VS Code',
+    link: '',
+    type: Development.TOOL,
+  }
 };
 
 export const Technologies: {[key in ETechnology]: ITechnology } = {
@@ -257,6 +269,11 @@ export const Technologies: {[key in ETechnology]: ITechnology } = {
     label: 'Material UI',
     type: Development.TECHNOLOGY
   },
+  antDesign: {
+    key: ETechnology.ANT_DESIGN,
+    label: 'Ant Design',
+    type: Development.TECHNOLOGY
+  },
   semanticUI: {
     key: ETechnology.SEMANTIC_UI,
     label: 'Semantic UI',
@@ -325,6 +342,16 @@ export const Technologies: {[key in ETechnology]: ITechnology } = {
   jest: {
     key: ETechnology.JEST,
     label: 'Jest',
+    type: Development.TECHNOLOGY
+  },
+  cypress: {
+    key: ETechnology.CYPRESS,
+    label: 'Cypress',
+    type: Development.TECHNOLOGY
+  },
+  detox: {
+    key: ETechnology.DETOX,
+    label: 'Detox',
     type: Development.TECHNOLOGY
   },
   jasmine: {

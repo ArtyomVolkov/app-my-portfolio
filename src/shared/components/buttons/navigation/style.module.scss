@@ -4,11 +4,25 @@
   padding: 6px 12px;
   border-radius: 12px;
   gap: 6px;
-  transition: box-shadow 0.35s;
-  box-shadow: 0 3px 6px 2px #dadada;
+  background-color: var(--bg-paper, #ebebeb);
+  transition: all 0.25s;
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+  box-shadow:  0 10px 8px -5px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s;
 
   &:hover {
-    box-shadow: 0 1px 6px 5px #cfcfcf
+    background-color: var(--bg-color, #ffffff);
+    border-color: var(--primary-color, #007bff);
+    color: var(--primary-color, #007bff);
+
+    .iconBox {
+      background: var(--primary-color, #007bff);
+      color: var(--bg-color, #ffffff);
+    }
+
+    .headline {
+      color: var(--primary-color, #007bff);
+    }
   }
 
   .iconBox {
@@ -16,8 +30,9 @@
     margin-top: 6px;
     padding: 15px;
     border-radius: 100px;
-    background: #343434;
-    color: white;
+    background: var(--bg-color, #ebebeb);
+    color: var(--text-color, #007bff);
+    transition: all 0.3s;
 
     svg {
       font-size: 26px;
@@ -28,8 +43,9 @@
     font-size: 16px;
     margin: 6px 0;
     padding: 0 12px;
+    white-space: nowrap;
     text-transform: capitalize;
-    color: #252525;
+    color: var(--text-color, #333333);
     min-width: 80px;
   }
 }

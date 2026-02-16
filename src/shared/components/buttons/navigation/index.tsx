@@ -1,17 +1,20 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
-import styles from './style.module.scss';
+import { mergeClassNames } from "@utils/common";
+
+import styles from "./style.module.scss";
 
 interface NavButton {
-  path: string,
-  icon: React.ComponentElement<any, any>,
-  title: string,
+  path: string;
+  icon: React.ReactNode;
+  title: string;
+  className?: string;
 }
 
-const NavButton: React.FC<NavButton> = ({ path, title, icon }) => {
+const NavButton: React.FC<NavButton> = ({ path, title, icon, className }) => {
   const navigation = useNavigate();
 
   const navigateTo = () => {
@@ -19,15 +22,15 @@ const NavButton: React.FC<NavButton> = ({ path, title, icon }) => {
   };
 
   return (
-    <Button className={styles.navButton} onClick={navigateTo} color="inherit">
-      <div className={styles.iconBox}>
-        { icon }
-      </div>
-      <p className={styles.headline}>
-        { title }
-      </p>
+    <Button
+      className={mergeClassNames([styles.navButton, className])}
+      onClick={navigateTo}
+      color="inherit"
+    >
+      <div className={styles.iconBox}>{icon}</div>
+      <p className={styles.headline}>{title}</p>
     </Button>
   );
-}
+};
 
 export default NavButton;
