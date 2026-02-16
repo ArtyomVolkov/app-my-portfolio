@@ -34,7 +34,7 @@ const Summary = () => {
           <p className={styles.subtitle}>Senior FrontEnd Software Engineer</p>
           <span className={styles.description}>
             Software Engineer (13+ years) with vast development experience of
-            web applications using libs/frameworks such as: Node, Next, Next,
+            web applications using libs/frameworks such as: Node, Nest, Next,
             React, ReactNative, Capacitor, Flutter, Angular, AngularJS,
             BackboneJS.
             <br />

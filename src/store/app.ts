@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type Theme = 'light' | 'dark' | 'light-purple' | 'dark-azure' | null;
+export type Theme = 'light' | 'dark' | 'light-purple' | 'dark-azure';
 
 export interface IAppStore {
   layout: {
@@ -22,10 +22,10 @@ export const useAppStore = create<IAppStore>((set) => ({
       layout: { ...state.layout, fullWidth: !state.layout.fullWidth },
     }))
   },
-  setTheme: (theme) =>{
-    window.localStorage.setItem('app-theme', theme || '');
-    document.documentElement.setAttribute('data-theme', theme || '');
-    
+  setTheme: (theme) => {
+    window.localStorage.setItem('app-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+
     set(() => ({ theme }));
   },
   setFullWidth: (value: boolean) =>

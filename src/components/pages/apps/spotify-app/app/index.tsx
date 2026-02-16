@@ -33,7 +33,6 @@ const SpotifyApp = () => {
         loading && styles.loading,
       ])}
       src={process.env.SPOTIFY_APP_URI}
-      onLoadStart={() => setLoading(true)}
       onLoad={() => setLoading(false)}
       title="Spotify App"
       allow="autoplay; encrypted-media; fullscreen;"

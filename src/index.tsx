@@ -1,7 +1,7 @@
 import React from "react";
-
 import { createRoot } from "react-dom/client";
 
+import { Theme } from "@store/app";
 import App from "@components/app";
 
 const serviceWorkerInit = () => {
@@ -18,7 +18,7 @@ const serviceWorkerInit = () => {
 };
 
 const setTheme = () => {
-  const theme = window.localStorage.getItem("app-theme") as "light" | "dark" | "light-gray" | "dark-gray" | null || "light";
+  const theme = (window.localStorage.getItem("app-theme") as Theme) || "light";
   document.documentElement.setAttribute("data-theme", theme);
 };
 

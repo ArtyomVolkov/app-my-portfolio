@@ -155,14 +155,6 @@
       }
     }
 
-    input[type="number"] {
-
-      &::-webkit-inner-spin-button,
-      &::-webkit-outer-spin-button {
-        color: red;
-      }
-    }
-
     input,
     textarea {
       display: block;

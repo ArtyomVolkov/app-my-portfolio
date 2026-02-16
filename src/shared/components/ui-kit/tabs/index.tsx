@@ -9,7 +9,11 @@ export type TabItem = {
   label: string;
   icon?: React.ReactNode | string;
   disabled?: boolean;
-  component: React.ReactNode | string | Array<React.ReactNode | string>;
+  component:
+    | React.ReactNode
+    | React.JSX.Element
+    | string
+    | Array<React.ReactNode | string | React.JSX.Element>;
 };
 
 type TabProps = {
@@ -33,7 +37,7 @@ const Tabs: React.FC<TabProps> = ({
   classes,
 }) => {
   const [activeTab, setActiveTab] = React.useState<string>(
-    defaultActive || items[0]?.key || ""
+    defaultActive || items[0]?.key || "",
   );
 
   const onSetActiveTab = (item: TabItem) => {
