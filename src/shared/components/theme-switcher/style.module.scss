@@ -1,0 +1,79 @@
+.ThemeSwitcher {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  width: fit-content;
+
+  &:hover {
+    .circleShadow {
+      opacity: 1;
+    }
+
+    .switcherBox {
+      .circleBox {
+        &.checked {
+          svg {
+            color: var(--bg-color, #333333);
+          }
+        }
+      }
+    }
+  }
+
+  .switcherBox {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border: 1px solid var(--border-color, #a5a5a5);
+    border-radius: 30px;
+    width: fit-content;
+    max-width: 200px;
+    background-color: var(--bg-color, #ebebeb);
+    z-index: 10;
+
+    .circleBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+
+      svg {
+        font-size: 20px;
+        color: var(--text-color, #333333);
+        transition: color 0.5s;
+      }
+
+      &.checked {
+        background: var(--primary-color, #007bff);
+        transition: background-color 0.5s;
+
+        svg {
+          color: var(--bg-color, #333333);
+        }
+      }
+    }
+  }
+
+  .circleShadow {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color, #007bff);
+    border-radius: 50%;
+    left: -3px;
+    opacity: 0;
+    transition:
+      transform 0.35s,
+      opacity 0.3s;
+
+    &.transform {
+      transform: translateX(35px);
+    }
+  }
+}

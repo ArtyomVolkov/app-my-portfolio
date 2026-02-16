@@ -1,19 +1,10 @@
 .appHeader {
   display: flex;
   align-items: center;
-  padding: 12px 14px;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--border-color);
-  min-height: 35px;
   background: var(--bg-paper, #fbfbfb);
   z-index: 90;
-}
-
-@media screen and (max-width: 1023px) {
-  .appHeader {
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .appHeader {
-  }
 }
