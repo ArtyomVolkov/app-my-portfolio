@@ -2,10 +2,10 @@
   "compileOnSave": false,
   "sourceMap": true,
   "noImplicitAny": true,
-  "exclude": ["node_modules", "build"],
   "include": ["./src", "webpack.config.ts", "server.js", "types"],
+  "exclude": ["node_modules", "build", "server.js", "src/service-worker.js"],
   "compilerOptions": {
-    "typeRoots" : ["node_modules/@types", "src/types"],
+    "typeRoots": ["node_modules/@types", "src/types"],
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "ESNext",
@@ -19,21 +19,18 @@
     "downlevelIteration": true,
     "paths": {
       "*": ["src/*"],
-      "@api/*" : ["api/*"],
-      "@assets/*" : ["assets/*"],
-      "@pages/*" : ["components/pages/*"],
-      "@config/*" : ["config/*"],
-      "@constants/*" : ["constants/*"],
-      "@components/*" : ["components/*"],
-      "@services/*" : ["services/*"],
-      "@shared/*" : ["shared/*"],
-      "@store/*" : ["store/*"],
-      "@utils/*" : ["utils/*"],
+      "@assets/*": ["assets/*"],
+      "@api/*": ["api/*"],
+      "@app/*": ["app/*"],
+      "@pages/*": ["app/pages/*"],
+      "@store/*": ["app/store/*"],
+      "@config/*": ["config/*"],
+      "@constants/*": ["constants/*"],
+      "@components/*": ["components/*"],
+      "@services/*": ["services/*"],
+      "@shared/*": ["shared/*"],
+      "@utils/*": ["utils/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable"
-    ],
-  },
+    "lib": ["esnext", "dom", "dom.iterable"]
+  }
 }
