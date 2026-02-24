@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import debounce from 'lodash/debounce';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from 'react-router';
 
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -26,33 +26,40 @@ const WineAppSignUpPage = () => {
   const { actions } = useStore((store) => store);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    email: string | null;
+    password: string | null;
+    confirmPassword: string | null;
+  }>({
     email: null,
     password: null,
     confirmPassword: null,
   });
-  const [emailValidation, setEmailValidation] = useState({
+  const [emailValidation, setEmailValidation] = useState<{
+    loading: boolean;
+    isValid: boolean;
+  }>({
     loading: false,
     isValid: true,
   });
 
-  const onCheckEmail = async (value) => {
+  const onCheckEmail = async (value: string) => {
     if (!value || !value.trim().length) {
       setEmailValidation({
         ...emailValidation,
-        loading: false
+        loading: false,
       });
       return;
     }
 
     setEmailValidation({
       ...emailValidation,
-      loading: true
+      loading: true,
     });
     const isValid = await checkEmail(value.trim());
     setEmailValidation({
       isValid,
-      loading: false
+      loading: false,
     });
   };
 
@@ -61,10 +68,10 @@ const WineAppSignUpPage = () => {
     [debounce]
   );
 
-  const onChangeFormField = (name, value) => {
+  const onChangeFormField = (name: string, value: string) => {
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
     if (name === 'email') {
       setEmailValidation({
@@ -76,9 +83,9 @@ const WineAppSignUpPage = () => {
   };
 
   const onSignUp = async () => {
-    setLoading(true)
+    setLoading(true);
     setError('');
-    const error = await actions.onSignUp(formData.email, formData.password);
+    const error = await actions.onSignUp(formData.email!, formData.password!);
     setLoading(false);
 
     if (error) {
@@ -93,8 +100,13 @@ const WineAppSignUpPage = () => {
   };
 
   const isDisableToSubmit = () => {
-    return emailValidation.loading || !!error || !emailValidation.isValid
-      || !formData.password || !formData.email?.trim()?.length
+    return (
+      emailValidation.loading ||
+      !!error ||
+      !emailValidation.isValid ||
+      !formData.password ||
+      !formData.email?.trim()?.length
+    );
   };
 
   const renderEmailAdornment = () => {
@@ -107,14 +119,19 @@ const WineAppSignUpPage = () => {
       return <CheckCircleOutlineRoundedIcon className={styles.checkIcon} />;
     }
     if (!emailValidation.isValid && email.length > 0) {
-      return <CancelRoundedIcon className={styles.errorIcon} />
+      return <CancelRoundedIcon className={styles.errorIcon} />;
     }
-    return null
+    return null;
   };
 
   return (
     <div className={styles.wineAppSignUpPage}>
-      <form className={mergeClassNames([styles.signUpForm, loading && styles.loading])}>
+      <form
+        className={mergeClassNames([
+          styles.signUpForm,
+          loading && styles.loading,
+        ])}
+      >
         <AppLogo />
         <TextField
           placeholder="email"
@@ -125,8 +142,8 @@ const WineAppSignUpPage = () => {
           size="small"
           slotProps={{
             input: {
-              endAdornment: renderEmailAdornment()
-            }
+              endAdornment: renderEmailAdornment(),
+            },
           }}
           onChange={(e) => onChangeFormField('email', e.target.value)}
         />
@@ -137,7 +154,7 @@ const WineAppSignUpPage = () => {
           label="Password"
           size="small"
           inputProps={{
-            autoComplete: 'new-password'
+            autoComplete: 'new-password',
           }}
           onChange={(e) => onChangeFormField('password', e.target.value)}
         />
@@ -149,21 +166,14 @@ const WineAppSignUpPage = () => {
         >
           Sign Up
         </Button>
-        {
-          error && (
-            <Alert severity="error">{error}</Alert>
-          )
-        }
+        {error && <Alert severity="error">{error}</Alert>}
         <Divider />
-        <Button
-          variant="text"
-          onClick={toLoginPage}
-        >
+        <Button variant="text" onClick={toLoginPage}>
           Back to Log In
         </Button>
       </form>
     </div>
-  )
+  );
 };
 
 export default WineAppSignUpPage;

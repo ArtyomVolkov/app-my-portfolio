@@ -1,4 +1,3 @@
-import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import LiquorIcon from '@mui/icons-material/Liquor';
 
@@ -11,7 +10,7 @@ const AppLogo = ({ className = '' }) => {
     <Avatar className={mergeClassNames([styles.wineAppAvatar, className])}>
       <LiquorIcon className={styles.icon} />
     </Avatar>
-  )
+  );
 };
 
 export default AppLogo;

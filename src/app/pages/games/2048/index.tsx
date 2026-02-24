@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Main from '@app/layout/main';
 import TechnologyList from '@shared/components/lists/technologies';
 import Game2048 from '@pages/games/2048/game';

@@ -1,25 +1,19 @@
 import { Suspense, lazy } from 'react';
 import { Route } from 'react-router';
 
+import Loader from '@app/layout/loader';
+import ErrorBoundary from '@shared/components/error-boundary';
+
 const Apps = lazy(() => import('@pages/apps'));
 const WineCollection = lazy(() => import('@pages/apps/wine-collection'));
 const SpotifyApp = lazy(() => import('@pages/apps/spotify-app'));
 
-import ErrorBoundary from '@shared/components/error-boundary';
-
 export default [
-  <Route
-    path="/apps"
-    element={
-      <Suspense fallback="">
-        <Apps />
-      </Suspense>
-    }
-  />,
+  <Route path="/apps" element={<Apps />} />,
   <Route
     path="/apps/wine-collection/*"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <WineCollection />
         </ErrorBoundary>
@@ -29,7 +23,7 @@ export default [
   <Route
     path="/apps/spotify-app/*"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <SpotifyApp />
         </ErrorBoundary>

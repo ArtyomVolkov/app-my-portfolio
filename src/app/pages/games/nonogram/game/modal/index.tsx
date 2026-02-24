@@ -1,11 +1,16 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Button from '@mui/material/Button';
 
 import Modal from '@shared/components/modals/basic';
 import Preview from '@pages/games/nonogram/game/preview';
 
-import { GameContext, Action, IState, TDispatch } from '@pages/games/nonogram/game/context';
+import {
+  GameContext,
+  Action,
+  type IState,
+  type TDispatch,
+} from '@pages/games/nonogram/game/context';
 import { NONOGRAMS } from '@pages/games/nonogram/game/data';
 
 import styles from './style.module.scss';
@@ -14,7 +19,7 @@ const GameModal = () => {
   const [crossword, dispatch] = useContext<[IState, TDispatch]>(GameContext);
 
   useEffect(() => {
-    onCheckOpenModal()
+    onCheckOpenModal();
   }, [crossword.isFinish]);
 
   const onCloseModal = () => {
@@ -39,7 +44,7 @@ const GameModal = () => {
           Congratulations, you decrypted that crossword.
         </p>
         <div className={styles.crosswordPreview}>
-          <p className={styles.title}>{ crossword.name }</p>
+          <p className={styles.title}>{crossword.name}</p>
           <div className={styles.previewWrap}>
             <Preview initialDraw className={styles.preview} />
           </div>

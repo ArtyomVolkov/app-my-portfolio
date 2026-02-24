@@ -9,7 +9,7 @@ import styles from './style.module.scss';
 interface IMatrix {
   size: [v: number, h: number],
   blank: Array<Array<number>>,
-  onBoxEnter: (row, cell) => void,
+  onBoxEnter: (row: number, cell: number) => void,
 }
 
 const Matrix: React.FC<IMatrix> = ({ size, blank, onBoxEnter }) => {
@@ -27,7 +27,7 @@ const Matrix: React.FC<IMatrix> = ({ size, blank, onBoxEnter }) => {
             ])}
           >
             {
-              item.map((item, cell, list) => (
+              item.map((_: unknown, cell: number, list: Array<number>) => (
                 <CellBox
                   key={cell}
                   row={row}

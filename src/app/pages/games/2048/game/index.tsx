@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
-import Button from "@shared/components/ui-kit/button";
+import React, { useEffect, useState, useMemo, useRef } from 'react';
+import Button from '@shared/components/ui-kit/button';
 
 import {
   saveGameData,
@@ -12,51 +12,51 @@ import {
   getCellIndex,
   getScore,
   setAnimation,
-} from "./actions";
+} from './actions';
 
-import { Grid, MergeDirection } from "./types";
-import { GAME_DATA, CELLS } from "./data";
+import { type Grid, MergeDirection } from './types';
+import { GAME_DATA, CELLS } from './data';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const Game2048 = () => {
-  const gridRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement | null>(null);
   const [grid, setGrid] = useState<Grid>(GAME_DATA);
   const [gameOver, setGameOver] = useState(false);
-  const [oldData, setOldData] = useState(null);
+  const [oldData, setOldData] = useState<Grid | null>(null);
 
   useEffect(() => {
     setInitialData();
   }, []);
 
   useEffect(() => {
-    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener('keydown', onKeyDown);
 
     return () => {
-      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener('keydown', onKeyDown);
     };
   }, [grid]);
 
   const score = useMemo(() => getScore(grid), [grid]);
 
-  const onKeyDown = (e) => {
+  const onKeyDown = (e: KeyboardEvent) => {
     if (gameOver) {
       return;
     }
     switch (e.key) {
-      case "ArrowRight": {
+      case 'ArrowRight': {
         shiftToRight();
         break;
       }
-      case "ArrowLeft": {
+      case 'ArrowLeft': {
         shiftToLeft();
         break;
       }
-      case "ArrowUp": {
+      case 'ArrowUp': {
         shiftToTop();
         break;
       }
-      case "ArrowDown": {
+      case 'ArrowDown': {
         shiftToDown();
         break;
       }
@@ -96,7 +96,7 @@ const Game2048 = () => {
 
   const generateValue = (data: Grid) => {
     const cellIndex = getCellIndex(data);
-    const hasChange = data.some((item, index) => grid[index] !== data[index]);
+    const hasChange = data.some((_, index) => grid[index] !== data[index]);
 
     if (!hasChange || cellIndex < 0) {
       return;
@@ -107,12 +107,20 @@ const Game2048 = () => {
   };
 
   const setAppearAnimation = (cellIndex: number) => {
-    setAnimation(gridRef, cellIndex, styles.appearAnimation);
+    setAnimation(
+      gridRef as React.RefObject<HTMLDivElement>,
+      cellIndex,
+      styles.appearAnimation
+    );
   };
 
   const setMergeAnimation = (indexes: Array<number>) => {
     indexes.forEach((item) => {
-      setAnimation(gridRef, item, styles.mergeAnimation);
+      setAnimation(
+        gridRef as React.RefObject<HTMLDivElement>,
+        item,
+        styles.mergeAnimation
+      );
     });
   };
 
@@ -237,7 +245,7 @@ const Game2048 = () => {
         ref={gridRef}
         className={styles.grid}
         style={{
-          borderColor: "black",
+          borderColor: 'black',
           gridTemplateColumns: `repeat(${CELLS}, 80px)`,
         }}
       >

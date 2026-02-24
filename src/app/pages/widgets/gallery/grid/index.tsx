@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import LoadMore from '@pages/widgets/gallery/load-more';
-import ImageCard from '@pages/widgets/gallery/image-card';
+import ImageCard, { type Image } from '@pages/widgets/gallery/image-card';
 import PreviewModal from '@pages/widgets/gallery/preview';
 
 import { getImages } from '@api/pexels';
@@ -11,16 +11,19 @@ import styles from '../style.module.scss';
 
 const GalleryGrid = () => {
   const [loading, setLoading] = useState(true);
-  const [photos, setPhotos] = useState([]);
-  const pagination = useRef({page: 1, perPage: 20, hasMore: false});
-  const [modal, setModal] = useState({open: false, data: null});
+  const [photos, setPhotos] = useState<Image[]>([]);
+  const pagination = useRef({ page: 1, perPage: 20, hasMore: false });
+  const [modal, setModal] = useState<{ open: boolean; data: Image | null }>({
+    open: false,
+    data: null,
+  });
 
   useEffect(() => {
     fetchImages().then();
   }, []);
 
   const fetchImages = async () => {
-    const {page, perPage} = pagination.current;
+    const { page, perPage } = pagination.current;
 
     const data = await getImages(page, perPage);
 
@@ -33,7 +36,7 @@ const GalleryGrid = () => {
   };
 
   const onLoadMore = async () => {
-    const {page, perPage} = pagination.current;
+    const { page, perPage } = pagination.current;
 
     const data = await getImages(page + 1, perPage);
 
@@ -47,7 +50,7 @@ const GalleryGrid = () => {
     setPhotos(newData);
   };
 
-  const onOpenPreview = (data) => {
+  const onOpenPreview = (data: Image) => {
     setModal({
       open: true,
       data,
@@ -55,7 +58,7 @@ const GalleryGrid = () => {
   };
 
   const onClosePreview = () => {
-    setModal({open: false, data: null});
+    setModal({ open: false, data: null });
   };
 
   if (!photos.length && loading) {
@@ -69,15 +72,9 @@ const GalleryGrid = () => {
   return (
     <div className={styles.galleryGrid}>
       <div className={styles.grid}>
-        {
-          photos.map((item) => (
-            <ImageCard
-              key={uuid()}
-              data={item}
-              onPreview={onOpenPreview}
-            />
-          ))
-        }
+        {photos.map((item) => (
+          <ImageCard key={uuid()} data={item} onPreview={onOpenPreview} />
+        ))}
       </div>
       <LoadMore
         loading={loading}
@@ -90,7 +87,7 @@ const GalleryGrid = () => {
         onClose={onClosePreview}
       />
     </div>
-  )
+  );
 };
 
 export default GalleryGrid;

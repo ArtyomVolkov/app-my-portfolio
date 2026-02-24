@@ -1,8 +1,10 @@
 import { action, makeAutoObservable, observable } from 'mobx';
 import cloneDeep from 'lodash/cloneDeep';
 
-import SudokuGenerator, { Level } from '@pages/games/sudoku/game/generator';
-import { ModalType } from '@pages/games/sudoku/game/modal';
+import SudokuGenerator, { type Level } from '@pages/games/sudoku/game/generator';
+import { ModalType, type ModalType as TModal } from '@pages/games/sudoku/game/modal';
+
+export type RowData = [block: number, cell: number];
 
 interface IMatrix {
   filled: Array<Array<number>>,
@@ -15,13 +17,13 @@ interface ISudoku {
   matrix: IMatrix,
   hasChange: boolean,
   hints: number,
-  active: [block: number, cell: number],
+  active: RowData,
   history: Array<{ block: number, cell: number, value: number }>,
-  modal: { open: boolean, type: ModalType, onConfirm?: () => void},
+  modal: { open: boolean, type: TModal, onConfirm?: () => void},
   setNewGame: (level: Level) => void,
-  setActive: (data) => void,
-  setModal: (data) => void,
-  fill: () => void,
+  setActive: (data: RowData) => void,
+  setModal: (data: { open: boolean, type: TModal, onConfirm?: () => void}) => void,
+  fill: (value: number) => void,
   hint: () => void,
   undo: () => void,
   onChangeLevel: (level: Level) => void,
@@ -34,7 +36,7 @@ class SudokuStore implements ISudoku {
   matrix: IMatrix;
   hints: number;
   hasChange: boolean;
-  active: [block: number, cell: number];
+  active: RowData;
   history: Array<{ block: number; cell: number; value: number }>;
   modal: { open: boolean; type: ModalType; onConfirm?: () => void };
 
@@ -58,7 +60,20 @@ class SudokuStore implements ISudoku {
       onCloseModal: action,
     });
 
+    this.hints = 5;
+    this.matrix = {
+      filled: [],
+      blank: [],
+      data: []
+    }
+    this.hasChange = false;
     this.level = level;
+    this.active = [-1, -1];
+    this.history = [];
+    this.modal = {
+      open: false,
+      type: null,
+    }
     this.resetData();
   }
 
@@ -89,7 +104,7 @@ class SudokuStore implements ISudoku {
     });
   }
 
-  onChangeLevel(level): void {
+  onChangeLevel(level: Level): void {
     if (!this.hasChange) {
       this.setNewGame(level);
       return;
@@ -117,7 +132,7 @@ class SudokuStore implements ISudoku {
     this.setModal({
       open: false,
       type: null,
-      onConfirm: null,
+      onConfirm: undefined,
     });
   }
 
@@ -156,15 +171,15 @@ class SudokuStore implements ISudoku {
     this.checkIsFinish();
   }
 
-  setActive(active): void {
+  setActive(active: RowData): void {
     this.active = active;
   }
 
-  setModal(data): void {
+  setModal(data: { open: boolean, type: ModalType, onConfirm?: (() => void) }): void {
     this.modal = data;
   }
 
-  setNewGame(level): void {
+  setNewGame(level: Level): void {
     const sudoku = this.generator.generate(level);
 
     this.resetData();

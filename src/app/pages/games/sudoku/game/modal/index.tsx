@@ -4,14 +4,16 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Close from '@mui/icons-material/Close';
 
-import { Action } from '@pages/games/sudoku/game';
+import { Action, type TAction } from '@pages/games/sudoku/game';
 
 import styles from './style.module.scss';
 
-export enum ModalType {
-  CONFIRM,
-  FINISH,
-}
+export const ModalType = {
+  CONFIRM: 'CONFIRM',
+  FINISH: 'FINISH',
+};
+
+export type ModalType = typeof ModalType[keyof typeof ModalType] | null;
 
 interface Modal {
   data: {
@@ -19,7 +21,7 @@ interface Modal {
     type: ModalType,
     onConfirm?: () => void,
   }
-  onAction: (type: Action) => void,
+  onAction: (action: TAction) => void,
 }
 
 const Modal: React.FC<Modal> = ({ data, onAction }) => {

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
@@ -14,13 +13,17 @@ const UserPage = () => {
   const navigate = useNavigate();
   const { user, wineList, actions } = useStore((store) => store);
 
-  return (
-    <div className={styles.wineAppUserPage}>
-      <IconButton className={styles.backButton} onClick={() => navigate(-1)}>
-        <ArrowBackRoundedIcon />
-      </IconButton>
-      <div className={styles.userDetails}>
-        <img src={user.photoURL} alt={user.displayName} className={styles.userImage} />
+  const renderUserDetails = () => {
+    if (!user) {
+      return null;
+    }
+    return (
+      <>
+        <img
+          src={user.photoURL}
+          alt={user.displayName}
+          className={styles.userImage}
+        />
         <span className={styles.displayName}>{user.displayName}</span>
         <span className={styles.email}>{user.email}</span>
         <div className={styles.info}>
@@ -43,13 +46,27 @@ const UserPage = () => {
           </div>
         </div>
         <div className={styles.actions}>
-          <Button variant="outlined" color="inherit" onClick={actions.onSignOut} startIcon={<ExitToAppRoundedIcon />}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={actions.onSignOut}
+            startIcon={<ExitToAppRoundedIcon />}
+          >
             Logout
           </Button>
         </div>
-      </div>
+      </>
+    );
+  };
+
+  return (
+    <div className={styles.wineAppUserPage}>
+      <IconButton className={styles.backButton} onClick={() => navigate(-1)}>
+        <ArrowBackRoundedIcon />
+      </IconButton>
+      <div className={styles.userDetails}>{renderUserDetails()}</div>
     </div>
   );
-}
+};
 
 export default UserPage;

@@ -25,6 +25,7 @@
 
   .stackTrace {
     max-height: 200px;
+    min-height: 4em;
     --shadow-color: var(--bg-paper, #ebebeb);
   }
 }

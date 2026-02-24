@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 
 import ContextProvider, { Action, GameContext } from './context';
 
@@ -15,16 +15,16 @@ const GameWidget = () => {
 
     return () => {
       dispatch({ type: Action.CLEAR_DATA });
-    }
+    };
   }, []);
 
-  const [crossword, dispatch] = useContext(GameContext);
-  const verticalPanelRef = useRef(null);
-  const horizontalPanelRef = useRef(null);
+  const [crossword, dispatch] = useContext(GameContext) as GameContext;
+  const verticalPanelRef = useRef<{ setHoverLine: (row: number, cell: number) => void }>(null);
+  const horizontalPanelRef = useRef<{ setHoverLine: (row: number, cell: number) => void }>(null);
 
-  const onBoxHover = (row, cell) => {
-    verticalPanelRef.current.setHoverLine(row, cell);
-    horizontalPanelRef.current.setHoverLine(row, cell);
+  const onBoxHover = (row: number, cell: number) => {
+    verticalPanelRef.current?.setHoverLine(row, cell);
+    horizontalPanelRef.current?.setHoverLine(row, cell);
   };
 
   if (!crossword.size) {
@@ -33,7 +33,7 @@ const GameWidget = () => {
 
   const renderContent = () => {
     if (crossword.loading) {
-      return <span>Loading...</span>
+      return <span>Loading...</span>;
     }
 
     return (
@@ -54,24 +54,18 @@ const GameWidget = () => {
             refItem={horizontalPanelRef}
           />
           <Area
-            size={crossword.size}
+            size={crossword.size as [number, number]}
             blank={crossword.blank}
             onBoxHover={onBoxHover}
           />
         </div>
-        {
-          crossword.isFinish && <div className={styles.finishViewWrap} />
-        }
+        {crossword.isFinish && <div className={styles.finishViewWrap} />}
       </>
-    )
-  }
+    );
+  };
 
-  return (
-    <section className={styles.gameWidget}>
-      { renderContent() }
-    </section>
-  );
-}
+  return <section className={styles.gameWidget}>{renderContent()}</section>;
+};
 
 export default () => (
   <ContextProvider>

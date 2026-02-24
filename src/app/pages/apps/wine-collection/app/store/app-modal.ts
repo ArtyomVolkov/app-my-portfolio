@@ -1,34 +1,35 @@
 import { create } from 'zustand';
 
 export type TModal = {
-  name: string,
-  open?: boolean,
-  content?: React.ReactNode,
+  name: string;
+  open?: boolean;
+  content?: React.ReactNode;
   props?: {
-    onClose?: (name: string) => void
-  }
-}
+    onClose?: (name: string) => void;
+  };
+};
 
 type TState = {
-  modals: Array<TModal>,
-}
+  modals: Array<TModal>;
+};
 
 type TActions = {
-  openModal: (data: TModal) => void,
-  closeModal: (name: string) => void,
-}
+  openModal: (data: TModal) => void;
+  closeModal: (name: string) => void;
+};
 
-export const useAppModal = create<TState&TActions>((set, get) => ({
+export const useAppModal = create<TState & TActions>((set, get) => ({
   modals: [],
   closeModal: (name) => {
     set({
       modals: get().modals.map((item) =>
-        item.name === name ?  {...item, open: false } : item)
+        item.name === name ? { ...item, open: false } : item
+      ),
     });
 
     const timerId = setTimeout(() => {
       set({
-        modals: get().modals.filter((item) => item.name !== name)
+        modals: get().modals.filter((item) => item.name !== name),
       });
       clearTimeout(timerId);
     }, 700);
@@ -40,5 +41,5 @@ export const useAppModal = create<TState&TActions>((set, get) => ({
       return;
     }
     set({ modals: [...modals, { ...data, open: true }] });
-  }
+  },
 }));

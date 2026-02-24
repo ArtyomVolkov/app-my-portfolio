@@ -1,6 +1,7 @@
-import React, { Suspense, lazy } from 'react';
-import { Route } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { Route } from 'react-router';
 
+import Loader from '@app/layout/loader';
 const Games = lazy(() => import('@pages/games'));
 const Puzzle = lazy(() => import('@pages/games/puzzle'));
 const Sudoku = lazy(() => import('@pages/games/sudoku'));
@@ -10,18 +11,11 @@ const Katana = lazy(() => import('@pages/games/nonogram'));
 import ErrorBoundary from '@shared/components/error-boundary';
 
 export default [
-  <Route
-    path="/games"
-    element={
-      <Suspense fallback="">
-        <Games />
-      </Suspense>
-    }
-  />,
+  <Route path="/games" element={<Games />} />,
   <Route
     path="/games/puzzle"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Puzzle />
         </ErrorBoundary>
@@ -31,7 +25,7 @@ export default [
   <Route
     path="/games/2048"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Game2048 />
         </ErrorBoundary>
@@ -41,7 +35,7 @@ export default [
   <Route
     path="/games/sudoku"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Sudoku />
         </ErrorBoundary>
@@ -51,7 +45,7 @@ export default [
   <Route
     path="/games/nonogram"
     element={
-      <Suspense fallback="loading...">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Katana />
         </ErrorBoundary>

@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Route } from 'react-router';
 
+import Loader from '@app/layout/loader';
 import ErrorBoundary from '@shared/components/error-boundary';
 
 const Profile = lazy(() => import('@pages/profile'));
@@ -9,7 +10,7 @@ export default [
   <Route
     path="/"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Profile />
         </ErrorBoundary>
@@ -19,7 +20,7 @@ export default [
   <Route
     path="/profile"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Profile />
         </ErrorBoundary>

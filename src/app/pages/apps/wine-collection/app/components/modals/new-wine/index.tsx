@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import Typography  from '@mui/material/Typography';
+import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import MenuItem from '@mui/material/MenuItem';
-import Select  from '@mui/material/Select';
+import Select from '@mui/material/Select';
 
 import { mergeClassNames } from '@utils/common';
 
-import { TWine } from '@pages/apps/wine-collection/app/dto';
+import { type TWine } from '@pages/apps/wine-collection/app/dto';
 
 import styles from './style.module.scss';
 
-const AddNewWineModal = ({ onClose, onSubmit }) => {
+type TAddNewWineModal = {
+  onClose: () => void;
+  onSubmit: (data: Partial<TWine>) => Promise<string | null>;
+};
+
+const AddNewWineModal: React.FC<TAddNewWineModal> = ({ onClose, onSubmit }) => {
   const snackbar = useSnackbar();
   const [submitting, setSubmitting] = useState(false);
   const [formFields, setFormFields] = useState<Partial<TWine>>({
@@ -33,13 +38,13 @@ const AddNewWineModal = ({ onClose, onSubmit }) => {
     taste: '',
     price: '',
     description: '',
-    country: ''
+    country: '',
   });
 
-  const onChangeFormField = (name, value) => {
+  const onChangeFormField = (name: keyof TWine, value: TWine[keyof TWine]) => {
     setFormFields({
       ...formFields,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -51,7 +56,7 @@ const AddNewWineModal = ({ onClose, onSubmit }) => {
     if (error) {
       snackbar.enqueueSnackbar({
         variant: 'error',
-        message: error
+        message: error,
       });
       return;
     }
@@ -63,7 +68,12 @@ const AddNewWineModal = ({ onClose, onSubmit }) => {
   };
 
   return (
-    <div className={mergeClassNames([styles.wineAppNewWineModal, submitting && styles.loading])}>
+    <div
+      className={mergeClassNames([
+        styles.wineAppNewWineModal,
+        submitting && styles.loading,
+      ])}
+    >
       <div className={styles.header}>
         <span className={styles.title}>Add new wine</span>
       </div>
@@ -73,8 +83,11 @@ const AddNewWineModal = ({ onClose, onSubmit }) => {
             <Typography>Rating</Typography>
             <Rating
               value={formFields.rate}
-              max={10} precision={1}
-              onChange={(e, value) => onChangeFormField('rate', value )}
+              max={10}
+              precision={1}
+              onChange={(_, value) =>
+                onChangeFormField('rate', value as number)
+              }
             />
           </div>
           <TextField
@@ -97,18 +110,10 @@ const AddNewWineModal = ({ onClose, onSubmit }) => {
               label="Type"
               onChange={(e) => onChangeFormField('color', e.target.value)}
             >
-              <MenuItem value="red">
-                Red
-              </MenuItem>
-              <MenuItem value="white">
-                White
-              </MenuItem>
-              <MenuItem value="sparkling">
-                Sparkling
-              </MenuItem>
-              <MenuItem value="rose">
-                Rose
-              </MenuItem>
+              <MenuItem value="red">Red</MenuItem>
+              <MenuItem value="white">White</MenuItem>
+              <MenuItem value="sparkling">Sparkling</MenuItem>
+              <MenuItem value="rose">Rose</MenuItem>
             </Select>
           </FormControl>
           <TextField
@@ -182,12 +187,16 @@ const AddNewWineModal = ({ onClose, onSubmit }) => {
         </form>
       </div>
       <div className={styles.actions}>
-        <Button variant="outlined" onClick={onClose}>Cancel</Button>
+        <Button variant="outlined" onClick={onClose}>
+          Cancel
+        </Button>
         <Button
           variant="contained"
           onClick={onSubmitForm}
           loading={submitting}
-          disabled={!formFields.brand || !formFields.fullName || !formFields.color}
+          disabled={
+            !formFields.brand || !formFields.fullName || !formFields.color
+          }
         >
           Add
         </Button>

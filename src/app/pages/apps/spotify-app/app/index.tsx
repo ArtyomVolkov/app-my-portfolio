@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { mergeClassNames } from "@utils/common";
+import { mergeClassNames } from '@utils/common';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const SPOTYFY_APP_URI = import.meta.env.VITE_SPOTIFY_APP_URI;
 
@@ -16,18 +16,17 @@ type JSONValue =
 
 const SpotifyApp = () => {
   const [loading, setLoading] = useState(true);
-  console.log("SPOTYFY_APP_URI", SPOTYFY_APP_URI);
 
   useEffect(() => {
-    document.addEventListener("message", onMessage);
+    window.addEventListener('message', onMessage);
 
     return () => {
-      document.removeEventListener("message", onMessage);
+      window.removeEventListener('message', onMessage);
     };
   }, []);
 
   const onMessage = (event: MessageEvent<JSONValue>) => {
-    console.log("Received message from iframe:", event.data);
+    console.log('Received message from iframe:', event.data);
   };
 
   return (

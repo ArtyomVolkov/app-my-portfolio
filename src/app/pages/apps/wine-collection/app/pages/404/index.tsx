@@ -1,5 +1,4 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import Button from '@mui/material/Button';
 import FindInPageOutlinedIcon from '@mui/icons-material/FindInPageOutlined';
@@ -18,10 +17,12 @@ const WineAppPage404 = () => {
         <span className={styles.description}>
           Sorry, we can't find the page you were looking for.
         </span>
-        <Button onClick={() => navigate('/apps/wine-collection')}>Back to Home page</Button>
+        <Button onClick={() => navigate('/apps/wine-collection')}>
+          Back to Home page
+        </Button>
       </div>
     </div>
-  )
+  );
 };
 
 export default WineAppPage404;

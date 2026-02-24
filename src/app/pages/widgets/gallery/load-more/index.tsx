@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Button from "@shared/components/ui-kit/button";
-import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import Button from '@shared/components/ui-kit/button';
+import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 
-import styles from "../style.module.scss";
+import styles from '../style.module.scss';
 
 interface ILoadMore {
   hasMore: boolean;

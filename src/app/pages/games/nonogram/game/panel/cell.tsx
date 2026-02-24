@@ -7,7 +7,7 @@ import styles from './style.module.scss';
 interface ICellBox {
   value: number,
   filled: boolean,
-  onPress: (value) => void,
+  onPress: (value: number) => void,
 }
 
 const CellBox: React.FC<ICellBox> = ({ value, filled, onPress }) => {

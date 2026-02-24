@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import debounce from 'lodash/debounce';
 
 import Matrix from '@pages/games/nonogram/game/area/matrix';
 import Tooltip from '@pages/games/nonogram/game/area/tooltip';
 
-import { Action, EBoxState, GameContext, IState, TDispatch } from '@pages/games/nonogram/game/context';
+import {
+  Action,
+  BoxState,
+  type TBoxState,
+  GameContext,
+  type IState,
+  type TDispatch,
+} from '@pages/games/nonogram/game/context';
 import { EMouseButton } from '@shared/enums/web-ui';
 
 import styles from './style.module.scss';
@@ -14,38 +21,46 @@ const TooltipAxisOffset = {
   y: 40,
 };
 
-enum EFlow {
-  HORIZONTAL,
-  VERTICAL
-}
+const EFlow = {
+  HORIZONTAL: 0,
+  VERTICAL: 1,
+};
 
 interface IArea {
-  size: [v: number, h: number],
-  blank: Array<Array<number>>,
-  onBoxHover: (row, cell) => void,
+  size: [v: number, h: number];
+  blank: Array<Array<number>>;
+  onBoxHover: (row: number, cell: number) => void;
 }
 
-class Area extends React.Component<IArea, null> {
+class Area extends Component<IArea> {
   private readonly tooltipRef: React.RefObject<any>;
   private readonly onCheckIsDoneDebounce: () => void;
-  private drawMode: { horizontal: any[]; startBox: any[]; active: boolean; filled: null; vertical: any[]; position: any[]; flow: number };
+  private drawMode: {
+    horizontal: any[];
+    startBox: any[];
+    active: boolean;
+    filled: number | undefined | null;
+    vertical: any[];
+    position: any[];
+    flow: number;
+  };
   declare public context: [IState, TDispatch];
 
-  private static invertValue = (value: EBoxState) => {
+  private static invertValue = (value: TBoxState) => {
     switch (value) {
-      case EBoxState.Cross:
-      case EBoxState.Filled: {
-        return EBoxState.Empty
+      case BoxState.Cross:
+      case BoxState.Filled: {
+        return BoxState.Empty;
       }
-      case EBoxState.Empty: {
-        return EBoxState.Filled;
+      case BoxState.Empty: {
+        return BoxState.Filled;
       }
       default:
-        return EBoxState.Empty;
+        return BoxState.Empty;
     }
-  }
+  };
 
-  constructor(props) {
+  constructor(props: IArea) {
     super(props);
 
     this.tooltipRef = React.createRef();
@@ -58,17 +73,19 @@ class Area extends React.Component<IArea, null> {
       horizontal: [],
       vertical: [],
     };
-    this.onCheckIsDoneDebounce = debounce(this.onCheckIsDone, 200, { leading: false, trailing: true });
+    this.onCheckIsDoneDebounce = debounce(this.onCheckIsDone, 200, {
+      leading: false,
+      trailing: true,
+    });
   }
 
-  componentDidUpdate(prevProps: Readonly<IArea>, prevState: Readonly<null>) {
+  componentDidUpdate() {
     this.onCheckIsDoneDebounce();
-  };
-
-  componentDidMount() {
-    // TODO: for future test
-    //this.fillAllBox();
   }
+
+  // componentDidMount() {
+  //   this.fillAllBox();
+  // }
 
   // private fillAllBox = () => {
   //   const [state, dispatch] = this.context;
@@ -91,7 +108,7 @@ class Area extends React.Component<IArea, null> {
     this.tooltipRef.current.classList.add(styles.hidden);
   };
 
-  private onBoxEnter = (row, cell) => {
+  private onBoxEnter = (row: number, cell: number) => {
     this.props.onBoxHover(row, cell);
 
     if (!this.drawMode.active) {
@@ -99,37 +116,46 @@ class Area extends React.Component<IArea, null> {
     }
     this.tooltipRef.current.classList.remove(styles.hidden);
 
-    if (this.drawMode.startBox[0] === row || this.drawMode.startBox[1] === cell) {
+    if (
+      this.drawMode.startBox[0] === row ||
+      this.drawMode.startBox[1] === cell
+    ) {
       this.setDrawData(row, cell);
       return;
     }
     this.stopDrawMode();
   };
 
-  private setDrawData = (row, cell) => {
+  private setDrawData = (row: number, cell: number) => {
     if (this.drawMode.flow < 0) {
-      this.drawMode.flow = this.drawMode.startBox[0] === row ? EFlow.HORIZONTAL : EFlow.VERTICAL;
+      this.drawMode.flow =
+        this.drawMode.startBox[0] === row ? EFlow.HORIZONTAL : EFlow.VERTICAL;
     }
 
-    const value = this.drawMode.flow === EFlow.HORIZONTAL
-      ? this.drawMode.startBox[1] - cell
-      : this.drawMode.startBox[0] - row;
+    const value =
+      this.drawMode.flow === EFlow.HORIZONTAL
+        ? this.drawMode.startBox[1] - cell
+        : this.drawMode.startBox[0] - row;
 
     if (!value) {
       this.drawByAxis(row, cell, value);
       this.tooltipRef.current.classList.add(styles.hidden);
       return;
     }
-    this.tooltipRef.current.innerHTML = Math.abs(value)+1;
+    this.tooltipRef.current.innerHTML = Math.abs(value) + 1;
     this.drawByAxis(row, cell, value);
   };
 
-  private drawByVertical = (row, cell, value) => {
+  private drawByVertical = (row: number, cell: number, value: number) => {
     if (!value) {
       if (!this.drawMode.filled) {
         return;
       }
-      this.fillItemBox(this.drawMode.vertical[0], cell, Area.invertValue(this.drawMode.filled));
+      this.fillItemBox(
+        this.drawMode.vertical[0],
+        cell,
+        Area.invertValue(this.drawMode.filled)
+      );
       this.drawMode.vertical.pop();
       return;
     }
@@ -138,20 +164,28 @@ class Area extends React.Component<IArea, null> {
       if (!this.drawMode.filled) {
         return;
       }
-      this.fillItemBox(this.drawMode.vertical.pop(), cell, Area.invertValue(this.drawMode.filled));
+      this.fillItemBox(
+        this.drawMode.vertical.pop(),
+        cell,
+        Area.invertValue(this.drawMode.filled)
+      );
       return;
     }
 
     this.drawMode.vertical.push(row);
-    this.fillItemBox(row, cell, this.drawMode.filled);
+    this.fillItemBox(row, cell, this.drawMode.filled!);
   };
 
-  private drawByHorizontal = (row, cell, value) => {
+  private drawByHorizontal = (row: number, cell: number, value: number) => {
     if (!value) {
       if (!this.drawMode.filled) {
         return;
       }
-      this.fillItemBox(row, this.drawMode.horizontal[0], Area.invertValue(this.drawMode.filled));
+      this.fillItemBox(
+        row,
+        this.drawMode.horizontal[0],
+        Area.invertValue(this.drawMode.filled)
+      );
       this.drawMode.horizontal.pop();
       return;
     }
@@ -160,16 +194,24 @@ class Area extends React.Component<IArea, null> {
       if (!this.drawMode.filled) {
         return;
       }
-      this.fillItemBox(row, this.drawMode.horizontal.pop(), Area.invertValue(this.drawMode.filled));
+      this.fillItemBox(
+        row,
+        this.drawMode.horizontal.pop(),
+        Area.invertValue(this.drawMode.filled)
+      );
       return;
     }
 
     this.drawMode.horizontal.push(cell);
-    this.fillItemBox(row, cell, this.drawMode.filled);
+    this.fillItemBox(row, cell, this.drawMode.filled!);
   };
 
-  private fillItemBox = (row, cell, value) => {
-    if (isNaN(row) || isNaN(cell)) {
+  private fillItemBox = (
+    row: number | string,
+    cell: number | string,
+    value: TBoxState | number
+  ) => {
+    if (isNaN(Number(row)) || isNaN(Number(cell))) {
       return;
     }
     const [, dispatch] = this.context;
@@ -177,43 +219,47 @@ class Area extends React.Component<IArea, null> {
     dispatch({
       type: Action.FILL_BOX,
       payload: {
-        row, cell, value
-      }
+        row: Number(row),
+        cell: Number(cell),
+        value,
+      },
     });
   };
 
-  private drawByAxis = (row, cell, value) => {
+  private drawByAxis = (row: number, cell: number, value: number) => {
     this.drawMode.flow === EFlow.HORIZONTAL
       ? this.drawByHorizontal(row, cell, value)
-      : this.drawByVertical(row, cell, value)
+      : this.drawByVertical(row, cell, value);
   };
-
 
   private onCheckIsDone = () => {
     const [state, dispatch] = this.context;
-    const isDone = state.matrix.length > 0 && !state.matrix.some((row, i) =>
-      row.some((cell, j) => {
-        if (state.blank[i][j] === 1 && !cell) {
-          return true;
-        }
-        return (cell === 1 && state.blank[i][j] !== cell);
-      })
-    );
+    const isDone =
+      state.matrix.length > 0 &&
+      !state.matrix.some((row, i) =>
+        row.some((cell, j) => {
+          if (state.blank[i][j] === 1 && !cell) {
+            return true;
+          }
+          return cell === 1 && state.blank[i][j] !== cell;
+        })
+      );
 
     if (!state.isFinish && isDone) {
       dispatch({ type: Action.SET_FINISH, payload: isDone });
     }
   };
 
-  public onContextMenu = (e) => {
+  public onContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
 
-  public onMouseDown = (e) => {
+  public onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button === EMouseButton.MIDDLE) {
       return false;
     }
-    const { row, cell } = e.target.dataset;
+    const target = e.target as HTMLDivElement;
+    const { row, cell } = target.dataset;
 
     if (!row || !cell) {
       return;
@@ -223,15 +269,21 @@ class Area extends React.Component<IArea, null> {
 
     switch (e.button) {
       case EMouseButton.RIGHT: {
-        value = blank[+row][+cell] === EBoxState.Cross ? EBoxState.Empty : EBoxState.Cross;
+        value =
+          blank[+row][+cell] === BoxState.Cross
+            ? BoxState.Empty
+            : BoxState.Cross;
         break;
       }
       case EMouseButton.LEFT: {
-        value = blank[+row][+cell] === EBoxState.Filled ? EBoxState.Empty : EBoxState.Filled;
+        value =
+          blank[+row][+cell] === BoxState.Filled
+            ? BoxState.Empty
+            : BoxState.Filled;
       }
     }
     if (!this.drawMode.active) {
-     this.fillItemBox(row, cell, value);
+      this.fillItemBox(row, cell, value as TBoxState);
     }
 
     this.drawMode.active = true;
@@ -248,7 +300,7 @@ class Area extends React.Component<IArea, null> {
     this.stopDrawMode();
   };
 
-  public onMouseMove = (e) => {
+  public onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!this.drawMode.active) {
       return;
     }
@@ -257,7 +309,7 @@ class Area extends React.Component<IArea, null> {
 
     this.tooltipRef.current.style.left = e.clientX - TooltipAxisOffset.x + 'px';
     this.tooltipRef.current.style.top = e.clientY - TooltipAxisOffset.y + 'px';
-  }
+  };
 
   render() {
     const { size, blank } = this.props;
@@ -272,13 +324,9 @@ class Area extends React.Component<IArea, null> {
         onContextMenu={this.onContextMenu}
       >
         <Tooltip tooltipRef={this.tooltipRef} />
-        <Matrix
-          size={size}
-          blank={blank}
-          onBoxEnter={this.onBoxEnter}
-        />
+        <Matrix size={size} blank={blank} onBoxEnter={this.onBoxEnter} />
       </div>
-    )
+    );
   }
 }
 

@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react({
@@ -24,6 +23,11 @@ export default defineConfig({
       '@store': path.resolve(__dirname, './src/app/store'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@services': path.resolve(__dirname, './src/services'),
-    }
-  }
-})
+    },
+  },
+  css: {
+    modules: {
+      generateScopedName: '[name]__[local]___[hash:base64:5]',
+    },
+  },
+});

@@ -1,4 +1,5 @@
 import { Languages, Technologies } from '@shared/dtos/develop';
+import type { Game } from './context';
 
 export const TECHNOLOGIES = [
   Languages.typescript,
@@ -7,7 +8,7 @@ export const TECHNOLOGIES = [
   Technologies.css,
 ];
 
-export const NONOGRAMS = {
+export const NONOGRAMS: Record<string, Game> = {
   guitar: {
     name: 'Guitar',
     matrix: [

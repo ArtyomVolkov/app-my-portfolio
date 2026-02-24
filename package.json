@@ -16,6 +16,8 @@
     "@mui/material": "^7.3.8",
     "firebase": "^12.9.0",
     "lodash": "^4.17.23",
+    "mobx": "^6.15.0",
+    "mobx-react": "^9.2.1",
     "notistack": "^3.0.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

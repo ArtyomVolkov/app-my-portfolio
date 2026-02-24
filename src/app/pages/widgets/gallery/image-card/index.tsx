@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { mergeClassNames } from '@utils/common';
 
 import styles from '../style.module.scss';
 
-const ImageCard = ({ data, onPreview }) => {
+export type Image = {
+  alt: string;
+  src: {
+    large: string;
+    large2x: string;
+  };
+}
+
+type ImageCardProps = {
+  data: Image;
+  onPreview: (data: Image) => void;
+};
+
+const ImageCard: React.FC<ImageCardProps> = ({ data, onPreview }) => {
   const [loading, setLoading] = useState(true);
 
   const onLoadImage = () => {
@@ -22,13 +35,11 @@ const ImageCard = ({ data, onPreview }) => {
       onClick={() => onPreview(data)}
       title={data.alt}
     >
-      {
-        loading && (
-          <div className={styles.loadingWrap}>
-            <CircularProgress />
-          </div>
-        )
-      }
+      {loading && (
+        <div className={styles.loadingWrap}>
+          <CircularProgress />
+        </div>
+      )}
       <img
         alt={data.alt}
         src={data.src.large}
@@ -37,6 +48,6 @@ const ImageCard = ({ data, onPreview }) => {
       />
     </section>
   );
-}
+};
 
 export default ImageCard;

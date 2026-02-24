@@ -29,41 +29,46 @@ import { type TUser, type TWine } from '@pages/apps/wine-collection/app/dto';
 import { getErrorMessage } from '@utils/common';
 
 type TState = {
-  loading: boolean,
-  user: TUser | null,
+  loading: boolean;
+  user: TUser | null;
   wineList: {
-    loading: boolean,
-    data: Array<TWine>,
-    search?: string,
+    loading: boolean;
+    data: Array<TWine> | null;
+    search?: string;
     filters?: {
-      [key: string]: []|string
-    }
-  }
-  wineDetails?: TWine,
-  actions: TActions,
+      [key: string]: [] | string;
+    };
+  };
+  wineDetails?: TWine | null;
+  actions: TActions;
 };
 
-type JSONValue = string | number | boolean | { [x: string]: JSONValue } | Array<JSONValue>;
+type JSONValue =
+  | string
+  | number
+  | boolean
+  | { [x: string]: JSONValue }
+  | Array<JSONValue>;
 
 type TActions = {
-  setUser: (data: JSONValue) => void,
-  onSignUp: (email: string, password: string) => Promise<string | null>,
-  onSignIn: (email: string, password: string) => Promise<string | null>,
-  onSignInWithGoogle: () => Promise<string | null>,
-  onResetPassword: (email: string) => Promise<string | null>,
-  onSignOut: () => void,
-  onSubscribeWineList?: (pathSegments: Array<string>) => () => void;
-  onAddNewWine: (data: JSONValue) => Promise<string | null>,
-  onDeleteWine: (id: string) => Promise<string | null>,
-  getWine: (id: string) => Promise<string | null>,
-  onUpdateWine: (data: TWine) => Promise<string | null>,
+  setUser: (data: TUser | null) => void;
+  onSignUp: (email: string, password: string) => Promise<string | null>;
+  onSignIn: (email: string, password: string) => Promise<string | null>;
+  onSignInWithGoogle: () => Promise<string | null>;
+  onResetPassword: (email: string) => Promise<string | null>;
+  onSignOut: () => void;
+  onSubscribeWineList: (pathSegments: Array<string>) => () => void;
+  onAddNewWine: (data: JSONValue) => Promise<string | null>;
+  onDeleteWine: (id: string) => Promise<string | null>;
+  getWine: (id: string) => Promise<string | null>;
+  onUpdateWine: (data: TWine) => Promise<string | null>;
   subscribeAuthStateChanged: () => void;
   onDownloadWineList: () => void;
-  onUpdateWineListFilter: (data: JSONValue) => void,
-  onClearAllWineListFilter: () => void,
+  onUpdateWineListFilter: (data: JSONValue) => void;
+  onClearAllWineListFilter: () => void;
   onUploadWineList: () => Promise<string | null>;
-  onSearchWine: (value: string) => void,
-  onClearAppData?: () => void;
+  onSearchWine: (value: string) => void;
+  onClearAppData: () => void;
 };
 
 export const useStore = create<TState>((set, get) => ({
@@ -73,31 +78,40 @@ export const useStore = create<TState>((set, get) => ({
     loading: true,
     data: null,
     search: '',
-    filters: {
-    }
+    filters: {},
   },
   actions: {
     subscribeAuthStateChanged: async () => {
       const actions = get().actions;
 
-      onAuthStateChanged(FBAuth, actions.setUser, () => actions.setUser(null));
+      onAuthStateChanged(
+        FBAuth,
+        (data) => {
+          actions.setUser(data as TUser);
+        },
+        () => actions.setUser(null)
+      );
     },
     setUser: async (authData) => {
       try {
         if (get().user && !authData) {
-          set({user: null});
+          set({ user: null });
           return;
         }
         if (get().user) {
-          set({loading: false});
+          set({ loading: false });
+          return;
+        }
+        if (!authData) {
+          set({ loading: false });
           return;
         }
         const docRef = doc(FBStore, DBName, authData.uid);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          const userData: TUser = docSnap.data() as TUser;
-          set({user: userData, loading: false});
+          const userData = docSnap.data() as TUser;
+          set({ user: userData, loading: false });
           return;
         }
         const userData = {
@@ -113,44 +127,48 @@ export const useStore = create<TState>((set, get) => ({
         };
         // create new account
         await setDoc(docRef, userData);
-        set({user: userData, loading: false});
+        set({ user: userData as TUser, loading: false });
       } catch (e) {
-        set({loading: false});
+        set({ loading: false });
       }
     },
     onSignIn: async (email: string, password: string) => {
       try {
         await signInWithEmailAndPassword(FBAuth, email, password);
+        return null;
       } catch (e) {
-        return getErrorMessage(e);
+        return getErrorMessage(e as Error);
       }
     },
     onSignUp: async (email, password) => {
       try {
         await createUserWithEmailAndPassword(FBAuth, email, password);
+        return null;
       } catch (e) {
-        return getErrorMessage(e);
+        return getErrorMessage(e as Error);
       }
     },
     onSignInWithGoogle: async () => {
       try {
         await signInWithPopup(FBAuth, new GoogleAuthProvider());
+        return null;
       } catch (e) {
-        return getErrorMessage(e);
+        return getErrorMessage(e as Error);
       }
     },
     onResetPassword: async (email: string) => {
       try {
         await sendPasswordResetEmail(FBAuth, email);
+        return null;
       } catch (e) {
-        return getErrorMessage(e);
+        return getErrorMessage(e as Error);
       }
     },
     onSignOut: async () => {
       await signOut(FBAuth);
 
       get().actions.onClearAppData();
-      set({loading: false});
+      set({ loading: false });
     },
     onClearAppData: () => {
       set({
@@ -165,58 +183,79 @@ export const useStore = create<TState>((set, get) => ({
     },
     onSubscribeWineList: (pathSegments) => {
       return onSnapshot(collection(FBStore, DBName, ...pathSegments), (doc) => {
-        const wineList = [];
+        const wineList: TWine[] = [];
 
-        doc.forEach((item) => wineList.push({id: item.id, ...item.data()}));
-        wineList.sort((a, b) => a.updatedAt < b.updatedAt ? 1 : -1);
-        set({wineList: {loading: false, data: wineList}});
+        doc.forEach((item) => {
+          wineList.push({
+            id: item.id,
+            ...item.data(),
+          } as TWine);
+        });
+        wineList.sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1));
+
+        set({ wineList: { loading: false, data: wineList } });
       });
     },
     onAddNewWine: async (data) => {
       try {
         const user = get().user;
-        const docRef = doc(FBStore, DBName, user.uid);
 
+        if (!user) {
+          return 'User not found';
+        }
+        const docRef = doc(FBStore, DBName, user.uid);
         await addDoc(collection(docRef, 'wine-list'), {
-          ...data,
+          ...(data as TWine),
           createdAt: Date.now(),
           updatedAt: null,
         });
+        return null;
       } catch (e) {
-        return getErrorMessage(e);
+        return getErrorMessage(e as Error);
       }
     },
     onUpdateWine: async (data) => {
       try {
         const user = get().user;
+        if (!user) {
+          return 'User not found';
+        }
         const docRef = doc(FBStore, DBName, user.uid);
 
         await updateDoc(doc(collection(docRef, 'wine-list'), data.id), {
           ...data,
           updatedAt: Date.now(),
         });
+        return null;
       } catch (e) {
-        return getErrorMessage(e);
+        return getErrorMessage(e as Error);
       }
     },
     onDeleteWine: async (id) => {
       try {
         const user = get().user;
+        if (!user) {
+          return 'User not found';
+        }
         const docRef = doc(FBStore, DBName, user.uid);
 
         await deleteDoc(doc(collection(docRef, 'wine-list'), id));
+        return null;
       } catch (e) {
-        return getErrorMessage(e);
+        return getErrorMessage(e as Error);
       }
     },
     getWine: async (id: string) => {
       try {
-        const {user, wineList} = get();
+        const { user, wineList } = get();
         const wineData = wineList.data?.find((item) => item.id === id);
 
         if (wineData) {
-          set({wineDetails: wineData});
-          return;
+          set({ wineDetails: wineData });
+          return null;
+        }
+        if (!user) {
+          return 'User not found';
         }
         const docRef = doc(FBStore, DBName, user.uid);
 
@@ -224,17 +263,20 @@ export const useStore = create<TState>((set, get) => ({
         const data = wine.data();
 
         if (!data) {
-          set({wineDetails: null});
+          set({ wineDetails: null });
           return 'Wine Not found';
         }
-        set({wineDetails: data as TWine})
+        set({ wineDetails: data as TWine });
+        return null;
       } catch (e) {
-        return getErrorMessage(e);
+        return getErrorMessage(e as Error);
       }
     },
     onDownloadWineList: () => {
       const downloadAnchorNode = document.createElement('a');
-      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(get().wineList.data));
+      const dataStr =
+        'data:text/json;charset=utf-8,' +
+        encodeURIComponent(JSON.stringify(get().wineList.data));
 
       downloadAnchorNode.setAttribute('href', dataStr);
       downloadAnchorNode.setAttribute('download', 'wine-list.json');
@@ -244,22 +286,32 @@ export const useStore = create<TState>((set, get) => ({
     onUploadWineList: async () => {
       return new Promise((res, rej) => {
         try {
-          const fileInputNode: HTMLInputElement = document.createElement('input');
+          const fileInputNode: HTMLInputElement =
+            document.createElement('input');
 
           fileInputNode.setAttribute('type', 'file');
           fileInputNode.setAttribute('accept', '.json');
           fileInputNode.addEventListener('change', async () => {
+            if (!fileInputNode.files || !fileInputNode.files.length) {
+              rej(new Error('No file selected'));
+              return;
+            }
             const file = fileInputNode.files[0];
             const importData = JSON.parse(await file.text());
             const batch = writeBatch(FBStore);
-            const docRef = doc(FBStore, DBName, get().user.uid);
+            const user = get().user;
+            if (!user) {
+              rej(new Error('User not found'));
+              return;
+            }
+            const docRef = doc(FBStore, DBName, user.uid);
             const collectionRef = collection(docRef, 'wine-list');
             const list = await getDocs(collectionRef);
-            const ids = [];
+            const ids: string[] = [];
             let itemsCount = 0;
 
             list.forEach((item) => ids.push(item.data().id));
-            importData.forEach((item) => {
+            importData.forEach((item: TWine) => {
               if (ids.includes(item.id)) {
                 return;
               }
@@ -273,8 +325,9 @@ export const useStore = create<TState>((set, get) => ({
             if (!itemsCount) {
               enqueueSnackbar({
                 variant: 'info',
-                message: 'There are already wines in your collection that you have imported.',
-                autoHideDuration: 3000
+                message:
+                  'There are already wines in your collection that you have imported.',
+                autoHideDuration: 3000,
               });
               return res(null);
             }
@@ -293,7 +346,7 @@ export const useStore = create<TState>((set, get) => ({
           enqueueSnackbar({
             variant: 'error',
             autoHideDuration: 2000,
-            message: getErrorMessage(e),
+            message: getErrorMessage(e as Error),
           });
         }
       });
@@ -302,8 +355,8 @@ export const useStore = create<TState>((set, get) => ({
       set({
         wineList: {
           ...get().wineList,
-          search: value
-        }
+          search: value,
+        },
       });
     },
     onUpdateWineListFilter: (data) => {
@@ -311,19 +364,19 @@ export const useStore = create<TState>((set, get) => ({
         wineList: {
           ...get().wineList,
           filters: {
-            ...data
-          }
-        }
-      })
+            ...(data as { [key: string]: [] | string }),
+          },
+        },
+      });
     },
     onClearAllWineListFilter: () => {
       set({
         wineList: {
           ...get().wineList,
           search: '',
-          filters: {}
-        }
-      })
-    }
+          filters: {},
+        },
+      });
+    },
   },
 }));

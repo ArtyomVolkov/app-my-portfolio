@@ -3,25 +3,25 @@ import React from 'react';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 import { mergeClassNames } from '@utils/common';
-import { EBoxState } from '@pages/games/nonogram/game/context';
+import { BoxState, type TBoxState } from '@pages/games/nonogram/game/context';
 
 import styles from './style.module.scss';
 
 interface ICellBox {
-  row: number,
-  cell: number,
-  size: number,
-  state: EBoxState,
-  onEnter: (row, cell) => void,
+  row: number;
+  cell: number;
+  size: number;
+  state: TBoxState;
+  onEnter: (row: number, cell: number) => void;
 }
 
 const CellBox: React.FC<ICellBox> = ({ row, cell, size, state, onEnter }) => {
   const renderItem = () => {
     switch (state) {
-      case EBoxState.Cross: {
-        return <CloseRoundedIcon className={styles.cross} />
+      case BoxState.Cross: {
+        return <CloseRoundedIcon className={styles.cross} />;
       }
-      case EBoxState.Filled: {
+      case BoxState.Filled: {
         return <div className={styles.filled} />;
       }
       default:
@@ -31,11 +31,11 @@ const CellBox: React.FC<ICellBox> = ({ row, cell, size, state, onEnter }) => {
 
   const onMouseEnter = () => {
     onEnter(row, cell);
-  }
+  };
 
-  const onDragStart = (e) => {
+  const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-  }
+  };
 
   return (
     <div
@@ -45,12 +45,12 @@ const CellBox: React.FC<ICellBox> = ({ row, cell, size, state, onEnter }) => {
       data-cell={cell}
       className={mergeClassNames([
         styles.cell,
-        (cell !== size) && !((cell+1)%5) && styles.divider,
+        cell !== size && !((cell + 1) % 5) && styles.divider,
       ])}
     >
-      { renderItem() }
+      {renderItem()}
     </div>
   );
 };
 
-export default CellBox
+export default CellBox;

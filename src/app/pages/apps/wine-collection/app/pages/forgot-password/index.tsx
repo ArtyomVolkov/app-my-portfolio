@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 
 import TextField from '@mui/material/TextField';
 import AppLogo from '@pages/apps/wine-collection/app/components/app-logo';
@@ -15,7 +15,7 @@ import { mergeClassNames } from '@utils/common';
 import styles from './style.module.scss';
 
 const ForgotPassword = () => {
-  const actions = useStore((store) => store.actions)
+  const actions = useStore((store) => store.actions);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,13 +23,13 @@ const ForgotPassword = () => {
   const [error, setError] = useState('');
   const [email, setEmail] = useState('');
 
-  const onChangeEmailField = (value) => {
+  const onChangeEmailField = (value: string) => {
     setError('');
-    setEmail(value)
+    setEmail(value);
   };
 
   const onSendResetPassword = async () => {
-    setLoading(true)
+    setLoading(true);
     const error = await actions.onResetPassword(email);
     setLoading(false);
 
@@ -46,7 +46,12 @@ const ForgotPassword = () => {
 
   return (
     <div className={styles.wineAppForgotPasswordPage}>
-      <form className={mergeClassNames([styles.resetPasswordForm, loading && styles.loading])}>
+      <form
+        className={mergeClassNames([
+          styles.resetPasswordForm,
+          loading && styles.loading,
+        ])}
+      >
         <AppLogo />
         <TextField
           placeholder="email"
@@ -67,15 +72,12 @@ const ForgotPassword = () => {
           Send
         </Button>
         <Divider />
-        <Button
-          variant="text"
-          onClick={toLoginPage}
-        >
+        <Button variant="text" onClick={toLoginPage}>
           Back to Log In
         </Button>
       </form>
     </div>
-  )
+  );
 };
 
 export default ForgotPassword;

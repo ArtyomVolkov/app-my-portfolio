@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Route } from 'react-router';
 
+import Loader from '@app/layout/loader';
 const Widgets = lazy(() => import('@pages/widgets'));
 const History = lazy(() => import('@pages/widgets/history'));
 const Gallery = lazy(() => import('@pages/widgets/gallery'));
@@ -11,18 +12,11 @@ const Memory = lazy(() => import('@pages/widgets/memory'));
 import ErrorBoundary from '@shared/components/error-boundary';
 
 export default [
-  <Route
-    path="/widgets"
-    element={
-      <Suspense fallback="">
-        <Widgets />
-      </Suspense>
-    }
-  />,
+  <Route path="/widgets" element={<Widgets />} />,
   <Route
     path="/widgets/history"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <History />
         </ErrorBoundary>
@@ -32,7 +26,7 @@ export default [
   <Route
     path="/widgets/gallery"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Gallery />
         </ErrorBoundary>
@@ -42,7 +36,7 @@ export default [
   <Route
     path="/widgets/matrix"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Matrix />
         </ErrorBoundary>
@@ -52,7 +46,7 @@ export default [
   <Route
     path="/widgets/clock"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Clock />
         </ErrorBoundary>
@@ -62,7 +56,7 @@ export default [
   <Route
     path="/widgets/memory"
     element={
-      <Suspense fallback="">
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <Memory />
         </ErrorBoundary>

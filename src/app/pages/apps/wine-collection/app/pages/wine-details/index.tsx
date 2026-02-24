@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import { useSnackbar } from 'notistack';
 
 import TextField from '@mui/material/TextField';
@@ -18,11 +18,14 @@ import NoData from '@pages/apps/wine-collection/app/components/no-data';
 
 import { useStore } from '@pages/apps/wine-collection/app/store';
 import { useAppModal } from '@pages/apps/wine-collection/app/store/app-modal';
-import { TWine } from '@pages/apps/wine-collection/app/dto';
+import {
+  type TWineData,
+  type TWine,
+} from '@pages/apps/wine-collection/app/dto';
 
 import { mergeClassNames } from '@utils/common';
 
-import styles from './style.module.scss'
+import styles from './style.module.scss';
 
 const WineDetails = () => {
   const { actions, wineDetails } = useStore((store) => store);
@@ -32,7 +35,7 @@ const WineDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
   const [submitting, setSubmitting] = useState(false);
-  const [formFields, setFormFields] = useState<TWine>({
+  const [formFields, setFormFields] = useState<TWineData>({
     id: '',
     brand: '',
     fullName: '',
@@ -47,7 +50,7 @@ const WineDetails = () => {
     taste: '',
     price: '',
     description: '',
-    country: ''
+    country: '',
   });
 
   useEffect(() => {
@@ -56,12 +59,16 @@ const WineDetails = () => {
 
   useEffect(() => {
     if (wineDetails) {
-      setFormFields({...wineDetails })
+      setFormFields({ ...wineDetails } as TWineData);
     }
   }, [wineDetails]);
 
   const fetchWineData = async () => {
     setLoading(true);
+    if (!params.id) {
+      setLoading(false);
+      return;
+    }
     const error = await actions.getWine(params.id);
     setLoading(false);
 
@@ -69,57 +76,62 @@ const WineDetails = () => {
       snackbar.enqueueSnackbar({
         variant: 'error',
         message: error,
-        autoHideDuration: 3000
+        autoHideDuration: 3000,
       });
       return;
     }
   };
 
-  const onChangeFormField = (name, value) => {
+  const onChangeFormField = (name: string, value: string | number) => {
     setFormFields({
       ...formFields,
-      [name]: value
+      [name]: value,
     });
   };
 
   const onSave = async () => {
     setSubmitting(true);
-    const error = await actions.onUpdateWine(formFields);
+    const error = await actions.onUpdateWine(formFields as TWine);
     setSubmitting(false);
 
     if (error) {
       snackbar.enqueueSnackbar({
         variant: 'error',
-        message: error
+        message: error,
       });
       return;
     }
     snackbar.enqueueSnackbar({
       variant: 'success',
-      message: 'Wine was successfully updated'
+      message: 'Wine was successfully updated',
     });
     navigate(-1);
   };
 
   const onDelete = async () => {
     setSubmitting(true);
+
+    if (!wineDetails) {
+      setSubmitting(false);
+      return;
+    }
     const error = await actions.onDeleteWine(wineDetails.id);
     setSubmitting(false);
 
     if (error) {
       snackbar.enqueueSnackbar({
         variant: 'error',
-        message: error
+        message: error,
       });
       return;
     }
-    closeModal('delete-wine-modal')
+    closeModal('delete-wine-modal');
     navigate(-1);
     snackbar.enqueueSnackbar({
       variant: 'success',
-      message: 'Wine was successfully deleted'
+      message: 'Wine was successfully deleted',
     });
-  }
+  };
 
   const onDeleteWine = () => {
     openModal({
@@ -148,19 +160,21 @@ const WineDetails = () => {
                 <span className={styles.label} />
                 <span className={styles.stars} />
               </div>
-              {
-                Array(14).fill(1).map((item, index) => (
+              {Array(14)
+                .fill(1)
+                .map((_, index) => (
                   <div className={styles.fieldBox} key={index} />
-                ))
-              }
+                ))}
             </div>
             <div className={styles.actions}>
-              <div className={mergeClassNames([styles.button, styles.delete])} />
+              <div
+                className={mergeClassNames([styles.button, styles.delete])}
+              />
               <div className={mergeClassNames([styles.button, styles.save])} />
             </div>
           </div>
         </div>
-      )
+      );
     }
     if (!wineDetails) {
       return (
@@ -173,19 +187,28 @@ const WineDetails = () => {
     return (
       <>
         <div className={styles.imageBox}>
-          <IconButton className={styles.backButton} onClick={() => navigate(-1)}>
+          <IconButton
+            className={styles.backButton}
+            onClick={() => navigate(-1)}
+          >
             <ArrowBackRoundedIcon />
           </IconButton>
           <img src={wineDetails.imageURL} alt={wineDetails.fullName} />
         </div>
-        <div className={mergeClassNames([styles.details, submitting && styles.submitting])}>
+        <div
+          className={mergeClassNames([
+            styles.details,
+            submitting && styles.submitting,
+          ])}
+        >
           <form className={styles.formFields}>
             <div>
               <span className={styles.fieldLabel}>Rating</span>
               <Rating
                 value={formFields.rate}
-                max={10} precision={1}
-                onChange={(e, value) => onChangeFormField('rate', value )}
+                max={10}
+                precision={1}
+                onChange={(_, value) => onChangeFormField('rate', value as number)}
               />
             </div>
             <TextField
@@ -208,18 +231,10 @@ const WineDetails = () => {
                 label="Type"
                 onChange={(e) => onChangeFormField('color', e.target.value)}
               >
-                <MenuItem value="red">
-                  Red
-                </MenuItem>
-                <MenuItem value="white">
-                  White
-                </MenuItem>
-                <MenuItem value="sparkling">
-                  Sparkling
-                </MenuItem>
-                <MenuItem value="rose">
-                  Rose
-                </MenuItem>
+                <MenuItem value="red">Red</MenuItem>
+                <MenuItem value="white">White</MenuItem>
+                <MenuItem value="sparkling">Sparkling</MenuItem>
+                <MenuItem value="rose">Rose</MenuItem>
               </Select>
             </FormControl>
             <TextField
@@ -292,18 +307,20 @@ const WineDetails = () => {
             />
           </form>
           <div className={styles.actions}>
-            <Button variant="contained" color="error" onClick={onDeleteWine}>Delete</Button>
-            <Button variant="contained" onClick={onSave} loading={submitting}>Save</Button>
+            <Button variant="contained" color="error" onClick={onDeleteWine}>
+              Delete
+            </Button>
+            <Button variant="contained" onClick={onSave} loading={submitting}>
+              Save
+            </Button>
           </div>
         </div>
       </>
-    )
+    );
   };
 
   return (
-    <section className={styles.wineAppWineDetails}>
-      {renderDetails()}
-    </section>
+    <section className={styles.wineAppWineDetails}>{renderDetails()}</section>
   );
 };
 

@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router';
 
-import AppLogo from "@pages/apps/wine-collection/app/components/app-logo";
-import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import GoogleIcon from "@mui/icons-material/Google";
-import LoginIcon from "@mui/icons-material/Login";
-import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
+import AppLogo from '@pages/apps/wine-collection/app/components/app-logo';
+import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import GoogleIcon from '@mui/icons-material/Google';
+import LoginIcon from '@mui/icons-material/Login';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 
-import { useStore } from "@pages/apps/wine-collection/app/store";
+import { useStore } from '@pages/apps/wine-collection/app/store';
 
-import { mergeClassNames } from "@utils/common";
+import { mergeClassNames } from '@utils/common';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const WineAppLoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, actions } = useStore((store) => store);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     email: null,
     password: null,
   });
 
   useEffect(() => {
-    const path = location.pathname.split("/").slice(0, -1).join("/");
+    const path = location.pathname.split('/').slice(0, -1).join('/');
     if (user) {
       navigate(path, {
         replace: true,
@@ -36,8 +36,8 @@ const WineAppLoginPage = () => {
     }
   }, [user]);
 
-  const onChangeFormField = (name, value) => {
-    setError("");
+  const onChangeFormField = (name: 'email' | 'password', value: string) => {
+    setError('');
     setFormData({
       ...formData,
       [name]: value,
@@ -46,7 +46,7 @@ const WineAppLoginPage = () => {
 
   const onSignIn = async () => {
     setLoading(true);
-    const error = await actions.onSignIn(formData.email, formData.password);
+    const error = await actions.onSignIn(formData.email!, formData.password!);
     setLoading(false);
 
     if (error) {
@@ -65,12 +65,12 @@ const WineAppLoginPage = () => {
   };
 
   const onForgotPasswordHandle = () => {
-    const path = location.pathname.split("/").slice(0, -1).join("/");
+    const path = location.pathname.split('/').slice(0, -1).join('/');
     navigate(`${path}/forgot-password`);
   };
 
   const onSignUpHandle = () => {
-    const path = location.pathname.split("/").slice(0, -1).join("/");
+    const path = location.pathname.split('/').slice(0, -1).join('/');
     navigate(`${path}/sign-up`);
   };
 
@@ -89,7 +89,7 @@ const WineAppLoginPage = () => {
           variant="outlined"
           label="Email"
           size="small"
-          onChange={(e) => onChangeFormField("email", e.target.value)}
+          onChange={(e) => onChangeFormField('email', e.target.value)}
         />
         <TextField
           placeholder="password"
@@ -97,7 +97,7 @@ const WineAppLoginPage = () => {
           variant="outlined"
           label="Password"
           size="small"
-          onChange={(e) => onChangeFormField("password", e.target.value)}
+          onChange={(e) => onChangeFormField('password', e.target.value)}
         />
         <Button
           variant="outlined"

@@ -1,4 +1,4 @@
-const API_KEY = process.env.HUNTER_API_KEY;
+const API_KEY = import.meta.env.VITE_HUNTER_API_KEY;
 const REST_API = 'https://api.hunter.io/v2/email-verifier';
 
 export const checkEmail = async (value: string): Promise<boolean> => {

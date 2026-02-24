@@ -1,25 +1,27 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react';
 
 import GameArea from '@pages/games/sudoku/game/area';
 import GamePanel from '@pages/games/sudoku/game/panel';
 import Modal from '@pages/games/sudoku/game/modal';
 
-import SudokuStore from '@pages/games/sudoku/game/store';
+import SudokuStore, { type RowData } from '@pages/games/sudoku/game/store';
 import { Level } from '@pages/games/sudoku/game/generator';
 
 import styles from './style.module.scss';
 
-export enum Action {
-  FILL,
-  ERASE,
-  UNDO,
-  HINT,
-  SET_ACTIVE,
-  CHANGE_LEVEL,
-  NEW_GAME,
-  CLOSE_MODAL
-}
+export const Action = {
+  FILL: 'FILL',
+  ERASE: 'ERASE',
+  UNDO: 'UNDO',
+  HINT: 'HINT',
+  SET_ACTIVE: 'SET_ACTIVE',
+  CHANGE_LEVEL: 'CHANGE_LEVEL',
+  NEW_GAME: 'NEW_GAME',
+  CLOSE_MODAL: 'CLOSE_MODAL',
+};
+
+export type TAction = (typeof Action)[keyof typeof Action];
 
 const SudokuGameWidget = () => {
   const store = useRef(new SudokuStore(Level.Easy)).current;
@@ -28,13 +30,13 @@ const SudokuGameWidget = () => {
     store.setNewGame(Level.Easy);
   }, []);
 
-  const onAction = (action, data = null) => {
+  const onAction = (action: TAction, data: RowData | Level | null = null) => {
     switch (action) {
       case Action.SET_ACTIVE: {
-        return store.setActive(data);
+        return store.setActive(data as RowData);
       }
       case Action.FILL: {
-        return store.fill(data);
+        return store.fill(data as number);
       }
       case Action.ERASE: {
         return store.fill(0);
@@ -46,7 +48,7 @@ const SudokuGameWidget = () => {
         return store.undo();
       }
       case Action.CHANGE_LEVEL: {
-        return store.onChangeLevel(data);
+        return store.onChangeLevel(data as Level);
       }
       case Action.NEW_GAME: {
         return store.onStartNewGame();
@@ -61,10 +63,7 @@ const SudokuGameWidget = () => {
 
   return (
     <section className={styles.sudokuWidget}>
-      <Modal
-        data={store.modal}
-        onAction={onAction}
-      />
+      <Modal data={store.modal} onAction={onAction} />
       <GamePanel
         level={store.level}
         hints={store.hints}
@@ -81,6 +80,6 @@ const SudokuGameWidget = () => {
       />
     </section>
   );
-}
+};
 
 export default observer(SudokuGameWidget);

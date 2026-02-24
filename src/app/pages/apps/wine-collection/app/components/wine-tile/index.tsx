@@ -1,13 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import Rating from '@mui/material/Rating';
 
-import { TWine } from '@pages/apps/wine-collection/app/dto';
+import { type TWine } from '@pages/apps/wine-collection/app/dto';
 
 import styles from './style.module.scss';
 
 interface IWineTile {
-  wine: TWine
+  wine: TWine;
 }
 
 const WineTile: React.FC<IWineTile> = ({ wine }) => {
@@ -19,7 +19,11 @@ const WineTile: React.FC<IWineTile> = ({ wine }) => {
 
   return (
     <li className={styles.wineAppWineTile} onClick={openDetailsPage}>
-      <img src={wine.imageURL} alt={wine.fullName} className={styles.wineImage} />
+      <img
+        src={wine.imageURL}
+        alt={wine.fullName}
+        className={styles.wineImage}
+      />
       <div className={styles.details}>
         <Rating
           value={wine.rate}

@@ -1,5 +1,10 @@
-import { MutableRefObject } from 'react'
-import { CellDirection, Grid, MergeDirection, RowDirection } from './types';
+import {
+  type CellDirection,
+  type Grid,
+  MergeDirection,
+  type RowDirection,
+} from './types';
+
 import { CELLS, GAME_DATA, GRID_SIZE, KEY_STORE } from './data';
 
 export const saveGameData = (grid: Grid) => {
@@ -8,7 +13,7 @@ export const saveGameData = (grid: Grid) => {
 
 export const loadGameData = () => {
   try {
-    const data = JSON.parse(window.localStorage.getItem(KEY_STORE));
+    const data = JSON.parse(window.localStorage.getItem(KEY_STORE) || '');
 
     if (!data || data.length !== GAME_DATA.length) {
       return null;
@@ -19,14 +24,22 @@ export const loadGameData = () => {
   }
 };
 
-export const mergeRow = (data: Grid, direction: RowDirection): Array<number> => {
+export const mergeRow = (
+  data: Grid,
+  direction: RowDirection
+): Array<number> => {
   const n = GRID_SIZE - 1;
   const merged = [];
 
   for (let i = 0; i < n; i++) {
-    let [current, next] = direction === MergeDirection.LEFT ? [i, i + 1] : [n - i, n - i - 1];
+    let [current, next] =
+      direction === MergeDirection.LEFT ? [i, i + 1] : [n - i, n - i - 1];
 
-    if (!((i + 1) % CELLS) || (!data[current] && !data[next]) || data[current] !== data[next]) {
+    if (
+      !((i + 1) % CELLS) ||
+      (!data[current] && !data[next]) ||
+      data[current] !== data[next]
+    ) {
       continue;
     }
     data[current] = data[current] + data[next];
@@ -36,11 +49,17 @@ export const mergeRow = (data: Grid, direction: RowDirection): Array<number> => 
   return merged;
 };
 
-export const mergeCell = (data: Grid, direction: CellDirection): Array<number> => {
+export const mergeCell = (
+  data: Grid,
+  direction: CellDirection
+): Array<number> => {
   const merged = [];
 
   for (let i = 0; i < GRID_SIZE; i++) {
-    let [current, next] = direction === MergeDirection.TOP ? [i, i + CELLS] : [GRID_SIZE - i, GRID_SIZE - i - CELLS];
+    let [current, next] =
+      direction === MergeDirection.TOP
+        ? [i, i + CELLS]
+        : [GRID_SIZE - i, GRID_SIZE - i - CELLS];
 
     if ((!data[current] && !data[next]) || data[current] !== data[next]) {
       continue;
@@ -61,7 +80,10 @@ export const verticalSwap = (data: Grid, direction: CellDirection) => {
     }
     const filled = cell.filter((item) => item);
     const empty = new Array(CELLS - filled.length).fill(0);
-    const merged = direction === MergeDirection.TOP ? filled.concat(empty) : empty.concat(filled);
+    const merged =
+      direction === MergeDirection.TOP
+        ? filled.concat(empty)
+        : empty.concat(filled);
 
     for (let k = 0; k < CELLS; k++) {
       data[i + CELLS * k] = merged[k];
@@ -81,7 +103,10 @@ export const horizontalSwap = (data: Grid, direction: RowDirection) => {
     }
     const filled = row.filter((item) => item);
     const empty = new Array(CELLS - filled.length).fill(0);
-    const merged = direction === MergeDirection.RIGHT ? empty.concat(filled) : filled.concat(empty);
+    const merged =
+      direction === MergeDirection.RIGHT
+        ? empty.concat(filled)
+        : filled.concat(empty);
 
     for (let k = 0; k < CELLS; k++) {
       data[i + k] = merged[k];
@@ -90,7 +115,7 @@ export const horizontalSwap = (data: Grid, direction: RowDirection) => {
 };
 
 export const getCellIndex = (data: Grid): number => {
-  const indexes = [];
+  const indexes: number[] = [];
 
   data.forEach((item, index) => {
     if (!item) {
@@ -112,7 +137,7 @@ export const isGameOver = (data: Grid) => {
       break;
     }
     // row check
-    if (((i + 1) % CELLS) && data[i] === data[i + 1]) {
+    if ((i + 1) % CELLS && data[i] === data[i + 1]) {
       isOver = false;
       break;
     }
@@ -138,8 +163,12 @@ export const getScore = (grid: Grid) => {
   }, 0);
 };
 
-export const setAnimation = (gridRef:  MutableRefObject<HTMLDivElement>, index: number, className: string) => {
-  const cell = gridRef.current.children[index];
+export const setAnimation = (
+  gridRef: React.RefObject<HTMLDivElement>,
+  index: number,
+  className: string
+) => {
+  const cell = gridRef?.current?.children[index];
 
   if (!cell) {
     return;

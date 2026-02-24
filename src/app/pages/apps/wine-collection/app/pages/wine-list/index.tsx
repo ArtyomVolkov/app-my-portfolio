@@ -1,5 +1,5 @@
-import React, { useMemo, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMemo, useRef } from 'react';
+import { useNavigate } from 'react-router';
 
 import TextField from '@mui/material/TextField';
 import Badge from '@mui/material/Badge';
@@ -27,25 +27,28 @@ const WineAppWineListPage = () => {
   const navigation = useNavigate();
   const { user, actions, wineList } = useStore((store) => store);
   const { openModal, closeModal } = useAppModal((store) => store);
-  const inputSearchRef = useRef(null);
+  const inputSearchRef = useRef<HTMLInputElement>(null);
 
   const hasAnyFilter = useMemo(() => {
-    return storeHelpers.hasAnyFilter(wineList.search, wineList.filters);
+    return storeHelpers.hasAnyFilter(wineList.search!, wineList.filters!);
   }, [wineList.filters, wineList.search]);
 
   const filteredList = useMemo(() => {
-    return storeHelpers.searchWineFilter(wineList.search, wineList.filters, wineList.data);
+    return storeHelpers.searchWineFilter(
+      wineList.search!,
+      wineList.filters!,
+      wineList.data!
+    );
   }, [wineList.search, wineList.data, wineList.filters]);
 
   const filterCount = useMemo(() => {
-    return storeHelpers.getFilterCount(wineList?.filters);
+    return storeHelpers.getFilterCount(wineList?.filters!);
   }, [wineList.filters]);
 
   const onAddNewWine = () => {
     openModal({
       name: 'new-wine-modal',
-      props: {
-      },
+      props: {},
       content: (
         <AddNewWineModal
           onSubmit={actions.onAddNewWine}
@@ -58,23 +61,20 @@ const WineAppWineListPage = () => {
   const onFilterWine = () => {
     openModal({
       name: 'filter-wine-modal',
-      props: {
-      },
+      props: {},
       content: (
-        <FilterWineModal
-          onClose={() => closeModal('filter-wine-modal')}
-        />
+        <FilterWineModal onClose={() => closeModal('filter-wine-modal')} />
       ),
     });
   };
 
-  const onChangeSearchTerm = (e) => {
+  const onChangeSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
     actions.onSearchWine(e.target.value);
   };
 
   const onClearSearchTerm = () => {
     actions.onSearchWine('');
-    inputSearchRef.current.focus();
+    inputSearchRef.current?.focus();
   };
 
   const renderNoData = () => {
@@ -86,33 +86,40 @@ const WineAppWineListPage = () => {
 
     return (
       <NoData
-        title={hasAnyFilter && noResults ? "No results" : "No wine data"}
-        subtitle={hasAnyFilter && noResults
-          ? "Sorry we couldn't find any results, try to clear filters."
-          : "You don't have saved wines yet."}
-        content={hasAnyFilter && (
-          <div>
-            <Button variant="outlined" onClick={actions.onClearAllWineListFilter}>
-              Clear all filters
-            </Button>
-          </div>
-        )}
+        title={hasAnyFilter && noResults ? 'No results' : 'No wine data'}
+        subtitle={
+          hasAnyFilter && noResults
+            ? "Sorry we couldn't find any results, try to clear filters."
+            : "You don't have saved wines yet."
+        }
+        content={
+          hasAnyFilter && (
+            <div>
+              <Button
+                variant="outlined"
+                onClick={actions.onClearAllWineListFilter}
+              >
+                Clear all filters
+              </Button>
+            </div>
+          )
+        }
       />
-    )
+    );
   };
 
   const renderWineList = () => {
     if (!filteredList) {
       return null;
     }
-    return filteredList.length > 0 && (
-      <ul className={styles.wineList}>
-        {
-          filteredList.map((item) => (
+    return (
+      filteredList.length > 0 && (
+        <ul className={styles.wineList}>
+          {filteredList.map((item) => (
             <WineTile key={item.id} wine={item} />
-          ))
-        }
-      </ul>
+          ))}
+        </ul>
+      )
     );
   };
 
@@ -120,14 +127,18 @@ const WineAppWineListPage = () => {
     if (!wineList.loading) {
       return null;
     }
-    return !wineList.data && (
-      <div className={styles.skeleton}>
-        <ul className={styles.wineList}>
-          {Array(8).fill(0).map((item, index) => (
-            <li key={index} className={styles.tile} />
-          ))}
-        </ul>
-      </div>
+    return (
+      !wineList.data && (
+        <div className={styles.skeleton}>
+          <ul className={styles.wineList}>
+            {Array(8)
+              .fill(0)
+              .map((_, index) => (
+                <li key={index} className={styles.tile} />
+              ))}
+          </ul>
+        </div>
+      )
     );
   };
 
@@ -135,7 +146,7 @@ const WineAppWineListPage = () => {
     <div className={styles.wineAppWineListPage}>
       <div className={styles.header}>
         <Avatar
-          src={user.photoURL}
+          src={user?.photoURL}
           className={styles.avatar}
           onClick={() => navigation('user')}
         />
@@ -148,15 +159,24 @@ const WineAppWineListPage = () => {
           inputRef={inputSearchRef}
           slotProps={{
             input: {
-              startAdornment: <SearchOutlinedIcon className={styles.searchIcon} />,
-              endAdornment: wineList.search
-                ? <CloseRoundedIcon className={styles.clearIcon} onClick={onClearSearchTerm} />
-                : null
-            }
+              startAdornment: (
+                <SearchOutlinedIcon className={styles.searchIcon} />
+              ),
+              endAdornment: wineList.search ? (
+                <CloseRoundedIcon
+                  className={styles.clearIcon}
+                  onClick={onClearSearchTerm}
+                />
+              ) : null,
+            },
           }}
         />
         <div className={styles.actions}>
-          <Badge badgeContent={filterCount} color="primary" invisible={!filterCount}>
+          <Badge
+            badgeContent={filterCount}
+            color="primary"
+            invisible={!filterCount}
+          >
             <Button variant="outlined" color="primary" onClick={onFilterWine}>
               <FilterAltIcon />
             </Button>
@@ -165,10 +185,18 @@ const WineAppWineListPage = () => {
             <PostAddOutlinedIcon />
           </Button>
           <span className={styles.divider} />
-          <Button variant="outlined" color="inherit" onClick={actions.onDownloadWineList}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={actions.onDownloadWineList}
+          >
             <FileDownloadRoundedIcon />
           </Button>
-          <Button variant="outlined" color="inherit" onClick={actions.onUploadWineList}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={actions.onUploadWineList}
+          >
             <FileUploadRoundedIcon />
           </Button>
         </div>
@@ -179,7 +207,7 @@ const WineAppWineListPage = () => {
         {renderNoData()}
       </div>
     </div>
-  )
+  );
 };
 
 export default WineAppWineListPage;

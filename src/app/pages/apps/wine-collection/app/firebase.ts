@@ -3,7 +3,7 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from "firebase/auth";
 
 export const FBApp = initializeApp({
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "my-portfolio-32f33.firebaseapp.com",
   projectId: "my-portfolio-32f33",
   storageBucket: "my-portfolio-32f33.firebasestorage.app",

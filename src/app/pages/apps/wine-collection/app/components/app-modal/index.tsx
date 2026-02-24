@@ -8,20 +8,18 @@ const AppModal = () => {
 
   return (
     <>
-      {
-        modals.map((item) => (
-          <Dialog
-            key={item.name}
-            open={item.open}
-            scroll="paper"
-            {...item.props}
-          >
-            {item.content as React.ReactNode}
-          </Dialog>
-        ))
-      }
+      {modals.map((item) => (
+        <Dialog
+          key={item.name}
+          open={Boolean(item.open)}
+          scroll="paper"
+          {...item.props}
+        >
+          {item.content as React.ReactNode}
+        </Dialog>
+      ))}
     </>
   );
-}
+};
 
 export default AppModal;
