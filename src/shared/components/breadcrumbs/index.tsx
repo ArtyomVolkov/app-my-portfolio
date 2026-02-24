@@ -1,10 +1,10 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router';
 
 import Link from '@mui/material/Link';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 
-import { PATH_MAP } from '@components/aside/navigation';
+import { PATH_MAP } from '@shared/constants/navigation';
 
 import styles from './style.module.scss';
 
@@ -12,21 +12,30 @@ const Breadcrumbs = () => {
   const navigation = useNavigate();
   const location = useLocation();
 
-  const navigateTo = (event: React.MouseEvent<HTMLDivElement>, pathname) => {
+  const navigateTo = (
+    event: React.MouseEvent<HTMLDivElement>,
+    pathname: string
+  ) => {
     event.preventDefault();
     navigation(pathname);
   };
 
   const renderItems = () => {
-    const paths = location.pathname.length === 1 ? [''] : location.pathname.split('/');
+    const paths =
+      location.pathname.length === 1 ? [''] : location.pathname.split('/');
 
     return paths.map((item, index) => {
       if (!item) {
         return (
           <div key={index} onClick={(e) => navigateTo(e, '/')}>
-            <Link underline="hover" color="inherit" href="/" className={styles.link}>
-              { PATH_MAP.home.icon }
-              <span className={styles.pageLabel}>{ PATH_MAP.home.label }</span>
+            <Link
+              underline="hover"
+              color="inherit"
+              href="/"
+              className={styles.link}
+            >
+              {PATH_MAP.home.icon}
+              <span className={styles.pageLabel}>{PATH_MAP.home.label}</span>
             </Link>
           </div>
         );
@@ -35,7 +44,7 @@ const Breadcrumbs = () => {
       if (!PATH_MAP[item]) {
         return null;
       }
-      const path = paths.slice(0, (index+1)).join('/');
+      const path = paths.slice(0, index + 1).join('/');
 
       return (
         <div key={item} onClick={(e) => navigateTo(e, path)}>
@@ -45,19 +54,19 @@ const Breadcrumbs = () => {
             href={path}
             className={styles.link}
           >
-            { PATH_MAP[item].icon }
-            <span className={styles.pageLabel}>{ PATH_MAP[item]?.label }</span>
+            {PATH_MAP[item].icon}
+            <span className={styles.pageLabel}>{PATH_MAP[item]?.label}</span>
           </Link>
         </div>
-      )
-    })
+      );
+    });
   };
 
   return (
     <MuiBreadcrumbs className={styles.breadcrumbs}>
-      { renderItems() }
+      {renderItems()}
     </MuiBreadcrumbs>
   );
-}
+};
 
 export default Breadcrumbs;

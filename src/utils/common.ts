@@ -1,4 +1,6 @@
-export const mergeClassNames = (classNames = []) =>
+type JSONValue = string | number | boolean | null | { [key: string]: JSONValue } | JSONValue[];
+
+export const mergeClassNames = (classNames: Array<string | boolean | null | undefined> = []) =>
   classNames.filter((item) => item).join(" ");
 
 export const formatBytes = (bytes: number, decimals = 2) => {
@@ -17,19 +19,26 @@ export const formatBytes = (bytes: number, decimals = 2) => {
 export const getQueryParams = () => {
   const hash = location.search.replace("?", "").split("&");
 
-  return hash.reduce((previous, current) => {
+  return hash.reduce((acc, current) => {
     const [key, value] = current.split("=");
 
     if (!key) {
-      return previous;
+      return acc;
     }
 
-    previous[key] = value;
-    return previous;
-  }, {});
+    acc[key] = value;
+    return acc;
+  }, {} as Record<string, string | undefined>);
 };
 
-export const getErrorMessage = (error) => {
+type ErrorData = {
+  message?: string;
+  data?: {
+    message?: string;
+  };
+};
+
+export const getErrorMessage = (error: ErrorData) => {
   if (error?.message) {
     return error.message;
   }
@@ -91,9 +100,8 @@ export const toTimeInWords = (h: number, m: number): string => {
   if (minutes === 15) {
     return `quarter ${upTo} ${numbers[hours]}`;
   }
-  return `${numbers[minutes - 1]} ${toMinutes(minutes)} ${upTo} ${
-    numbers[hours]
-  }`;
+  return `${numbers[minutes - 1]} ${toMinutes(minutes)} ${upTo} ${numbers[hours]
+    }`;
 };
 
 export const isPrimeNumber = (num: number): boolean => {
@@ -128,28 +136,28 @@ export const getFactorial = (num: number): number => {
 };
 
 // find frequently occurring number in an array
-export const findFON = (arr: number[]): number => {
-  const km = arr.reduce((acc, val) => {
-    acc[val] = (acc[val] || 0) + 1;
+// export const findFON = (arr: number[]): number => {
+//   const km = arr.reduce((acc, val) => {
+//     acc[val] = (acc[val] || 0) + 1;
 
-    return acc;
-  }, {});
+//     return acc;
+//   }, {} as Record<number, number>);
 
-  return Object.keys(km).reduce(
-    (acc, val) => {
-      if (km[val] > acc[1]) {
-        return [+val, km[val]];
-      }
-      return acc;
-    },
-    [null, 0]
-  )[0];
-};
+//   return Object.keys(km).reduce(
+//     (acc, val) => {
+//       if (km[val] > acc[1]) {
+//         return [+val, km[val]];
+//       }
+//       return acc;
+//     },
+//     [null, 0]
+//   )[0];
+// };
 
-export const debounce = (func: Function, delay: number) => {
+export const debounce = (func: (...args: JSONValue[]) => void, delay: number) => {
   let timeoutId: ReturnType<typeof setTimeout>;
 
-  return (...args: any[]) => {
+  return (...args: JSONValue[]) => {
     if (timeoutId) {
       clearTimeout(timeoutId);
     }

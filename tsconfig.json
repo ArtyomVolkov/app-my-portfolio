@@ -2,8 +2,8 @@
   "compileOnSave": false,
   "sourceMap": true,
   "noImplicitAny": true,
-  "exclude": ["node_modules", "build"],
-  "include": ["./src", "webpack.config.ts", "server.js", "types"],
+  "exclude": ["node_modules", "build", "src/service-worker.js"],
+  "include": ["./src", "webpack.config.ts", "types"],
   "compilerOptions": {
     "typeRoots" : ["node_modules/@types", "src/types"],
     "module": "commonjs",

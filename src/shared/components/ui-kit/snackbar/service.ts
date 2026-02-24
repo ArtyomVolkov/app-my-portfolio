@@ -1,4 +1,4 @@
-import { SnackbarContextType, SnackbarProps, SnackbarSettings } from './provider';
+import { type SnackbarContextType, type SnackbarProps, type SnackbarSettings } from './provider';
 
 class SnackbarService {
   snackbarContext: SnackbarContextType | null = null;
@@ -22,6 +22,10 @@ class SnackbarService {
   updateSettings(data: Partial<SnackbarSettings>) {
     if (!this.snackbarContext) {
       console.error("SnackbarService is not initialized. Check if SnackbarProvider is mounted.");
+      return;
+    }
+    if (!this.snackbarContext.updateSettings) {
+      console.error("SnackbarContext does not have updateSettings method.");
       return;
     }
     this.snackbarContext.updateSettings(data);

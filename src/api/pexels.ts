@@ -6,7 +6,7 @@ export const getImages = async (page: number, perPage: number) => {
       `${API}?query=nature&orientation=landscape&page=${page}&per_page=${perPage}`,
       {
         headers: {
-          Authorization: process.env.PEXELS_API_KEY,
+          Authorization: import.meta.env.VITE_PEXELS_API_KEY,
         },
       }
     );
