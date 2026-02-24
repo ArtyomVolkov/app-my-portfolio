@@ -11,3 +11,4 @@ node_modules
 #dotenv
 .env
 src/assets/.DS_Store
+.DS_Store
