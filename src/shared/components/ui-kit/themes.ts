@@ -40,7 +40,7 @@ export const LightThemes: Array<Theme> = [
       { name: 'Secondary', hex: '#5e05cf', variableName: '--secondary-color' },
       { name: 'Success', hex: '#28a745', variableName: '--success-color' },
       { name: 'Warning', hex: '#ffc107', variableName: '--warning-color' },
-      { name: 'Info', hex: '#457d99', variableName: '--info-color' },
+      { name: 'Info', hex: '#008697', variableName: '--info-color' },
       { name: 'Danger', hex: '#dc3545', variableName: '--danger-color' },
     ],
   },
