@@ -24,6 +24,7 @@ const getEmissionBorder = (data: number[]): { top: number; bottom: number } => {
 const humansPressures: number[] = [100, 110, 95, 105, 120, 130, 90, 115, 125, 85, 140, 150, 193]; // 193 added for more variability
 
 const emissionBorder = getEmissionBorder(humansPressures);
+console.log("Emission Border:", emissionBorder); // Output: Emission Border: { top: 193.546, bottom: 51.455 }
 
 // Example emissionBorder output: 
 // bottom: 51.455

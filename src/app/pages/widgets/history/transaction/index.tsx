@@ -1,0 +1,43 @@
+import React from 'react';
+
+import './style.scss';
+
+type TransactionData = {
+  title: string,
+  date: string,
+  color?: string,
+  icon?: React.ElementType
+}
+
+export type Transaction = {
+  title: string,
+  data: Array<TransactionData>
+}
+
+const Transaction: React.FC<Transaction> = ({ title, data }) => {
+  return (
+    <div className="history-widget">
+      <div className="headline">
+        <p className="title">{ title }</p>
+      </div>
+      <ul className="history-data">
+        {
+          data.map((item, index) => (
+            <li key={index}>
+              <div className="icon" style={{background: item.color }}>
+                {item.icon && <item.icon />}
+              </div>
+              <div className="details">
+                <span className="title">{item.title}</span>
+                <span className="date">{item.date}</span>
+              </div>
+              <div className="divider" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  );
+}
+
+export default Transaction;

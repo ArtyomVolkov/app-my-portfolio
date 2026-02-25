@@ -1,0 +1,67 @@
+.modal {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba($color: black, $alpha: 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+  animation: fadeIn 0.25s linear;
+
+  .contentBox {
+    width: 235px;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-paper, #ffffff);
+    border-radius: 4px;
+    position: relative;
+    padding: 12px;
+
+    .closeButton {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+
+    .modalContent {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+
+      .title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 10px 0;
+      }
+
+      .description {
+        color: var(--text-color, #000000);
+        flex: 1;
+        margin: 10px 0;
+      }
+
+      .actions {
+        margin-top: 10px;
+        display: flex;
+        grid-column-gap: 10px;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+        button {
+          text-transform: none;
+        }
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

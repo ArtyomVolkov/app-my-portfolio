@@ -1,431 +1,444 @@
 import { Development, Language as ELanguage, Technology as ETechnology, Tool as ETool } from '@shared/enums/develop';
-import { Language as ILanguage, Technology as ITechnology, Tool as ITool } from '@shared/interfaces/develop';
 
-export const Languages: { [key in ELanguage]: ILanguage } = {
+export type TechnologyType = 
+  typeof Development.PL | 
+  typeof Development.TOOL | 
+  typeof Development.TECHNOLOGY;
+
+export interface ITechnology {
+  id: string;
+  type: TechnologyType;
+  label: string;
+  prefix?: string;
+  name?: string;
+  link?: string;
+}
+
+export const Languages: { [key: string]: ITechnology } = {
   javascript: {
-    key: ELanguage.JAVASCRIPT,
+    id: ELanguage.JAVASCRIPT,
     prefix: 'JS',
     label: 'JavaScript',
     type: Development.PL,
   },
   typescript: {
-    key: ELanguage.TYPESCRIPT,
+    id: ELanguage.TYPESCRIPT,
     prefix: 'TS',
     label: 'TypeScript',
     type: Development.PL,
   },
   dart: {
-    key: ELanguage.DART,
+    id: ELanguage.DART,
     prefix: 'D',
     label: 'Dart',
     type: Development.PL
   },
   java: {
-    key: ELanguage.JAVA,
+    id: ELanguage.JAVA,
     prefix: 'J',
     label: 'Java (core)',
     type: Development.PL
   },
   objectiveC: {
-    key: ELanguage.OBJECTIVE_C,
+    id: ELanguage.OBJECTIVE_C,
     prefix: 'OC',
     label: 'Objective C',
     type: Development.PL
   },
   python: {
-    key: ELanguage.PYTHON,
+    id: ELanguage.PYTHON,
     prefix: 'PY',
     label: 'Python',
     type: Development.PL
   }
 };
 
-export const Tools: { [key in ETool]: ITool } = {
+export const Tools: { [key: string]: ITechnology } = {
   npm: {
-    key: ETool.NPM,
+    id: ETool.NPM,
     label: 'Npm',
     link: '',
     type: Development.TOOL,
   },
   git: {
-    key: ETool.GIT,
+    id: ETool.GIT,
     label: 'Git',
     link: '',
     type: Development.TOOL,
   },
   docker: {
-    key: ETool.DOCKER,
+    id: ETool.DOCKER,
     label: 'Docker',
     link: '',
     type: Development.TOOL,
   },
   webpack: {
-    key: ETool.WEBPACK,
+    id: ETool.WEBPACK,
     label: 'Webpack',
     link: '',
     type: Development.TOOL,
   },
   vite: {
-    key: ETool.VITE,
+    id: ETool.VITE,
     label: 'Vite',
     link: '',
     type: Development.TOOL,
   },
   grunt: {
-    key: ETool.GRUNT,
+    id: ETool.GRUNT,
     label: 'Grunt',
     link: '',
     type: Development.TOOL,
   },
   webstorm: {
-    key: ETool.WEBSTORM_IDEA,
+    id: ETool.WEBSTORM_IDEA,
     label: 'WebStorm IDEA',
     link: '',
     type: Development.TOOL,
   },
-  [ETool.XCODE] : {
-    key: ETool.XCODE,
+  [ETool.XCODE]: {
+    id: ETool.XCODE,
     label: 'Xcode',
     link: '',
     type: Development.TOOL,
   },
-  [ETool.ANDROID_STUDIO] : {
-    key: ETool.ANDROID_STUDIO,
+  [ETool.ANDROID_STUDIO]: {
+    id: ETool.ANDROID_STUDIO,
     label: 'Android Studio',
     link: '',
     type: Development.TOOL,
   },
   [ETool.FIREBASE]: {
-    key: ETool.FIREBASE,
+    id: ETool.FIREBASE,
     label: 'Firebase',
     link: '',
     type: Development.TOOL,
   },
   sonar: {
-    key: ETool.SONAR,
+    id: ETool.SONAR,
     label: 'Sonar',
     link: '',
     type: Development.TOOL,
   },
   gla: {
-    key: ETool.GLA,
+    id: ETool.GLA,
     label: 'Google Lighthouse audit',
     link: '',
     type: Development.TOOL,
   },
   zeplin: {
-    key: ETool.ZEPLIN,
+    id: ETool.ZEPLIN,
     label: 'Zeplin',
     link: '',
     type: Development.TOOL,
   },
   figma: {
-    key: ETool.FIGMA,
+    id: ETool.FIGMA,
     label: 'Figma',
     link: '',
     type: Development.TOOL,
   },
   jenkins: {
-    key: ETool.JENKINS,
+    id: ETool.JENKINS,
     label: 'Jenkins',
     link: '',
     type: Development.TOOL,
   },
   aws: {
-    key: ETool.AWS,
+    id: ETool.AWS,
     label: 'AWS',
     link: '',
     type: Development.TOOL,
   },
   jasper: {
-    key: ETool.JASPER,
+    id: ETool.JASPER,
     label: 'Jasper Reports',
     link: '',
     type: Development.TOOL,
   },
   jira: {
-    key: ETool.JIRA,
+    id: ETool.JIRA,
     label: 'JIRA',
     link: '',
     type: Development.TOOL,
   },
   azure: {
-    key: ETool.AZURE,
+    id: ETool.AZURE,
     label: 'Azure',
     link: '',
     type: Development.TOOL,
   },
   VSCode: {
-    key: ETool.VS_CODE,
+    id: ETool.VS_CODE,
     label: 'VS Code',
     link: '',
     type: Development.TOOL,
   }
 };
 
-export const Technologies: {[key in ETechnology]: ITechnology } = {
+export const Technologies: { [key: string]: ITechnology } = {
   node: {
-    key: ETechnology.NODE,
+    id: ETechnology.NODE,
     label: 'Node',
     type: Development.TECHNOLOGY
   },
   express: {
-    key: ETechnology.EXPRESS,
+    id: ETechnology.EXPRESS,
     label: 'Express',
     type: Development.TECHNOLOGY
   },
   mysql: {
-    key: ETechnology.MYSQL,
+    id: ETechnology.MYSQL,
     label: 'MySQL',
     type: Development.TECHNOLOGY
   },
   postgresql: {
-    key: ETechnology.POSTGRESQL,
+    id: ETechnology.POSTGRESQL,
     label: 'PostgreSQL',
     type: Development.TECHNOLOGY
   },
   mongo: {
-    key: ETechnology.MONGO,
+    id: ETechnology.MONGO,
     label: 'Mongo',
     type: Development.TECHNOLOGY
   },
   webStorages: {
-    key: ETechnology.WEB_STORAGES,
+    id: ETechnology.WEB_STORAGES,
     label: 'Web-storages',
     type: Development.TECHNOLOGY
   },
   rest: {
-    key: ETechnology.REST,
+    id: ETechnology.REST,
     label: 'Rest API',
     type: Development.TECHNOLOGY
   },
   graphql: {
-    key: ETechnology.GRAPHQL,
+    id: ETechnology.GRAPHQL,
     label: 'GraphQL',
     type: Development.TECHNOLOGY
   },
   html: {
-    key: ETechnology.HTML,
+    id: ETechnology.HTML,
     label: 'HTML5',
     type: Development.TECHNOLOGY
   },
   css: {
-    key: ETechnology.CSS,
+    id: ETechnology.CSS,
     label: 'CSS3',
     type: Development.TECHNOLOGY
   },
   react: {
-    key: ETechnology.REACT,
+    id: ETechnology.REACT,
     label: 'React',
     type: Development.TECHNOLOGY
   },
   reactContext: {
-    key: ETechnology.REACT_CONTEXT,
+    id: ETechnology.REACT_CONTEXT,
     label: 'React Context',
     type: Development.TECHNOLOGY
   },
   reactNative: {
-    key: ETechnology.REACT_NATIVE,
+    id: ETechnology.REACT_NATIVE,
     label: 'React Native',
     type: Development.TECHNOLOGY
   },
   flutter: {
-    key: ETechnology.FLUTTER,
+    id: ETechnology.FLUTTER,
     label: 'Flutter',
     type: Development.TECHNOLOGY
   },
   [ETechnology.CAPACITOR]: {
-    key: ETechnology.CAPACITOR,
+    id: ETechnology.CAPACITOR,
     label: 'Capacitor',
     type: Development.TECHNOLOGY
   },
   [ETechnology.MICRO_FRONT_END]: {
-    key: ETechnology.MICRO_FRONT_END,
+    id: ETechnology.MICRO_FRONT_END,
     label: 'Micro Front-End',
     type: Development.TECHNOLOGY
   },
   angular: {
-    key: ETechnology.ANGULAR,
+    id: ETechnology.ANGULAR,
     label: 'Angular2+',
     type: Development.TECHNOLOGY
   },
   angularjs: {
-    key: ETechnology.ANGULARJS,
+    id: ETechnology.ANGULARJS,
     label: 'Angular.js',
     type: Development.TECHNOLOGY
   },
   backbone: {
-    key: ETechnology.BACKBONE,
+    id: ETechnology.BACKBONE,
     label: 'Backbone',
     type: Development.TECHNOLOGY
   },
   jquery: {
-    key: ETechnology.JQUERY,
+    id: ETechnology.JQUERY,
     label: 'jQuery',
     type: Development.TECHNOLOGY
   },
   materialUI: {
-    key: ETechnology.MATERIAL_UI,
+    id: ETechnology.MATERIAL_UI,
     label: 'Material UI',
     type: Development.TECHNOLOGY
   },
   antDesign: {
-    key: ETechnology.ANT_DESIGN,
+    id: ETechnology.ANT_DESIGN,
     label: 'Ant Design',
     type: Development.TECHNOLOGY
   },
   semanticUI: {
-    key: ETechnology.SEMANTIC_UI,
+    id: ETechnology.SEMANTIC_UI,
     label: 'Semantic UI',
     type: Development.TECHNOLOGY
   },
   kendoUI: {
-    key: ETechnology.KENDO_UI,
+    id: ETechnology.KENDO_UI,
     label: 'Kendo UI',
     type: Development.TECHNOLOGY
   },
   bootstrap: {
-    key: ETechnology.BOOTSTRAP,
+    id: ETechnology.BOOTSTRAP,
     label: 'Bootstrap',
     type: Development.TECHNOLOGY
   },
   styledComponents: {
-    key: ETechnology.STYLED,
+    id: ETechnology.STYLED,
     label: 'Styled Components',
     type: Development.TECHNOLOGY
   },
   oop: {
-    key: ETechnology.OOP,
+    id: ETechnology.OOP,
     label: 'OOP',
     type: Development.TECHNOLOGY
   },
   fp: {
-    key: ETechnology.FP,
+    id: ETechnology.FP,
     label: 'FP',
     type: Development.TECHNOLOGY
   },
   tdd: {
-    key: ETechnology.TDD,
+    id: ETechnology.TDD,
     label: 'TDD',
     type: Development.TECHNOLOGY
   },
   bdd: {
-    key: ETechnology.BDD,
+    id: ETechnology.BDD,
     label: 'BDD',
     type: Development.TECHNOLOGY
   },
   redux: {
-    key: ETechnology.REDUX,
+    id: ETechnology.REDUX,
     label: 'Redux',
     type: Development.TECHNOLOGY
   },
   zustand: {
-    key: ETechnology.ZUSTAND,
+    id: ETechnology.ZUSTAND,
     label: 'Zustand',
     type: Development.TECHNOLOGY
   },
   mobx: {
-    key: ETechnology.MOBX,
+    id: ETechnology.MOBX,
     label: 'MobX',
     type: Development.TECHNOLOGY
   },
   rxjs: {
-    key: ETechnology.RXJS,
+    id: ETechnology.RXJS,
     label: 'RxJS',
     type: Development.TECHNOLOGY
   },
   googleMaps: {
-    key: ETechnology.GOOGLE_MAPS,
+    id: ETechnology.GOOGLE_MAPS,
     label: 'Google Maps',
     type: Development.TECHNOLOGY
   },
   jest: {
-    key: ETechnology.JEST,
+    id: ETechnology.JEST,
     label: 'Jest',
     type: Development.TECHNOLOGY
   },
   cypress: {
-    key: ETechnology.CYPRESS,
+    id: ETechnology.CYPRESS,
     label: 'Cypress',
     type: Development.TECHNOLOGY
   },
   detox: {
-    key: ETechnology.DETOX,
+    id: ETechnology.DETOX,
     label: 'Detox',
     type: Development.TECHNOLOGY
   },
   jasmine: {
-    key: ETechnology.JASMINE,
+    id: ETechnology.JASMINE,
     label: 'Jasmine',
     type: Development.TECHNOLOGY
   },
   lodash: {
-    key: ETechnology.LODASH,
+    id: ETechnology.LODASH,
     label: 'Lodash',
     type: Development.TECHNOLOGY
   },
   cryptoJS: {
-    key: ETechnology.CRYPTO_JS,
+    id: ETechnology.CRYPTO_JS,
     label: 'Crypto JS',
     type: Development.TECHNOLOGY
   },
   svg: {
-    key: ETechnology.SVG,
+    id: ETechnology.SVG,
     label: 'SVG',
     type: Development.TECHNOLOGY
   },
   d3js: {
-    key: ETechnology.D3JS,
+    id: ETechnology.D3JS,
     label: 'D3js',
     type: Development.TECHNOLOGY
   },
   canvas: {
-    key: ETechnology.CANVAS,
+    id: ETechnology.CANVAS,
     label: 'Canvas',
     type: Development.TECHNOLOGY
   },
   webSocket: {
-    key: ETechnology.WEB_SOCKET,
+    id: ETechnology.WEB_SOCKET,
     label: 'Web Socket',
     type: Development.TECHNOLOGY
   },
   webWorker: {
-    key: ETechnology.WEB_WORKER,
+    id: ETechnology.WEB_WORKER,
     label: 'Web Worker',
     type: Development.TECHNOLOGY
   },
   serviceWorker: {
-    key: ETechnology.SERVICE_WORKER,
+    id: ETechnology.SERVICE_WORKER,
     label: 'Service Worker',
     type: Development.TECHNOLOGY
   },
   jsdoc: {
-    key: ETechnology.JSDOC,
+    id: ETechnology.JSDOC,
     label: 'JsDoc',
     type: Development.TECHNOLOGY
   },
   scrum: {
-    key: ETechnology.SCRUM,
+    id: ETechnology.SCRUM,
     label: 'Scrum',
     type: Development.TECHNOLOGY
   },
   kanban: {
-    key: ETechnology.KANBAN,
+    id: ETechnology.KANBAN,
     label: 'Kanban',
     type: Development.TECHNOLOGY
   },
   lean: {
-    key: ETechnology.LEAN,
+    id: ETechnology.LEAN,
     label: 'Lean',
     type: Development.TECHNOLOGY
   },
   exp: {
-    key: ETechnology.EXP,
+    id: ETechnology.EXP,
     label: 'Extreme Programming',
     type: Development.TECHNOLOGY
   },
   pexels: {
-    key: ETechnology.PEXELS,
+    id: ETechnology.PEXELS,
     label: 'Pexels (api)',
     type: Development.TECHNOLOGY
   }

@@ -1,14 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import { mergeClassNames } from "@utils/common";
+import { mergeClassNames } from '@utils/common';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
-const Tag = ({ name, children, ...rest }) => {
+type TagProps = {
+  name: string;
+  children?: React.ReactNode | string;
+  [key: string]: any;
+};
+
+const Tag: React.FC<TagProps> = ({ name, children, ...rest }) => {
   return React.createElement(name, { ...rest }, children);
 };
 
-export type Variant = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
+export type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
 
 type TypographyProps = {
   className?: string;
@@ -21,7 +27,7 @@ type TypographyProps = {
 const Typography: React.FC<TypographyProps> = ({
   className,
   children,
-  variant = "h3",
+  variant = 'h3',
   lineBreak = false,
   lineNumber = 1,
 }) => {

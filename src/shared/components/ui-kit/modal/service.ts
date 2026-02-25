@@ -1,7 +1,7 @@
-import { ModalContextType, ModalProps } from "./provider";
+import { type ModalContextType, type ModalProps } from "./provider";
 
 class ModalService implements ModalContextType {
-  modalContext: ModalContextType = null;
+  modalContext: ModalContextType | null = null;
 
   init(context: ModalContextType) {
     if (this.modalContext) {
@@ -20,12 +20,20 @@ class ModalService implements ModalContextType {
       console.error("ModalService is not initialized. Check if ModalProvider is mounted.");
       return;
     }
+    if (!this.modalContext.open) {
+      console.error("ModalContext does not have an open method.");
+      return;
+    }
     this.modalContext.open(name, data);
   }
 
   close(name: string) {
     if (!this.modalContext) {
       console.error("ModalService is not initialized. Check if ModalProvider is mounted.");
+      return;
+    }
+    if (!this.modalContext.close) {
+      console.error("ModalContext does not have a close method.");
       return;
     }
     this.modalContext.close(name);

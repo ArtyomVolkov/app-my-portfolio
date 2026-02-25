@@ -5,7 +5,7 @@ import { mergeClassNames } from "@utils/common";
 import styles from "./style.module.scss";
 
 type DividerProps = {
-  title?: string;
+  title?: string | React.ReactNode;
   height?: number;
   align?: "left" | "center" | "right";
   borderStyle?: "solid" | "dashed" | "dotted";

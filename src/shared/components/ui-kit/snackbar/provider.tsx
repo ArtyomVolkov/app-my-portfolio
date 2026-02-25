@@ -4,29 +4,29 @@ import React, {
   createContext,
   useContext,
   useMemo,
-} from "react";
+} from 'react';
 
-import Snackbar from "./snackbar";
-import snackbarService from "./service";
-import { mergeClassNames } from "@utils/common";
+import Snackbar from './snackbar';
+import snackbarService from './service';
+import { mergeClassNames } from '@utils/common';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const DefaultSettings: SnackbarSettings = {
-  position: "top-center",
+  position: 'top-center',
   stackLimit: 5,
   terminateDuration: 300,
 };
 
 type Position =
-  | "top-left"
-  | "top-center"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-center"
-  | "bottom-right";
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right';
 
-type Color = "default" | "success" | "danger" | "warning" | "info";
+type Color = 'default' | 'success' | 'danger' | 'warning' | 'info';
 
 type SnackbarSettings = {
   position?: Position;
@@ -42,7 +42,7 @@ type SnackbarStoreItem = {
   terminate?: boolean;
 };
 
-type SnackbarData = SnackbarProps & SnackbarStoreItem;
+export type SnackbarData = SnackbarProps & SnackbarStoreItem;
 
 type SnackbarProps = {
   message: MessageContent;
@@ -62,7 +62,7 @@ type SnackbarProviderProps = {
 };
 
 type SnackbarContextType = {
-  open: (props: SnackbarProps, settings?: Partial<SnackbarSettings>) => void;
+  open: (props: SnackbarData, settings?: Partial<SnackbarSettings>) => void;
   close: (id?: string) => void;
   updateSettings?: (settings: SnackbarSettings) => void;
 };
@@ -100,27 +100,27 @@ const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
   useEffect(() => {
     stack.data.forEach((snackbar, index) => {
       if (snackbar.terminate) {
-        terminate(index, stack.settings.terminateDuration);
+        terminate(index, stack.settings.terminateDuration!);
       }
     });
   }, [stack]);
 
   const positionClass = useMemo(() => {
     switch (stack.settings.position) {
-      case "top-left":
+      case 'top-left':
         return styles.topLeft;
-      case "top-center":
+      case 'top-center':
         return styles.topCenter;
-      case "top-right":
+      case 'top-right':
         return styles.topRight;
-      case "bottom-left":
+      case 'bottom-left':
         return styles.bottomLeft;
-      case "bottom-center":
+      case 'bottom-center':
         return styles.bottomCenter;
-      case "bottom-right":
+      case 'bottom-right':
         return styles.bottomRight;
       default:
-        return "";
+        return '';
     }
   }, [stack.settings.position]);
 
@@ -131,23 +131,23 @@ const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
     const id = Math.random().toString(36);
 
     setStack((prevStack) => {
-      if (prevStack.data.length >= prevStack.settings.stackLimit) {
+      if (prevStack.data.length >= prevStack.settings.stackLimit!) {
         prevStack.data.shift();
         return {
-          data: [...prevStack.data, { id, ...data }],
+          data: [...prevStack.data, { id, ...data }] as SnackbarData[],
           settings: {
             ...prevStack.settings,
             ...settings,
           },
-        };
+        } as SnackbarStack;
       }
       return {
-        data: [...prevStack.data, { id, ...data }],
+        data: [...prevStack.data, { id, ...data }] as SnackbarData[],
         settings: {
           ...prevStack.settings,
           ...settings,
         },
-      };
+      } as SnackbarStack;
     });
   };
 
@@ -189,9 +189,9 @@ const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
   const renderSnackbar = (snackbar: SnackbarData) => {
     return (
       <Snackbar
+        {...snackbar}
         key={snackbar.id}
         onRequestClose={() => closeSnackbar(snackbar.id)}
-        {...snackbar}
       />
     );
   };
@@ -220,14 +220,14 @@ const useSnackbar = () => {
   const context = useContext(SnackbarContext);
 
   if (!context || (!context.open && !context.close)) {
-    console.error("useSnackbar must be used within a SnackbarProvider");
+    console.error('useSnackbar must be used within a SnackbarProvider');
 
     return {
       open: () => {
-        console.error("SnackbarContext is not available.");
+        console.error('SnackbarContext is not available.');
       },
       close: () => {
-        console.error("SnackbarContext is not available.");
+        console.error('SnackbarContext is not available.');
       },
     };
   }
@@ -238,7 +238,6 @@ export {
   useSnackbar,
   SnackbarContext,
   type SnackbarProps,
-  type SnackbarData,
   type SnackbarSettings,
   type SnackbarStoreItem,
   type SnackbarContextType,

@@ -8,13 +8,18 @@ import { mergeClassNames } from '@utils/common';
 import styles from './style.module.scss';
 
 interface IModal {
-  open: boolean,
-  onClose: () => void,
-  className?: string,
-  renderContent?: () => React.ComponentElement<any, any> | null,
+  open: boolean;
+  onClose: () => void;
+  className?: string;
+  renderContent?: () => React.ReactElement;
 }
 
-const Modal: React.FC<IModal> = ({ open, onClose, className, renderContent }) => {
+const Modal: React.FC<IModal> = ({
+  open,
+  onClose,
+  className,
+  renderContent,
+}) => {
   if (!open) {
     return null;
   }
@@ -25,12 +30,10 @@ const Modal: React.FC<IModal> = ({ open, onClose, className, renderContent }) =>
         <IconButton onClick={onClose} className="close-button">
           <Close />
         </IconButton>
-        {
-          renderContent()
-        }
+        {renderContent && renderContent()}
       </div>
     </div>
   );
-}
+};
 
 export default Modal;

@@ -14,6 +14,7 @@ const getMedian = (data: number[]): number => {
 };
 
 const median = getMedian(data);
+console.log("Median:", median); // Output: Median: 5
 
 export default {
   getMedian,
