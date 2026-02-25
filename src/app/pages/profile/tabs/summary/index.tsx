@@ -10,7 +10,8 @@ import ScrollView from '@shared/components/ui-kit/scroll-view';
 
 import { LANGUAGES, TECHNOLOGIES, TOOLS } from '@pages/profile/data';
 
-import UserImage from '@assets/images/profile-image.png';
+import UserImage from '@assets/images/profile-image.webp';
+
 
 import { mergeClassNames } from '@utils/common';
 

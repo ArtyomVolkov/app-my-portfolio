@@ -2,7 +2,7 @@
 // Formula: MAD = (1/n) * Σ |xi - mean| for i = 1 to n
 // Usage: a better example is to measure the variability of daily temperatures over a month.
 
-const data: number[] = [20, 16, 22, 19, 24, 18, 21, 17, 23, 20];
+// const data: number[] = [20, 16, 22, 19, 24, 18, 21, 17, 23, 20];
 
 const getAbsoluteDeviation = (data: number[]): number => {
   if (data.length === 0) {

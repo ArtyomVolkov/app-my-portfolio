@@ -1,16 +1,20 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import ContentPasteSearchOutlinedIcon from '@mui/icons-material/ContentPasteSearchOutlined';
 
 import styles from './style.module.scss';
 
 interface INodata {
-  title?: string|ReactNode,
-  subtitle?: string|ReactNode,
-  content?: ReactNode
+  title?: string | React.ReactNode;
+  subtitle?: string | React.ReactNode;
+  content?: React.ReactNode;
 }
 
-const NoData: React.FC<INodata> = ({ title = 'No Data', subtitle = '', content }) => {
+const NoData: React.FC<INodata> = ({
+  title = 'No Data',
+  subtitle = '',
+  content,
+}) => {
   return (
     <section className={styles.wineAppNoData}>
       <ContentPasteSearchOutlinedIcon className={styles.icon} />
@@ -18,7 +22,7 @@ const NoData: React.FC<INodata> = ({ title = 'No Data', subtitle = '', content }
       <span className={styles.subtitle}>{subtitle}</span>
       {content}
     </section>
-  )
+  );
 };
 
 export default NoData;

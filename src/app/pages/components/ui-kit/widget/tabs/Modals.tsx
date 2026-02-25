@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Button from "@shared/components/ui-kit/button";
 import Divider from "@shared/components/ui-kit/divider";
@@ -8,7 +8,11 @@ import modal from "@shared/components/ui-kit/modal";
 
 import styles from "./style.module.scss";
 
-const CustomModal = ({ onClose }) => {
+type ModalProps = {
+  onClose: () => void;
+};
+
+const CustomModal: React.FC<ModalProps> = ({ onClose }) => {
   return (
     <div className={styles.modalContent}>
       <Typography variant="h6">This is a custom modal content.</Typography>
@@ -24,7 +28,12 @@ const CustomModal = ({ onClose }) => {
   );
 };
 
-const ConfirmModal = ({ onConfirm, onClose }) => {
+type ConfirmModalProps = {
+  onConfirm: () => Promise<void>;
+  onClose: () => void;
+};
+
+const ConfirmModal: React.FC<ConfirmModalProps> = ({ onConfirm, onClose }) => {
   const [loading, setLoading] = useState(false);
 
   return (
@@ -53,7 +62,12 @@ const ConfirmModal = ({ onConfirm, onClose }) => {
   );
 };
 
-const DeleteModal = ({ onDelete, onClose }) => {
+type DeleteModalProps = {
+  onDelete: () => Promise<void>;
+  onClose: () => void;
+};
+
+const DeleteModal: React.FC<DeleteModalProps> = ({ onDelete, onClose }) => {
   const [loading, setLoading] = useState(false);
 
   return (
@@ -82,7 +96,7 @@ const DeleteModal = ({ onDelete, onClose }) => {
   );
 };
 
-const MovableModal = ({ onClose }) => {
+const MovableModal: React.FC<ModalProps> = ({ onClose }) => {
   return (
     <div className={styles.modalContent}>
       <div>
@@ -101,7 +115,12 @@ const MovableModal = ({ onClose }) => {
   );
 };
 
-const StackedModal = ({ onClose, onNewModal }) => {
+type StackedModalProps = {
+  onClose: () => void;
+  onNewModal: () => void;
+};
+
+const StackedModal: React.FC<StackedModalProps> = ({ onClose, onNewModal }) => {
   return (
     <div className={styles.modalContent}>
       <div>
@@ -120,8 +139,8 @@ const StackedModal = ({ onClose, onNewModal }) => {
   );
 };
 
-const ModalsTab = () => {
-  const onAction = async (callback: Function) => {
+const ModalsTab: React.FC = () => {
+  const onAction = async (callback: Function): Promise<void> => {
     return new Promise((res) => setTimeout(() => res(callback()), 2000));
   };
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 import Divider from "@shared/components/ui-kit/divider";
 import Section from "@shared/components/section";
 import Tabs from "@shared/components/ui-kit/tabs";

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Main from '@app/layout/main';
 import GameWidget from '@pages/games/puzzle/game';
 import TechnologyList from '@shared/components/lists/technologies';

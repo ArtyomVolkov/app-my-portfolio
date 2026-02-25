@@ -1,5 +1,3 @@
-import React from "react";
-
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ClassRoundedIcon from "@mui/icons-material/ClassRounded";
 import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
@@ -62,22 +60,22 @@ const BreadcrumbTab = () => {
                 options={[
                   {
                     label: "Home",
-                    link: item.link && "/",
+                    link: item.link ? "/" : '',
                     icon: item.icon && <HomeRoundedIcon />,
                   },
                   {
                     label: "Category",
-                    link: item.link && "/category",
+                    link: item.link ? "/category" : '',
                     icon: item.icon && <CategoryRoundedIcon />,
                   },
                   {
                     label: "Subcategory",
-                    link: item.link && "/category/subcategory",
+                    link: item.link ? "/category/subcategory" : '',
                     icon: item.icon && <ClassRoundedIcon />,
                   },
                   {
                     label: "Subcategory 1",
-                    link: item.link && "/category/subcategory/item",
+                    link: item.link ? "/category/subcategory/item" : '',
                     icon: item.icon && <AcUnitRoundedIcon />,
                   },
                   ...(item.more ? item.more : [])

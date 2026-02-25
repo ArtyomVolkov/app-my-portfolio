@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Rotation from '@shared/components/rotation';
 
 import { mergeClassNames } from '@utils/common';

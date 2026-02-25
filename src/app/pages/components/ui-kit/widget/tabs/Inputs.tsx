@@ -1,11 +1,9 @@
-import React from "react";
+import Divider from '@shared/components/ui-kit/divider';
+import Section from '@shared/components/section';
+import Typography from '@shared/components/ui-kit/typography';
+import Input from '@shared/components/ui-kit/input';
 
-import Divider from "@shared/components/ui-kit/divider";
-import Section from "@shared/components/section";
-import Typography from "@shared/components/ui-kit/typography";
-import Input from "@shared/components/ui-kit/input";
-
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const InputsTab = () => {
   return (

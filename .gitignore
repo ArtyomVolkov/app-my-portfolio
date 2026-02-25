@@ -1,6 +1,8 @@
 # compiled output
 /build
 /coverage
+/dist
+/esm
 
 # dependencies
 node_modules

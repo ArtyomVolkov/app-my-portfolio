@@ -1,12 +1,10 @@
-import React from "react";
+import Divider from '@shared/components/ui-kit/divider';
+import Typography from '@shared/components/ui-kit/typography';
+import TechnologyList from '@shared/components/lists/technologies';
 
-import Divider from "@shared/components/ui-kit/divider";
-import Typography from "@shared/components/ui-kit/typography";
-import TechnologyList from "@shared/components/lists/technologies";
+import { PROJECTS } from '@pages/profile/data';
 
-import { PROJECTS } from "@pages/profile/data";
-
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const Experience = () => (
   <div className={styles.projectsTab}>

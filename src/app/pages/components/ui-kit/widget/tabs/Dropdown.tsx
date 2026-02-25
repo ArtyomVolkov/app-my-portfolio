@@ -1,24 +1,27 @@
-import React from "react";
+import React from 'react';
 
-import Divider from "@shared/components/ui-kit/divider";
-import Section from "@shared/components/section";
-import Dropdown from "@shared/components/ui-kit/dropdown";
+import Divider from '@shared/components/ui-kit/divider';
+import Section from '@shared/components/section';
+import Dropdown, {
+  type OptionData,
+  type Option,
+} from '@shared/components/ui-kit/dropdown';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
-const OPTIONS = [
-  { key: "option1", label: "Option 1", startIcon: "⭐" },
-  { key: "option2", label: "Option 2", startIcon: "🔥" },
-  { key: "option3", label: "Option 3", startIcon: "💧" },
-  { key: "option4", label: "Option 4", startIcon: "🌟" },
-  { key: "option5", label: "Option 5", startIcon: "⚡" },
-  { key: "option6", label: "Option 6", startIcon: "🍀" },
-  { key: "option7", label: "Option 7", startIcon: "🌈" },
+const OPTIONS: Option[] = [
+  { key: 'option1', label: 'Option 1', startIcon: '⭐' },
+  { key: 'option2', label: 'Option 2', startIcon: '🔥' },
+  { key: 'option3', label: 'Option 3', startIcon: '💧' },
+  { key: 'option4', label: 'Option 4', startIcon: '🌟' },
+  { key: 'option5', label: 'Option 5', startIcon: '⚡' },
+  { key: 'option6', label: 'Option 6', startIcon: '🍀' },
+  { key: 'option7', label: 'Option 7', startIcon: '🌈' },
 ];
 
-const DropdownPreview = () => {
-  const onSelect = (option) => {
-    console.log("Selected option:", option);
+const DropdownPreview: React.FC = () => {
+  const onSelect = (option: OptionData) => {
+    console.log('Selected option:', option);
   };
 
   return (
@@ -62,7 +65,7 @@ const DropdownPreview = () => {
                 options={OPTIONS}
                 minWidth={200}
                 multiple
-                defaultSelected={["option1", "option3"]}
+                defaultSelected={['option1', 'option3']}
                 onSelect={onSelect}
               />
             </div>
@@ -90,9 +93,9 @@ const DropdownPreview = () => {
                 placeholder="Select option"
                 options={[
                   {
-                    key: "longOption",
-                    label: "This is a very long option name to test width",
-                    startIcon: "📝",
+                    key: 'longOption',
+                    label: 'This is a very long option name to test width',
+                    startIcon: '📝',
                   },
                   ...OPTIONS,
                 ]}
@@ -104,14 +107,14 @@ const DropdownPreview = () => {
                 placeholder="Select option"
                 options={[
                   {
-                    key: "longOption",
+                    key: 'longOption',
                     label:
-                      "This is a very long option name to test width in multiple select)",
-                    startIcon: "📝",
+                      'This is a very long option name to test width in multiple select)',
+                    startIcon: '📝',
                   },
                   ...OPTIONS,
                 ]}
-                defaultSelected={["longOption"]}
+                defaultSelected={['longOption']}
                 minWidth={200}
                 multiple
                 onSelect={onSelect}
@@ -133,7 +136,7 @@ const DropdownPreview = () => {
                 minWidth={200}
                 multiple
                 disabled
-                defaultSelected={["option1", "option2", "option3"]}
+                defaultSelected={['option1', 'option2', 'option3']}
                 onSelect={onSelect}
               />
             </div>

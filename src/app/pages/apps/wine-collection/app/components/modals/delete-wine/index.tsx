@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Button from '@mui/material/Button';
 
-import styles from './style.module.scss'
+import styles from './style.module.scss';
 
-const DeleteWineModal = ({ data, onConfirm, onClose }) => {
+type DeleteWineModalProps = {
+  data: {
+    id: string;
+  };
+  onConfirm: (id: string) => Promise<void>;
+  onClose: () => void;
+};
+
+const DeleteWineModal: React.FC<DeleteWineModalProps> = ({
+  data,
+  onConfirm,
+  onClose,
+}) => {
   const [submitting, setSubmitting] = useState(false);
 
   const onDeleteConfirm = async () => {
     setSubmitting(true);
     await onConfirm(data.id);
     setSubmitting(false);
-  }
+  };
 
   return (
     <div className={styles.wineAppDeleteWineModal}>
@@ -22,8 +34,17 @@ const DeleteWineModal = ({ data, onConfirm, onClose }) => {
         <span>Permanently delete wine? You can't undo this.</span>
       </div>
       <div className={styles.actions}>
-        <Button variant="outlined" onClick={onClose}>Cancel</Button>
-        <Button variant="contained" color="error" loading={submitting} onClick={onDeleteConfirm}>Delete</Button>
+        <Button variant="outlined" onClick={onClose}>
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          loading={submitting}
+          onClick={onDeleteConfirm}
+        >
+          Delete
+        </Button>
       </div>
     </div>
   );

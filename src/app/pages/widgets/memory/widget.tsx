@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from 'react';
 
-import { formatBytes } from "@utils/common";
+import { formatBytes } from '@utils/common';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 type MemoryWidgetProps = {
   ping?: number;
@@ -23,10 +23,17 @@ const MemoryWidget: React.FC<MemoryWidgetProps> = ({ ping = 500 }) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
+      const memory = (performance as { memory?: IMemoryData }).memory;
+
+      if (!memory) {
+        clearInterval(intervalId);
+        return;
+      }
+
       setMemoryData({
-        usedJSHeapSize: performance['memory'].usedJSHeapSize,
-        jsHeapSizeLimit: performance['memory'].jsHeapSizeLimit,
-        totalJSHeapSize: performance['memory'].totalJSHeapSize,
+        usedJSHeapSize: memory.usedJSHeapSize,
+        jsHeapSizeLimit: memory.jsHeapSizeLimit,
+        totalJSHeapSize: memory.totalJSHeapSize,
       });
     }, ping);
 

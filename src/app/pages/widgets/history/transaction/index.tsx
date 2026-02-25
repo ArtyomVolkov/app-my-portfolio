@@ -1,18 +1,15 @@
 import React from 'react';
 
-import { SvgIconTypeMap } from '@mui/material/SvgIcon/SvgIcon';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-
 import './style.scss';
 
-interface TransactionData {
+type TransactionData = {
   title: string,
   date: string,
   color?: string,
-  icon?: OverridableComponent<SvgIconTypeMap>
+  icon?: React.ElementType
 }
 
-interface Transaction {
+export type Transaction = {
   title: string,
   data: Array<TransactionData>
 }
@@ -28,7 +25,7 @@ const Transaction: React.FC<Transaction> = ({ title, data }) => {
           data.map((item, index) => (
             <li key={index}>
               <div className="icon" style={{background: item.color }}>
-                <item.icon />
+                {item.icon && <item.icon />}
               </div>
               <div className="details">
                 <span className="title">{item.title}</span>

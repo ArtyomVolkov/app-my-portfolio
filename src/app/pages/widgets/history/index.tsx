@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Main from '@app/layout/main';
 import Transaction from '@pages/widgets/history/transaction';
 

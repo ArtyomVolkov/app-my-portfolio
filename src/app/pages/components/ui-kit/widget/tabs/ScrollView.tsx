@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Divider from "@shared/components/ui-kit/divider";
 import ScrollView from "@shared/components/ui-kit/scroll-view";

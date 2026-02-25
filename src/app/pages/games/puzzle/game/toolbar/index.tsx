@@ -4,18 +4,23 @@ import Button from '@mui/material/Button';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Divider from '@mui/material/Divider';
 
-import { Level } from '@pages/games/puzzle/game';
+import { Level, type TLevel } from '@pages/games/puzzle/game';
 
 import styles from './style.module.scss';
 
 interface Index {
-  level: Level,
-  onRefresh: () => void,
-  onChangeItemsCount: (level: Level) => void,
-  controls: React.ComponentElement<any, any>,
+  level: TLevel;
+  onRefresh: () => void;
+  onChangeItemsCount: (level: TLevel) => void;
+  controls: React.ReactNode;
 }
 
-const Toolbar: React.FC<Index> = ({ onRefresh, level, onChangeItemsCount, controls }) => (
+const Toolbar: React.FC<Index> = ({
+  onRefresh,
+  level,
+  onChangeItemsCount,
+  controls,
+}) => (
   <div className={styles.toolbar}>
     <div className={styles.actions}>
       <Button
@@ -54,7 +59,7 @@ const Toolbar: React.FC<Index> = ({ onRefresh, level, onChangeItemsCount, contro
       </Button>
     </div>
     <Divider />
-    { controls }
+    {controls}
   </div>
 );
 

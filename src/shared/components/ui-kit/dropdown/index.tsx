@@ -10,12 +10,14 @@ const defaultStyles = {
   maxWidth: 320,
 };
 
-type Option = {
+export type Option = {
   key: string;
   label: string;
   startIcon?: string;
   endIcon?: string;
 };
+
+export type OptionData = Option | Option[] | null
 
 type DropdownProps = {
   placeholder: string;
@@ -23,7 +25,7 @@ type DropdownProps = {
   defaultSelected?: string | string[];
   multiple?: boolean;
   fullWidth?: boolean;
-  onSelect?: (option: Option | Option[] | null) => void;
+  onSelect?: (option: OptionData) => void;
   minWidth?: number;
   maxWidth?: number;
   size?: 'small' | 'medium' | 'large';
@@ -97,10 +99,11 @@ const Dropdown: React.FC<DropdownProps> = ({
   const updateLayoutDebounced = debounce(updateLayout, 250);
 
   useEffect(() => {
-    window.addEventListener('resize', updateLayoutDebounced);
+    const onResize = () => updateLayoutDebounced();
+    window.addEventListener('resize', onResize);
 
     return () => {
-      window.removeEventListener('resize', updateLayoutDebounced);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 

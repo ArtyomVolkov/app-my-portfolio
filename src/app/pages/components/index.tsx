@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Main from '@app/layout/main';
 import NavButton from '@shared/components/buttons/navigation';
 

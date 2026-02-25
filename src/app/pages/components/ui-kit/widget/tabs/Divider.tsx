@@ -1,9 +1,7 @@
-import React from "react";
+import Divider from '@shared/components/ui-kit/divider';
+import Section from '@shared/components/section';
 
-import Divider from "@shared/components/ui-kit/divider";
-import Section from "@shared/components/section";
-
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const DividerTab = () => {
   return (

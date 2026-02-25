@@ -1,10 +1,11 @@
 {
   "name": "react-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.2.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "node server.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -12,8 +13,10 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@jest/globals": "^30.2.0",
     "@mui/icons-material": "^7.3.8",
     "@mui/material": "^7.3.8",
+    "express": "^5.2.1",
     "firebase": "^12.9.0",
     "lodash": "^4.17.23",
     "mobx": "^6.15.0",
@@ -23,6 +26,7 @@
     "react-dom": "^19.2.0",
     "react-router": "^7.13.0",
     "uuid": "^13.0.0",
+    "vite-plugin-pwa": "^1.2.0",
     "zustand": "^5.0.11"
   },
   "devDependencies": {

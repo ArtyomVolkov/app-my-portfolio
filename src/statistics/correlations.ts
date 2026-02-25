@@ -1,5 +1,5 @@
-import mean from "./mean";
-import deviation from "./deviation";
+import mean from './mean';
+import deviation from './deviation';
 
 // coefficient of variations
 // Formula: CV = (SD / mean) * 100
@@ -23,6 +23,8 @@ const getCoefficientOfVariation = (data: number[]): number => {
 // Example usage:
 const cvTestScoresA = getCoefficientOfVariation(testScoresA);
 const cvTestScoresB = getCoefficientOfVariation(testScoresB);
+console.log('cvTestScoresA:', cvTestScoresA.toFixed(2)); // Output: cvTestScoresA: 6.24 (indicating lower relative variability)
+console.log('cvTestScoresB:', cvTestScoresB.toFixed(2)); // Output: cvTestScoresB: 15.81 (indicating higher relative variability)
 
 // Output:
 // cvTestScoresA: 6.24 (indicating lower relative variability)
@@ -39,7 +41,7 @@ const cvTestScoresB = getCoefficientOfVariation(testScoresB);
 const getRank = (data: number[]): number[] => {
   const sorted = Array.from(data).sort((a, b) => a - b);
 
-  return data.map(value => sorted.indexOf(value) + 1);
+  return data.map((value) => sorted.indexOf(value) + 1);
 };
 
 const getSpearmansCorrelation = (dataA: number[], dataB: number[]): number => {
@@ -52,15 +54,18 @@ const getSpearmansCorrelation = (dataA: number[], dataB: number[]): number => {
   const dSquared = rankA.map((rank, i) => Math.pow(rank - rankB[i], 2));
   const sumDSquared = dSquared.reduce((acc, val) => acc + val, 0);
 
-  return 1 - ((6 * sumDSquared) / (dataA.length * (Math.pow(dataA.length, 2) - 1)));
+  return (
+    1 - (6 * sumDSquared) / (dataA.length * (Math.pow(dataA.length, 2) - 1))
+  );
 };
 
 const studentRanksMath: number[] = [1, 2, 3, 4, 5];
 const studentRanksScience: number[] = [2, 1, 4, 3, 5];
-const spearmansCorrelation = getSpearmansCorrelation(studentRanksMath, studentRanksScience);
-
-// Output:
-// spearmansCorrelation: 0.8 (indicating a strong positive correlation)
+const spearmansCorrelation = getSpearmansCorrelation(
+  studentRanksMath,
+  studentRanksScience
+);
+console.log('spearmansCorrelation:', spearmansCorrelation.toFixed(2)); // Output: spearmansCorrelation: 0.80 (indicating a strong positive correlation)
 
 // Pearson Correlation coefficient
 // Formula: r = Σ((xi - meanX)(yi - meanY)) / (sqrt(Σ(xi - meanX)²) * sqrt(Σ(yi - meanY)²))
@@ -103,9 +108,7 @@ const getPearsonsCorrelation = (dataX: number[], dataY: number[]): number => {
 const heights: number[] = [150, 160, 170, 180, 190];
 const weights: number[] = [50, 60, 65, 80, 90];
 const pearsonsCorrelation = getPearsonsCorrelation(heights, weights);
-
-// Output:
-// pearsonsCorrelation: 0.98 (indicating a very strong positive linear correlation)
+console.log('pearsonsCorrelation:', pearsonsCorrelation.toFixed(2)); // Output: pearsonsCorrelation: 0.98 (indicating a very strong positive linear correlation)
 
 // Kendall's Correlation coefficient
 // Formula: τ = (number of concordant pairs - number of discordant pairs) / (0.5 * n * (n - 1))
@@ -141,6 +144,7 @@ const getKendallsCorrelation = (dataA: number[], dataB: number[]): number => {
 const ranksA: number[] = [2, 1, 4, 3, 5, 7, 8];
 const ranksB: number[] = [4, 3, 1, 5, 2, 6, 9];
 const kendallsCorrelation = getKendallsCorrelation(ranksA, ranksB);
+console.log('kendallsCorrelation:', kendallsCorrelation.toFixed(4));
 
 // Output:
 // kendallsCorrelation: 0.5238 (indicating a moderate positive correlation)

@@ -20,10 +20,10 @@ class Graph<T> {
     this.addVertex(vertex1);
     this.addVertex(vertex2);
 
-    this.list.get(vertex1).add(vertex2);
+    this.list.get(vertex1)?.add(vertex2);
 
     if (bilateral) {
-      this.list.get(vertex2).add(vertex1);
+      this.list.get(vertex2)?.add(vertex1);
     }
   }
 
@@ -32,7 +32,7 @@ class Graph<T> {
     if (!this.list.has(vertex)) {
       return;
     }
-    for (let v of this.list.get(vertex)) {
+    for (let v of this.list.get(vertex)!) {
       this.removeEdge(vertex, v);
     }
     this.list.delete(vertex);
@@ -43,8 +43,8 @@ class Graph<T> {
     if (!this.list.has(vertex1) || !this.list.has(vertex2)) {
       return;
     }
-    this.list.get(vertex1).delete(vertex2);
-    this.list.get(vertex2).delete(vertex1);
+    this.list.get(vertex1)?.delete(vertex2);
+    this.list.get(vertex2)?.delete(vertex1);
   }
 
   // Complexity: O(v)
@@ -61,7 +61,7 @@ class Graph<T> {
         edges.push([vertex, edge]);
       }
     }
-    return edges;
+    return edges as Array<[T, T]>;
   }
 
   // Complexity: O(1)
@@ -71,12 +71,12 @@ class Graph<T> {
 
   // Complexity: O(1)
   hasEdge(vertex: T, edge: T): boolean {
-    return this.list.get(vertex)?.has(edge);
+    return this.list.get(vertex)?.has(edge) ?? false;
   }
 
   // Complexity: O(1)
   getRelations(vertex: T): Array<T> {
-    return [...this.list.get(vertex)];
+    return [...this.list.get(vertex) ?? []];
   }
 
   isEmpty(): boolean {
@@ -99,7 +99,7 @@ class Graph<T> {
       visited.add(vertex);
       callback(vertex);
 
-      for (const relation of this.list.get(vertex)) {
+      for (const relation of this.list.get(vertex) ?? []) {
         if (!visited.has(relation)) {
           traverse.call(this, relation);
         }
@@ -116,10 +116,10 @@ class Graph<T> {
     visited.add(startVertex);
 
     while (queue.length) {
-      const currentVertex = queue.shift();
+      const currentVertex = queue.shift()!;
       callback(currentVertex);
 
-      for (const relation of this.list.get(currentVertex)) {
+      for (const relation of this.list.get(currentVertex) ?? []) {
         if (!visited.has(relation)) {
           visited.add(relation);
           queue.push(relation);

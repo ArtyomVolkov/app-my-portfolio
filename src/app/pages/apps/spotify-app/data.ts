@@ -1,4 +1,4 @@
-import { Languages, Technologies, Tools } from '@shared/dtos/develop';
+import { Languages, Technologies } from '@shared/dtos/develop';
 
 export const TECHNOLOGIES = [
   Languages.typescript,

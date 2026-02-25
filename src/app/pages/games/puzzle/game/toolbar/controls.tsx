@@ -6,18 +6,18 @@ import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftR
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 
-import { Level } from '@pages/games/puzzle/game';
+import { type TLevel } from '@pages/games/puzzle/game';
 
 import styles from './style.module.scss';
 
 interface Controls {
-  items: any,
-  zeroIndex: number,
-  level: Level,
-  onMoveUp: () => void,
-  onMoveLeft: () => void,
-  onMoveRight: () => void,
-  onMoveDown: () => void,
+  items: any;
+  zeroIndex: number;
+  level: TLevel;
+  onMoveUp: () => void;
+  onMoveLeft: () => void;
+  onMoveRight: () => void;
+  onMoveDown: () => void;
 }
 
 const Controls: React.FC<Controls> = ({
@@ -27,19 +27,34 @@ const Controls: React.FC<Controls> = ({
   onMoveUp,
   onMoveLeft,
   onMoveRight,
-  onMoveDown
+  onMoveDown,
 }) => (
   <div className={styles.controls}>
     <div className={styles.vertical}>
-      <Button size="small" variant="outlined" onClick={onMoveUp} disabled={!items[zeroIndex+level]}>
+      <Button
+        size="small"
+        variant="outlined"
+        onClick={onMoveUp}
+        disabled={!items[zeroIndex + level]}
+      >
         <KeyboardArrowUpRoundedIcon />
       </Button>
     </div>
     <div className={styles.horizontal}>
-      <Button size="small" variant="outlined" onClick={onMoveLeft} disabled={(zeroIndex % level) >= level-1}>
+      <Button
+        size="small"
+        variant="outlined"
+        onClick={onMoveLeft}
+        disabled={zeroIndex % level >= level - 1}
+      >
         <KeyboardArrowLeftRoundedIcon />
       </Button>
-      <Button size="small" variant="outlined" onClick={onMoveRight} disabled={!(zeroIndex % level)}>
+      <Button
+        size="small"
+        variant="outlined"
+        onClick={onMoveRight}
+        disabled={!(zeroIndex % level)}
+      >
         <KeyboardArrowRightRoundedIcon />
       </Button>
     </div>
@@ -48,7 +63,7 @@ const Controls: React.FC<Controls> = ({
         size="small"
         variant="outlined"
         onClick={onMoveDown}
-        disabled={!items[zeroIndex-level]}
+        disabled={!items[zeroIndex - level]}
       >
         <KeyboardArrowDownRoundedIcon />
       </Button>

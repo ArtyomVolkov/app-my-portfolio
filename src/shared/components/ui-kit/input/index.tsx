@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { mergeClassNames } from "@utils/common";
+import { mergeClassNames } from '@utils/common';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 type TextareaProps = {
   fullWidth?: boolean;
   multiline?: boolean;
   rows?: number;
   resize?: boolean;
-} &  React.InputHTMLAttributes<HTMLTextAreaElement>
+} & React.InputHTMLAttributes<HTMLTextAreaElement>;
 
 type InputProps = {
-  type?: "text" | "password" | "email" | "number";
-  dimension?: "small" | "medium" | "large";
-  color?: "success" | "warning" | "error";
+  type?: 'text' | 'password' | 'email' | 'number';
+  dimension?: 'small' | 'medium' | 'large';
+  color?: 'success' | 'warning' | 'error';
   name?: string;
   error?: boolean;
   label?: string;
@@ -31,22 +31,22 @@ type InputProps = {
   };
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    value?: string | number,
+    value?: string | number
   ) => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 type InputFieldProps = InputProps & TextareaProps;
 
 const Input: React.FC<InputFieldProps> = ({
-  type = "text",
-  name = "input-field",
-  dimension = "medium",
+  type = 'text',
+  name = 'input-field',
+  dimension = 'medium',
   fullWidth = false,
   multiline = false,
   rows = 1,
   resize = false,
   error = false,
-  color = error ? "error" : "default",
+  color = error ? 'error' : 'default',
   hint,
   label,
   startIcon,
@@ -58,14 +58,14 @@ const Input: React.FC<InputFieldProps> = ({
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
-  const [inputValue, setInputValue] = useState(value || "");
+  const [inputValue, setInputValue] = useState(value || '');
 
   useEffect(() => {
-    setInputValue(value || "");
+    setInputValue(value || '');
   }, [value]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const inputValue = e.target.value;
 
@@ -74,7 +74,7 @@ const Input: React.FC<InputFieldProps> = ({
     if (!onChange) {
       return;
     }
-    onChange(e, type === "number" ? toValidNumber(inputValue) : inputValue);
+    onChange(e, type === 'number' ? toValidNumber(inputValue) : inputValue);
   };
 
   const toValidNumber = (value: string) => {
@@ -83,15 +83,15 @@ const Input: React.FC<InputFieldProps> = ({
     if (reg.test(value)) {
       return String(Number(value));
     }
-    return "";
+    return '';
   };
 
   const onBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFocused(false);
 
-    if (type !== "number") {
+    if (type !== 'number') {
       return;
     }
     const value = toValidNumber(e.target.value);
@@ -104,9 +104,7 @@ const Input: React.FC<InputFieldProps> = ({
     }
   };
 
-  const onFocus = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const onFocus = () => {
     setFocused(true);
   };
 
@@ -117,11 +115,11 @@ const Input: React.FC<InputFieldProps> = ({
           name={name}
           rows={rows}
           style={{
-            maxWidth: fullWidth ? "100%" : "unset",
+            maxWidth: fullWidth ? '100%' : 'unset',
             flexGrow: fullWidth ? 1 : 0,
-            resize: resize ? (fullWidth ? "vertical" : "both") : "none",
+            resize: resize ? (fullWidth ? 'vertical' : 'both') : 'none',
           }}
-          placeholder={!focused ? placeholder : ""}
+          placeholder={!focused ? placeholder : ''}
           onFocus={onFocus}
           onBlur={onBlur}
           value={inputValue}
@@ -135,7 +133,7 @@ const Input: React.FC<InputFieldProps> = ({
       <input
         type={type}
         name={name}
-        placeholder={!focused ? placeholder : ""}
+        placeholder={!focused ? placeholder : ''}
         onFocus={() => setFocused(true)}
         onBlur={onBlur}
         value={inputValue}
@@ -158,7 +156,7 @@ const Input: React.FC<InputFieldProps> = ({
         className={mergeClassNames([
           styles.Input,
           focused && styles.focused,
-          inputValue && styles.filled,
+          Boolean(inputValue) && styles.filled,
           styles[dimension],
           classes?.container,
         ])}

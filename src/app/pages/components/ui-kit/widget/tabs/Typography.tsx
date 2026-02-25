@@ -1,5 +1,3 @@
-import React from "react";
-
 import Typography from "@shared/components/ui-kit/typography";
 import Section from "@shared/components/section";
 import Divider from "@shared/components/ui-kit/divider";

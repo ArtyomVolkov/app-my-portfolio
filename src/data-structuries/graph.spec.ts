@@ -82,7 +82,7 @@ describe('Graph', () => {
     graph.addEdge('F', 'B');
     graph.addEdge('B', 'C');
 
-    let path = [];
+    let path: Array<string> = [];
     graph.depthSearch('B', (edge) => {
       path.push(edge);
     });
@@ -96,7 +96,7 @@ describe('Graph', () => {
 
   test('breadthSearch', () => {
     const graph = new Graph<string>();
-    let path = []
+    let path: Array<string> = [];
 
     expect(graph.isEmpty()).toBeTruthy();
 

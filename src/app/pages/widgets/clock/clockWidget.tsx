@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ColorBox from '@shared/components/buttons/color-box';
 import Divider from '@shared/components/divider';
@@ -20,15 +20,15 @@ type TCircleParams = {
   dashoffset: number;
   dasharray: number;
   className?: string;
-}
+};
 
-const COLOR_SCHEMA = {
+const COLOR_SCHEMA: { colorPill: Record<string, string[]> } = {
   colorPill: {
     default: ['black', '#eb1f68', '#0ef705', '#00b4f7'],
     primary: ['#444444', '#fede46', '#0ef705', '#ff913a'],
     secondary: ['#858585', '#c17af6', '#ff7b93', '#7af685'],
   },
-}
+};
 
 const ClockWidget = () => {
   const [timeValue, setTimeValue] = useState<Date>(new Date());
@@ -47,7 +47,7 @@ const ClockWidget = () => {
 
     return () => {
       clearInterval(interval);
-    }
+    };
   }, []);
 
   const updateTimeValue = () => {
@@ -67,30 +67,41 @@ const ClockWidget = () => {
         width={params.size}
         height={params.size}
         viewBox={`-${params.size * 0.125} -${params.size * 0.125} ${params.size * 1.25} ${params.size * 1.25}`}
-        version="1.1" xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
         className={params.className}
       >
-        <circle fill="transparent"
-                r={`${(params.size / 2)}`} cx={`${params.size / 2}`} cy={`${params.size / 2}`}
-                stroke={params.circleColor} strokeWidth={params.circleWidth}/>
-        <circle fill="transparent" r={`${(params.size / 2)}`} cx={`${params.size / 2}`} cy={`${params.size / 2}`}
-                stroke={params.progressColor}
-                data-name={params.name}
-                className={styles.progressArc}
-                strokeWidth={params.progressWidth}
-                strokeLinecap={params.shape}
-                strokeDashoffset={params.dashoffset}
-                strokeDasharray={params.dasharray}
+        <circle
+          fill="transparent"
+          r={`${params.size / 2}`}
+          cx={`${params.size / 2}`}
+          cy={`${params.size / 2}`}
+          stroke={params.circleColor}
+          strokeWidth={params.circleWidth}
+        />
+        <circle
+          fill="transparent"
+          r={`${params.size / 2}`}
+          cx={`${params.size / 2}`}
+          cy={`${params.size / 2}`}
+          stroke={params.progressColor}
+          data-name={params.name}
+          className={styles.progressArc}
+          strokeWidth={params.progressWidth}
+          strokeLinecap={params.shape}
+          strokeDashoffset={params.dashoffset}
+          strokeDasharray={params.dasharray}
         />
       </svg>
-    )
+    );
   };
 
   const renderHours = () => {
     const hours = new Date().getHours();
-    const dasharray = 2 * Math.PI * 300 / 2;
-    const offset = hours > 0 ? dasharray - (dasharray * hours / 24) : 0;
-    const [circleColor, progressColor] = COLOR_SCHEMA.colorPill[settings.activeSchema];
+    const dasharray = (2 * Math.PI * 300) / 2;
+    const offset = hours > 0 ? dasharray - (dasharray * hours) / 24 : 0;
+    const [circleColor, progressColor] =
+      COLOR_SCHEMA.colorPill[settings.activeSchema];
 
     return renderCircle({
       name: 'hours',
@@ -108,10 +119,13 @@ const ClockWidget = () => {
 
   const renderMinutes = () => {
     const minutes = new Date().getMinutes();
-    const size = 300 - (Math.max(settings.stroke, settings.progress)) * 2 - settings.gap;
-    const dasharray = 2 * Math.PI * size / 2;
-    const offset = minutes > 0 ? dasharray - (dasharray * minutes / 60) : dasharray;
-    const [circleColor, , progressColor] = COLOR_SCHEMA.colorPill[settings.activeSchema];
+    const size =
+      300 - Math.max(settings.stroke, settings.progress) * 2 - settings.gap;
+    const dasharray = (2 * Math.PI * size) / 2;
+    const offset =
+      minutes > 0 ? dasharray - (dasharray * minutes) / 60 : dasharray;
+    const [circleColor, , progressColor] =
+      COLOR_SCHEMA.colorPill[settings.activeSchema];
 
     return renderCircle({
       name: 'minutes',
@@ -129,10 +143,13 @@ const ClockWidget = () => {
 
   const renderSeconds = () => {
     const seconds = new Date().getSeconds();
-    const size = 300 - (Math.max(settings.stroke, settings.progress)) * 4 - settings.gap * 2;
-    const dasharray = 2 * Math.PI * size / 2;
-    const offset = seconds > 0 ? dasharray - (dasharray * seconds / 60) : dasharray;
-    const [circleColor, , , progressColor] = COLOR_SCHEMA.colorPill[settings.activeSchema];
+    const size =
+      300 - Math.max(settings.stroke, settings.progress) * 4 - settings.gap * 2;
+    const dasharray = (2 * Math.PI * size) / 2;
+    const offset =
+      seconds > 0 ? dasharray - (dasharray * seconds) / 60 : dasharray;
+    const [circleColor, , , progressColor] =
+      COLOR_SCHEMA.colorPill[settings.activeSchema];
 
     return renderCircle({
       name: 'seconds',
@@ -150,16 +167,23 @@ const ClockWidget = () => {
 
   return (
     <div className={styles.clockWidget}>
-      <div className={mergeClassNames([styles.clock, settings.useAnimation && styles.useAnimation])}>
+      <div
+        className={mergeClassNames([
+          styles.clock,
+          settings.useAnimation && styles.useAnimation,
+        ])}
+      >
         {renderHours()}
         {renderMinutes()}
         {renderSeconds()}
         <span
           className={styles.timeValue}
           style={{
-            fontSize: 12 + 35 - (Math.max(settings.stroke, settings.progress)),
+            fontSize: 12 + 35 - Math.max(settings.stroke, settings.progress),
           }}
-        >{timeValue.toLocaleTimeString()}</span>
+        >
+          {timeValue.toLocaleTimeString()}
+        </span>
       </div>
       <div className={styles.settings}>
         <div className={styles.option}>
@@ -169,9 +193,13 @@ const ClockWidget = () => {
               type="checkbox"
               id="clock-animation-input"
               checked={settings.useAnimation}
-              onChange={(e) => onUpdateSettings('useAnimation', e.target.checked)}
+              onChange={(e) =>
+                onUpdateSettings('useAnimation', e.target.checked)
+              }
             />
-            <label className={styles.subtitle} htmlFor="clock-animation-input">Use animation</label>
+            <label className={styles.subtitle} htmlFor="clock-animation-input">
+              Use animation
+            </label>
           </div>
         </div>
         <div className={styles.option}>
@@ -185,7 +213,9 @@ const ClockWidget = () => {
               checked={settings.shape === 'round'}
               onChange={(e) => onUpdateSettings('shape', e.target.value)}
             />
-            <label className={styles.subtitle} htmlFor="shape-type-round">Round</label>
+            <label className={styles.subtitle} htmlFor="shape-type-round">
+              Round
+            </label>
             <input
               type="radio"
               name="square"
@@ -194,7 +224,9 @@ const ClockWidget = () => {
               id="shape-type-square"
               onChange={(e) => onUpdateSettings('shape', e.target.value)}
             />
-            <label className={styles.subtitle} htmlFor="shape-type-square">Square</label>
+            <label className={styles.subtitle} htmlFor="shape-type-square">
+              Square
+            </label>
             <input
               type="radio"
               name="butt"
@@ -203,7 +235,9 @@ const ClockWidget = () => {
               id="shape-type-butt"
               onChange={(e) => onUpdateSettings('shape', e.target.value)}
             />
-            <label className={styles.subtitle} htmlFor="shape-type-butt">Butt</label>
+            <label className={styles.subtitle} htmlFor="shape-type-butt">
+              Butt
+            </label>
           </div>
         </div>
         <div className={styles.option}>
@@ -242,7 +276,7 @@ const ClockWidget = () => {
           title="Color schema"
           classes={{
             main: styles.divider,
-            title: styles.title
+            title: styles.title,
           }}
         />
         <div className={styles.row}>

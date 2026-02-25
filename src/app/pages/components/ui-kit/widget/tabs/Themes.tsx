@@ -1,5 +1,3 @@
-import React from "react";
-
 import Section from "@shared/components/section";
 import ColorPalette from "@shared/components/ui-kit/color-palette";
 import Divider from "@shared/components/ui-kit/divider";

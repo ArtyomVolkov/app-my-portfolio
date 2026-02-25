@@ -18,9 +18,9 @@ class LRUCache {
     }
     const value = this.cache.get(key);
     this.cache.delete(key);
-    this.cache.set(key, value);
+    this.cache.set(key, value!);
 
-    return value;
+    return value!;
   }
 
   put(key: number, value: number): void {
@@ -32,7 +32,7 @@ class LRUCache {
 
     if (this.cache.size === this.capacity) {
       const firstKey = this.cache.keys().next().value;
-      this.cache.delete(firstKey);
+      this.cache.delete(firstKey!);
     }
     this.cache.set(key, value);
   }
@@ -49,42 +49,4 @@ class LRUCache {
 // lruCache.put('e', 5); // evicts key 'c', cache is {a:1, d:4, e:5}
 
 
-/*
- * LFU (Least Frequently Used) Cache Implementation.
- * This class provides a simple LFU cache mechanism.
- * It supports get and put operations with O(1) time complexity.
- */
-class LFUCache {
-  private capacity: number;
-  private cache: Map<number, { value: number; freq: number }>;
-  private freqMap: Map<number, Set<number>>;
-
-  constructor(capacity: number) {
-    this.capacity = capacity;
-    this.cache = new Map();
-    this.freqMap = new Map();
-  }
-
-  get(key: number): number {
-    if (!this.cache.has(key)) {
-      return -1;
-    }
-    const { value, freq } = this.cache.get(key);
-
-    this.cache.set(key, { value, freq: freq + 1 });
-    this.freqMap.get(freq).delete(key);
-
-    if (!this.freqMap.has(freq + 1)) {
-      this.freqMap.set(freq + 1, new Set());
-    }
-    this.freqMap.get(freq + 1).add(key);
-
-    return value;
-  }
-
-  put(key: number, value: number): void {
-    
-  }
-}
-
-export default { LRUCache, LFUCache };
+export default { LRUCache };

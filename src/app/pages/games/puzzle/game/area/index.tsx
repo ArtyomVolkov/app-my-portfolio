@@ -2,44 +2,46 @@ import React from 'react';
 
 import { mergeClassNames } from '@utils/common';
 
-import { Level } from '@pages/games/puzzle/game';
+import { type TLevel } from '@pages/games/puzzle/game';
 
 import styles from './style.module.scss';
 
 interface PuzzleArea {
-  size: number,
-  zeroIndex: number
-  isOver: boolean,
-  level: Level,
-  items: any,
+  size: number;
+  zeroIndex: number;
+  isOver: boolean;
+  level: TLevel;
+  items: number[];
 }
 
-const PuzzleArea: React.FC<PuzzleArea> = ({ size, level, isOver, items, zeroIndex }) => (
+const PuzzleArea: React.FC<PuzzleArea> = ({
+  size,
+  level,
+  isOver,
+  items,
+  zeroIndex,
+}) => (
   <div className={styles.area}>
     <div
       className={styles.holst}
       style={{
-        gridTemplateColumns: `${Array(level).fill('1fr').join(' ')}`
+        gridTemplateColumns: `${Array(level).fill('1fr').join(' ')}`,
       }}
     >
-      {
-        isOver && <div className={styles.gameOver}>Game Over!</div>
-      }
-      {
-        items.map((item, index) => (
-          <div
-            key={index}
-            style={{ width: size, height: size }}
-            className={mergeClassNames([
-              styles.item,
-              (item - 1) === index && styles.done,
-              zeroIndex === index && styles.empty
-            ])}
-          >
-            {item}
-          </div>
-        ))
-      }
+      {isOver && <div className={styles.gameOver}>Game Over!</div>}
+      {items.map((item: number, index: number) => (
+        <div
+          key={index}
+          style={{ width: size, height: size }}
+          className={mergeClassNames([
+            styles.item,
+            item - 1 === index && styles.done,
+            zeroIndex === index && styles.empty,
+          ])}
+        >
+          {item}
+        </div>
+      ))}
     </div>
   </div>
 );

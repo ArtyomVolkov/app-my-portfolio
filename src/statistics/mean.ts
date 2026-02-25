@@ -37,6 +37,7 @@ const getHarmonicMean = (data: number[]): number => {
   return data.length / data.reduce((sum, value) => sum + 1 / value, 0);
 };
 const harmonicMean = getHarmonicMean(speeds);
+console.log("Harmonic Mean:", harmonicMean); // Output: Harmonic Mean: 66.66666666666667
 
 // Geometric mean
 // Formula: X̄g = (x1 * x2 * ... * xn)^(1/n)
@@ -50,6 +51,9 @@ const getGeometricMean = (data: number[]): number => {
   );
 };
 const geometricMean = getGeometricMean(growthRates);
+console.log("Arithmetic Mean:", arithmeticMean); // Output: Arithmetic Mean: 5
+console.log("Weighted Mean:", weightedMean);
+console.log("Geometric Mean:", geometricMean); // Output: Geometric Mean: 1.084471771197698
 
 export default {
   getArithmeticMean,

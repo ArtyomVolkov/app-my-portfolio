@@ -2,8 +2,6 @@
 // Each call to sum with a number adds that number to the total sum.
 // When sum is called without any arguments, it returns the total sum.
 
-import { get } from "node:http";
-
 // Example usage:
 // sum(1)(2)(3)() => 6
 // sum(2)(3)(4)(-1)() => 8
@@ -24,9 +22,9 @@ const sum = (n: number) => {
 // function add(a: number, b: number, c: number): number => f(a)(b)(c)
 // curry function => addCurry(a)(b)(c): number => number
 
-const add = (a: number, b: number, c: number): number => {
-  return a + b + c;
-};
+// const add = (a: number, b: number, c: number): number => {
+//   return a + b + c;
+// };
 
 type JSONValue = string | number | boolean | { [key: string]: JSONValue } | Array<JSONValue> | null;
 
@@ -42,7 +40,7 @@ const toCurry = (fn: Function) => {
   }
 };
 
-const addCurry = toCurry(add);
+// const addCurry = toCurry(add);
 // addCurry(1)(2)(3) => 6
 
 export default {

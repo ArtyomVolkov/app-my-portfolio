@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Button from '@mui/material/Button';
 import FullscreenExitOutlinedIcon from '@mui/icons-material/FullscreenExitOutlined';
@@ -11,14 +11,16 @@ import styles from './style.module.scss';
 const MatrixCanvas = () => {
   const [fullscreen, setFullscreen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     initialize();
 
     return () => {
-      clearInterval(intervalRef.current);
-    }
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, []);
 
   const initialize = () => {
@@ -28,10 +30,14 @@ const MatrixCanvas = () => {
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    const w = canvas.width = document.body.offsetWidth;
-    const h = canvas.height = document.body.offsetHeight;
+    const w = (canvas.width = document.body.offsetWidth);
+    const h = (canvas.height = document.body.offsetHeight);
     const cols = Math.floor(w / 20) + 1;
     const yAxisPos = Array(cols).fill(0);
+
+    if (!ctx) {
+      return;
+    }
 
     ctx.fillRect(0, 0, w, h);
 
@@ -40,7 +46,12 @@ const MatrixCanvas = () => {
     }, 50);
   };
 
-  const draw = (ctx, w, h, yAxisPos) => {
+  const draw = (
+    ctx: CanvasRenderingContext2D,
+    w: number,
+    h: number,
+    yAxisPos: number[]
+  ) => {
     ctx.fillStyle = '#0001';
     ctx.fillRect(0, 0, w, h);
 
@@ -52,22 +63,29 @@ const MatrixCanvas = () => {
       const x = ind * 20;
 
       ctx.fillText(text, x, y);
-      yAxisPos[ind] = (y > 100 + Math.random() * 10000) ? 0 : y + 20;
+      yAxisPos[ind] = y > 100 + Math.random() * 10000 ? 0 : y + 20;
     });
   };
 
   return (
-    <div className={mergeClassNames([styles.canvas, fullscreen && styles.fullscreen])}>
-      <canvas ref={canvasRef}/>
+    <div
+      className={mergeClassNames([
+        styles.canvas,
+        fullscreen && styles.fullscreen,
+      ])}
+    >
+      <canvas ref={canvasRef} />
       <Button
         variant="contained"
         color="inherit"
         className={styles.fullscreenButton}
         onClick={() => setFullscreen(!fullscreen)}
       >
-        {
-          fullscreen ? <FullscreenExitOutlinedIcon/> : <FullscreenOutlinedIcon/>
-        }
+        {fullscreen ? (
+          <FullscreenExitOutlinedIcon />
+        ) : (
+          <FullscreenOutlinedIcon />
+        )}
       </Button>
     </div>
   );

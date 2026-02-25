@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Main from '@app/layout/main';
 import TechnologyList from '@shared/components/lists/technologies';
 import UiKitWidget from '@pages/components/ui-kit/widget';

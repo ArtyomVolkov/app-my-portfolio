@@ -139,7 +139,9 @@ const WineDetails = () => {
       props: {},
       content: (
         <DeleteWineModal
-          data={wineDetails}
+          data={{
+            id: wineDetails?.id || '',
+          }}
           onConfirm={onDelete}
           onClose={() => closeModal('delete-wine-modal')}
         />
@@ -208,7 +210,9 @@ const WineDetails = () => {
                 value={formFields.rate}
                 max={10}
                 precision={1}
-                onChange={(_, value) => onChangeFormField('rate', value as number)}
+                onChange={(_, value) =>
+                  onChangeFormField('rate', value as number)
+                }
               />
             </div>
             <TextField

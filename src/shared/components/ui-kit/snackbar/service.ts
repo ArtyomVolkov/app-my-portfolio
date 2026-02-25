@@ -1,4 +1,4 @@
-import { type SnackbarContextType, type SnackbarProps, type SnackbarSettings } from './provider';
+import { type SnackbarContextType, type SnackbarSettings, type SnackbarData } from './provider';
 
 class SnackbarService {
   snackbarContext: SnackbarContextType | null = null;
@@ -11,7 +11,7 @@ class SnackbarService {
     this.snackbarContext = null;
   }
 
-  open(data: SnackbarProps, settings?: Partial<SnackbarSettings>) {
+  open(data: SnackbarData, settings?: Partial<SnackbarSettings>) {
     if (!this.snackbarContext) {
       console.error("SnackbarService is not initialized. Check if SnackbarProvider is mounted.");
       return;

@@ -6,66 +6,77 @@ import Controls from './toolbar/controls';
 
 import styles from './style.module.scss';
 
-const generateItems = (size) => {
-  const length = Math.pow(size, 2)-1;
-  const crypt = {};
+const generateItems = (size: number) => {
+  const length = Math.pow(size, 2) - 1;
+  const crypt: { [key: number]: number } = {};
   const pattern = Array(length)
     .fill(0)
-    .map((item, index) => index+1)
-    .sort((a, b) => a%size > b%size ? 1 : -1);
+    .map((_, index) => index + 1)
+    .sort((a, b) => (a % size > b % size ? 1 : -1));
 
   pattern.push(0);
 
-  const list = Array(length).fill(1).map((item, index) => index+1);
+  const list = Array(length)
+    .fill(1)
+    .map((_, index) => index + 1);
 
-  Array(length).fill(1).forEach((item, index) => {
-    const randomIndex = Math.round(Math.random()*(list.length-1));
-    crypt[index+1] = list[randomIndex];
-    list.splice(randomIndex, 1);
-  });
+  Array(length)
+    .fill(1)
+    .forEach((_, index) => {
+      const randomIndex = Math.round(Math.random() * (list.length - 1));
+      crypt[index + 1] = list[randomIndex];
+      list.splice(randomIndex, 1);
+    });
 
   return pattern.map((item) => crypt[item]);
-}
+};
 
-export enum Level {
-  EASY = 4,
-  MEDIUM = 5,
-  HARD = 6,
-}
+export const Level = {
+  EASY: 4,
+  MEDIUM: 5,
+  HARD: 6,
+};
 
-export enum KeyCodes {
-  UP = 38,
-  DOWN = 40,
-  LEFT = 37,
-  RIGHT = 39
-}
+export type TLevel = (typeof Level)[keyof typeof Level];
+
+export const KeyCodes = {
+  UP: 38,
+  DOWN: 40,
+  LEFT: 37,
+  RIGHT: 39,
+};
 
 interface PuzzleTags {
-  defaultLevel?: Level,
-  cellSize?: number,
+  defaultLevel?: keyof typeof Level;
+  cellSize?: number;
 }
 
-const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize = 40 }) => {
+const PuzzleTags: React.FC<PuzzleTags> = ({
+  defaultLevel = 'EASY',
+  cellSize = 40,
+}) => {
   const [isOver, setIsOver] = useState(false);
-  const [level, setActive] = useState(defaultLevel);
-  const [items, setItems] = useState(() => generateItems(defaultLevel));
-  const [zeroIndex, setZeroIndex] = useState(() => Math.pow(defaultLevel, 2)-1);
+  const [level, setActive] = useState(Level[defaultLevel]);
+  const [items, setItems] = useState(() => generateItems(Level[defaultLevel]));
+  const [zeroIndex, setZeroIndex] = useState(
+    () => Math.pow(Level[defaultLevel], 2) - 1
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', onKeyDown);
 
     return () => {
       window.removeEventListener('keydown', onKeyDown);
-    }
+    };
   }, [zeroIndex, items]);
 
-  const onChangeItemsCount = (value) => {
+  const onChangeItemsCount = (value: number) => {
     setActive(value);
-    setZeroIndex(Math.pow(value, 2)-1);
+    setZeroIndex(Math.pow(value, 2) - 1);
     setItems(generateItems(value));
   };
 
-  const onKeyDown = (e) => {
+  const onKeyDown = (e: KeyboardEvent) => {
     switch (e.keyCode) {
       case KeyCodes.UP: {
         moveUp();
@@ -88,12 +99,12 @@ const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize 
     }
   };
 
-  const onCheckIsFinish = (data) => {
+  const onCheckIsFinish = (data: number[]) => {
     const isDone = !data.some((item, index) => {
-      if (!item && (index === items.length - 1)) {
+      if (!item && index === items.length - 1) {
         return false;
       }
-      return index !== (item-1);
+      return index !== item - 1;
     });
     if (isDone) {
       setIsOver(true);
@@ -103,33 +114,33 @@ const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize 
   const onRefresh = () => {
     setIsOver(false);
     setItems(generateItems(level));
-    setZeroIndex(Math.pow(level, 2)-1);
+    setZeroIndex(Math.pow(level, 2) - 1);
   };
 
-  const horizontalMove = (index) => {
+  const horizontalMove = (index: number) => {
     const newItems = [...items];
 
-    newItems[zeroIndex] = items[zeroIndex+index];
-    newItems[zeroIndex+index] = items[zeroIndex];
+    newItems[zeroIndex] = items[zeroIndex + index];
+    newItems[zeroIndex + index] = items[zeroIndex];
 
     setItems(newItems);
     onCheckIsFinish(newItems);
-    setZeroIndex(zeroIndex+index);
+    setZeroIndex(zeroIndex + index);
   };
 
-  const verticalMove = (index) => {
+  const verticalMove = (index: number) => {
     const newItems = [...items];
 
-    newItems[zeroIndex+index] = items[zeroIndex];
-    newItems[zeroIndex] = items[zeroIndex+index];
+    newItems[zeroIndex + index] = items[zeroIndex];
+    newItems[zeroIndex] = items[zeroIndex + index];
 
     setItems(newItems);
-    setZeroIndex(zeroIndex+index);
+    setZeroIndex(zeroIndex + index);
     onCheckIsFinish(newItems);
   };
 
   const moveLeft = () => {
-    if ((zeroIndex % level) >= level-1) {
+    if (zeroIndex % level >= level - 1) {
       return;
     }
     horizontalMove(1);
@@ -143,14 +154,14 @@ const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize 
   };
 
   const moveUp = () => {
-    if (!items[zeroIndex+level]) {
+    if (!items[zeroIndex + level]) {
       return;
     }
     verticalMove(+level);
   };
 
   const moveDown = () => {
-    if (!items[zeroIndex-level]) {
+    if (!items[zeroIndex - level]) {
       return;
     }
     verticalMove(-level);
@@ -162,7 +173,7 @@ const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize 
         level={level}
         onRefresh={onRefresh}
         onChangeItemsCount={onChangeItemsCount}
-        controls={(
+        controls={
           <Controls
             items={items}
             zeroIndex={zeroIndex}
@@ -172,7 +183,7 @@ const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize 
             onMoveRight={moveRight}
             onMoveDown={moveDown}
           />
-        )}
+        }
       />
       <PuzzleArea
         size={cellSize}
@@ -183,6 +194,6 @@ const PuzzleTags: React.FC<PuzzleTags> = ({ defaultLevel = Level.EASY, cellSize 
       />
     </section>
   );
-}
+};
 
 export default PuzzleTags;

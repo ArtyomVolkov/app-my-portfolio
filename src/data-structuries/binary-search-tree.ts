@@ -5,12 +5,12 @@
 type TreeTypeData = number | string;
 
 class TreeNode<T = TreeTypeData> {
-  left: TreeNode|null;
-  right: TreeNode|null;
-  parent: TreeNode|null;
+  left: TreeNode<T>|null;
+  right: TreeNode<T>|null;
+  parent: TreeNode<T>|null;
   value: T;
 
-  constructor(value, parent = null) {
+  constructor(value: T, parent: TreeNode<T>|null = null) {
     this.left = null;
     this.right = null;
     this.value = value;
@@ -23,26 +23,29 @@ class TreeNode<T = TreeTypeData> {
 }
 
 class BinarySearchTree<T = TreeTypeData> {
-  private root: TreeNode|null;
+  private root: TreeNode<T>|null;
 
   constructor() {
     this.root = null;
   }
 
   // Complexity: O(n)
-  *inOrderTraversal(node = this.root) {
-    if (node.left) {
-      yield* this.inOrderTraversal(node.left);
+  *inOrderTraversal(node: TreeNode<T>|null = this.root): IterableIterator<TreeNode<T>> {
+    if (!node) {
+      return;
     }
     yield node;
 
+    if (node.left) {
+      yield* this.inOrderTraversal(node.left);
+    }
     if (node.right) {
       yield* this.inOrderTraversal(node.right);
     }
   }
 
   // Complexity: O(n)
-  *preOrderTraversal(node = this.root) {
+  *preOrderTraversal(node: TreeNode<T>|null = this.root): IterableIterator<TreeNode<T>> {
     if (!node) {
       return;
     }
@@ -101,7 +104,7 @@ class BinarySearchTree<T = TreeTypeData> {
   }
 
   // Complexity: O(log n) or O(n)
-  find(value: TreeTypeData): TreeNode|null {
+  find(value: TreeTypeData): TreeNode<T>|null {
     for (let node of this.preOrderTraversal()) {
       if (node.value === value) {
         return node;
@@ -112,7 +115,7 @@ class BinarySearchTree<T = TreeTypeData> {
 
   // Complexity: O(log n) or O(n)
   getMin(): TreeTypeData|undefined {
-    let current: TreeNode|null = this.root;
+    let current: TreeNode<T>|null = this.root;
 
     if (!current) {
       return undefined;
@@ -120,12 +123,12 @@ class BinarySearchTree<T = TreeTypeData> {
     while (current.left) {
       current = current.left;
     }
-    return current.value;
+    return current.value as TreeTypeData;
   }
 
   // Complexity: O(log n) or O(n)
   getMax(): TreeTypeData|undefined {
-    let current = this.root;
+    let current: TreeNode<T>|null = this.root;
 
     if (!current) {
       return undefined;
@@ -133,7 +136,7 @@ class BinarySearchTree<T = TreeTypeData> {
     while (current.right) {
       current = current.right;
     }
-    return current.value;
+    return current.value as TreeTypeData;
   }
 
   toArray(inOrder = false): Array<TreeTypeData> {
@@ -143,7 +146,7 @@ class BinarySearchTree<T = TreeTypeData> {
     for (const node of iterator) {
       values.push(node.value);
     }
-    return values;
+    return values as Array<TreeTypeData>;
   }
 }
 

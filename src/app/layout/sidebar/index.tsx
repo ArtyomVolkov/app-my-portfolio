@@ -17,7 +17,7 @@ const SideBar = () => {
         <IconButton
           className={styles.screenResize}
           onClick={appStore.toggleFullWidth}
-          name="Toggle Full Width"
+          aria-label='toggle-sidebar'
         >
           {appStore.layout.fullWidth ? (
             <MenuRoundedIcon className={styles.icon} />

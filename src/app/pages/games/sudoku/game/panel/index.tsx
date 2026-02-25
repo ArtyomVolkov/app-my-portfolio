@@ -11,7 +11,7 @@ import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 
-import { Action } from '@pages/games/sudoku/game';
+import { Action, type TAction } from '@pages/games/sudoku/game';
 import { Level } from '@pages/games/sudoku/game/generator';
 
 import styles from './style.module.scss';
@@ -21,12 +21,12 @@ interface GamePanel {
   hints: number,
   history: Array<any>,
   activeValue: number,
-  onAction: (type: Action, data?: any) => void,
+  onAction: (type: TAction, data?: any) => void,
 }
 
 const GamePanel: React.FC<GamePanel> = ({ level, hints, history, activeValue, onAction }) => {
-  const onChangeLevel = (e) => {
-    onAction(Action.CHANGE_LEVEL, e.target.value);
+  const onChangeLevel = (e: unknown) => {
+    onAction(Action.CHANGE_LEVEL, (e as { target: { value: Level } }).target.value);
   };
 
   return (

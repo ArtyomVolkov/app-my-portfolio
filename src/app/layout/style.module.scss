@@ -1,6 +1,6 @@
 @use "../../assets/styles/style-guide";
 @use "../../shared/components/ui-kit/style.module.scss" as ukkit-style;
-// @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+NZ+Basic:wght@100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+NZ+Basic:wght@100..400&display=swap");
 
 :global(html) {
   @include style-guide.scroll-style;
@@ -8,8 +8,8 @@
 :global(body) {
   margin: 0;
 }
-:global(#my-portfolio-app) {
-  font-family: 'system-ui', sans-serif;
+:global(#portfolio-app) {
+  font-family: 'Open Sans', sans-serif;
 
   h3 {
     margin-top: 0;

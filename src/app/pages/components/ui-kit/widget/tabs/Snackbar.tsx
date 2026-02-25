@@ -1,18 +1,18 @@
-import React from "react";
+import Divider from '@shared/components/ui-kit/divider';
+import Button from '@shared/components/ui-kit/button';
+import Section from '@shared/components/section';
+import Typography from '@shared/components/ui-kit/typography';
+import snackbar from '@shared/components/ui-kit/snackbar';
 
-import Divider from "@shared/components/ui-kit/divider";
-import Button from "@shared/components/ui-kit/button";
-import Section from "@shared/components/section";
-import Typography from "@shared/components/ui-kit/typography";
-import snackbar from "@shared/components/ui-kit/snackbar";
+import type { SnackbarData } from '@shared/components/ui-kit/snackbar/provider';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const SnackOptions = {
   layout: {
     props: {
       autoHide: false,
-      color: "default",
+      color: 'default',
     },
     settings: {
       stackLimit: 1,
@@ -22,10 +22,10 @@ const SnackOptions = {
     props: {
       autoHide: true,
       duration: 3000,
-      color: "default",
+      color: 'default',
     },
     settings: {
-      position: "bottom-center",
+      position: 'bottom-center',
       stackLimit: 5,
     },
   },
@@ -35,17 +35,17 @@ const SnackOptions = {
       duration: 3000,
     },
     settings: {
-      position: "top-center",
+      position: 'top-center',
       stackLimit: 1,
     },
   },
   custom: {
     props: {
       autoHide: false,
-      color: "default",
+      color: 'default',
     },
     settings: {
-      position: "bottom-center",
+      position: 'bottom-center',
       stackLimit: 1,
     },
   },
@@ -54,7 +54,7 @@ const SnackOptions = {
 const SnackbarTab = () => {
   const openSnackbar = (
     props: Record<string, any>,
-    settings: Record<string, any>,
+    settings: Record<string, any>
   ) => {
     const id = (Math.random() * 1000).toFixed(0);
 
@@ -62,14 +62,14 @@ const SnackbarTab = () => {
       {
         message: `This is a snackbar message! ID: ${id}`,
         ...props,
-      },
-      settings,
+      } as SnackbarData,
+      settings
     );
   };
 
   const openCustomSnackbar = (
     props: Record<string, any>,
-    settings: Record<string, any>,
+    settings: Record<string, any>
   ) => {
     snackbar.open(
       {
@@ -87,20 +87,20 @@ const SnackbarTab = () => {
           message: styles.customSnackbarMessage,
         },
         ...props,
-      },
-      settings,
+      } as SnackbarData,
+      settings
     );
   };
 
   const renderOptions = (options: Record<string, any>) => {
     return Object.entries(options)
       .map(([key, value]) => {
-        if (key === "message") {
+        if (key === 'message') {
           return `${key}: ${typeof value}`;
         }
         return `${key}: ${String(value)}`;
       })
-      .join(", ");
+      .join(', ');
   };
 
   const closeSnackbar = () => {
@@ -122,17 +122,17 @@ const SnackbarTab = () => {
               {renderOptions({
                 ...SnackOptions.layout.props,
                 ...SnackOptions.layout.settings,
-                position: "varies",
+                position: 'varies',
               })}
             </Typography>
             <div className={styles.row}>
               {[
-                "top-left",
-                "top-center",
-                "top-right",
-                "bottom-left",
-                "bottom-center",
-                "bottom-right",
+                'top-left',
+                'top-center',
+                'top-right',
+                'bottom-left',
+                'bottom-center',
+                'bottom-right',
               ].map((position) => (
                 <Button
                   key={position}
@@ -143,12 +143,12 @@ const SnackbarTab = () => {
                       {
                         ...SnackOptions.layout.settings,
                         position,
-                      },
+                      }
                     );
                   }}
                 >
                   {position
-                    .replace("-", " ")
+                    .replace('-', ' ')
                     .replace(/\b\w/g, (c) => c.toUpperCase())}
                 </Button>
               ))}
@@ -173,7 +173,7 @@ const SnackbarTab = () => {
                 onClick={() => {
                   openSnackbar(
                     SnackOptions.stack.props,
-                    SnackOptions.stack.settings,
+                    SnackOptions.stack.settings
                   );
                 }}
               >
@@ -185,11 +185,11 @@ const SnackbarTab = () => {
               {renderOptions({
                 ...SnackOptions.colors.props,
                 ...SnackOptions.colors.settings,
-                color: "varies",
+                color: 'varies',
               })}
             </Typography>
             <div className={styles.row}>
-              {["default", "success", "danger", "warning", "info"].map(
+              {['default', 'success', 'danger', 'warning', 'info'].map(
                 (color) => (
                   <Button
                     key={color}
@@ -201,13 +201,13 @@ const SnackbarTab = () => {
                           ...SnackOptions.colors.props,
                           color,
                         },
-                        SnackOptions.colors.settings,
+                        SnackOptions.colors.settings
                       );
                     }}
                   >
                     {color.charAt(0).toUpperCase() + color.slice(1)}
                   </Button>
-                ),
+                )
               )}
             </div>
             <Divider title="Custom" align="left" />
@@ -227,7 +227,7 @@ const SnackbarTab = () => {
                 onClick={() =>
                   openCustomSnackbar(
                     SnackOptions.custom.props,
-                    SnackOptions.custom.settings,
+                    SnackOptions.custom.settings
                   )
                 }
               >

@@ -32,3 +32,7 @@ const gridEncryption = (text: string) => {
   }
   return result.join(' ');
 }
+
+export default {
+  gridEncryption,
+};

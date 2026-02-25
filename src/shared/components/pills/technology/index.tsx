@@ -9,7 +9,7 @@ import { mergeClassNames } from '@utils/common';
 import styles from './style.module.scss';
 
 const TechnologyPill: React.FC<ITechnology> = ({
-  name,
+  id,
   prefix,
   label,
   type,
@@ -18,8 +18,13 @@ const TechnologyPill: React.FC<ITechnology> = ({
     case 'language': {
       return (
         <Chip
-          className={mergeClassNames([styles.technologyPill, name])}
-          avatar={<Avatar className="icon">{prefix}</Avatar>}
+          className={mergeClassNames([id && styles[id]])}
+          classes={{
+            root: styles.technologyPill,
+            label: styles.label,
+            icon: styles.chipIcon,
+          }}
+          avatar={<Avatar className={styles.icon}>{prefix}</Avatar>}
           label={label}
           variant="filled"
           size="small"
@@ -30,10 +35,9 @@ const TechnologyPill: React.FC<ITechnology> = ({
     case 'technology': {
       return (
         <Chip
-          className={styles.technologyPill}
+          className={mergeClassNames([styles.technologyPill, id && styles[type]])}
           label={label}
           size="small"
-          color={type === 'technology' ? 'primary' : 'secondary'}
           variant="outlined"
         />
       );

@@ -9,7 +9,7 @@ class MonotonicStack {
 
     for (let i = 0; i < arr.length; i++) {
       while (stack.length && arr[i] > arr[stack[stack.length - 1]]) {
-        const index = stack.pop();
+        const index = stack.pop()!;
         result[index] = arr[i];
       }
       stack.push(i);
@@ -23,7 +23,7 @@ class MonotonicStack {
 
     for (let i = 0; i < arr.length; i++) {
       while (stack.length && arr[i] < arr[stack[stack.length - 1]]) {
-        const index = stack.pop();
+        const index = stack.pop()!;
         result[index] = arr[i];
       }
       stack.push(i);
@@ -47,11 +47,11 @@ export default MonotonicStack;
 
 function finalPrices(prices: number[]): number[] {
   const output = [...prices];
-  const stack = [];
+  const stack: number[] = [];
 
   for (let i = 0; i < prices.length; i++) {
     while(stack.length > 0 && prices[i] <= prices[stack[stack.length-1]]) {
-      const stackIndex = stack.pop();
+      const stackIndex = stack.pop()!;
       output[stackIndex] = prices[stackIndex]-prices[i];
     }
     stack.push(i);
@@ -69,7 +69,7 @@ export const dailyTemperatures = (temperatures: number[]): number[] => {
 
     for (let i = 0; i < temperatures.length; i++) {
       while (stack.length && temperatures[i] > temperatures[stack[stack.length - 1]]) {
-        const index = stack.pop();
+        const index = stack.pop()!;
 
         result[index] = i - index;
       }
