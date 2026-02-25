@@ -1,0 +1,199 @@
+import React, { useEffect, useState } from 'react';
+
+import PuzzleArea from './area';
+import Toolbar from './toolbar';
+import Controls from './toolbar/controls';
+
+import styles from './style.module.scss';
+
+const generateItems = (size: number) => {
+  const length = Math.pow(size, 2) - 1;
+  const crypt: { [key: number]: number } = {};
+  const pattern = Array(length)
+    .fill(0)
+    .map((_, index) => index + 1)
+    .sort((a, b) => (a % size > b % size ? 1 : -1));
+
+  pattern.push(0);
+
+  const list = Array(length)
+    .fill(1)
+    .map((_, index) => index + 1);
+
+  Array(length)
+    .fill(1)
+    .forEach((_, index) => {
+      const randomIndex = Math.round(Math.random() * (list.length - 1));
+      crypt[index + 1] = list[randomIndex];
+      list.splice(randomIndex, 1);
+    });
+
+  return pattern.map((item) => crypt[item]);
+};
+
+export const Level = {
+  EASY: 4,
+  MEDIUM: 5,
+  HARD: 6,
+};
+
+export type TLevel = (typeof Level)[keyof typeof Level];
+
+export const KeyCodes = {
+  UP: 38,
+  DOWN: 40,
+  LEFT: 37,
+  RIGHT: 39,
+};
+
+interface PuzzleTags {
+  defaultLevel?: keyof typeof Level;
+  cellSize?: number;
+}
+
+const PuzzleTags: React.FC<PuzzleTags> = ({
+  defaultLevel = 'EASY',
+  cellSize = 40,
+}) => {
+  const [isOver, setIsOver] = useState(false);
+  const [level, setActive] = useState(Level[defaultLevel]);
+  const [items, setItems] = useState(() => generateItems(Level[defaultLevel]));
+  const [zeroIndex, setZeroIndex] = useState(
+    () => Math.pow(Level[defaultLevel], 2) - 1
+  );
+
+  useEffect(() => {
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [zeroIndex, items]);
+
+  const onChangeItemsCount = (value: number) => {
+    setActive(value);
+    setZeroIndex(Math.pow(value, 2) - 1);
+    setItems(generateItems(value));
+  };
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    switch (e.keyCode) {
+      case KeyCodes.UP: {
+        moveUp();
+        break;
+      }
+      case KeyCodes.DOWN: {
+        moveDown();
+        break;
+      }
+      case KeyCodes.LEFT: {
+        moveLeft();
+        break;
+      }
+      case KeyCodes.RIGHT: {
+        moveRight();
+        break;
+      }
+      default:
+        return false;
+    }
+  };
+
+  const onCheckIsFinish = (data: number[]) => {
+    const isDone = !data.some((item, index) => {
+      if (!item && index === items.length - 1) {
+        return false;
+      }
+      return index !== item - 1;
+    });
+    if (isDone) {
+      setIsOver(true);
+    }
+  };
+
+  const onRefresh = () => {
+    setIsOver(false);
+    setItems(generateItems(level));
+    setZeroIndex(Math.pow(level, 2) - 1);
+  };
+
+  const horizontalMove = (index: number) => {
+    const newItems = [...items];
+
+    newItems[zeroIndex] = items[zeroIndex + index];
+    newItems[zeroIndex + index] = items[zeroIndex];
+
+    setItems(newItems);
+    onCheckIsFinish(newItems);
+    setZeroIndex(zeroIndex + index);
+  };
+
+  const verticalMove = (index: number) => {
+    const newItems = [...items];
+
+    newItems[zeroIndex + index] = items[zeroIndex];
+    newItems[zeroIndex] = items[zeroIndex + index];
+
+    setItems(newItems);
+    setZeroIndex(zeroIndex + index);
+    onCheckIsFinish(newItems);
+  };
+
+  const moveLeft = () => {
+    if (zeroIndex % level >= level - 1) {
+      return;
+    }
+    horizontalMove(1);
+  };
+
+  const moveRight = () => {
+    if (!(zeroIndex % level)) {
+      return;
+    }
+    horizontalMove(-1);
+  };
+
+  const moveUp = () => {
+    if (!items[zeroIndex + level]) {
+      return;
+    }
+    verticalMove(+level);
+  };
+
+  const moveDown = () => {
+    if (!items[zeroIndex - level]) {
+      return;
+    }
+    verticalMove(-level);
+  };
+
+  return (
+    <section className={styles.puzzleGameWidget}>
+      <Toolbar
+        level={level}
+        onRefresh={onRefresh}
+        onChangeItemsCount={onChangeItemsCount}
+        controls={
+          <Controls
+            items={items}
+            zeroIndex={zeroIndex}
+            level={level}
+            onMoveUp={moveUp}
+            onMoveLeft={moveLeft}
+            onMoveRight={moveRight}
+            onMoveDown={moveDown}
+          />
+        }
+      />
+      <PuzzleArea
+        size={cellSize}
+        level={level}
+        items={items}
+        isOver={isOver}
+        zeroIndex={zeroIndex}
+      />
+    </section>
+  );
+};
+
+export default PuzzleTags;

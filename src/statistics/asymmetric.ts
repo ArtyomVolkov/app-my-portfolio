@@ -19,6 +19,7 @@ const getSkewnessMeasure = (data: number[]): number => {
 };
 
 const skewnessMeasure = getSkewnessMeasure(data);
+console.log("Skewness Measure:", skewnessMeasure.toFixed(2)); // Output: Skewness Measure: -0.15 (indicating a slight negative skewness)
 // if skewnessMeasure === 0, the data is perfectly symmetrical
 // if skewnessMeasure > 0, the data is positively skewed (right-skewed)
 // if skewnessMeasure < 0, the data is negatively skewed (left-skewed)

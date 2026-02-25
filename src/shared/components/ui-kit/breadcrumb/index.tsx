@@ -35,7 +35,7 @@ const showCheckFit = (
   ulRef: React.RefObject<HTMLUListElement>,
   list: NodeListOf<ChildNode>
 ) => {
-  const hiddenItems = [];
+  const hiddenItems: HTMLLIElement[] = [];
   let visibleContentWidth = 0;
 
   list.forEach((node) => {
@@ -123,9 +123,9 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ options, onSelect }) => {
       visibleContentWidth += liElement.offsetWidth;
     });
     if (visibleContentWidth < ulRef.current.clientWidth) {
-      showCheckFit(ulRef, list);
+      showCheckFit(ulRef as React.RefObject<HTMLUListElement>, list);
     } else {
-      hideCheckFit(ulRef, list);
+      hideCheckFit(ulRef as React.RefObject<HTMLUListElement>, list);
     }
   };
 

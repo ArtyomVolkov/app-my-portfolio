@@ -46,8 +46,8 @@ describe('BinarySearchTree', () => {
     const node = bst.find(9);
 
     expect(node?.value).toEqual(9);
-    expect(node.parent?.value).toEqual(8);
-    expect(node.hasChildren()).toBeFalsy();
+    expect(node?.parent?.value).toEqual(8);
+    expect(node?.hasChildren()).toBeFalsy();
     expect(bst.find(11)).toEqual(null);
   });
 

@@ -3,46 +3,48 @@ import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 
-import { Development } from '@shared/enums/develop';
-
+import { type ITechnology } from '@shared/dtos/develop';
 import { mergeClassNames } from '@utils/common';
 
 import styles from './style.module.scss';
 
-interface TechnologyPill {
-  name: string,
-  label: string,
-  prefix?: string,
-  type: Development,
-}
-
-const TechnologyPill: React.FC<TechnologyPill> = ({ name, prefix, label, type }) => {
+const TechnologyPill: React.FC<ITechnology> = ({
+  id,
+  prefix,
+  label,
+  type,
+}) => {
   switch (type) {
-    case Development.PL: {
+    case 'language': {
       return (
         <Chip
-          className={mergeClassNames([styles.technologyPill, name])}
-          avatar={<Avatar className="icon">{prefix}</Avatar>}
+          className={mergeClassNames([id && styles[id]])}
+          classes={{
+            root: styles.technologyPill,
+            label: styles.label,
+            icon: styles.chipIcon,
+          }}
+          avatar={<Avatar className={styles.icon}>{prefix}</Avatar>}
           label={label}
           variant="filled"
           size="small"
         />
       );
     }
-    case Development.TOOL:
-    case Development.TECHNOLOGY: {
+    case 'tool':
+    case 'technology': {
       return (
         <Chip
-          className={styles.technologyPill}
+          className={mergeClassNames([styles.technologyPill, id && styles[type]])}
           label={label}
           size="small"
-          color={type === Development.TECHNOLOGY ? 'primary' : 'secondary'}
           variant="outlined"
         />
-      )
+      );
     }
-    default: return null;
+    default:
+      return null;
   }
-}
+};
 
 export default TechnologyPill;

@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-import { debounce, mergeClassNames } from "@utils/common";
+import { debounce, mergeClassNames } from '@utils/common';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const defaultStyles = {
   minWidth: 170,
   maxWidth: 320,
 };
 
-type Option = {
+export type Option = {
   key: string;
   label: string;
   startIcon?: string;
   endIcon?: string;
 };
+
+export type OptionData = Option | Option[] | null
 
 type DropdownProps = {
   placeholder: string;
@@ -23,10 +25,10 @@ type DropdownProps = {
   defaultSelected?: string | string[];
   multiple?: boolean;
   fullWidth?: boolean;
-  onSelect?: (option: Option | Option[] | null) => void;
+  onSelect?: (option: OptionData) => void;
   minWidth?: number;
   maxWidth?: number;
-  size?: "small" | "medium" | "large";
+  size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
   classes?: {
     button?: string;
@@ -42,9 +44,9 @@ const Dropdown: React.FC<DropdownProps> = ({
   onSelect,
   multiple = false,
   disabled = false,
-  defaultSelected = "",
+  defaultSelected = '',
   fullWidth = false,
-  size = "medium",
+  size = 'medium',
   minWidth = defaultStyles.minWidth,
   maxWidth = defaultStyles.maxWidth,
   classes = {},
@@ -68,14 +70,40 @@ const Dropdown: React.FC<DropdownProps> = ({
     left: 0,
     width: 0,
     height: 0,
-    anchor: "bottom",
+    anchor: 'bottom',
   });
 
+  const updateLayout = () => {
+    const rect: DOMRect | undefined = dbRef.current?.getBoundingClientRect();
+    const optionsHeight = optionsRef.current?.offsetHeight || 0;
+    const paddingOffset = 8; // some extra space between dropdown and viewport edge
+
+    if (!rect) {
+      return;
+    }
+    const anchor =
+      rect.y + rect.height + optionsHeight + paddingOffset > window.innerHeight
+        ? 'top'
+        : 'bottom';
+
+    if (rect) {
+      setLayout({
+        top: rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        height: rect.height,
+        anchor: anchor,
+      });
+    }
+  };
+  const updateLayoutDebounced = debounce(updateLayout, 250);
+
   useEffect(() => {
-    window.addEventListener("resize", updateLayoutDebounced);
+    const onResize = () => updateLayoutDebounced();
+    window.addEventListener('resize', onResize);
 
     return () => {
-      window.removeEventListener("resize", updateLayoutDebounced);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
@@ -91,26 +119,6 @@ const Dropdown: React.FC<DropdownProps> = ({
     }
     updateLayout();
   }, [isOpen, selectedOption]);
-
-  const updateLayout = () => {
-    const rect = dbRef.current?.getBoundingClientRect();
-    const optionsHeight = optionsRef.current?.offsetHeight || 0;
-    const paddingOffset = 8; // some extra space between dropdown and viewport edge
-    const anchor =
-      rect.y + rect.height + optionsHeight + paddingOffset > window.innerHeight
-        ? "top"
-        : "bottom";
-
-    if (rect) {
-      setLayout({
-        top: rect.top + window.scrollY,
-        left: rect.left + window.scrollX,
-        width: rect.width,
-        height: rect.height,
-        anchor: anchor,
-      });
-    }
-  };
 
   const autoScrollToSelectedOption = () => {
     if (!optionsRef.current || !selectedOption) {
@@ -137,11 +145,9 @@ const Dropdown: React.FC<DropdownProps> = ({
         selectedOptionElement.offsetTop -
         optionsRef.current.clientHeight / 2 +
         selectedOptionElement.clientHeight / 2,
-      behavior: "auto",
+      behavior: 'auto',
     });
   };
-
-  const updateLayoutDebounced = debounce(updateLayout, 250);
 
   const onToggleDropdown = () => {
     if (isOpen) {
@@ -196,10 +202,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       return (
         <>
           {selectedOptions.map((opt) => (
-            <span
-              key={opt.key}
-              className={styles.optionTag}
-            >
+            <span key={opt.key} className={styles.optionTag}>
               {opt.label}
             </span>
           ))}
@@ -227,7 +230,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       onClick={onToggleDropdown}
       ref={dbRef}
       tabIndex={0}
-      style={{ minWidth: minWidth, maxWidth: fullWidth ? "100%" : maxWidth }}
+      style={{ minWidth: minWidth, maxWidth: fullWidth ? '100%' : maxWidth }}
     >
       {!selectedOption.length && (
         <span className={styles.placeholder}>{placeholder}</span>
@@ -258,9 +261,9 @@ const Dropdown: React.FC<DropdownProps> = ({
                   top: layout.top + layout.height + 4,
                   left: layout.left,
                   width: layout.width,
-                  maxWidth: fullWidth ? "100%" : maxWidth,
-                  "--db-offset":
-                    layout.anchor === "bottom"
+                  maxWidth: fullWidth ? '100%' : maxWidth,
+                  '--db-offset':
+                    layout.anchor === 'bottom'
                       ? `${-(layout.height + 8)}px`
                       : `${layout.height + 8}px`,
                 } as React.CSSProperties
@@ -291,7 +294,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             </div>
           </div>,
           document.body,
-          "dropdown-portal"
+          'dropdown-portal'
         )}
     </div>
   );

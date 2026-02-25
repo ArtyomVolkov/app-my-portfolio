@@ -4,7 +4,7 @@
  */
 class NodeItem<T> {
   value: T;
-  next: NodeItem<T>;
+  next: NodeItem<T> | null;
 
   constructor(value: T) {
     this.value = value;

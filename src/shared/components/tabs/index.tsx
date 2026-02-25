@@ -34,7 +34,7 @@ const TabPanel: React.FC<TabPanel> = ({children, value, name, className}) => {
 const InlineTabs: React.FC<InlineTabs> = ({tabs, defaultActive, data}) => {
   const [tab, setTab] = useState(defaultActive);
 
-  const onChangeTab = (e, tab) => {
+  const onChangeTab = (_: React.SyntheticEvent, tab: string) => {
     setTab(tab);
   };
 
@@ -63,10 +63,10 @@ const InlineTabs: React.FC<InlineTabs> = ({tabs, defaultActive, data}) => {
           <TabPanel
             key={item.key}
             name={item.key}
-            value={tab}
+            value={tab!}
             className="tab-item-content"
           >
-            {Boolean(item.component) && <item.component data={data}/>}
+            {item.component && <item.component data={data}/>}
           </TabPanel>
         ))
       }

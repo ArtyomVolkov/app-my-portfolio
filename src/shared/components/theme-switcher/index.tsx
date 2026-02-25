@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import SunIcon from "@mui/icons-material/LightModeOutlined";
-import MoonIcon from "@mui/icons-material/DarkModeOutlined";
-import { useAppStore } from "@store/app";
+import SunIcon from '@mui/icons-material/LightModeOutlined';
+import MoonIcon from '@mui/icons-material/DarkModeOutlined';
+import { useAppStore } from '@store/app';
 
-import { mergeClassNames } from "@utils/common";
+import { mergeClassNames } from '@utils/common';
 
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 type ISwitcher = {
   className?: string;
@@ -15,16 +15,16 @@ type ISwitcher = {
 const ThemeSwitcher: React.FC<ISwitcher> = ({ className }) => {
   const appStore = useAppStore();
   const [darkMode, setDarkMode] = useState<boolean>(
-    appStore.theme.includes("dark"),
+    appStore.theme.includes('dark')
   );
 
   useEffect(() => {
-    setDarkMode(appStore.theme.includes("dark"));
+    // setDarkMode(appStore.theme.includes("dark"));
   }, [appStore.theme]);
 
   const onToggle = () => {
     setDarkMode((prev) => !prev);
-    appStore.setTheme(darkMode ? "light" : "dark");
+    appStore.setTheme(darkMode ? 'light' : 'dark');
   };
 
   return (

@@ -21,13 +21,13 @@ const Snackbar: React.FC<SnackbarProps & SnackbarStoreItem> = ({
   onClose,
   onRequestClose,
 }) => {
-  const timerId = React.useRef<NodeJS.Timeout | null>(null);
+  const timerId = React.useRef<number | null>(null);
 
   useEffect(() => {
     if (!autoHide) {
       return;
     }
-    timerId.current = setTimeout(handleClose, duration);
+    timerId.current = window.setTimeout(handleClose, duration);
 
     return () => {
       if (timerId.current) {

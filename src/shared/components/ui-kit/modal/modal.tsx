@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import Typography from "../typography";
 import Button from "../button";
-import { type ModalProps as Modal, type ModalStoreData } from "./provider";
+import { type ModalProps as TModal, type ModalStoreData } from "./provider";
 
 import { mergeClassNames } from "@utils/common";
 
@@ -20,7 +20,7 @@ type MoveData = {
   offsetY: number;
 };
 
-type ModalProps = Modal & Pick<ModalStoreData, "style" | "terminate">;
+type ModalProps = TModal & Pick<ModalStoreData, "style" | "terminate">;
 
 const Modal: React.FC<ModalProps> = ({
   style,
@@ -86,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({
       offsetX,
       offsetY,
     };
-    modalRef.current?.parentElement.classList.add(styles.isMoving);
+    modalRef.current?.parentElement?.classList.add(styles.isMoving);
 
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
@@ -140,7 +140,7 @@ const Modal: React.FC<ModalProps> = ({
     if (modalRef.current) {
       modalRef.current.style.outline = "none";
       modalRef.current.style.cursor = "grab";
-      modalRef.current?.parentElement.classList.remove(styles.isMoving);
+      modalRef.current?.parentElement?.classList.remove(styles.isMoving);
     }
     document.removeEventListener("mousemove", onMouseMove);
     document.removeEventListener("mouseup", onMouseUp);

@@ -5,21 +5,25 @@ import { mergeClassNames } from '@utils/common';
 import styles from './style.module.scss';
 
 interface Rotation {
-  className: string,
+  className: string;
   position?: {
-    x: number,
-    y: number,
-  },
-  children: React.ReactElement,
+    x: number;
+    y: number;
+  };
+  children: React.ReactElement;
 }
 
-const Rotation: React.FC<Rotation> = ({position = {x: 0, y: 0}, children, className}) => {
+const Rotation: React.FC<Rotation> = ({
+  position = { x: 0, y: 0 },
+  children,
+  className,
+}) => {
   useEffect(() => {
     setPosition(position.x, position.y);
   }, []);
 
-  const componentRef = useRef(null);
-  const widgetRef = useRef(null);
+  const componentRef = useRef<HTMLDivElement | null>(null);
+  const widgetRef = useRef<HTMLDivElement | null>(null);
   const rotate = useRef({
     active: false,
     startX: 0,
@@ -28,11 +32,15 @@ const Rotation: React.FC<Rotation> = ({position = {x: 0, y: 0}, children, classN
     y: position.y,
   });
 
-  const setPosition = (x, y) => {
-    componentRef.current.childNodes[0].style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+  const setPosition = (x: number, y: number) => {
+    if (!componentRef.current) {
+      return;
+    }
+    (componentRef.current.childNodes[0] as HTMLElement).style.transform =
+      `rotateX(${y}deg) rotateY(${x}deg)`;
   };
 
-  const mouseMove = (e) => {
+  const mouseMove = (e: React.MouseEvent) => {
     if (!rotate.current.active) {
       return;
     }
@@ -42,25 +50,25 @@ const Rotation: React.FC<Rotation> = ({position = {x: 0, y: 0}, children, classN
     setPosition(x, y);
   };
 
-  const mouseDown = (e) => {
+  const mouseDown = (e: React.MouseEvent) => {
     rotate.current.active = true;
     rotate.current.startX = e.clientX;
     rotate.current.startY = e.clientY;
-    widgetRef.current.classList.add('rotating');
+    widgetRef.current?.classList.add('rotating');
   };
 
-  const mouseUp = (e) => {
+  const mouseUp = (e: React.MouseEvent) => {
     if (!rotate.current.active) {
       return;
     }
     rotate.current.active = false;
     rotate.current.x = e.clientX - rotate.current.startX + rotate.current.x;
     rotate.current.y = rotate.current.startY - e.clientY + rotate.current.y;
-    widgetRef.current.classList.remove('rotating');
+    widgetRef.current?.classList.remove('rotating');
   };
 
   const mouseLeave = () => {
-    widgetRef.current.classList.remove('rotating');
+    widgetRef.current?.classList.remove('rotating');
     rotate.current.active = false;
   };
 
@@ -72,15 +80,11 @@ const Rotation: React.FC<Rotation> = ({position = {x: 0, y: 0}, children, classN
       onMouseLeave={mouseLeave}
       onMouseUp={mouseUp}
     >
-      <div
-        className="scene"
-        ref={componentRef}
-        onMouseDown={mouseDown}
-      >
+      <div className="scene" ref={componentRef} onMouseDown={mouseDown}>
         {children}
       </div>
     </div>
   );
-}
+};
 
 export default Rotation;

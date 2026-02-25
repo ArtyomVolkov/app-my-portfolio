@@ -4,24 +4,24 @@
 
 ## Technologies:
 * [Typescript](https://www.typescriptlang.org/)
-* [Webpack](https://webpack.js.org/)
+* [Vite](https://vite.dev/)
 * [React](https://en.reactjs.org/)
-* [MobX](https://mobx.js.org/)
+* [Zustand](https://zustand.docs.pmnd.rs/)
 * [MaterialUI](https://mui.com/)
 * [Sass](https://sass-lang.com/)
 
 ## Install
-* `npm install` or `yarn install`
+* `pnpm install` or `yarn install`
 
 ## Start
-* `npm start` or `yarn start`
+* `pnpm dev` or `yarn dev`
 
 ## Tests
-* `npm run test` or `yarn test`
+* `pnpm run test` or `yarn test`
 
 ## Build
-* `npm run build` or `yarn build`
+* `pnpm run build` or `yarn build`
 
 ## Server
 Run application on express server for production build (locally)
-* `npm run server` or `yarn server`
+* `pnpm run server` or `yarn server`

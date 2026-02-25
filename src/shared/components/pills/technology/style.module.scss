@@ -1,60 +1,61 @@
 .technologyPill {
-  &:global(.javascript) {
+
+  &.technology {
+    background-color: var(--bg-color, #ffffff);
+    color: var(--primary-color, #072bfa);
+    border-color: var(--primary-color, #072bfa);
+  }
+
+  &.tool {
+    background-color: var(--bg-color, #ffffff);
+    color: var(--secondary-color, #5e05cf);
+    border-color: var(--secondary-color, #5e05cf);
+  }
+
+  .label {
+    color: black;
+    font-weight: 500;
+  }
+
+  .icon {
+    background: black;
+    color: white;
+  }
+
+  &.javascript {
     background: #efd81e;
 
-    :global(.icon) {
+    .icon {
       background: black;
       color: white;
     }
   }
 
-  &:global(.typescript) {
+  &.typescript {
     background: #2f74c0;
     color: white;
 
-    :global(.icon) {
-      background: black;
+    .label {
       color: white;
     }
   }
-
-  &:global(.objectiveC) {
+  &.objectiveC {
     background: #f4f5f6;
     color: black;
-
-    :global(.icon) {
-      background: black;
-      color: white;
-    }
   }
 
-  &:global(.dart) {
+  &.dart {
     background: #2bb1ef;
     color: black;
-
-    :global(.icon) {
-      background: black;
-      color: white;
-    }
   }
 
-  &:global(.python) {
+  &.python {
     background: #009688;
     color: white;
-
-    :global(.icon) {
-      background: black;
-      color: white;
-    }
   }
 
-  &:global(.java) {
+  &.java {
     background: #e86f00;
     color: black;
-
-    :global(.icon) {
-      background: black;
-      color: white;
-    }
   }
 }
