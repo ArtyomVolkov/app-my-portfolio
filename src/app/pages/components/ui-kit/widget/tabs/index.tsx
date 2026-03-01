@@ -1,73 +1,79 @@
-import { type NavItems } from "@pages/components/ui-kit/widget/types";
+import { type NavItems } from '@pages/components/ui-kit/widget/types';
 
-import Typography from "./Typography";
-import Buttons from "./Buttons";
-import Divider from "./Divider";
-import Breadcrumb from "./Breadcrumb";
-import ScrollView from "./ScrollView";
-import Tabs from "./Tabs";
-import Dropdown from "./Dropdown";
-import Modals from "./Modals";
-import Snackbar from "./Snackbar";
-import Inputs from "./Inputs";
-import Themes from "./Themes";
+import Typography from './Typography';
+import Buttons from './Buttons';
+import Divider from './Divider';
+import Breadcrumb from './Breadcrumb';
+import ScrollView from './ScrollView';
+import Tabs from './Tabs';
+import Dropdown from './Dropdown';
+import Modals from './Modals';
+import Snackbar from './Snackbar';
+import Inputs from './Inputs';
+import Themes from './Themes';
+import Tooltip from './Tooltip';
 
 const TABS: NavItems = [
   {
-    key: "themes",
-    label: "Themes",
+    key: 'tooltip',
+    label: 'Tooltip',
+    component: <Tooltip />,
+  },
+  {
+    key: 'themes',
+    label: 'Themes',
     component: <Themes />,
   },
   {
-    key: "typography",
-    label: "Typography",
+    key: 'typography',
+    label: 'Typography',
     component: <Typography />,
   },
   {
-    key: "buttons",
-    label: "Buttons",
+    key: 'buttons',
+    label: 'Buttons',
     component: <Buttons />,
   },
   {
-    key: "divider",
-    label: "Divider",
+    key: 'divider',
+    label: 'Divider',
     component: <Divider />,
   },
   {
-    key: "breadcrumb",
-    label: "Breadcrumb",
+    key: 'breadcrumb',
+    label: 'Breadcrumb',
     component: <Breadcrumb />,
   },
   {
-    key: "scroll-view",
-    label: "Scroll View",
+    key: 'scroll-view',
+    label: 'Scroll View',
     component: <ScrollView />,
   },
   {
-    key: "tabs",
-    label: "Tabs",
+    key: 'tabs',
+    label: 'Tabs',
     component: <Tabs />,
   },
   {
-    key: "dropdown",
-    label: "Dropdown",
+    key: 'dropdown',
+    label: 'Dropdown',
     component: <Dropdown />,
   },
   {
-    key: "modal",
-    label: "Modal Window",
+    key: 'modal',
+    label: 'Modal Window',
     component: <Modals />,
   },
   {
-    key: "snackbar",
-    label: "Snackbar",
+    key: 'snackbar',
+    label: 'Snackbar',
     component: <Snackbar />,
   },
   {
-    key: "input",
-    label: "Input Field",
+    key: 'input',
+    label: 'Input Field',
     component: <Inputs />,
-  }
+  },
 ];
 
 export default TABS;

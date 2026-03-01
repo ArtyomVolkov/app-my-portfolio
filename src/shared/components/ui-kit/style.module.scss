@@ -15,6 +15,7 @@
   --warning-color-rgb: #{from-hex-to-rgb(#ffc107)};
   --info-color-rgb: #{from-hex-to-rgb(#17a2b8)};
   --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --font-family: 'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
 
   &[data-theme="light"] {
     color-scheme: light;

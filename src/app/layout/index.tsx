@@ -20,7 +20,7 @@ const AppLayout = () => {
   return (
     <div
       className={mergeClassNames([
-        styles.appEntry,
+        styles.appLayout,
         appStore.layout.fullWidth && styles.fullWidth,
       ])}
     >
