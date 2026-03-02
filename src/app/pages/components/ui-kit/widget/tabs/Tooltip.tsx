@@ -1,6 +1,7 @@
 import Divider from '@shared/components/ui-kit/divider';
 import Section from '@shared/components/section';
 import Button from '@shared/components/ui-kit/button';
+import Typography from '@shared/components/ui-kit/typography';
 import Tooltip, { type Placement } from '@shared/components/ui-kit/tooltip';
 
 import styles from './style.module.scss';
@@ -12,7 +13,8 @@ const LayoutSection = {
   right: ['right-start', 'right-center', 'right-end'],
 };
 
-const TooltipMessage = 'Tooltip with longer text to test the width of the tooltip.';
+const TooltipMessage =
+  'Tooltip with longer text to test the width of the tooltip. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
 const TooltipTab = () => {
   return (
@@ -89,6 +91,29 @@ const TooltipTab = () => {
                   </Tooltip>
                 ))}
               </div>
+            </div>
+            <Divider title="Custom Tooltip" align="left" />
+            <div className={styles.row}>
+              <Tooltip
+              placement='top-start'
+                classes={{
+                  popup: styles.customTooltip,
+                }}
+                message={
+                  <div>
+                    <Typography variant="h5">Custom Tooltip</Typography>
+                    <Typography variant="span" lineBreak>
+                      This tooltip contains custom content, including a title
+                      and description, demonstrating the flexibility of the
+                      tooltip component.
+                    </Typography>
+                  </div>
+                }
+              >
+                <Button variant="outlined" color="primary">
+                  Hover me
+                </Button>
+              </Tooltip>
             </div>
           </article>
         </Section>

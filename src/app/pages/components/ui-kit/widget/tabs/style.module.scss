@@ -188,3 +188,9 @@
     --text-color: rgb(227, 227, 227) !important;
   }
 }
+
+.customTooltip {
+  --bg-color: rgb(13, 13, 13);
+  --text-color: rgb(202, 202, 202);
+  padding: 16px !important;
+}

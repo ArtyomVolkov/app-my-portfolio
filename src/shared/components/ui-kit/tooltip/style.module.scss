@@ -5,9 +5,11 @@
 
 .TooltipPopup {
   cursor: default;
+  width: 100%;
   max-width: 240px;
-  background-color: var(--bg-paper, #555);
+  background-color: var(--bg-color, #555);
   border: 1px solid var(--border-color, #ccc);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
   color: var(--text-color, #fff);
   overflow: hidden;

@@ -15,19 +15,9 @@ import Tooltip from './Tooltip';
 
 const TABS: NavItems = [
   {
-    key: 'tooltip',
-    label: 'Tooltip',
-    component: <Tooltip />,
-  },
-  {
     key: 'themes',
     label: 'Themes',
     component: <Themes />,
-  },
-  {
-    key: 'typography',
-    label: 'Typography',
-    component: <Typography />,
   },
   {
     key: 'buttons',
@@ -35,24 +25,14 @@ const TABS: NavItems = [
     component: <Buttons />,
   },
   {
-    key: 'divider',
-    label: 'Divider',
-    component: <Divider />,
-  },
-  {
     key: 'breadcrumb',
     label: 'Breadcrumb',
     component: <Breadcrumb />,
   },
   {
-    key: 'scroll-view',
-    label: 'Scroll View',
-    component: <ScrollView />,
-  },
-  {
-    key: 'tabs',
-    label: 'Tabs',
-    component: <Tabs />,
+    key: 'divider',
+    label: 'Divider',
+    component: <Divider />,
   },
   {
     key: 'dropdown',
@@ -60,9 +40,19 @@ const TABS: NavItems = [
     component: <Dropdown />,
   },
   {
+    key: 'input',
+    label: 'Input Field',
+    component: <Inputs />,
+  },
+  {
     key: 'modal',
     label: 'Modal Window',
     component: <Modals />,
+  },
+  {
+    key: 'scroll-view',
+    label: 'Scroll View',
+    component: <ScrollView />,
   },
   {
     key: 'snackbar',
@@ -70,9 +60,19 @@ const TABS: NavItems = [
     component: <Snackbar />,
   },
   {
-    key: 'input',
-    label: 'Input Field',
-    component: <Inputs />,
+    key: 'typography',
+    label: 'Typography',
+    component: <Typography />,
+  },
+  {
+    key: 'tabs',
+    label: 'Tabs',
+    component: <Tabs />,
+  },
+  {
+    key: 'tooltip',
+    label: 'Tooltip',
+    component: <Tooltip />,
   },
 ];
 

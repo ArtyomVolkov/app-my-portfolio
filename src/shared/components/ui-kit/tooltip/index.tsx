@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom';
 import { useState, useEffect, useRef } from 'react';
+
 import { mergeClassNames } from '@utils/common';
 
 import styles from './style.module.scss';
@@ -43,16 +44,11 @@ const Tooltip: React.FC<TooltipProps> = ({
   const [terminate, setTerminate] = useState(false);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     return () => {
       setOpen(false);
       tooltipRef.current = null;
-
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
     };
   }, []);
 
@@ -60,13 +56,14 @@ const Tooltip: React.FC<TooltipProps> = ({
     const rect: DOMRect | undefined =
       tooltipRef.current?.getBoundingClientRect();
 
-    if (!rect) {
+    if (!rect || !popupRef.current || !open) {
       return;
     }
     const [vertical, horizontal] = placement.split('-');
 
     const styleLayout = getStyleLayout(
       rect,
+      popupRef.current,
       vertical as VerticalPlacement,
       horizontal as HorizontalPlacement,
       offset
@@ -77,6 +74,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   const getStyleLayout = (
     rect: DOMRect,
+    popup: HTMLDivElement,
     vertical: VerticalPlacement,
     horizontal: HorizontalPlacement,
     offset: number = 0
@@ -87,6 +85,10 @@ const Tooltip: React.FC<TooltipProps> = ({
       let [translateX, translateY] = ['0', '-100%'];
       let left = rect.left;
 
+      // (check vertical overflow): top - offset - popup height < 0
+      if (rect.top - offset - popup.offsetHeight < 0) {
+        translateY = `${rect.height + offset * 2}px`;
+      }
       if (horizontal === 'center') {
         left = rect.left + rect.width / 2;
         translateX = '-50%';
@@ -106,6 +108,10 @@ const Tooltip: React.FC<TooltipProps> = ({
       let [translateX, translateY] = ['0', '0'];
       let left = rect.left;
 
+      // (check vertical overflow): bottom + offset + popup height > window.innerHeight
+      if (rect.bottom + offset + popup.offsetHeight > window.innerHeight) {
+        translateY = `-${rect.height + popup.offsetHeight + offset * 2}px`;
+      }
       if (horizontal === 'center') {
         left = rect.left + rect.width / 2;
         translateX = '-50%';
@@ -133,6 +139,10 @@ const Tooltip: React.FC<TooltipProps> = ({
         top = rect.bottom;
         translateY = '-100%';
       }
+      // (check vertical overflow): left + offset + popup width > viewport width
+      if (popup.offsetWidth + offset > rect.left) {
+        translateX = `${rect.width + offset * 2}px`;
+      }
       styleLayout.push(`top: ${top}px`);
       styleLayout.push(`left: ${rect.left - offset}px`);
       styleLayout.push(
@@ -152,6 +162,11 @@ const Tooltip: React.FC<TooltipProps> = ({
         top = rect.bottom;
         translateY = '-100%';
       }
+      // (check vertical overflow): right + offset + popup width > viewport width
+      if (rect.right + offset + popup.offsetWidth > window.innerWidth) {
+        translateX = `-${popup.offsetWidth + rect.width + offset * 2}px`;
+      }
+
       styleLayout.push(`top: ${top}px`);
       styleLayout.push(`left: ${rect.right + offset}px`);
       styleLayout.push(
@@ -168,13 +183,13 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   const onMouseLeave = () => {
     setTerminate(true);
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    timeoutRef.current = window.setTimeout(() => {
+  };
+
+  const onAnimationEnd = () => {
+    if (terminate) {
       setOpen(false);
       setTerminate(false);
-    }, 350);
+    }
   };
 
   return (
@@ -189,6 +204,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         createPortal(
           <div
             ref={popupRef}
+            onAnimationEnd={onAnimationEnd}
             className={mergeClassNames([
               styles.TooltipPopup,
               styles[placement],
