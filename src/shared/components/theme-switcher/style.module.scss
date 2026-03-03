@@ -4,6 +4,7 @@
   cursor: pointer;
   position: relative;
   width: fit-content;
+  font-size: 16px;
 
   &:hover {
     .circleShadow {
@@ -26,12 +27,12 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px;
+    gap: 0.5em;
+    padding: 0.5em;
     border: 1px solid var(--border-color, #a5a5a5);
-    border-radius: 30px;
+    border-radius: 1.4em;
     width: fit-content;
-    max-width: 200px;
+    max-width: 12.5em;
     background-color: var(--bg-color, #ebebeb);
     z-index: 10;
 
@@ -40,11 +41,11 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      width: 26px;
-      height: 26px;
+      width: 1.65em;
+      height: 1.65em;
 
       svg {
-        font-size: 20px;
+        font-size: 1.25em;
         color: var(--text-color, #333333);
         transition: color 0.5s;
       }
@@ -62,18 +63,18 @@
 
   .circleShadow {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 3.125em;
+    height: 3.125em;
     background-color: var(--primary-color, #007bff);
     border-radius: 50%;
-    left: -3px;
+    left: -0.25em;
     opacity: 0;
     transition:
       transform 0.35s,
       opacity 0.3s;
 
     &.transform {
-      transform: translateX(35px);
+      transform: translateX(2.1875em);
     }
   }
 }

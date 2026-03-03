@@ -1,0 +1,7 @@
+.profileTabs {
+  .tab {
+    @media screen and (max-width: 425px) {
+      flex: 1;
+    }
+  }
+}

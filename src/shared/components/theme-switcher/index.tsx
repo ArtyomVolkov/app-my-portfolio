@@ -19,7 +19,7 @@ const ThemeSwitcher: React.FC<ISwitcher> = ({ className }) => {
   );
 
   useEffect(() => {
-    // setDarkMode(appStore.theme.includes("dark"));
+    setDarkMode(appStore.theme.includes("dark"));
   }, [appStore.theme]);
 
   const onToggle = () => {

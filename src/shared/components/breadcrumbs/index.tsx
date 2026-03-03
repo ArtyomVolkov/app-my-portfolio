@@ -1,71 +1,61 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 
-import Link from '@mui/material/Link';
-import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
+import Breadcrumb, {
+  type BreadcrumbOption,
+} from '@shared/components/ui-kit/breadcrumb';
 
 import { PATH_MAP } from '@shared/constants/navigation';
 
-import styles from './style.module.scss';
+type BreadcrumbsProps = {
+  className?: string;
+};
 
-const Breadcrumbs = () => {
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
   const navigation = useNavigate();
   const location = useLocation();
 
-  const navigateTo = (
-    event: React.MouseEvent<HTMLDivElement>,
-    pathname: string
-  ) => {
-    event.preventDefault();
-    navigation(pathname);
-  };
-
-  const renderItems = () => {
+  const options = useMemo(() => {
     const paths =
       location.pathname.length === 1 ? [''] : location.pathname.split('/');
 
     return paths.map((item, index) => {
       if (!item) {
-        return (
-          <div key={index} onClick={(e) => navigateTo(e, '/')}>
-            <Link
-              underline="hover"
-              color="inherit"
-              href="/"
-              className={styles.link}
-            >
-              {PATH_MAP.home.icon}
-              <span className={styles.pageLabel}>{PATH_MAP.home.label}</span>
-            </Link>
-          </div>
-        );
-      }
-
-      if (!PATH_MAP[item]) {
-        return null;
+        return {
+          label: PATH_MAP.home.label,
+          link: '/',
+          icon: PATH_MAP.home.icon,
+        };
       }
       const path = paths.slice(0, index + 1).join('/');
 
-      return (
-        <div key={item} onClick={(e) => navigateTo(e, path)}>
-          <Link
-            underline="hover"
-            color="inherit"
-            href={path}
-            className={styles.link}
-          >
-            {PATH_MAP[item].icon}
-            <span className={styles.pageLabel}>{PATH_MAP[item]?.label}</span>
-          </Link>
-        </div>
-      );
+      if (!PATH_MAP[item]) {
+        return {
+          label: item,
+          link: '',
+          icon: null,
+        };
+      }
+      return {
+        label: PATH_MAP[item].label,
+        link: path,
+        icon: PATH_MAP[item].icon,
+      };
     });
+  }, [location.pathname]);
+
+  const onSelect = (option: BreadcrumbOption) => {
+    if (option.link) {
+      navigation(option.link);
+    }
   };
 
   return (
-    <MuiBreadcrumbs className={styles.breadcrumbs}>
-      {renderItems()}
-    </MuiBreadcrumbs>
+    <Breadcrumb
+      options={options}
+      onSelect={onSelect}
+      classes={{ root: className }}
+    />
   );
 };
 

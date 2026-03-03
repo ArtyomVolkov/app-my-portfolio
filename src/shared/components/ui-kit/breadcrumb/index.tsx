@@ -88,9 +88,13 @@ export type BreadcrumbOption = {
 type BreadcrumbProps = {
   options: BreadcrumbOption[];
   onSelect?: (option: BreadcrumbOption, index: number) => void;
+  classes?: {
+    root?: string;
+    item?: string;
+  };
 };
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({ options, onSelect }) => {
+const Breadcrumb: React.FC<BreadcrumbProps> = ({ options, onSelect, classes }) => {
   const ulRef = React.useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -105,7 +109,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ options, onSelect }) => {
     return () => {
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [options]);
 
   const checkFit = () => {
     if (!ulRef.current) {
@@ -153,6 +157,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ options, onSelect }) => {
         className={mergeClassNames([
           styles.breadcrumbItem,
           index === options.length - 1 && styles.current,
+          classes?.item,
         ])}
       >
         <a
@@ -171,7 +176,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ options, onSelect }) => {
   };
 
   return (
-    <nav className={styles.Breadcrumb}>
+    <nav className={mergeClassNames([styles.Breadcrumb, classes?.root])}>
       <ul className={styles.breadcrumbList} ref={ulRef}>
         {options.map(renderItem)}
         <li

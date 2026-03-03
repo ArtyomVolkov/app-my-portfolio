@@ -4,7 +4,7 @@ import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
 import AcUnitRoundedIcon from "@mui/icons-material/AcUnitRounded";
 import Divider from "@shared/components/ui-kit/divider";
 
-import Breadcrumb from "@shared/components/ui-kit/breadcrumb";
+import Breadcrumb, { type BreadcrumbOption } from "@shared/components/ui-kit/breadcrumb";
 import Section from "@shared/components/section";
 
 import styles from "./style.module.scss";
@@ -39,7 +39,7 @@ const BREADCRUMBS = [
 ];
 
 const BreadcrumbTab = () => {
-  const handleSelect = (option: any, index: number) => {
+  const handleSelect = (option: BreadcrumbOption, index: number) => {
     console.log("Selected option:", option, "at index:", index);
   };
 

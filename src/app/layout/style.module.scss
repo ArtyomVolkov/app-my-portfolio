@@ -43,28 +43,17 @@
 }
 
 @media screen and (max-width: 767px) {
-  .appLayout.fullWidth {
-    .mainContent {
-      margin-left: 60px;
-    }
-    aside {
-      width: 60px;
-    }
-  }
+
 }
 
 @media screen and (max-width: 1023px) {
-  .appLayout {
+  .appLayout.fullWidth {
     .mainContent {
-      grid-template-rows: 65px 1fr;
+      margin-left: 0;
     }
   }
-}
 
-@media screen and (max-width: 765px) {
-  .appLayout {
-    .mainContent {
-      grid-template-rows: 50px 1fr;
-    }
+  aside {
+    display: none;
   }
 }

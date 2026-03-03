@@ -36,6 +36,7 @@
       font-weight: 500;
       font-size: 24px;
       margin: 0 0 15px;
+      padding-right: 86px; // to prevent text from being hidden behind the pill widget
       color: var(--primary-color, #007bff);
     }
 
@@ -70,28 +71,14 @@
     grid-row-gap: 10px;
 
     .projectCard {
-      padding: 20px;
+      padding: 12px;
 
       .responsibilities {
-        margin: 0 10px;
         padding: 10px 0 0;
 
         li {
           padding: 4px;
         }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 474px) {
-  .projectsTab {
-    .projectCard {
-      .name {
-        font-size: 16px;
-      }
-      .pillWidget {
-        padding: 6px;
       }
     }
   }
