@@ -1,22 +1,22 @@
-@use "../../assets/styles/style-guide";
-@use "../../shared/components/ui-kit/style.module.scss" as ukkit-style;
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+NZ+Basic:wght@100..400&display=swap");
+@use '../../assets/styles/style-guide';
+@use '../../shared/components/ui-kit/style.module.scss' as ukkit-style;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+NZ+Basic:wght@100..400&display=swap');
 
 :global(html) {
   @include style-guide.scroll-style;
 }
 :global(body) {
   margin: 0;
+  font-family: var(--font-family), sans-serif;
 }
-:global(#portfolio-app) {
-  font-family: 'Open Sans', sans-serif;
 
+:global(#portfolio-app) {
   h3 {
     margin-top: 0;
   }
 }
 
-.appEntry {
+.appLayout {
   min-height: 100vh;
 
   &.fullWidth {
@@ -43,7 +43,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .appEntry.fullWidth {
+  .appLayout.fullWidth {
     .mainContent {
       margin-left: 60px;
     }
@@ -54,7 +54,7 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .appEntry {
+  .appLayout {
     .mainContent {
       grid-template-rows: 65px 1fr;
     }
@@ -62,7 +62,7 @@
 }
 
 @media screen and (max-width: 765px) {
-  .appEntry {
+  .appLayout {
     .mainContent {
       grid-template-rows: 50px 1fr;
     }
