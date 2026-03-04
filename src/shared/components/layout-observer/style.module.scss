@@ -1,0 +1,19 @@
+.LayoutObserverModal {
+  position: fixed;
+
+  .modalBox {
+    .body {
+      display: flex;
+      flex-direction: column;
+      margin-top: 12px;
+      gap: 4px;
+    }
+
+    .actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+  }
+}

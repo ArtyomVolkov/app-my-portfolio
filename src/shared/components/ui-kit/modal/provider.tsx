@@ -1,7 +1,7 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from 'react';
 
-import Modal from "./modal";
-import modalService from "./service";
+import Modal from './modal';
+import modalService from './service';
 
 const DefaultSettings = {
   animationDuration: 500,
@@ -11,7 +11,7 @@ type ModalStoreData = {
   name: string;
   style?: React.CSSProperties;
   terminate?: boolean; // if true, modal will be removed from DOM on close (for animations)
-} & Omit<ModalProps, "title">;
+} & Omit<ModalProps, 'title'>;
 
 type ModalProps = {
   header?: string | React.ReactNode | React.ReactNode[];
@@ -21,7 +21,7 @@ type ModalProps = {
   backDropClose?: boolean;
   onClose?: (
     e: React.MouseEvent<HTMLDivElement>,
-    reason: "backdrop" | "closeButton" | "escape",
+    reason: 'backdrop' | 'closeButton' | 'escape'
   ) => void;
   classes?: {
     root?: string;
@@ -42,15 +42,17 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 
     return () => {
       modalService.destroy();
-    }
+    };
   }, []);
 
   useEffect(() => {
+    modalService.updateModals(modals);
+
     modals.forEach((modal) => {
       if (modal.terminate) {
         terminate(
           modal.name,
-          modal.animationDuration ?? DefaultSettings.animationDuration,
+          modal.animationDuration ?? DefaultSettings.animationDuration
         );
       }
     });
@@ -68,7 +70,8 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
         {
           name,
           terminate: false,
-          animationDuration: data.animationDuration ?? DefaultSettings.animationDuration,
+          animationDuration:
+            data.animationDuration ?? DefaultSettings.animationDuration,
           ...data,
         },
       ];
@@ -86,10 +89,14 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     });
   };
 
+  const isOpen = (name: string): boolean => {
+    return modals.some((modal) => modal.name === name);
+  };
+
   const terminate = (name: string, duration: number) => {
     setTimeout(() => {
       setModals((prevModals) =>
-        prevModals.filter((modal) => modal.name !== name),
+        prevModals.filter((modal) => modal.name !== name)
       );
     }, duration);
   };
@@ -107,7 +114,9 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   };
 
   return (
-    <ModalContext.Provider value={{ open: openModal, close: closeModal }}>
+    <ModalContext.Provider
+      value={{ open: openModal, close: closeModal, isOpen }}
+    >
       {children}
       {modals.map(renderModal)}
     </ModalContext.Provider>
@@ -115,28 +124,34 @@ const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 };
 
 type ModalContextType = {
+  modals?: ModalStoreData[];
   open?: (name: string, data: ModalProps) => void;
   close?: (name: string) => void;
+  isOpen?: (name: string) => boolean;
 };
 
 const ModalContext = createContext<ModalContextType>({});
 
-const useModal = () =>  {
+const useModal = () => {
   const context = useContext(ModalContext);
 
   if (!context || (!context.open && !context.close)) {
-    console.error("useModal must be used within a ModalProvider");
+    console.error('useModal must be used within a ModalProvider');
     return {
       open: () => {
-        console.error("ModalContext is not available.");
+        console.error('ModalContext is not available.');
       },
       close: () => {
-        console.error("ModalContext is not available.");
+        console.error('ModalContext is not available.');
+      },
+      isOpen: () => {
+        console.error('ModalContext is not available.');
+        return false;
       },
     };
   }
   return context;
-}
+};
 
 export {
   useModal,

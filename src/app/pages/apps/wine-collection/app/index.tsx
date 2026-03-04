@@ -1,14 +1,17 @@
+import './firebase';
 import { useEffect } from 'react';
 import { SnackbarProvider } from 'notistack';
+
+import LayoutObserver from '@shared/components/layout-observer';
 
 import AppRoutes from './routes';
 import AppModal from '../app/components/app-modal';
 
 import { useStore } from '../app/store';
 
-import './firebase';
+import styles from './style.module.scss';
 
-import styles  from './style.module.scss';
+const MIN_LAYOUT_WIDTH = 685;
 
 const WineApp = () => {
   const { actions, user } = useStore((store) => store);
@@ -18,7 +21,7 @@ const WineApp = () => {
 
     return () => {
       actions.onClearAppData();
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -29,11 +32,11 @@ const WineApp = () => {
 
     return () => {
       unsubscribe();
-    }
+    };
   }, [user]);
 
   return (
-    <div className={styles.wineApp}>
+    <LayoutObserver className={styles.wineApp} minWidth={MIN_LAYOUT_WIDTH}>
       <SnackbarProvider
         maxSnack={3}
         autoHideDuration={3000}
@@ -42,7 +45,7 @@ const WineApp = () => {
         <AppRoutes />
         <AppModal />
       </SnackbarProvider>
-    </div>
+    </LayoutObserver>
   );
 };
 

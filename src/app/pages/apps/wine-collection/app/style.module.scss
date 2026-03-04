@@ -10,7 +10,8 @@
   background: var(--bg-paper);
   max-width: 1024px;
   max-height: 820px;
-  min-width: 670px;
+  position: relative;
+  min-width: var(--layout-observer-min-width, 100%);
 }
 
 @mixin ellipsis {
