@@ -28,12 +28,6 @@ const LayoutObserver: React.FC<LayoutObserverProps> = ({
     }
     const rect = containerRef.current.getBoundingClientRect();
     const contentWidth = rect.width;
-    const scrollBarWidth =
-      (containerRef.current.parentElement?.offsetWidth || 0) -
-      (containerRef.current.parentElement?.clientWidth || 0);
-    const horizontalOffset = Math.round(
-      rect.left + (rect.right - rect.width) + scrollBarWidth
-    );
 
     if (contentWidth > minWidth) {
       appModal.close('layoutWarning');
@@ -73,7 +67,7 @@ const LayoutObserver: React.FC<LayoutObserverProps> = ({
             variant="h5"
             className={styles.title}
             lineBreak
-          >{`The application is best viewed on screens wider than ${minWidth + horizontalOffset}px.`}</Typography>
+          >{`The application is best viewed on screens wider than ${minWidth}px.`}</Typography>
           <Typography variant="p" lineBreak>
             Adaptive layout for current screen size hasn't been implemented yet.
           </Typography>
