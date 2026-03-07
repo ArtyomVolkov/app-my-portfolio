@@ -1,9 +1,10 @@
 import { useRef } from 'react';
 import { useResizeChange } from '@shared/hooks/layout';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 import Button from '@shared/components/ui-kit/button';
 import Typography from '@shared/components/ui-kit/typography';
-import appModal, { ModalProvider } from '@shared/components/ui-kit/modal';
+import appModal from '@shared/components/ui-kit/modal';
 
 import styles from './style.module.scss';
 
@@ -25,7 +26,14 @@ const LayoutObserver: React.FC<LayoutObserverProps> = ({
     if (!containerRef.current || hasNotified.current.value) {
       return;
     }
-    const contentWidth = containerRef.current.getBoundingClientRect().width;
+    const rect = containerRef.current.getBoundingClientRect();
+    const contentWidth = rect.width;
+    const scrollBarWidth =
+      (containerRef.current.parentElement?.offsetWidth || 0) -
+      (containerRef.current.parentElement?.clientWidth || 0);
+    const horizontalOffset = Math.round(
+      rect.left + (rect.right - rect.width) + scrollBarWidth
+    );
 
     if (contentWidth > minWidth) {
       appModal.close('layoutWarning');
@@ -36,17 +44,36 @@ const LayoutObserver: React.FC<LayoutObserverProps> = ({
     }
     appModal.open('layoutWarning', {
       movable: true,
-      header: 'Screen Too Small',
+      header: (
+        <div className={styles.header}>
+          <span>Screen Too Small</span>
+        </div>
+      ),
       classes: {
         root: styles.LayoutObserverModal,
         modalBox: styles.modalBox,
       },
       body: (
         <div className={styles.body}>
+          <DotLottieReact
+            className={styles.lottie}
+            src={'./assets/lottie/screen-size.lottie'}
+            width={300}
+            height={140}
+            renderConfig={{
+              devicePixelRatio: 2,
+            }}
+            layout={{
+              fit: 'fit-height',
+            }}
+            autoplay
+            loop
+          />
           <Typography
             variant="h5"
+            className={styles.title}
             lineBreak
-          >{`The application is best viewed on screens wider than ${minWidth}px.`}</Typography>
+          >{`The application is best viewed on screens wider than ${minWidth + horizontalOffset}px.`}</Typography>
           <Typography variant="p" lineBreak>
             Adaptive layout for current screen size hasn't been implemented yet.
           </Typography>
@@ -75,19 +102,13 @@ const LayoutObserver: React.FC<LayoutObserverProps> = ({
   };
 
   return (
-    <ModalProvider>
-      <div
-        className={className}
-        ref={containerRef}
-        style={
-          {
-            '--layout-observer-min-width': `${minWidth}px`,
-          } as React.CSSProperties
-        }
-      >
-        {children}
-      </div>
-    </ModalProvider>
+    <div
+      className={className}
+      ref={containerRef}
+      style={{ minWidth: `${minWidth}px` }}
+    >
+      {children}
+    </div>
   );
 };
 

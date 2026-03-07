@@ -33,6 +33,10 @@ const Header = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
+  const onCloseMenu = () => {
+    setIsDrawerOpen(false);
+  };
+
   return (
     <header className={styles.appHeader}>
       <IconButton className={styles.menuIcon} onClick={onToggleMenu}>
@@ -65,7 +69,7 @@ const Header = () => {
               <span>Portfolio App</span>
             </div>
           </div>
-          <Navigation />
+          <Navigation onNavigate={onCloseMenu} />
         </div>
       </Drawer>
     </header>

@@ -9,11 +9,10 @@
   @include style-guide.card-shadow;
 }
 
-@media screen and (max-width: 835px) {
+@media screen and (max-width: 496px) {
   .sudokuWidget {
     display: grid;
     grid-template-columns: 1fr;
     flex-direction: column;
-    width: 100%;
   }
 }

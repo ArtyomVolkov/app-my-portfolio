@@ -1,47 +1,27 @@
-import { useEffect, useState } from 'react';
-
-import { mergeClassNames } from '@utils/common';
+import Typography from '@shared/components/ui-kit/typography';
+import Button from '@shared/components/ui-kit/button';
 
 import styles from './style.module.scss';
 
-const SPOTYFY_APP_URI = import.meta.env.VITE_SPOTIFY_APP_URI;
-
-type JSONValue =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: JSONValue }
-  | JSONValue[];
-
 const SpotifyApp = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    window.addEventListener('message', onMessage);
-
-    return () => {
-      window.removeEventListener('message', onMessage);
-    };
-  }, []);
-
-  const onMessage = (event: MessageEvent<JSONValue>) => {
-    console.log('Received message from iframe:', event.data);
+  const onOpenApp = () => {
+    window.open('https://a-volkov-spotify-player.netlify.app/', '_blank');
   };
 
   return (
-    <iframe
-      className={mergeClassNames([
-        styles.spotifyApp,
-        loading && styles.loading,
-      ])}
-      src={SPOTYFY_APP_URI}
-      onLoad={() => setLoading(false)}
-      title="Spotify App"
-      allow="autoplay; encrypted-media; fullscreen;"
-      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-      allowFullScreen
-    ></iframe>
+    <div className={styles.SpotifyApp}>
+      <Typography variant="h5" lineBreak>
+        According to CSP (Content Security Policy) restrictions, Spotify Web
+        Player cannot be embedded in an iframe.
+      </Typography>
+      <Typography variant="p" lineBreak>
+        You can open the Spotify Web Player in a new tab by clicking the button
+        below.
+      </Typography>
+      <Button variant="outlined" color="primary" onClick={onOpenApp}>
+        Open App
+      </Button>
+    </div>
   );
 };
 

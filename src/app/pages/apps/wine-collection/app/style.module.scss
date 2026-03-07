@@ -9,9 +9,9 @@
   overflow: hidden;
   background: var(--bg-paper);
   max-width: 1024px;
+  min-width: 685px;
   max-height: 820px;
   position: relative;
-  min-width: var(--layout-observer-min-width, 100%);
 }
 
 @mixin ellipsis {

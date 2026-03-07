@@ -11,7 +11,7 @@ import styles from './style.module.scss';
 
 const WidgetsPage = () => {
   return (
-    <Main className={styles.widgetsPage}>
+    <Main className={styles.widgetsPage} useLayoutObserver={false}>
       {/* <NavButton
         path="/widgets/history"
         title="History"
