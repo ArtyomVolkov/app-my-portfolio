@@ -14,6 +14,7 @@
     border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
+    min-width: 294px;
 
     &:hover {
       .fullscreenButton {

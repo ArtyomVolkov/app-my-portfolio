@@ -108,4 +108,8 @@ export const PATH_MAP: Record<string, NavigationItem> = {
     label: 'Spotify App',
     icon: <SpotifyIcon />,
   },
+  user: {
+    label: 'User',
+    icon: <AccountIcon />,
+  },
 };

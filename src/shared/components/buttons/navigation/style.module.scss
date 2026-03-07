@@ -49,27 +49,3 @@
     min-width: 80px;
   }
 }
-
-@media screen and (max-width: 767px) {
-  .navButton {
-    .iconBox {
-      padding: 0;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      svg {
-        font-size: 18px;
-      }
-    }
-
-    .headline {
-      font-size: 14px;
-      padding: 0 8px;
-      min-width: fit-content;
-      margin: 6px 0 0;
-    }
-  }
-}

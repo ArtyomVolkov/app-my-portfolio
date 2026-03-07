@@ -8,7 +8,7 @@ import styles from './style.module.scss';
 
 const ComponentsPage = () => {
   return (
-    <Main className={styles.componentsPage}>
+    <Main className={styles.componentsPage} useLayoutObserver={false}>
       <NavButton
         path="/components/shapes"
         title="3D Shapes"

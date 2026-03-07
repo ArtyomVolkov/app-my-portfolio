@@ -1,5 +1,6 @@
 .sideBar {
   border-right: 1px solid var(--border-color, #a5a5a5);
+  box-sizing: border-box;
   position: fixed;
   left: 0;
   top: 0;
@@ -11,7 +12,7 @@
   .header {
     display: flex;
     position: relative;
-    gap: 20px;
+    gap: 18px;
     align-items: center;
     background: inherit;
     overflow: hidden;
@@ -28,14 +29,18 @@
       .icon {
         font-size: 36px;
         color: var(--text-color, #333333);
+
+        &.rotate {
+          transform: rotate(180deg);
+        }
       }
     }
 
     .appLogo {
       white-space: nowrap;
-      font-family: system-ui;
       font-size: 18px;
-      font-weight: 500;
+      font-weight: 600;
+      color: var(--text-color, #333333);
     }
   }
 }

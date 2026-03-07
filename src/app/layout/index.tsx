@@ -14,7 +14,9 @@ const AppLayout = () => {
   const appStore = useAppStore();
 
   useResizeChange((width: number) => {
-    appStore.setFullWidth(width < RESIZE.tablet);
+    if (width < RESIZE.tablet && !appStore.layout.fullWidth) {
+      appStore.setFullWidth(true);
+    }
   });
 
   return (

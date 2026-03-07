@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { RESIZE } from "@shared/constants/layout";
+import { create } from 'zustand';
+import { RESIZE } from '@shared/constants/layout';
 
 export type Theme = 'light' | 'dark' | 'light-purple' | 'dark-azure';
 
@@ -14,14 +14,14 @@ export interface IAppStore {
 }
 
 export const useAppStore = create<IAppStore>((set) => ({
-  theme: window.localStorage.getItem('app-theme') as Theme || 'light',
+  theme: (window.localStorage.getItem('app-theme') as Theme) || 'light',
   layout: {
     fullWidth: window.innerWidth < RESIZE.tablet,
   },
   toggleFullWidth: () => {
     set((state) => ({
       layout: { ...state.layout, fullWidth: !state.layout.fullWidth },
-    }))
+    }));
   },
   setTheme: (theme) => {
     window.localStorage.setItem('app-theme', theme);
@@ -29,10 +29,11 @@ export const useAppStore = create<IAppStore>((set) => ({
 
     set(() => ({ theme }));
   },
-  setFullWidth: (value: boolean) =>
+  setFullWidth: (value: boolean) => {
     set(() => ({
       layout: { fullWidth: value },
-    })),
+    }));
+  },
 }));
 
 export default {

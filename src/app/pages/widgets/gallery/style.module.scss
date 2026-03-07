@@ -9,6 +9,7 @@
   .galleryGrid {
     display: flex;
     flex-direction: column;
+    min-width: 285px;
 
     .grid {
       display: flex;

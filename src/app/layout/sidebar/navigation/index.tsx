@@ -10,12 +10,20 @@ import { PATH_MAP, NAV_OPTIONS } from '@shared/constants/navigation';
 
 import styles from './style.module.scss';
 
-const Navigation = () => {
+type NavigationProps = {
+  onNavigate?: (path: string) => void;
+};
+
+const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const navigateTo = (path: string) => {
     navigate(path);
+
+    if (onNavigate) {
+      onNavigate(path);
+    }
   };
 
   const renderNavItem = (item: string) => {
