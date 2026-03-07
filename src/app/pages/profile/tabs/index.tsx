@@ -5,6 +5,8 @@ import Tabs, { type TabItem } from '@shared/components/ui-kit/tabs';
 import SummaryTab from '@pages/profile/tabs/summary';
 import ExperienceTab from '@pages/profile/tabs/experience';
 
+import styles from './style.module.scss';
+
 const TABS:Array<TabItem> = [
   {
     key: 'summary',
@@ -24,6 +26,10 @@ const ProfileTabs = () => (
   <Tabs
     items={TABS}
     defaultActive={TABS[0].key}
+    classes={{
+      root: styles.profileTabs,
+      tab: styles.tab,
+    }}
   />
 );
 

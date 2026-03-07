@@ -1,5 +1,6 @@
-import { HashRouter } from 'react-router';
+import { BrowserRouter } from 'react-router';
 import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { ModalProvider } from '@shared/components/ui-kit/modal';
 
 import AppLayout from '@app/layout';
 
@@ -12,13 +13,15 @@ const App = () => {
   const scheme = THEME[theme?.includes('dark') ? 'dark' : 'light'];
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={scheme}>
-          <AppLayout />
+          <ModalProvider>
+            <AppLayout />
+          </ModalProvider>
         </ThemeProvider>
       </StyledEngineProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

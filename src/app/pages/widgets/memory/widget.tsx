@@ -8,6 +8,14 @@ type MemoryWidgetProps = {
   ping?: number;
 };
 
+type Performance = {
+  memory?: {
+    jsHeapSizeLimit: number;
+    totalJSHeapSize: number;
+    usedJSHeapSize: number;
+  };
+};
+
 interface IMemoryData {
   jsHeapSizeLimit: number;
   totalJSHeapSize: number;
@@ -16,9 +24,9 @@ interface IMemoryData {
 
 const MemoryWidget: React.FC<MemoryWidgetProps> = ({ ping = 500 }) => {
   const [memoryData, setMemoryData] = useState<IMemoryData>({
-    usedJSHeapSize: 0,
-    jsHeapSizeLimit: 0,
-    totalJSHeapSize: 0,
+    usedJSHeapSize: (performance as Performance).memory?.usedJSHeapSize || 0,
+    jsHeapSizeLimit: (performance as Performance).memory?.jsHeapSizeLimit || 0,
+    totalJSHeapSize: (performance as Performance).memory?.totalJSHeapSize || 0,
   });
 
   useEffect(() => {
@@ -57,7 +65,7 @@ const MemoryWidget: React.FC<MemoryWidgetProps> = ({ ping = 500 }) => {
       <span
         className={styles.heapSize}
         style={{
-          color: `rgb(${progress.color}, ${progress.color}, ${progress.color})`,
+          color: `hsl(${progress.background - 180}deg 100% 50%)`,
         }}
       >
         {`${formatBytes(memoryData.usedJSHeapSize)} / ${formatBytes(

@@ -15,6 +15,7 @@
   --warning-color-rgb: #{from-hex-to-rgb(#ffc107)};
   --info-color-rgb: #{from-hex-to-rgb(#17a2b8)};
   --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --font-family: 'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
 
   &[data-theme="light"] {
     color-scheme: light;
@@ -23,7 +24,7 @@
     --text-color: #333333;
     --border-color: #a5a5a5;
     --primary-color: #072bfa;
-    --secondary-color: #5e05cf;
+    --secondary-color: #eb0d58;
     --success-color: #28a745;
     --danger-color: #dc3545;
     --warning-color: #ffc107;
@@ -68,7 +69,7 @@
     --text-color: #f0f0f0;
     --border-color: #494966;
     --primary-color: #a8a7f1;
-    --secondary-color: #f5d299;
+    --secondary-color: #FFC107;
     --success-color: #28a745;
     --danger-color: #dc3545;
     --warning-color: #ffc107;

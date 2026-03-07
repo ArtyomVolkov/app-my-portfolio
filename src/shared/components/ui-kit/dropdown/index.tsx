@@ -17,7 +17,7 @@ export type Option = {
   endIcon?: string;
 };
 
-export type OptionData = Option | Option[] | null
+export type OptionData = Option | Option[] | null;
 
 type DropdownProps = {
   placeholder: string;

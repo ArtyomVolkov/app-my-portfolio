@@ -1,10 +1,128 @@
 .appHeader {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 10px 12px;
+  padding: 8px 10px;
+  line-height: 54px;
   border-bottom: 1px solid var(--border-color);
+  box-sizing: border-box;
   background: var(--bg-paper, #fbfbfb);
   z-index: 90;
+
+  .menuIcon {
+    display: none;
+    color: var(--text-color, #333333);
+    cursor: pointer;
+
+    .icon {
+      font-size: 36px;
+
+      &.rotate {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .headerContent {
+    flex: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+
+    .breadcrumbs {
+      flex: 1;
+      overflow: hidden;
+      font-size: 20px;
+    }
+  }
+
+  .themeSwitcher {
+    margin-right: 0.25em;
+  }
+
+  @media screen and (max-width: 1023px) {
+    padding: 8px 10px;
+    line-height: 48px;
+
+    .menuIcon {
+      display: flex;
+    }
+
+    .headerContent {
+      .breadcrumbs {
+        font-size: 18px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 6px 8px;
+    line-height: 44px;
+
+    .menuIcon {
+      .icon {
+        font-size: 28px;
+      }
+    }
+
+    .themeSwitcher {
+      font-size: 13px;
+    }
+    .headerContent {
+      .breadcrumbs {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.MuiDrawer {
+  .MuiDrawerPaper {
+    background-image: none;
+    background-color: var(--bg-paper, #fbfbfb);
+    border-right: 1px solid var(--border-color, #a5a5a5);
+  }
+
+  .drawerContent {
+    width: 256px;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 10px;
+
+      .appLogo {
+        white-space: nowrap;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-color, #333333);
+      }
+
+      .menuIcon {
+        color: var(--text-color, #333333);
+        cursor: pointer;
+
+        svg {
+          font-size: 36px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .header {
+        padding: 6px;
+
+        .menuIcon {
+          svg {
+            font-size: 28px;
+          }
+        }
+      }
+    }
+  }
 }

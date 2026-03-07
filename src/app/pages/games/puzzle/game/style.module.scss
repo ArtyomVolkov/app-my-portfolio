@@ -1,15 +1,9 @@
-@use "../../../../../assets/styles/style-guide";
+@use '../../../../../assets/styles/style-guide';
 
 .puzzleGameWidget {
   @include style-guide.card-shadow;
   background-color: var(--bg-paper);
   display: flex;
   max-width: fit-content;
-}
-
-@media screen and (max-width: 875px) {
-  .puzzleGameWidget {
-    flex-direction: column;
-    max-width: 100%;
-  }
+  min-width: 440px;
 }

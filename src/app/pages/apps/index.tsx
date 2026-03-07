@@ -8,7 +8,7 @@ import styles from './style.module.scss';
 
 const AppsPage = () => {
   return (
-    <Main className={styles.appsPage}>
+    <Main className={styles.appsPage} useLayoutObserver={false}>
       <NavButton
         path="/apps/wine-collection"
         title="Wine collection"

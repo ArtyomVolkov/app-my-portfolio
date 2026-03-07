@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -17,16 +18,29 @@ const Page404 = () => {
     <Main className={styles.Page404}>
       <section className={styles.paper}>
         <div className={styles.header}>
-          <Typography variant="h3">404</Typography>
+          <DotLottieReact
+            className={styles.lottie}
+            src={'./assets/lottie/page-404.lottie'}
+            renderConfig={{
+              devicePixelRatio: 2,
+            }}
+            layout={{
+              fit: 'fit-height',
+            }}
+            autoplay
+            loop
+          />
           <Divider
             title={<Typography variant="h4">Page Not Found</Typography>}
           />
         </div>
         <div className={styles.body}>
-          <Typography variant="h5">
+          <Typography variant="h5" lineBreak className={styles.title}>
             The page you are looking for does not exist.
           </Typography>
-          <Typography variant="p">Try checking the URL for errors.</Typography>
+          <Typography variant="p" lineBreak className={styles.title}>
+            Try checking the URL for errors.
+          </Typography>
         </div>
         <div className={styles.navButtons}>
           <Button

@@ -14,13 +14,15 @@ const AppLayout = () => {
   const appStore = useAppStore();
 
   useResizeChange((width: number) => {
-    appStore.setFullWidth(width < RESIZE.tablet);
+    if (width < RESIZE.tablet && !appStore.layout.fullWidth) {
+      appStore.setFullWidth(true);
+    }
   });
 
   return (
     <div
       className={mergeClassNames([
-        styles.appEntry,
+        styles.appLayout,
         appStore.layout.fullWidth && styles.fullWidth,
       ])}
     >

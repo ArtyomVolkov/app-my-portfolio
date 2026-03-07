@@ -1,10 +1,10 @@
 import IconButton from '@mui/material/IconButton';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
 
 import Navigation from '@app/layout/sidebar/navigation';
 
 import { useAppStore } from '@store/app';
+import { mergeClassNames } from '@utils/common';
 
 import styles from './style.module.scss';
 
@@ -17,15 +17,19 @@ const SideBar = () => {
         <IconButton
           className={styles.screenResize}
           onClick={appStore.toggleFullWidth}
-          aria-label='toggle-sidebar'
+          aria-label="toggle-sidebar"
         >
           {appStore.layout.fullWidth ? (
-            <MenuRoundedIcon className={styles.icon} />
+            <MenuOpenRoundedIcon
+              className={mergeClassNames([styles.icon, styles.rotate])}
+            />
           ) : (
             <MenuOpenRoundedIcon className={styles.icon} />
           )}
         </IconButton>
-        <div className={styles.appLogo}>App Portfolio</div>
+        <div className={styles.appLogo}>
+          <span>Portfolio App</span>
+        </div>
       </div>
       <Navigation />
     </aside>

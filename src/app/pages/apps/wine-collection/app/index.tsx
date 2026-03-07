@@ -1,3 +1,4 @@
+import './firebase';
 import { useEffect } from 'react';
 import { SnackbarProvider } from 'notistack';
 
@@ -6,9 +7,7 @@ import AppModal from '../app/components/app-modal';
 
 import { useStore } from '../app/store';
 
-import './firebase';
-
-import styles  from './style.module.scss';
+import styles from './style.module.scss';
 
 const WineApp = () => {
   const { actions, user } = useStore((store) => store);
@@ -18,7 +17,7 @@ const WineApp = () => {
 
     return () => {
       actions.onClearAppData();
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const WineApp = () => {
 
     return () => {
       unsubscribe();
-    }
+    };
   }, [user]);
 
   return (

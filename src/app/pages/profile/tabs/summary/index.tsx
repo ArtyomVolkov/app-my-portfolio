@@ -12,7 +12,6 @@ import { LANGUAGES, TECHNOLOGIES, TOOLS } from '@pages/profile/data';
 
 import UserImage from '@assets/images/profile-image.webp';
 
-
 import { mergeClassNames } from '@utils/common';
 
 import styles from './style.module.scss';
