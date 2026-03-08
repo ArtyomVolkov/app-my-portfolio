@@ -20,7 +20,7 @@ const Page404 = () => {
         <div className={styles.header}>
           <DotLottieReact
             className={styles.lottie}
-            src={'./assets/lottie/page-404.lottie'}
+            src={'/assets/lottie/page-404.lottie'}
             renderConfig={{
               devicePixelRatio: 2,
             }}

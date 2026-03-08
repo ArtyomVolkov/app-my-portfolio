@@ -76,7 +76,7 @@ const Main: React.FC<MainProps> = ({
         <div className={styles.body}>
           <DotLottieReact
             className={styles.lottie}
-            src={'./assets/lottie/screen-size.lottie'}
+            src={'/assets/lottie/screen-size.lottie'}
             width={300}
             height={140}
             renderConfig={{

@@ -21,7 +21,7 @@ export default [
     }
   />,
   <Route
-    path="/apps/spotify-app/*"
+    path="/apps/spotify-app"
     element={
       <Suspense fallback={<Loader />}>
         <ErrorBoundary>
